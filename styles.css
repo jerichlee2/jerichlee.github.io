@@ -200,8 +200,114 @@ li + li {
   margin-top: 0.25rem;
 }
 
+.media-list {
+  list-style: none;
+  padding: 0;
+}
+
+.media-list li + li {
+  margin-top: 1rem;
+}
+
+.media-entry {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 0.45rem 0;
+}
+
+.media-entry img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.media-entry small {
+  display: block;
+  color: var(--muted);
+}
+
+.media-entry span {
+  text-align: center;
+}
+
 .empty-note {
   color: var(--muted);
+}
+
+.portfolio-hero {
+  margin: 1.1rem 0 1.2rem;
+}
+
+.portfolio-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.portfolio-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  list-style: none;
+  padding: 0;
+}
+
+.portfolio-gallery li {
+  margin: 0;
+}
+
+.portfolio-gallery figure {
+  margin: 0;
+}
+
+.portfolio-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--line);
+  object-fit: cover;
+}
+
+.portfolio-carousel {
+  display: grid;
+  grid-auto-columns: min(58%, 15rem);
+  grid-auto-flow: column;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0 0 0.65rem;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--line) transparent;
+}
+
+.portfolio-carousel li {
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.portfolio-carousel figure {
+  margin: 0;
+}
+
+.portfolio-carousel img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--line);
+  object-fit: cover;
+}
+
+.portfolio-gallery .is-wide {
+  grid-column: 1 / -1;
+}
+
+.portfolio-gallery .is-wide img {
+  aspect-ratio: 3 / 2;
 }
 
 .entry-cover {
@@ -281,8 +387,14 @@ footer {
   }
 
   .project-list div,
-  .dated-list li {
+  .dated-list li,
+  .media-entry,
+  .portfolio-gallery {
     grid-template-columns: 1fr;
     gap: 0.05rem;
+  }
+
+  .portfolio-gallery {
+    gap: 0.75rem;
   }
 }
