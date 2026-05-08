@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Microchannel Transport Processes | Jerich Lee</title>
+    <meta name="description" content="Numerical and CFD analysis of coupled heat, mass, and reaction transport in a pressure-driven microchannel reactor.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="index.html">builds</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article>
+          <p class="article-meta">Builds · 2025</p>
+          <h1>Microchannel Transport Processes</h1>
+
+          <figure class="build-hero">
+            <img src="../assets/builds/microchannel-transport-processes/cover.png" alt="Microchannel Transport Processes">
+          </figure>
+          <div class="article-body">
+            <p>This project investigates coupled heat and mass transport in a pressure-driven microchannel reactor where aqueous SO₂ and H₂O₂ react to form sulfuric acid. Microreactors enable high surface-to-volume ratios and precise thermal control, making them attractive for kinetic studies and process intensification.</p><p>A first-order numerical model was developed from the conservation of momentum, energy, and species under standard microchannel assumptions. The simplified model was compared against a two-dimensional CFD simulation in ANSYS Fluent to assess accuracy, limitations, and applicability for preliminary microreactor design.</p>
+          </div>
+
+          <dl class="build-details">
+              <div><dt>Documentation</dt><dd><a href="https://drive.google.com/file/d/1bEQ2nLvoRDdiNollbssdfuKBFt_z8CoY/view?usp=sharing" target="_blank">View documentation</a></dd></div>
+              <div><dt>Group</dt><dd>Course Project — ME 420 (Intermediate Heat Transfer)</dd></div>
+              <div><dt>Role</dt><dd>Co-author</dd></div>
+              <div><dt>Skills</dt><dd>Heat Transfer; Mass Transport; Reaction Kinetics; Finite Difference Methods; CFD (ANSYS Fluent); Python; Microfluidics; Transport Phenomena</dd></div>
+              <div><dt>Year</dt><dd>2025</dd></div>
+          </dl>
+          <section class="build-section" aria-labelledby="microchannel-transport-processes-simplified-model-title">
+            <h2 id="microchannel-transport-processes-simplified-model-title">Simplified Model</h2>
+            <div class="build-inline-gallery">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/microchannel-transport-processes/image-02.png" alt="Control volume for the problem statement">
+                <figcaption>Control volume for the problem statement</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/microchannel-transport-processes/image-03.png" alt="Parameters of the control volume">
+                <figcaption>Parameters of the control volume</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>To quantify coupled transport and reaction behavior in the microchannel, I developed a reduced-order model of the convection–diffusion–reaction system governing sulfuric acid formation from aqueous sulfur dioxide and hydrogen peroxide. The balanced reaction is</p><p>\[
+\mathrm{SO_2 + H_2O_2 \rightarrow H_2SO_4}.
+\]</p><p>The objective was to predict axial temperature evolution, species concentration profiles, and reaction rate behavior while avoiding the computational expense of a fully coupled 2D CFD simulation.</p><p>Starting from conservation of momentum, energy, and species for steady, incompressible, laminar flow, and neglecting body forces, viscous dissipation, and transverse velocity, the governing equations reduce to</p><p>\[
+\frac{\partial p}{\partial x} = \mu \frac{\partial^2 u}{\partial y^2},
+\]</p><p>\[
+\rho c_p u \frac{\partial T}{\partial x}
+= k \frac{\partial^2 T}{\partial y^2} + \dot{q},
+\]</p><p>\[
+u \frac{\partial C_i}{\partial x}
+= D_{AB} \frac{\partial^2 C_i}{\partial y^2} + \dot{N}_i.
+\]</p><p>The reaction source term follows a bimolecular Arrhenius rate law,</p><p>\[
+R = k C_1 C_2,
+\qquad
+k = A e^{-E_a/(k_b T)},
+\]</p><p>giving</p><p>\[
+\dot{N}_i = A e^{-E_a/(k_b T)} C_1 C_2,
+\qquad
+\dot{q} = \Delta H \, A e^{-E_a/(k_b T)} C_1 C_2.
+\]</p><p>To reduce the system order, I assumed constant fluid properties (evaluated at 300 K), negligible entrance effects, and fully developed laminar flow. Under these conditions, the velocity profile decouples and admits the analytical solution</p><p>\[
+u(y) = \frac{3}{2} u_m \left(1 - \left(\frac{y}{L}\right)^2 \right).
+\]</p><p>The mean velocity is determined from the laminar duct relation</p><p>\[
+\frac{\Delta p}{\Delta x}
+= f \frac{\rho u_m^2}{2 D_h},
+\qquad
+f Re = 69,
+\]</p><p>yielding</p><p>\[
+u_m = 3.39~\mathrm{m/s},
+\qquad
+Re = 79,
+\]</p><p>confirming deeply laminar flow. The corresponding Nusselt number is \(Nu = 3.96\), giving a convection coefficient</p><p>\[
+h = 1.21 \times 10^5~\mathrm{W/m^2K},
+\]</p><p>consistent with microscale heat transfer.</p><p>Rather than solving the full 2D energy PDE, I applied a cross-sectionally averaged energy balance to derive a nonlinear first-order ODE for the mean fluid temperature:</p><p>\[
+\frac{dT_m}{dx}
+=
+\frac{P h}{\dot{m} c_p} (T_s - T_m)
++
+\frac{A_c \Delta H}{\dot{m} c_p}
+\left(
+A e^{-E_a/(k T_m)} C_1 C_2
+\right).
+\]</p><p>This equation captures the competition between convective wall cooling and exothermic reaction heating. The reduction from a 2D PDE to a 1D nonlinear ODE preserves the dominant axial physics while eliminating transverse temperature resolution.</p><p>The species equation retains its convection–diffusion structure but is solved using the analytical velocity profile:</p><p>\[
+u(y) \frac{\partial C_i}{\partial x}
+=
+D_{AB} \frac{\partial^2 C_i}{\partial y^2}
++
+A e^{-E_a/(k T_m)} C_1 C_2.
+\]</p><p>The final reduced-order system therefore consists of:<br/>- An analytical laminar velocity field,<br/>- A 1D nonlinear temperature ODE,<br/>- A convection–diffusion–reaction species equation.</p><p>The temperature ODE is integrated using explicit fourth-order Runge–Kutta, while the species equation is discretized via finite differences with a semi-implicit scheme to maintain stability under strong reaction coupling.</p><p>This reduced-order framework transforms a fully coupled multiphysics PDE system into a computationally efficient, physically interpretable model. It enables rapid parametric exploration of reaction kinetics, wall temperature effects, and inlet concentration ratios—providing predictive insight into microchannel transport behavior while retaining the dominant thermal and chemical physics governing sulfuric acid formation.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="microchannel-transport-processes-process-title">
+            <h2 id="microchannel-transport-processes-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/microchannel-transport-processes/image-04.png" alt="Hydroxyl ion mass fraction near the outlet">
+                <figcaption>Hydroxyl ion mass fraction near the outlet</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The microchannel reactor was modeled as a two-dimensional, steady, laminar system under standard microchannel assumptions: fully developed flow, negligible axial diffusion, constant properties, and fixed wall temperature. Governing momentum, energy, and species equations were simplified accordingly.</p><p>A reduced-order numerical model was implemented in Python (NumPy/SciPy) using finite-difference discretization in the transverse direction with axial marching. Species transport equations were solved implicitly to maintain stability under stiff Arrhenius kinetics, while the mean energy equation was integrated using a fourth-order Runge–Kutta (RK4) scheme. Because axial diffusion was neglected, the governing system reduced to a parabolic formulation, enabling rapid solution and efficient parametric sweeps.</p><p>All reduced-order simulations were executed on a workstation equipped with an <strong>AMD Ryzen 7 7800X3D (8 cores, 16 threads, 4.2–5.0 GHz)</strong> and 32 GB DDR5 RAM running Linux. Typical solve times were on the order of seconds to minutes depending on grid resolution.</p><p>To validate the simplified model, a corresponding CFD simulation was constructed in <strong>ANSYS Fluent</strong> using a 2D, pressure-based, steady laminar solver with multicomponent species transport and energy enabled. The domain was discretized using a structured quadrilateral mesh containing 800,800 cells to resolve transverse gradients. The Fluent simulations were executed in parallel on the same workstation CPU (8–16 logical cores utilized), with wall-clock solution times ranging from tens of minutes to several hours.</p><p>The strong agreement between the reduced-order model and CFD results demonstrates that the simplified axial-marching formulation captures the dominant transport–reaction physics while reducing computational cost by orders of magnitude.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="microchannel-transport-processes-outcome-title">
+            <h2 id="microchannel-transport-processes-outcome-title">Outcome</h2>
+            <div class="build-inline-gallery">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/microchannel-transport-processes/image-05.png" alt="Cross-section-averaged temperature">
+                <figcaption>Cross-section-averaged temperature</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/microchannel-transport-processes/image-06.png" alt="Comparison of first-order numerical predictions with CFD results for temperature, reaction rate, and species concentration profiles along the microchannel.">
+                <figcaption>Comparison of first-order numerical predictions with CFD results for temperature, reaction rate, and species concentration profiles along the microchannel.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The reduced-order model and CFD simulation together provide a quantitative understanding of coupled transport–reaction behavior within the microchannel. For the baseline case, the mean velocity was computed as</p><p>\[
+u_m = 3.39~\mathrm{m/s}, 
+\qquad
+Re = 79,
+\]</p><p>confirming deeply laminar flow. The corresponding convection coefficient was</p><p>\[
+h = 1.21 \times 10^5~\mathrm{W/m^2K},
+\]</p><p>indicating extremely strong wall heat transfer relative to volumetric heat generation.</p><p>The first-order numerical solution predicts three dominant trends. First, the mean fluid temperature decreases from the inlet value of \(327~\mathrm{K}\) toward the wall temperature of \(273~\mathrm{K}\), dropping by approximately \(20~\mathrm{K}\) over the \(2000~\mu\mathrm{m}\) channel length. This cooling occurs over a thermal entrance length of approximately \(4.6 \times 10^{-4}~\mathrm{m}\), which is roughly 23% of the total channel length and therefore not negligible.</p><p>Second, the reaction rate exhibits a strong inlet spike due to Arrhenius sensitivity. Because the rate constant scales as</p><p>\[
+k \sim e^{-E_a/(k_b T)},
+\]</p><p>a 20 K temperature drop produces an order-of-magnitude reduction in the exponential term for typical activation energies. As a result, the cross-section-averaged reaction rate rapidly declines downstream and approaches a quasi-steady, low-value plateau once the temperature has cooled significantly.</p><p>Third, species diffusion broadens the reaction interface with axial position. The characteristic convective residence time is on the order of</p><p>\[
+t_{res} \sim \frac{L}{u_m}
+\approx 5.9 \times 10^{-4}~\mathrm{s},
+\]</p><p>indicating sub-millisecond transport through the channel. Despite this short residence time, diffusion is sufficient to produce visibly deeper interpenetration of concentration contours at downstream locations, confirming that transverse diffusion remains dynamically relevant at \(Re \approx 79\).</p><p>Parametric exploration showed that pressure, activation energy, and channel length dominate system behavior. Increasing pressure increases \(u_m\), shortens residence time, and suppresses overall conversion. In contrast, varying the heat of formation had minimal effect on temperature or reaction profiles because the small reactant concentrations and limited channel volume restrict total heat release. Even with exothermic reaction, volumetric heat generation remains small compared to wall convection.</p><p>The CFD solution, converged within 58 iterations with excellent mesh quality (minimum orthogonal quality 0.999989), confirms the same qualitative and order-of-magnitude trends. Velocity remains fully developed and laminar; temperature and reaction rate decay axially; and concentration fields broaden downstream. Although quantitative differences arise due to property libraries, entrance effects, and more detailed kinetics, most predicted values remain within the same order of magnitude.</p><p>Overall, the reduced-order model captures the correct transport scales, temperature decay magnitude (~20 K), residence time (~10⁻⁴–10⁻³ s), and dominant parametric sensitivities. The agreement with CFD validates the framework as an efficient predictive tool for microchannel transport–reaction analysis.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

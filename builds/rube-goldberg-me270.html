@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rube Goldberg Machine — ME 270 (Design for Manufacturability) | Jerich Lee</title>
+    <meta name="description" content="A 10+ step marble-powered machine designed under strict DFM constraints.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="index.html">builds</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article>
+          <p class="article-meta">Builds · 2022</p>
+          <h1>Rube Goldberg Machine — ME 270 (Design for Manufacturability)</h1>
+
+          <figure class="build-hero">
+            <img src="../assets/builds/rube-goldberg-me270/cover.png" alt="Rube Goldberg Machine — ME 270 (Design for Manufacturability)">
+          </figure>
+          <div class="article-body">
+            <p>Inspired by Rube Goldberg, this ME 270 Design for Manufacturability project challenged teams of 3–5 students to design and build a themed machine that turns on a battery-powered LED light—starting with a marble. Using a provided base plate, side plate, brackets, marble, and light, we manufactured nearly all components ourselves while meeting tight size and mechanism requirements.</p>
+          </div>
+
+          <dl class="build-details">
+              <div><dt>Role</dt><dd>Team Member (Mechanical Design + Fabrication)</dd></div>
+              <div><dt>Skills</dt><dd>Design for Manufacturability (DFM), Mechanism Design, Prototyping, Fabrication, Rapid Iteration, Mechanical Linkages, Motion Conversion (Rotary/Linear), Design Constraints, Team Collaboration</dd></div>
+              <div><dt>Year</dt><dd>2022</dd></div>
+          </dl>
+          <section class="build-section" aria-labelledby="rube-goldberg-me270-initial-design-title">
+            <h2 id="rube-goldberg-me270-initial-design-title">Initial Design</h2>
+            <div class="build-inline-gallery">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/rube-goldberg-me270/image-02.png" alt="Modular Staircase Global Assembly">
+                <figcaption>Modular Staircase Global Assembly</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/rube-goldberg-me270/image-03.png" alt="A single staircase element">
+                <figcaption>A single staircase element</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/rube-goldberg-me270/image-04.png" alt="Zoomed in snap-fit">
+                <figcaption>Zoomed in snap-fit</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The hardest challenge of the project was designing the 10-second step, which was a fundamental constraint of our Rube Goldberg machine. We chose to implement this step with a spiral staircase. However, during our first full 3D print, the support material was so extensive that after removal, the surface roughness and residual friction were high enough to prevent the ball from moving reliably.</p><p>To solve this, I changed the design approach and applied a design-for-manufacturability strategy using snap-fits. Instead of printing the staircase as one piece, I divided it into equal sections and added snap-fit features at each end so the parts could assemble together like Lego pieces. This redesign provided several advantages: it allowed us to parallelize fabrication across multiple 3D printers, reduced post-processing and support-removal effort, and improved the functional performance of the staircase. Ultimately, this manufacturing-driven redesign was what allowed our team to successfully achieve the required 10-second step.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="rube-goldberg-me270-process-title">
+            <h2 id="rube-goldberg-me270-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/rube-goldberg-me270/image-05.png" alt="Mechanism layout and staging focused on reliable handoffs and manufacturable parts.">
+                <figcaption>Mechanism layout and staging focused on reliable handoffs and manufacturable parts.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The project requirements forced careful system-level planning: the machine had to fit within a 30 cm × 30 cm × 30 cm envelope and include at least 10 mechanically distinct “steps.” Both rotary and linear motion were required, and the design needed to incorporate rigid linkages, string-driven motion, and an elastic element.</p><p>To keep the build manufacturable, teams were limited to mousetraps plus only one other commercial product—everything else had to be made. We designed the sequence around reliable handoffs between stages (gravity-driven marble motion, constrained guides, trigger interfaces, and motion conversion), then iterated on geometry and tolerances to prevent stalls and misfires.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="rube-goldberg-me270-outcome-title">
+            <h2 id="rube-goldberg-me270-outcome-title">Outcome</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/rube-goldberg-me270/image-06.jpg" alt="Final demo configuration prior to the marble start and light-on finale.">
+                <figcaption>Final demo configuration prior to the marble start and light-on finale.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The final machine successfully converted a marble start into a light-on finish while satisfying the course constraints: compact size, themed design, 10+ distinct steps, and required motion/element types (rotary + linear, rigid linkages, string, and elasticity). The project culminated in a live demonstration at the Lu Mechanical Engineering Building.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

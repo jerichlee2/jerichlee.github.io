@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spindle Vibration &amp; Deflection Reduction | Jerich Lee</title>
+    <meta name="description" content="Mitigating spindle vibration via experimental modal analysis and bearing-stack redesign.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="index.html">builds</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article>
+          <p class="article-meta">Builds · 2025</p>
+          <h1>Spindle Vibration &amp; Deflection Reduction</h1>
+
+          <figure class="build-hero">
+            <img src="../assets/builds/spindle-vibration-deflection-reduction/image-02.png" alt="Spindle Vibration &amp; Deflection Reduction">
+          </figure>
+          <div class="article-body">
+            <p>Excessive vibration in high-speed milling spindles degrades cut quality, accelerates tool wear, and shortens machine life. In this industry-sponsored capstone project, our team investigated vibration in the vertical spindle of Peddinghaus Corporation’s <strong>PeddiSubX-1120</strong> steel mill.</p><p>Through experimental testing and validated finite-element modeling, we identified the dominant vibration mode and developed a low-cost mechanical modification that significantly improves spindle stability without altering operating conditions or maintenance requirements.</p>
+          </div>
+
+          <dl class="build-details">
+              <div><dt>Role</dt><dd>Structural modeling, FEA, CAD design, solution optimization</dd></div>
+              <div><dt>Skills</dt><dd>Experimental modal analysis, vibration testing, ANSYS Mechanical, SOLIDWORKS, mechanical design, frequency-domain analysis</dd></div>
+              <div><dt>Year</dt><dd>2025</dd></div>
+          </dl>
+          <section class="build-section" aria-labelledby="spindle-vibration-deflection-reduction-process-title">
+            <h2 id="spindle-vibration-deflection-reduction-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/image-03.png" alt="Operational vibration testing and validated ANSYS modal analysis of the spindle assembly.">
+                <figcaption>Operational vibration testing and validated ANSYS modal analysis of the spindle assembly.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The project began with <strong>on-site vibration testing</strong> at Peddinghaus’ manufacturing facility. Tri-axial accelerometers were mounted near the spindle bearings, and both unloaded (free-spinning) and loaded (cutting) operational tests were conducted across the full speed range.</p><p>Spectral and wavelet analysis revealed a <strong>dominant vibration mode near 307 Hz</strong>, consistently excited during operation—particularly under asymmetric cutting with long, slender tooling. This frequency aligned with excitation from multi-flute cutting dynamics.</p><p>To identify the root cause, we developed a <strong>validated finite-element spindle model</strong> in ANSYS Mechanical. The simulation accurately reproduced the experimentally observed mode shape, revealing excessive radial deflection at the motor-end of the spindle. Multiple design concepts were evaluated numerically, including material changes, structural bracing, and bearing reconfiguration.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="spindle-vibration-deflection-reduction-outcome-title">
+            <h2 id="spindle-vibration-deflection-reduction-outcome-title">Outcome</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/image-04.png" alt="Proposed bearing-stack redesign increases the first modal frequency by 24.8%, substantially reducing harmful vibration.">
+                <figcaption>Proposed bearing-stack redesign increases the first modal frequency by 24.8%, substantially reducing harmful vibration.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The most effective solution was a <strong>floating bearing stack modification</strong>: adding an additional bearing and repositioning the stack closer to the drive belt. This change altered the spindle boundary conditions, significantly increasing system stiffness.</p><p>Simulation results showed the first modal frequency shifting from <strong>307 Hz to 383 Hz</strong>, a <strong>24.8% increase</strong>, moving the dominant mode safely outside the excitation range of the cutting process. The solution satisfies all sponsor constraints, requires minimal maintenance, and avoids changes to tooling or operating procedures.</p><p>The proposed modification is low-cost, mechanically simple, and directly informed by validated experimental and computational analysis—making it a practical, industry-ready solution.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

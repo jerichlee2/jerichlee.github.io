@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pedal-Actuated Guitar String Tensioner | Jerich Lee</title>
+    <meta name="description" content="Low-cost pedal mechanism enabling controlled pitch modulation via precise string tension adjustment.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="index.html">builds</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article>
+          <p class="article-meta">Builds · 2023</p>
+          <h1>Pedal-Actuated Guitar String Tensioner</h1>
+
+          <figure class="build-hero">
+            <img src="../assets/builds/pedal-guitar-string-tensioner/cover.png" alt="Pedal-Actuated Guitar String Tensioner">
+          </figure>
+          <div class="article-body">
+            <p>This project presents the design and analysis of a pedal-actuated tuning mechanism for a single-string lap steel guitar. The goal was to create an affordable, manufacturable, and ergonomically usable alternative to commercial pedal steel systems, which often cost thousands of dollars. Using static analysis, material modeling, and geometric constraints, the mechanism was designed to achieve a precise pitch change—from G♯3 to A3—while ensuring repeatability and automatic return to the original tuning. The final prototype combines rotary spring mechanics, a Bowden cable actuation system, and additively manufactured components to meet cost and performance constraints.</p>
+          </div>
+
+          <dl class="build-details">
+              <div><dt>Group</dt><dd>TAM 252 — UIUC</dd></div>
+              <div><dt>Role</dt><dd>Mechanical design, static analysis, prototyping</dd></div>
+              <div><dt>Skills</dt><dd>Static analysis, mechanical design, CAD, additive manufacturing, vibration fundamentals</dd></div>
+              <div><dt>Year</dt><dd>2023</dd></div>
+          </dl>
+          <section class="build-section" aria-labelledby="pedal-guitar-string-tensioner-process-title">
+            <h2 id="pedal-guitar-string-tensioner-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/pedal-guitar-string-tensioner/image-02.png" alt="Rotary spring mechanism and Bowden cable actuation system.">
+                <figcaption>Rotary spring mechanism and Bowden cable actuation system.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The tuning behavior of the guitar string is governed by the vibrating string equation<br/>\[
+f = \frac{1}{2L}\sqrt{\frac{T}{\rho_L}}
+\]<br/>where \( f \) is the frequency, \( T \) the string tension, \( L \) the effective string length, and \( \rho_L \) the linear density.</p><p>Linearizing about the initial tension \( T_0 \) via a Taylor expansion yields<br/>\[
+\Delta f = \frac{\partial f}{\partial T}\Delta T 
+= \frac{1}{2}\frac{f_0}{T_0}\Delta T
+\]<br/>which rearranges to<br/>\[
+\Delta T = 2T_0 \frac{\Delta f}{f_0}.
+\]</p><p>Geometric modeling of the string deformation relates the required tension change to the horizontal displacement \( \delta \) imposed by the mechanism. Solving the resulting strain relationship gives<br/>\[
+\delta = \sqrt{\left(\frac{\Delta T (a+b)}{2(EA)_{\text{eff}}} + \frac{b}{2}\right)^2 - \left(\frac{b}{2}\right)^2}
+\]<br/>allowing the pedal displacement to be computed directly from the desired pitch shift.</p><p>A rotary spring mechanism actuated through a Bowden cable converts pedal motion into controlled string deflection while maintaining automatic return to the original tuning state. Ball bearings were incorporated to minimize friction and improve repeatability.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="pedal-guitar-string-tensioner-outcome-title">
+            <h2 id="pedal-guitar-string-tensioner-outcome-title">Outcome</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/pedal-guitar-string-tensioner/image-03.png" alt="Final prototype demonstrating pedal-controlled pitch modulation.">
+                <figcaption>Final prototype demonstrating pedal-controlled pitch modulation.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>Using experimentally measured material properties and geometry, the mechanism was designed to achieve:</p><p>Required string displacement: \( \delta = 0.29\ \text{in} \)</p><p>Required string force: \( F_T = 5.21\ \text{lb} \)</p><p>Static analysis of the pedal linkage showed a required pedal force of <br/>\( F_F = 3.49\ \text{lb} \), <br/>corresponding to a mechanical advantage of <br/>\( \text{MA} = \frac{F_T}{F_F} = 1.49 \).</p><p>The completed prototype successfully achieved the target pitch change within approximately 30 cents of the desired frequency, demonstrating proof of concept. Deviations were attributed to assembly tolerances and unintentional pedal compliance, both of which were identified as correctable in future iterations.</p><p>The total bill of materials cost was \( \$64.73 \), validating the feasibility of a low-cost alternative to commercial pedal steel tuning systems.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

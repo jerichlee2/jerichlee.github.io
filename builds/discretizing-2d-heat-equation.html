@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Discretizing the 2D Heat Equation with Radiative Boundary Conditions | Jerich Lee</title>
+    <meta name="description" content="Explicit finite-difference simulation of transient heat conduction with nonlinear radiation boundary conditions.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="index.html">builds</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article>
+          <p class="article-meta">Builds · 2024</p>
+          <h1>Discretizing the 2D Heat Equation with Radiative Boundary Conditions</h1>
+
+          <figure class="build-hero">
+            <img src="../assets/builds/discretizing-2d-heat-equation/cover.png" alt="Discretizing the 2D Heat Equation with Radiative Boundary Conditions">
+          </figure>
+          <div class="article-body">
+            <p>This project develops an explicit finite-difference solver for the transient two-dimensional heat equation with nonlinear radiative boundary conditions and localized laser heating. The model is relevant to applications such as laser welding, surface treatment, and metal additive manufacturing, where localized heat input and boundary heat loss govern the resulting temperature field.</p><p>The framework captures depth-dependent thermal attenuation, radiative surface losses, and moving-source behavior, enabling efficient study of stationary and traversing laser heating as well as power / velocity trends.</p>
+          </div>
+
+          <dl class="build-details">
+              <div><dt>Role</dt><dd>Modeling · Numerical Analysis · Simulation</dd></div>
+              <div><dt>Skills</dt><dd>Finite Difference Methods, Heat Transfer, Stability Analysis, Numerical PDEs, Python</dd></div>
+              <div><dt>Year</dt><dd>2024</dd></div>
+          </dl>
+          <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-simplified-model-title">
+            <h2 id="discretizing-2d-heat-equation-simplified-model-title">Simplified Model</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/discretizing-2d-heat-equation/image-02.png" alt="Plots of temperature vs time at \(x = 0.5L_x\)">
+                <figcaption>Plots of temperature vs time at \(x = 0.5L_x\)</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The transient temperature field is governed by<br/>\[
+\rho c \frac{\partial T}{\partial t}
+=
+k\left(
+\frac{\partial^2 T}{\partial x^2}
++
+\frac{\partial^2 T}{\partial y^2}
+\right)
++
+Q(x,y,t),
+\]<br/>where \(T(x,y,t)\) is the temperature field, \(\rho\) is the density, \(c\) is the specific heat, \(k\) is the thermal conductivity, and \(Q(x,y,t)\) is the applied heat source.</p><p>The rectangular domain is discretized on a uniform Cartesian grid,<br/>\[
+x_i = i\Delta x, \qquad
+y_j = j\Delta y, \qquad
+t^n = n\Delta t,
+\]<br/>with nodal temperatures defined by<br/>\[
+T_{i,j}^n \approx T(x_i,y_j,t^n).
+\]</p><p>Using forward Euler in time and second-order central differences in space gives<br/>\[
+\frac{\partial T}{\partial t}\Big|_{i,j}^n
+\approx
+\frac{T_{i,j}^{n+1}-T_{i,j}^n}{\Delta t},
+\]<br/>\[
+\frac{\partial^2 T}{\partial x^2}\Big|_{i,j}^n
+\approx
+\frac{T_{i+1,j}^n-2T_{i,j}^n+T_{i-1,j}^n}{\Delta x^2},
+\]<br/>\[
+\frac{\partial^2 T}{\partial y^2}\Big|_{i,j}^n
+\approx
+\frac{T_{i,j+1}^n-2T_{i,j}^n+T_{i,j-1}^n}{\Delta y^2}.
+\]</p><p>Substituting these approximations into the PDE yields the explicit interior-node update<br/>\[
+T_{i,j}^{n+1}
+=
+T_{i,j}^n
++
+\frac{\Delta t}{\rho c}
+\left[
+k\left(
+\frac{T_{i+1,j}^n-2T_{i,j}^n+T_{i-1,j}^n}{\Delta x^2}
++
+\frac{T_{i,j+1}^n-2T_{i,j}^n+T_{i,j-1}^n}{\Delta y^2}
+\right)
++
+Q_{i,j}^n
+\right].
+\]</p><p>It is convenient to define the diffusion numbers<br/>\[
+r_x = \frac{k\Delta t}{\rho c\,\Delta x^2},
+\qquad
+r_y = \frac{k\Delta t}{\rho c\,\Delta y^2},
+\]<br/>so that the update becomes<br/>\[
+T_{i,j}^{n+1}
+=
+T_{i,j}^n
++
+r_x\left(T_{i+1,j}^n-2T_{i,j}^n+T_{i-1,j}^n\right)
++
+r_y\left(T_{i,j+1}^n-2T_{i,j}^n+T_{i,j-1}^n\right)
++
+\frac{\Delta t}{\rho c}Q_{i,j}^n.
+\]</p><p>Heat loss on the left, right, and top boundaries is modeled with a nonlinear radiative boundary condition,<br/>\[
+k\frac{\partial T}{\partial n}
+=
+-\sigma\epsilon\left(T^4-T_\infty^4\right).
+\]</p><p>Using a one-sided difference at a boundary node gives the nonlinear residual<br/>\[
+f(T_b)
+=
+k\frac{T_b-T_{\mathrm{in}}}{\Delta}
++
+\sigma\epsilon\left(T_b^4-T_\infty^4\right)
+=
+0,
+\]<br/>with derivative<br/>\[
+f&#x27;(T_b)
+=
+\frac{k}{\Delta}
++
+4\sigma\epsilon T_b^3.
+\]</p><p>The boundary temperature is therefore updated iteratively at each time step using Newton--Raphson,<br/>\[
+T_b^{(m+1)}
+=
+T_b^{(m)}
+-
+\frac{f\!\left(T_b^{(m)}\right)}{f&#x27;\!\left(T_b^{(m)}\right)}.
+\]</p><p>For the stationary-laser case, the volumetric source is modeled as<br/>\[
+Q(x,y,t)
+=
+\left(\frac{P}{w^2\sqrt{2\pi}}\right)
+\exp\left(-\frac{(x-x_L)^2}{2w^2}\right)f(y),
+\]<br/>where \(x_L\) is fixed and \(f(y)\) describes depth attenuation. For a traversing laser,<br/>\[
+x_L(t) = x_{L,0} + v_L t,
+\]<br/>so the source center moves in time while the update scheme remains unchanged.</p><p>This formulation preserves the dominant physics of surface heating, radiation loss, and moving-source behavior while remaining computationally efficient.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-process-title">
+            <h2 id="discretizing-2d-heat-equation-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/discretizing-2d-heat-equation/image-03.png" alt="Temperature vs Time at Different Depths">
+                <figcaption>Temperature vs Time at Different Depths</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The explicit 2D heat solver was validated with a von Neumann stability analysis, which gave the condition<br/>\begin{align}<br/>\Delta t \le \frac{\rho c}{2k}\left(\frac{1}{\Delta x^2}+\frac{1}{\Delta y^2}\right)^{-1},<br/>\end{align}<br/>or equivalently<br/>\begin{align}<br/>r_x + r_y &lt; 0.5.<br/>\end{align}<br/>Using<br/>\begin{align}<br/>\rho &amp;= 7900\ \text{kg/m}^3, \\<br/>c &amp;= 470\ \text{J/(kg\cdot K)}, \\<br/>k &amp;= 48\ \text{W/(m\cdot K)}, \\<br/>\Delta x &amp;= \Delta y = 0.001\ \text{m},<br/>\end{align}<br/>the maximum stable time step was<br/>\begin{align}<br/>\Delta t_{\max} \approx 0.01934\ \text{s}.<br/>\end{align}<br/>Since the implemented value<br/>\begin{align}<br/>\Delta t = 0.01\ \text{s}<br/>\end{align}<br/>lies below this limit, the numerical scheme is stable for the chosen grid and material parameters.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-simulation-and-comparison-title">
+            <h2 id="discretizing-2d-heat-equation-simulation-and-comparison-title">Simulation and Comparison</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/discretizing-2d-heat-equation/image-04.png" alt="Temperature distribution decaying as a function of space, time, heat source">
+                <figcaption>Temperature distribution decaying as a function of space, time, heat source</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>Python was used to implement the full finite-difference workflow, including interior-node updates, nonlinear radiative boundary solves, stationary-source heating, traversing-laser heating, and post-processing for line plots, contour fields, and parameter sweeps. The resulting visualizations show depth-dependent temperature histories, final-time through-thickness temperature profiles, transient contour maps, and maximum-temperature trends versus power for multiple laser speeds.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-outcome-title">
+            <h2 id="discretizing-2d-heat-equation-outcome-title">Outcome</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/discretizing-2d-heat-equation/image-05.png" alt="Maximum temperature on the vertical axis vs power">
+                <figcaption>Maximum temperature on the vertical axis vs power</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>The finite-difference simulation captures the dominant thermal response under localized laser heating with nonlinear radiative losses. For the stationary-source case, the maximum top-surface temperature increased from<br/>\begin{align}<br/>1661.53~\mathrm{K} \quad \text{at} \quad 30~\mathrm{s}<br/>\end{align}<br/>to<br/>\begin{align}<br/>1946.39~\mathrm{K} \quad \text{at} \quad 150~\mathrm{s},<br/>\end{align}<br/>showing rapid early heating followed by a gradual approach toward a limiting temperature as conduction and radiation balance continued energy input.</p><p>The solution predicts three key trends. First, temperature is strongly depth-dependent: the highest values occur at the heated top surface, while deeper regions remain cooler and respond more gradually. Second, the temperature field stays localized around the source. In the stationary case, contours show a concentrated hot region near the heating location; in the traversing case, this hot zone moves across the domain with the laser path. Third, the explicit scheme remained stable, since the chosen time step<br/>\begin{align}<br/>\Delta t = 0.01~\mathrm{s}<br/>\end{align}<br/>was below the von Neumann limit<br/>\begin{align}<br/>\Delta t_{\max} \approx 0.01934~\mathrm{s}.<br/>\end{align}</p><p>Parametric results showed that laser power and traversal speed dominate the response. Increasing power raises the maximum temperature, while decreasing speed increases local heating by allowing longer energy deposition at a given location. Overall, the model reproduces the expected thermal behavior of laser-driven heating and provides an efficient framework for studying how source motion, power, and boundary radiation shape the temperature field.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>
