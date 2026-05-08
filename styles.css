@@ -214,12 +214,13 @@ li + li {
   grid-template-columns: 8rem minmax(0, 1fr);
   gap: 1rem;
   align-items: center;
+  max-width: 28rem;
   padding: 0.45rem 0;
 }
 
 .media-entry img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  width: 8rem;
+  height: 4.5rem;
   object-fit: cover;
 }
 
@@ -388,7 +389,6 @@ footer {
 
   .project-list div,
   .dated-list li,
-  .media-entry,
   .portfolio-gallery {
     grid-template-columns: 1fr;
     gap: 0.05rem;
