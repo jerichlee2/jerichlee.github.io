@@ -34,6 +34,11 @@
           <a href="builds/index.html">builds</a>
           <a href="writing/index.html">writing</a>
           <a href="media/index.html">media</a>
+          <a href="music/index.html">music</a>
+          <a href="fitness/index.html">fitness</a>
+          <a href="cubing/index.html">cubing</a>
+          <a href="language/index.html">language</a>
+          <a href="literature/index.html">literature</a>
           <a href="contact/index.html">contact</a>
         </nav>
       </aside>
@@ -57,9 +62,59 @@
         </section>
 
         <footer>
-          <p>Last modified: <time datetime="2026-05-07">May 7, 2026</time>. &copy; 2026 Jerich Lee.</p>
+          <p>Last modified: <time id="last-modified" datetime="2026-05-07">May 7, 2026</time>. &copy; <span id="copyright-year">2026</span> Jerich Lee.</p>
         </footer>
       </main>
     </div>
+    <script>
+      (function () {
+        var modifiedTime = document.getElementById("last-modified");
+        var copyrightYear = document.getElementById("copyright-year");
+        var liveHosts = ["jerichlee.com", "www.jerichlee.com"];
+
+        function setModifiedDate(date) {
+          if (!modifiedTime || Number.isNaN(date.getTime())) {
+            return;
+          }
+
+          modifiedTime.dateTime = date.toISOString().slice(0, 10);
+          modifiedTime.textContent = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          }).format(date);
+        }
+
+        if (copyrightYear) {
+          copyrightYear.textContent = new Date().getFullYear();
+        }
+
+        setModifiedDate(new Date(document.lastModified));
+
+        if (liveHosts.indexOf(window.location.hostname) !== -1) {
+          fetch("https://api.github.com/repos/jerichlee2/jerichlee.github.io/commits/main")
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("Could not fetch latest commit.");
+              }
+
+              return response.json();
+            })
+            .then(function (data) {
+              if (
+                data &&
+                data.commit &&
+                data.commit.committer &&
+                data.commit.committer.date
+              ) {
+                setModifiedDate(new Date(data.commit.committer.date));
+              }
+            })
+            .catch(function () {
+              setModifiedDate(new Date(document.lastModified));
+            });
+        }
+      })();
+    </script>
   </body>
 </html>
