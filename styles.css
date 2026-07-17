@@ -224,6 +224,11 @@ li + li {
   object-fit: cover;
 }
 
+.media-entry img.media-book-thumbnail {
+  background: var(--paper);
+  object-fit: contain;
+}
+
 .media-entry small {
   display: block;
   color: var(--muted);
@@ -527,6 +532,18 @@ li + li {
   margin-bottom: 0.35rem;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.book-cover {
+  margin: 1rem 0 1.5rem;
+}
+
+.book-cover img {
+  display: block;
+  width: 14rem;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 
 address {
