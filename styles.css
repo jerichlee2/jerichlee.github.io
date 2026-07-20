@@ -463,18 +463,6 @@ li + li {
   color: var(--muted);
 }
 
-.course-resource-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.35rem 1rem;
-  margin: 0;
-  padding-left: 1.4rem;
-}
-
-.course-resource-grid li + li {
-  margin-top: 0;
-}
-
 .course-document {
   padding: 1.25rem;
 }
@@ -729,10 +717,6 @@ footer {
   .portfolio-gallery {
     grid-template-columns: 1fr;
     gap: 0.05rem;
-  }
-
-  .course-resource-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .build-gallery,
