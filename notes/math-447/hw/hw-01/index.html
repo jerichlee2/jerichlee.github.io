@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 447: Real Variables - Homework #1</title>
+    <link rel="stylesheet" href="/styles.css?v=7">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$','$']],
+                displayMath: [['$$', '$$']],
+                packages: { '[+]': ['ams'] },
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body class="course-document">
+    <a href="../../index.html" class="home-button">Back</a>
+    <div id="main">
+        <h1>MATH 447: Real Variables - Homework #1</h1>
+<h3>Jerich Lee</h3>
+<h4>December 16, 2024</h4>
+
+
+<div class='problem'><strong>Problem.</strong><br> [1.8 a]
+The principle of mathematical induction can be extended as follows. A list $P_{m}, P_{m+1}, \dots{}$ of propositions is true provided (i) $P_{m}$ is true, (ii) $P_{n+1}$ is true whenever $P_{n}$ is true and $n\geq{} m$.
+Prove $n^2&gt;n+1$ for all integers $n\geq2{}$.
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+<div class='proof'><strong>Proof.</strong>
+    We will prove the base case of $n=2$ first:
+$$\begin{align}
+
+(2)^2>(2)+1
+
+\end{align}$$
+$$\begin{align}
+
+4>3
+
+\end{align}$$
+The above verifies the base case. The inductive hypothesis is as follows:
+
+$$\begin{align}
+
+n^2>n+1, \ n\geq 2
+
+\end{align}$$
+
+We want to prove the case such that $P_{n+1}$ is true whenever $P_{n}$ is true and $n\geq{} m$. The inductive step is as follows:
+
+$$\begin{align}
+
+(n+1)^2 &> (n+1)+1 \\
+n^2+2n+1 &> n+2 \\
+n^2+n &> 1 \\
+n(n+1) &> 1
+
+\end{align}$$
+
+By the inductive hypothesis, $n^2&gt;n+1, n\geq{} 2$,
+$$\begin{align}
+
+n(n^2) &> n(n+1) > 1 \\
+n^3 &> 1
+
+\end{align}$$
+
+The last line is true for all $n\geq{} 2$.
+<div class='qed'>∎</div></div><br>
+
+</div>
+<div class='problem'><strong>Problem.</strong><br> [2.8]
+    Find all rational solutions of the equation $x^8-4x^5+13x^3-7x+1=0$.
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    To find all rational solutions of the equation $x^8-4x^5+13x^3-7x+1=0$, we can use the Rational Zeros Theorem.
+
+Corollary—Rational Zeros Theorem: If a polynomial equation
+$$\begin{align}
+
+a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 = 0
+
+\end{align}$$
+with integer coefficients has a rational solution $x = \frac{p}{q}$
+—where $p$ and $q$ are integers with no common factors and $q \neq{} 0$—, then:
+<ol>
+<li>$p$ must be a factor of the constant term $a_0$</li>
+<li>$q$ must be a factor of the leading coefficient $a_n$</li>
+</ol>
+
+First, let's identify the coefficients:
+<ol>
+<li>$c_8 = 1$</li>
+<li>$c_5 = -4$</li>
+<li>$c_3 = 13$</li>
+<li>$c_1 = -7$</li>
+<li>$c_0 = 1$</li>
+</ol>
+
+According to the theorem, if $\frac{c}{d}$ is a rational solution (where $c$ and $d$ are integers with no common factors and $d \neq{} 0$), then:
+<ol>
+<li>$c$ must divide $c_0 = 1$</li>
+<li>$d$ must divide $c_8 = 1$</li>
+</ol>
+
+The only integers that divide 1 are 1 and -1. Therefore, the only possible rational solutions are:
+<ol>
+<li>$\frac{1}{1} = 1$</li>
+<li>$\frac{-1}{1} = -1$</li>
+</ol>
+
+Now, we need to check if these candidates actually satisfy the equation:
+
+For $x = 1$:
+$$\begin{align}
+
+1^8 - 4(1^5) + 13(1^3) - 7(1) + 1 = 1 - 4 + 13 - 7 + 1 = 4 \neq 0
+
+\end{align}$$
+
+For $x = -1$:
+$$\begin{align}
+
+(-1)^8 - 4((-1)^5) + 13((-1)^3) - 7(-1) + 1 = 1 + 4 - 13 + 7 + 1 = 0
+
+\end{align}$$
+
+Therefore, the only rational solution to the equation $x^8-4x^5+13x^3-7x+1=0$ is $x = -1$.
+</div>
+
+
+<div class='problem'><strong>Problem.</strong><br> [3.5]
+    <ol>
+<li>Show $|b|\leq a$ if and only if $-a\leq b\leq a$.</li>
+<li>Prove $||a|-|b||\leq|a-b|$ for all $a,b \in \mathbb{R}$.</li>
+</ol>
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+ <div class='proof'><strong>Proof.</strong>
+        <ol>
+<li>If $|b| \leq a$, then by definition, $-a \leq b \leq a$. This is because $|b| \leq a$ implies $b$ is within the interval $[-a, a]$.</li>
+<li>If $-a \leq b \leq a$, then $b$ is within the interval $[-a, a]$. This directly implies $|b| \leq a$ since the maximum deviation of $b$ from zero is $a$.</li>
+</ol>
+        Thus, $|b| \leq{} a$ if and only if $-a \leq{} b \leq{} a$.
+    <div class='qed'>∎</div></div><br>
+    <div class='proof'><strong>Proof.</strong>
+        We will prove this inequality using the triangle inequality and considering both possible cases.
+  <strong>Using the Triangle Inequality:</strong>
+            <ol>
+<li>The triangle inequality states $|a| = |(a - b) + b| \leq |a - b| + |b|$.</li>
+<li>Rearranging gives $|a| - |b| \leq |a - b|$.</li>
+</ol>
+
+          <strong>Consider the Reverse Situation:</strong>
+            <ol>
+<li>Similarly, $|b| = |(b - a) + a| \leq |b - a| + |a| = |a - b| + |a|$.</li>
+<li>Rearranging gives $|b| - |a| \leq |a - b|$.</li>
+</ol>
+
+             <strong>Combine the Results:</strong>
+            <ol>
+<li>From the two inequalities, we have:
+                $$\begin{align}
+
+                |a| - |b| \leq |a - b| \quad \text{and} \quad |b| - |a| \leq |a - b|
+
+\end{align}$$</li>
+</ol>
+
+            <strong>Conclusion:</strong>
+            <ol>
+<li>The absolute value $||a| - |b||$ is defined as:
+                $$\begin{align}
+
+                ||a| - |b|| = \max(|a| - |b|, |b| - |a|)
+
+\end{align}$$</li>
+<li>Therefore, $||a| - |b|| \leq |a - b|$.</li>
+</ol>
+
+
+        Thus, we have proven that $||a|-|b||\leq{}|a-b|$ for all $a,b \in{} \mathbb{R}$.
+    <div class='qed'>∎</div></div><br>
+
+</div>
+
+
+
+
+
+
+
+<div class='problem'><strong>Problem.</strong><br> [3.8]
+ Let $a,b \in{} \mathbb{R}$. Show if $a\leq{} b_{1}$ for every $b_{1} &gt; b$, then $a\leq{} b$.
+
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <div class='proof'><strong>Proof.</strong>
+     We will prove this statement using a proof by contradiction.
+         Assume the hypothesis: For every $b_1 &gt; b$, we have $a \leq{} b_1$.
+         Suppose, for the sake of contradiction, that $a &gt; b$.
+         Consider $b_1 = \frac{a + b}{2}$. Note that:
+        <ol>
+<li>$b_1 > b$ (because $a > b$)</li>
+<li>$b_1 < a$ (because it's the midpoint between $a$ and $b$)</li>
+</ol>
+        By our initial assumption, since $b_1 &gt; b$, we must have $a \leq{} b_1$.
+        However, we also showed that $b_1 &lt; a$.
+         This is a contradiction: we can't have both $a \leq{} b_1$ and $b_1 &lt; a$.
+
+
+    Therefore, our supposition that $a &gt; b$ must be false. We conclude that $a \leq{} b$.
+
+    Thus, we have shown that if $a \leq{} b_1$ for every $b_1 &gt; b$, then $a \leq{} b$.
+    <div class='qed'>∎</div></div><br>
+    </div>
+
+
+<div class='problem'><strong>Problem.</strong><br> [4.1 r]
+
+For each set below that is bounded above, list three upper bounds for the set. Otherwise write "NOT BOUNDED ABOVE" or "NBA".
+
+$\cap_{n=1}^\infty{}( 1-\frac{1}{n}, 1+\frac{1}{n} )$
+
+</div>
+<div class='solution'><strong>Solution.</strong>
+It is observed that the intersection of the sequences above converges to 1 as $n$ approaches infinity. Therefore, 2, 3, and 4 are all upper bounds for the set.
+</div>
+
+<div class='problem'><strong>Problem.</strong><br> [4.8]
+ Let $S$ and $T$ be nonempty subsets of $\mathbb{R}$ with the following property:
+$s\leq{} t$ for all $s \in{} S$ and $t \in{} T$.
+
+
+</div>
+<div class='solution'><strong>Solution.</strong>
+         Observe $S$ is bounded above and $T$ is bounded below.
+         Prove $\text{sup}\ S \leq{} \text{inf}\ T$
+         Give an example of such sets $S$ and $T$ where $S \ \cap{} \ T$ is nonempty.
+         Give an example of sets $S$ and $T$ where $\text{sup}\ S = \text{inf}\ T$ and $S \ \cap{} \ T$ is the empty set.
+
+
+
+        <ol>
+<li>Let $M=t,\ t \in T$. Then $S\leq M$ for all $s\in S$. By Def 4.2, $M$ is an upper bound of $S$, and $S$ is bounded above.</li>
+<li>Let $m=s$, such that $s\in S$. Then, $m\leq t$ for all $t \in T$. Then, $m$ is a lower bound of $T$, and $T$ is bounded below.</li>
+</ol>
+
+     To prove $\sup{} S \leq{} \inf{} T$:
+        <ol>
+<li>By the given property, we know that $s \leq t$ for all $s \in S$ and all $t \in T$.</li>
+<li>Let $M = \sup S$. By definition of supremum, $s \leq M$ for all $s \in S$.</li>
+<li>For any $t \in T$, we have $s \leq t$ for all $s \in S$.</li>
+<li>Therefore, $M = \sup S \leq t$ for all $t \in T$.</li>
+<li>Since $M \leq t$ for all $t \in T$, $M$ is a lower bound for $T$.</li>
+<li>By definition of infimum, $\inf T$ is the greatest lower bound of $T$.</li>
+<li>Thus, $M \leq \inf T$.</li>
+</ol>
+        Therefore, we have proven that $\sup{} S \leq{} \inf{} T$.
+
+
+         An example of such sets $S$ and $T$ where $S \ \cap{} \ T$ is nonempty: $S=[0,1], T=[1,2]$
+
+       An example of sets $S$ and $T$ where $\text{sup}\ S = \text{inf}\ T$ and $S \ \cap{} \ T$ is the empty set: $S=[0,1), T=(1,2]$
+
+</div>
+
+<h2>Problem 7 (8.5)</h2>
+<div class='problem'><strong>Problem.</strong><br> [8.5]
+ <ol>
+<li>Consider three sequences $(a_{n}), (b_n)$ and $(s_{n})$ such that $a_{n}\leq s_{n}\leq b_{n}$ for all $n$ and $\lim_{ n \to \infty }a_{n}=\lim_{ n \to \infty }b_{n}=s$. Prove $\lim_{ n \to \infty }s_{n}=s$. This is called the "squeeze lemma".</li>
+</ol>
+
+</div>
+<div class='solution'><strong>Solution.</strong>
+     <ol>
+<li>Given: For all $\varepsilon > 0$, there exist $N_1, N_2 \in \mathbb{N}$ such that for $n > N_1$ and $n > N_2$:
+        <ol>
+<li>$|a_n - s| < \varepsilon$, which implies $s - \varepsilon < a_n < s + \varepsilon$</li>
+<li>$|b_n - s| < \varepsilon$, which implies $s - \varepsilon < b_n < s + \varepsilon$</li>
+</ol></li>
+<li>We also know that for all $n \in \mathbb{N}$, $a_n \leq s_n \leq b_n$</li>
+<li>Combining these facts, we can conclude that for $n > \max(N_1, N_2)$:
+        $$\begin{align}
+
+        s - \varepsilon < a_n \leq s_n \leq b_n < s + \varepsilon
+
+\end{align}$$</li>
+<li>This implies:
+        $$\begin{align}
+
+        s - \varepsilon < s_n < s + \varepsilon
+
+\end{align}$$</li>
+<li>Therefore:
+        $$\begin{align}
+
+        |s_n - s| < \varepsilon
+
+\end{align}$$</li>
+<li>By the definition of a limit of a sequence, this proves that $\lim_{n \to \infty} s_n = s$</li>
+</ol>
+    Thus, we have proven the squeeze lemma.
+
+    <ol>
+<li>Suppose $(s_{n})$ and $(t_{n})$ are sequences such that $|s_{n}|\leq t_{n}$ for all $n$ and $\lim_{ n \to \infty }t_{n}=0$. Prove $\lim_{ n \to \infty }s_{n}=0$.</li>
+</ol>
+    <ol>
+<li>Given: $\lim_{n \to \infty} t_n = 0$, so for any $\varepsilon > 0$, there exists an $N \in \mathbb{N}$ such that for all $n > N$:</li>
+<li>$|t_n - 0| < \varepsilon$</li>
+<li>This implies: $|t_n| < \varepsilon$</li>
+<li>We know that $|s_n| \leq t_n$ for all $n$, so: $|s_n| \leq |t_n| < \varepsilon$</li>
+<li>This means: $-\varepsilon < s_n < \varepsilon$</li>
+<li>Therefore: $|s_n - 0| < \varepsilon$</li>
+</ol>
+    By the definition of a limit, this proves that $\lim_{n \to \infty} s_n = 0$.
+
+
+    </div>
+
+
+<div class='problem'><strong>Problem.</strong><br> [8.6]
+    Let $(s_{n})$ be a sequence in $\mathbb{R}$.
+<ol>
+<li>Prove $\lim_{ n \to \infty }s_{n}=0$ if and only if $\lim_{ n \to \infty }|s_{n}|=0$</li>
+</ol>
+
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+   <div class='proof'><strong>Proof.</strong>
+    We will prove this statement in two parts:
+<ol>
+<li>If $\lim_{n \to \infty} s_n = 0$, then $\lim_{n \to \infty} |s_n| = 0$:
+    <ol>
+<li>Given $\lim_{n \to \infty} s_n = 0$, for every $\epsilon > 0$, there exists an $N$ such that for all $n \geq N$, $|s_n - 0| < \epsilon$.</li>
+<li>This simplifies to $|s_n| < \epsilon$.</li>
+<li>Therefore, $\lim_{n \to \infty} |s_n| = 0$.</li>
+</ol></li>
+<li>If $\lim_{n \to \infty} |s_n| = 0$, then $\lim_{n \to \infty} s_n = 0$:
+    <ol>
+<li>Given $\lim_{n \to \infty} |s_n| = 0$, for every $\epsilon > 0$, there exists an $N$ such that for all $n \geq N$, $|s_n| < \epsilon$.</li>
+<li>This directly implies that $|s_n - 0| < \epsilon$, so $\lim_{n \to \infty} s_n = 0$.</li>
+</ol></li>
+</ol>
+Thus, we have proven that $\lim_{n \to \infty} s_n = 0$ if and only if $\lim_{n \to \infty} |s_n| = 0$.
+
+<ol>
+<li>Observe that if $s_{n}=(-1)^n$, then $\lim_{ n \to \infty }|s_{n}|$ exists, but $\lim_{ n \to \infty }s_{n}$ does not exist.</li>
+</ol>
+
+<strong>Observation:</strong> For the sequence $s_n = (-1)^n$, we can see that $s_n$ alternates between -1 and 1.
+
+To prove that $\lim_{n \to \infty} s_n$ does not exist, we can establish two subsequences:
+<ol>
+<li>$s_{n_1}$: the subsequence of even terms, where $s_{n_1} = 1$ for all $n$</li>
+<li>$s_{n_2}$: the subsequence of odd terms, where $s_{n_2} = -1$ for all $n$</li>
+</ol>
+
+Clearly, $\lim_{n \to \infty} s_{n_1} = 1$ and $\lim_{n \to \infty} s_{n_2} = -1$
+
+Since these two subsequences converge to different values, we can conclude that $\lim_{n \to \infty} s_n$ does not exist, demonstrating that the sequence is divergent.
+
+However, $\lim_{n \to \infty} |s_n| = 1$ does exist, as $|s_n| = 1$ for all $n$.
+
+   <div class='qed'>∎</div></div><br>
+</div>
+
+<div class='problem'><strong>Problem.</strong><br> [Bonus]
+    Use the completeness of $\mathbb{R}$ to show the existence of $x&gt;0$ with $x^2=2$. Specifically, consider $S=\{t\in{} \mathbb{R} : t&gt;0, t^2&lt;2\}$. Clearly, $S$ is nonempty $(1\in{} S)$. Further, $2$ is an upper bound for $S$. Indeed, suppose $t\in{} S$, then $(2-t)(2+t)=4-x^2&gt;4-2&gt;0$. Clearly, $2+t&gt;0$, hence $2-t&gt;0$.
+Let $x=\text{sup} \ S$. Prove that $x^2=2$, by establishing that (i) $x^2\leq{} 2$, and (ii) $x^2\geq{} 2$. Once these inequalities are established, we can conclude that $x^2=2$.
+
+</div>
+<div class='solution'><strong>Solution.</strong>
+    <div class='proof'><strong>Proof.</strong>
+        <ol>
+<li>Let $\alpha = \sup S$. We will prove that $\alpha^2 = 2$ by showing that $\alpha^2 \leq 2$ and $\alpha^2 \geq 2$.</li>
+<li>First, let's prove $\alpha^2 \leq 2$:
+            <ol>
+<li>Assume $\alpha^2 > 2$.</li>
+<li>For $n \in \mathbb{N}$, consider $(\alpha - \frac{1}{n})^2$:
+                $$\begin{align}
+
+                \left( \alpha-\frac{1}{n} \right)^2=\alpha^2-\frac{2\alpha}{n}+\frac{1}{n^2}>\alpha^2-\frac{2\alpha}{n}
+
+\end{align}$$</li>
+<li>Since $\alpha^2 > 2$, we have:
+                $$\begin{align}
+
+                2<\alpha^2-\frac{2\alpha}{n} \\
+                2-\alpha^2<-\frac{2\alpha}{n} \\
+                \alpha^2-2> \frac{2\alpha}{n} \\
+                \frac{\alpha^2-2}{2\alpha}> \frac{1}{n}
+
+\end{align}$$</li>
+<li>Choose $n_0 \in \mathbb{N}$ such that $\frac{1}{n_0} < \frac{\alpha^2-2}{2\alpha}$.</li>
+<li>Then:
+                $$\begin{align}
+
+                \left( \alpha-\frac{1}{n_0} \right)^2>\alpha^2-(\alpha^2-2)=2
+
+\end{align}$$</li>
+<li>This contradicts the fact that $\alpha$ is an upper bound for $S$.</li>
+<li>Therefore, our assumption must be false, and $\alpha^2 \leq 2$.</li>
+</ol></li>
+<li>Now, let's prove $\alpha^2 \geq 2$:
+            <ol>
+<li>Assume $\alpha^2 < 2$.</li>
+<li>For $n \in \mathbb{N}$, consider $(\alpha + \frac{1}{n})^2$:
+                $$\begin{align}
+
+                \left( \alpha + \frac{1}{n} \right)^2 = \alpha^2 + \frac{2\alpha}{n} + \frac{1}{n^2} < \alpha^2 + \frac{2\alpha}{n} + \frac{1}{n} = \alpha^2 + \frac{2\alpha + 1}{n}.
+
+\end{align}$$</li>
+<li>Choose $n_0 \in \mathbb{N}$ such that $\frac{1}{n_0} < \frac{2 - \alpha^2}{2\alpha + 1}$.</li>
+<li>Then:
+                $$\begin{align}
+
+                \left( \alpha + \frac{1}{n_0} \right)^2 < \alpha^2 + (2 - \alpha^2) = 2.
+
+\end{align}$$</li>
+<li>This means $\alpha + \frac{1}{n_0} \in S$, contradicting $\alpha$ as an upper bound for $S$.</li>
+<li>Therefore, our assumption must be false, and $\alpha^2 \geq 2$.</li>
+</ol></li>
+<li>Since we have shown $\alpha^2 \leq 2$ and $\alpha^2 \geq 2$, we can conclude that $\alpha^2 = 2$.</li>
+</ol>
+
+        Thus, we have proven the existence of a real number $\alpha{} &gt; 0$ such that $\alpha{}^2 = 2$.
+
+    <div class='qed'>∎</div></div><br>
+</div>
+    </div>
+</body>
+</html>

@@ -425,6 +425,140 @@ li + li {
   color: var(--muted);
 }
 
+.course-hero {
+  margin: 1rem 0 1.25rem;
+}
+
+.course-hero img {
+  display: block;
+  width: 100%;
+  max-height: 28rem;
+  background: var(--line);
+  object-fit: cover;
+}
+
+.course-hero figcaption {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.course-material-list {
+  margin: 0;
+  border-top: 1px solid var(--line);
+  padding: 0;
+  list-style: none;
+}
+
+.course-material-list li {
+  display: grid;
+  grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0;
+}
+
+.course-material-list span {
+  color: var(--muted);
+}
+
+.course-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem 1rem;
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.course-resource-grid li + li {
+  margin-top: 0;
+}
+
+.course-document {
+  padding: 1.25rem;
+}
+
+.course-document > .home-button {
+  display: inline-block;
+  margin: 0 auto 1rem;
+}
+
+.course-document #main {
+  max-width: 50rem;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.course-document #main > h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.course-document .problem,
+.course-document .solution {
+  margin: 1.2rem 0;
+  padding: 0.9rem 1rem;
+}
+
+.course-document .problem {
+  border-left: 3px solid var(--accent);
+  background: var(--bg);
+}
+
+.course-document .solution {
+  border-left: 3px solid var(--line);
+}
+
+.course-document .proof {
+  margin-top: 0.7rem;
+}
+
+.course-document .qed {
+  text-align: right;
+}
+
+.course-document mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.course-slide {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.course-slide > nav {
+  margin-bottom: 1rem;
+}
+
+.course-slide > iframe {
+  display: block;
+  width: 100%;
+  height: min(75vh, 52rem);
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.course-slide .nav-buttons {
+  position: sticky;
+  bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.course-slide .nav-buttons a {
+  display: inline-block;
+  border: 1px solid var(--link);
+  background: var(--paper);
+  padding: 0.35rem 0.65rem;
+  text-decoration: none;
+}
+
 .portfolio-hero {
   margin: 1.1rem 0 1.2rem;
 }
@@ -590,10 +724,15 @@ footer {
   .project-list div,
   .dated-list li,
   .build-details div,
+  .course-material-list li,
   .build-gallery,
   .portfolio-gallery {
     grid-template-columns: 1fr;
     gap: 0.05rem;
+  }
+
+  .course-resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .build-gallery,

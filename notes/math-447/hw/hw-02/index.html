@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 447: Real Variables - Homework #2</title>
+    <link rel="stylesheet" href="/styles.css?v=7">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$','$']],
+                displayMath: [['$$', '$$']],
+                packages: { '[+]': ['ams'] },
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body class="course-document">
+    <a href="../../index.html" class="home-button">Back</a>
+    <div id="main">
+        <h1>MATH 447: Real Variables - Homework #2</h1>
+<h3>Jerich Lee</h3>
+<h4>December 24, 2024</h4>
+
+
+<div class='problem'><strong>Problem.</strong><br> [9.12]
+    <ul>
+<li>Assume all $s_n \neq 0$ and that the limit $L = \lim \left| \frac{s_{n+1}}{s_n} \right|$ exists.
+        <ol>
+<li>Show that if $L &lt; 1$, then $\lim s_n = 0$. \emph{Hint:} Select $a$ so that $L &lt; a &lt; 1$ and obtain $N$ so that $|s_{n+1}| &lt; a|s_n|$ for $n \ge N$. Then show $|s_n| &lt; a^{n-N}|s_N|$ for $n &gt; N$.</li>
+<li>Show that if $L &gt; 1$, then $\lim |s_n| = +\infty$. \emph{Hint:} Apply (a) to the sequence $t_n = \frac{1}{|s_n|}$; see Theorem 9.10.</li>
+</ol></li>
+</ul>
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <ol>
+<li><div class='proof'><strong>Proof.</strong>
+        $\forall{} s_n, s_n \neq{} 0, \lim_{n \to \infty} | \frac{s_{n+1}}{s_n} | = L.$
+
+        <div class='proposition'><strong>Proposition.</strong><br>
+             If $L &lt; 1$, then $\lim_{n \to \infty} s_n = 0.$
+        </div>
+
+        $\forall{} \epsilon{} &gt; 0, \exists{} N \in{} \mathbb{N} \text{s.t.} n &gt; N \implies{} | \frac{s_{n+1}}{s_n} - L | &lt; \epsilon{}.$
+        This implies that $\frac{s_{n+1}}{s_n} &lt; \epsilon{} + L.$ Then we select a value $a$ such that $L &lt; a &lt; 1.$
+        $$\begin{align}
+
+            s_{n+1} &&lt; (\epsilon + L) s_n \tag{1} \\
+            a &= \epsilon + L \tag{2}
+
+\end{align}$$
+
+        To show that $|s_n| &lt; a^{n-N} |s_N|$, we will show the following:
+        $$\begin{align}
+
+            |s_n| &= \left| \frac{s_n}{s_{n-1}} \cdot \frac{s_{n-1}}{s_{n-2}} \cdot \dots \cdot \frac{s_{N+1}}{s_N} \cdot |s_N| \right| \tag{4} \\
+            |s_n| &&lt; a^{n-N} |s_N| \tag{5}
+
+\end{align}$$
+
+        $\frac{1}{a^N} |s_N|$ is a constant, so we can rename it as the following:
+        $$\begin{align}
+
+            C = \frac{1}{a^N} |s_N| \tag{6}
+
+\end{align}$$
+
+        Then, we can say the following:
+        $$\begin{align}
+
+            |s_n| &lt; a^n \tag{7}
+
+\end{align}$$
+
+        If $a &lt; 1$, we know that $\lim_{n \to \infty} a^n = 0.$ By Theorem 9.7 (b) in Ross, we know that $\lim_{n \to \infty} a^n = 0.$
+        Therefore, by Theorem 9.2 in Ross, $\lim_{n \to \infty} |s_n| = 0.$
+    <div class='qed'>∎</div></div><br></li>
+<li><div class='proposition'><strong>Proposition.</strong><br>
+         If $L &gt; 1$, then $\lim_{n \to \infty} |s_n| = \infty{}.$
+    </div>
+
+    <div class='proof'><strong>Proof.</strong>
+        Let $t_n = \frac{1}{|s_n|}$. Our goal is to prove $\lim_{n \to \infty} t_n = 0.$ Then:
+        $$\begin{align}
+
+            L &= \lim_{n \to \infty} \left| \frac{s_{n+1}}{s_n} \right| \notag \\
+            &= \lim_{n \to \infty} \left| \frac{t_n}{t_{n+1}} \right| \tag{9}
+
+\end{align}$$
+
+        $\forall{} \epsilon{} &gt; 0, \exists{} N \in{} \mathbb{N} \text{s.t.} n &gt; N \implies{} | \frac{t_n}{t_{n+1}} - L | &lt; \epsilon{}.$
+        $$\begin{align}
+
+            \frac{t_n}{t_{n+1}} &&lt; \left( \frac{\epsilon + L}{a} \right) t_n \tag{11}
+
+\end{align}$$
+
+        Applying the same process as in (a), we can say that $L &lt; a &lt; 1.$ Then:
+        $$\begin{align}
+
+            t_{n+1} &&lt; at_n \tag{12} \\
+            \frac{t_{n+1}}{t_n} &&lt; a \tag{13} \\
+            |t_n| &= \left| \frac{t_n}{t_{n-1}} \cdot \frac{t_{n-1}}{t_{n-2}} \cdot \dots \cdot \frac{t_{N+1}}{t_N} \cdot |t_N| \right| \tag{14} \\
+            C &= a^{-N} |t_N| \tag{15}
+
+\end{align}$$
+
+        We can say that $|t_n| &lt; a^n C$ if $a &lt; 1$, so $\lim_{n \to \infty} a^n = 0.$ Then $\lim_{n \to \infty} t_n = 0.$ Therefore:
+        $$\begin{align}
+
+            \lim_{n \to \infty} \frac{1}{|s_n|} = 0 \tag{16}
+
+\end{align}$$
+        By Theorem 9.10 in Ross, $\lim_{n \to \infty} |s_n| = \infty{}.$
+    <div class='qed'>∎</div></div><br></li>
+</ol>
+    </div>
+
+<div class='problem'><strong>Problem.</strong><br> [9.14]
+    Let $p &gt; 0$. Use Exercise 9.12 to show
+    $$\begin{align}
+\lim_{n \to \infty} \frac{a^n}{n^p} =
+    \begin{cases}
+    0 & \text{if } |a| \leq 1 \\
+    +\infty & \text{if } a &gt; 1 \\
+    \text{does not exist} & \text{if } a &lt; -1.
+    \end{cases}
+\end{align}$$
+    Hint: For the $a &gt; 1$ case, use Exercise 9.12(b).
+
+</div>
+$\frac{1}{n^{2}}$
+$\sum_{n=1}^{\infty{}} \frac{1}{n^{2}}$
+<div class='solution'><strong>Solution.</strong>
+<ol>
+<li><div class='proof'><strong>Proof.</strong>
+        We begin with $s_n = \lim_{n \to \infty} \frac{a^n}{n^P}, |a| \leq{} 1$. Applying Problem 1:
+        $$\begin{align}
+
+            \left| \frac{s_{n+1}}{s_n} \right| &= \frac{a^{n+1}}{(n+1)^P} \cdot \frac{n^P}{a^n} \tag{17} \\
+            &= a \left( \frac{n^P}{(n+1)^P} \right) \tag{18} \\
+            &= a \tag{19} \quad \text{(since } \lim_{n \to \infty} \frac{n^P}{(n+1)^P} = 1\text{)}.
+
+\end{align}$$
+
+        The $\lim_{n \to \infty} | \frac{s_{n+1}}{s_n} |$ exists, so Problem 1 applies. According to the result from Problem 1a, if $\lim_{n \to \infty} | \frac{s_{n+1}}{s_n} | &lt; 1$, then $\lim_{n \to \infty} s_n = 0$. When $|a| \leq{} 1$, $\lim_{n \to \infty} \frac{a^n}{n^P} = a$. Therefore, its limit must be 0 when $|a| \leq{} 1$, as desired.
+    <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+        We begin with $s_n = \lim_{n \to \infty} \frac{a^n}{n^P}, a &gt; 1$. Applying Problem 1:
+        $$\begin{align}
+
+            \left| \frac{s_{n+1}}{s_n} \right| &= \frac{a^{n+1}}{(n+1)^P} \cdot \frac{n^P}{a^n} \tag{20} \\
+            &= a \left( \frac{n^P}{(n+1)^P} \right) \tag{21} \\
+            &= a \tag{22} \quad \text{(since } \lim_{n \to \infty} \frac{n^P}{(n+1)^P} = 1\text{)}.
+
+\end{align}$$
+
+        The $\lim_{n \to \infty} | \frac{s_{n+1}}{s_n} |$ exists, so Problem 1 applies. According to the result from Problem 1a, if $\lim_{n \to \infty} | \frac{s_{n+1}}{s_n} | &gt; 1$, then $\lim_{n \to \infty} s_n = +\infty{}$. When $a &gt; 1$, $\lim_{n \to \infty} \frac{a^n}{n^P} = a$. Therefore, its limit must be $+\infty{}$ when $a &gt; 1$, as desired.
+    <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+        We begin with $s_n = \lim_{n \to \infty} \frac{a^n}{n^P}, a &lt; -1$. To show that $\lim_{n \to \infty} \frac{a^n}{n^P} = \text{DNE}$, we will show that there exists more than one limit for the sequence $s_n$. Let $s_{n_1}$ be the subsequence such that $n$ is even. Let $s_{n_2}$ be the subsequence such that $n$ is not even.
+
+        To show that a limit is divergent, the following must be satisfied:
+        $$\begin{align}
+
+        \forall M &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } n \geq N \implies \left( \frac{a^{2n}}{(2n)^P} \right) &gt; M \tag{23}
+
+\end{align}$$
+
+        Choose $N$ such that $N &gt; \frac{P \ln 2 + \ln M}{2 (\ln{} a - P)}$. Then, for all $n &gt; N$, this implies:
+        $$\begin{align}
+
+            n(2 \ln a - P) &&gt; P \ln 2 + \ln M \tag{24} \\
+            2n \ln a - P \ln n &&gt; \ln (2^P M) \tag{25} \\
+            \ln \left( \frac{a^{2n}}{N^P} \right) &&gt; \ln (2^P M) \tag{26} \\
+            \frac{a^{2n}}{(2n)^P} &&gt; M \tag{27}
+
+\end{align}$$
+
+        This implies that the $\lim_{n \to \infty} s_{n_1}$ is divergent. The same reasoning follows with $\lim_{n \to \infty} s_{n_2}$. We then get:
+        $$\begin{align}
+
+            \lim_{n \to \infty} s_{n_1} &= \lim_{n \to \infty} \frac{a^{2n}}{(2n)^P} \tag{28} \\
+            \lim_{n \to \infty} s_{n_2} &= \lim_{n \to \infty} \frac{a^{2n+1}}{(2n+1)^P} \tag{29}
+
+\end{align}$$
+
+        When $a &lt; -1, n \in{} \mathbb{N}$, $a^{2n}$ is always positive and $a^{2n+1}$ is always negative. We then get:
+        $$\begin{align}
+
+            \lim_{n \to \infty} s_{n_1} &= \lim_{n \to \infty} \frac{a^{2n}}{(2n)^P} = +\infty \tag{31} \\
+            \lim_{n \to \infty} s_{n_2} &= \lim_{n \to \infty} \frac{a^{2n+1}}{(2n+1)^P} = -\infty \tag{32}
+
+\end{align}$$
+
+        There are two subsequences of $s_n$ with two distinct limits, so by Theorem 11.8 iii) in Ross, the limit of $s_n$ with $a &lt; -1$ does not exist.
+    <div class='qed'>∎</div></div><br></li>
+</ol>
+</div>
+
+
+
+
+<div class='problem'><strong>Problem.</strong><br> [10.6]
+    <ul>
+<li>Let $(s_n)$ be a sequence such that
+        $$\begin{align}
+
+        |s_{n+1} - s_n| &lt; 2^{-n} \quad \text{for all } n \in \mathbb{N}.
+
+\end{align}$$
+        Prove $(s_n)$ is a Cauchy sequence and hence a convergent sequence.</li>
+<li>Is the result in (a) true if we only assume $|s_{n+1} - s_n| &lt; \frac{1}{n}$ for all $n \in \mathbb{N}$?</li>
+</ul>
+
+
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <ol>
+<li><div class='proof'><strong>Proof.</strong>
+            Let $s_n$ be a sequence such that $\forall{} n \in{} \mathbb{N}, |s_{n+1} - s_n| &lt; 2^{-n}$. To show that a sequence is Cauchy, we must satisfy the following:
+            $$\begin{align}
+
+            \forall \epsilon &gt; 0, \exists N \in \mathbb{N} \text{ s.t. } n, m &gt; N \implies |s_n - s_m| &lt; \epsilon.
+
+\end{align}$$
+            We will show this by showing that:
+            $$\begin{align}
+
+            \forall \epsilon, \exists N_0 \in \mathbb{N} \text{ s.t. } n &gt; N_0 \implies |2^{-n} - 0| &lt; \epsilon.
+
+\end{align}$$
+
+            Then we can bound $s_n &lt; \epsilon{}$ for all $n, m \in{} \mathbb{N}$, thereby showing $s_n$ is Cauchy. We will solve for $N$ in the expression:
+            $$\begin{align}
+
+                \frac{1}{2^N} &&lt; \epsilon \tag{34} \\
+                2^N &&gt; \frac{1}{\epsilon} \tag{35} \\
+                N &&gt; \log_2 \left( \frac{1}{\epsilon} \right) \tag{36}
+
+\end{align}$$
+
+            Then, we can choose $N = \log_2{} ( \frac{1}{\epsilon{}} )$. Then, $\forall{} n &gt; N$,
+            $$\begin{align}
+
+                |s_{n+1} - s_n| &&lt; 2^{-n} \tag{37} \\
+                |s_m - s_n| &&lt; 2^{-n} &lt; \epsilon \tag{38} \\
+                |s_m - s_n| &&lt; \epsilon \tag{39}
+
+\end{align}$$
+
+            Therefore, the sequence $s_n$ is Cauchy, as required.
+        <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+            We can follow a similar line of reasoning from the previous question. We want $\forall{} n \in{} \mathbb{N}, s_n = |s_{n+1} - s_n| &lt; \frac{1}{n}$. So we will prove that:
+            $$\begin{align}
+
+            \forall \epsilon &gt; 0, \exists N \text{ s.t. } m, n &gt; N \implies |s_{n+1} - s_n| &lt; \epsilon.
+
+\end{align}$$
+
+            $$\begin{align}
+
+                |s_{n+1} - s_n| &&lt; \frac{1}{n} \tag{40} \\
+                \left| \frac{1}{n} - 0 \right| &&lt; \epsilon \tag{41}
+
+\end{align}$$
+
+            To determine $N$, we will use algebra as follows:
+            $$\begin{align}
+
+                \frac{1}{N} &&lt; \epsilon \tag{42} \\
+                \frac{1}{\epsilon} &&lt; N \tag{43}
+
+\end{align}$$
+
+            We will choose $N = \frac{1}{\epsilon{}}$. Then, $n &gt; N$ implies:
+            $$\begin{align}
+
+                \frac{1}{n} &&lt; \epsilon \tag{44}
+
+\end{align}$$
+
+            And hence,
+            $$\begin{align}
+
+                \left| \frac{1}{n} - 0 \right| &&lt; \epsilon \tag{45} \\
+                |s_m - s_n| &&lt; \frac{1}{n} &lt; \epsilon \tag{46} \\
+                |s_m - s_n| &&lt; \epsilon \tag{47}
+
+\end{align}$$
+
+            Therefore, the sequence satisfies the Cauchy criterion.
+        <div class='qed'>∎</div></div><br></li>
+</ol>
+</div>
+
+<div class='problem'><strong>Problem.</strong><br> [10.8]
+    Let $(s_n)$ be an increasing sequence of positive numbers and define $\sigma_n{} = \frac{1}{n} (s_1 + s_2 + \cdots{} + s_n)$. Prove $(\sigma_n{})$ is an increasing sequence.
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <div class='proof'><strong>Proof.</strong>
+        Suppose by contradiction, that
+        $$\begin{align}
+
+        \frac{1}{n+1}(s_1 + s_2 + \cdots + s_n + s_{n+1}) &lt; \frac{1}{n}(s_1 + s_2 + \cdots + s_n).
+
+\end{align}$$
+        Then,
+        $$\begin{align}
+
+            \sum_{i=1}^{n+1} s_i &&lt; \frac{n+1}{n} \sum_{i=1}^n s_i \tag{48} \\
+            \sum_{i=1}^{n+1} s_i &&lt; \left( 1 + \frac{1}{n} \right) \sum_{i=1}^n s_i \tag{49} \\
+            s_{n+1} &&lt; \frac{1}{n} \sum_{i=1}^n s_i \tag{50} \\
+            ns_{n+1} &\leq \sum_{i=1}^n s_n \tag{51} \\
+            s_{n+1} &&lt; ns_n \tag{52}
+
+\end{align}$$
+
+        Contradiction.
+    <div class='qed'>∎</div></div><br>
+</div>
+
+<div class='problem'><strong>Problem.</strong><br> [10.10]
+    Let $s_1 = 1$ and $s_{n+1} = \frac{1}{3}(s_n + 1)$ for $n \geq{} 1$.
+    <ol>
+<li>Find $s_2$, $s_3$ and $s_4$.</li>
+<li>Use induction to show $s_n &gt; \frac{1}{2}$ for all $n$.</li>
+<li>Show $(s_n)$ is a decreasing sequence.</li>
+<li>Show $\lim s_n$ exists and find $\lim s_n$.</li>
+</ol>
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <ol>
+<li>Let $s_1 = 1$ and $s_{n+1} = \frac{1}{3}(s_n + 1)$ for $n \geq 1$. Then:
+        <ol>
+<li>$s_1 = 1$</li>
+<li>$s_2 = \frac{1}{3}(s_1 + 1) = \frac{1}{3}(2) = \frac{2}{3}$</li>
+<li>$s_3 = \frac{1}{3} \left( \frac{2}{3} + 1 \right) = \frac{5}{9}$</li>
+<li>$s_4 = \frac{1}{3} \left( \frac{5}{9} + 1 \right) = \frac{14}{27}$</li>
+</ol></li>
+<li><div class='proof'><strong>Proof.</strong>
+            We will use induction. The base case is as follows:
+            $$\begin{align}
+
+            s_1 = 1 \tag{53}
+
+\end{align}$$
+
+            The induction hypothesis is:
+            $$\begin{align}
+
+            \forall n \geq 1, \frac{1}{2} &lt; s_{n+1} &lt; s_n &lt; 1 \tag{54}
+
+\end{align}$$
+
+            The inductive step is as follows:
+            $$\begin{align}
+
+                \frac{1}{3}(s_{n+1} + 1) &&lt; s_{n+1} \tag{55} \\
+                \frac{s_{n+1}}{3} + \frac{1}{3} &&lt; s_{n+1} \tag{56} \\
+                \frac{1}{3} &&lt; \frac{2s_{n+1}}{3} \tag{57} \\
+                \frac{1}{2} &&lt; s_{n+1} \tag{58}
+
+\end{align}$$
+
+            To finish the proof, we need $\frac{1}{3}(s_{n+1} + 1) &gt; \frac{1}{2}$:
+            $$\begin{align}
+
+                \frac{s_{n+1}}{3} - \frac{1}{6} &&gt; 0 \tag{59} \\
+                \frac{1}{6}(2s_{n+1} - 1) &&gt; 0 \tag{60} \\
+                s_{n+1} &&gt; \frac{1}{2} \tag{61}
+
+\end{align}$$
+        <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+            To prove that $\forall{} n \geq{} 1, s_1 = 1, s_n = \frac{1}{3}(s_n + 1)$ is decreasing, we will show that $\forall{} n \geq{} 1, s_{n+1} \leq{} s_n$:
+            $$\begin{align}
+
+                \frac{1}{3}(s_{n+1} + 1) &&lt; s_n \tag{62} \\
+                \frac{s_n}{3} + \frac{1}{3} &&lt; s_n \tag{63} \\
+                \frac{1}{3} &&lt; \frac{2s_n}{3} \tag{64} \\
+                \frac{1}{2} &&lt; s_n \tag{65}
+
+\end{align}$$
+
+            The last line was proved by induction in part (b) of this problem. So $s_n$ is decreasing.
+        <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+            To show that $\lim_{n \to \infty} s_n$ exists, we can state that because $s_n$ is decreasing, it is monotone. Because $s_n &gt; \frac{1}{2}$ for all $n \in{} \mathbb{N}$, the sequence is also bounded. Therefore, by Theorem 10.2 in Ross, $s_n$ converges and must have a limit.
+
+            Let $\epsilon{} &gt; 0$, $S = \{s_n : n \in{} \mathbb{N}\}$, and $u = \inf{} s_n$. $u + \epsilon{}$ is not a lower bound of $S$, so $\exists{} N \text{s.t.} s_N &lt; u + \epsilon{}$ for all $n \geq{} N$.
+
+            Thus, $u \leq{} s_n &lt; u + \epsilon{} \implies{} |s_n - u| &lt; \epsilon{}$. From part (b), we proved $\frac{1}{2} &lt; s_{n+1} &lt; s_n &lt; 1$. So $u = \inf{} s_n = \frac{1}{2}$. Therefore, by Theorem 10.2 from Ross,
+            $$\begin{align}
+
+            \lim_{n \to \infty} s_n = u = \frac{1}{2}.
+
+\end{align}$$
+
+        <div class='qed'>∎</div></div><br></li>
+</ol>
+</div>
+
+<div class='problem'><strong>Problem.</strong><br> [10.12]
+    Let $t_1 = 1$ and $t_{n+1} = [1 - \frac{1}{(n+1)^2}] \cdot{} t_n$ for $n \geq{} 1$.
+    <ol>
+<li>Show $\lim t_n$ exists.</li>
+<li>What do you think $\lim t_n$ is?</li>
+<li>Use induction to show $t_n = \frac{n+1}{2n}$.</li>
+<li>Repeat part (b).</li>
+</ol>
+</div>
+
+<div class='solution'><strong>Solution.</strong>
+    <ol>
+<li><div class='proof'><strong>Proof.</strong>
+            To show that $t_n$ is decreasing, we will show that $t_{n+1} &lt; t_n$ for all $n \in{} \mathbb{N} \text{s.t.} n \geq{} 1$:
+            $$\begin{align}
+
+                \left[1 - \frac{1}{(n+1)^2}\right] \cdot t_n &&lt; t_n \tag{66} \\
+                \left[1 - \frac{1}{(n+1)^2}\right] &&lt; 1 \tag{67} \\
+                -\frac{1}{(n+1)^2} &&lt; 0 \tag{68} \\
+                0 &&lt; \frac{1}{(n+1)^2} \tag{69}
+
+\end{align}$$
+
+            The last line is always true for $n \in{} \mathbb{N}$, so the $\lim_{n \to \infty} t_n$ exists. We have shown that $t_n$ is monotone, and therefore has a limit.
+        <div class='qed'>∎</div></div><br></li>
+<li>I think the limit is $\frac{1}{2}$.</li>
+<li><div class='proof'><strong>Proof.</strong>
+            We will use induction. For the base case, $n = 1$:
+            $$\begin{align}
+
+                t_n &= \frac{n + 1}{2n} \tag{70} \\
+                t_1 &= \frac{2}{2} = 1 \tag{71}
+
+\end{align}$$
+
+            The inductive hypothesis is as follows:
+            $$\begin{align}
+
+            t_n = \frac{n + 1}{2n} \quad \text{for } n \geq 1 \tag{72}
+
+\end{align}$$
+
+            The inductive step:
+            $$\begin{align}
+
+                t_{n+1} &= \frac{(n+1) + 1}{2(n+1)} \tag{74} \\
+                &= \frac{n + 2}{2(n+1)} \tag{75} \\
+                &= \left[ 1 - \frac{1}{(n+1)^2} \right] t_n \tag{76} \\
+                &= \left[ 1 - \frac{1}{(n+1)^2} \right] \left( \frac{n+1}{2n} \right) \tag{77} \\
+                &= \frac{(n+1)^2 (n+1)}{2n(n+1)^2} - \frac{n+1}{2n(n+1)^2} \tag{78} \\
+                &= \frac{n+2}{2(n+1)} \tag{79}
+
+\end{align}$$
+
+            Thus, the proof is complete.
+        <div class='qed'>∎</div></div><br></li>
+<li><div class='proof'><strong>Proof.</strong>
+            $$\begin{align}
+
+                \lim_{n \to \infty} \frac{n + 1}{2n} &= \lim_{n \to \infty} \frac{1 + 1/n}{2} \tag{80} \\
+                &= \frac{1}{2} \tag{81}
+
+\end{align}$$
+
+            Equation (80) is established from Theorem 9.10 in Ross.
+        <div class='qed'>∎</div></div><br></li>
+</ol>
+</div>
+    </div>
+</body>
+</html>

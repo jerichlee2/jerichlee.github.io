@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 447: Real Variables — Lecture Notes</title>
+    <link rel="stylesheet" href="/styles.css?v=7">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$','$']],
+                displayMath: [['$$', '$$']],
+                packages: { '[+]': ['ams'] },
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body class="course-document">
+    <a href="../../index.html" class="home-button">Back</a>
+    <div id="main">
+        <h1>MATH 447: Real Variables — Lecture Notes</h1>
+<h3>Compiled by Jerich Lee</h3>
+<h4>December 08, 2024</h4>
+
+
+<h2>Peano Axioms</h2>
+[Peano Axioms]
+The natural numbers $ \mathbb{N} $ are defined by the following postulates:
+<ol>
+<li>$ \mathbb{N} $ contains a distinguished element $ 1 $.</li>
+<li>Every $ n \in \mathbb{N} $ has its successor in $ \mathbb{N} $, denoted $ S(n) $.</li>
+<li>$ 1 $ is not the successor of any element in $ \mathbb{N} $.</li>
+<li>If $ m $ and $ n $ have the same successor, then $ m = n $.</li>
+<li>If $ A \subseteq \mathbb{N} $ such that $ 1 \in A $ and $ S(n) \in A $ whenever $ n \in A $, then $ A = \mathbb{N} $.</li>
+</ol>
+
+
+[Uniqueness of $ \mathbb{N} $]
+Suppose $ X $ is a set with a distinguished element $ 1' $ and a successor map $ S' $, satisfying the Peano Axioms (N1-N5). Then there exists a bijection $ \Phi{} : \mathbb{N} \to{} X $ such that:
+$$\begin{align*}
+
+    \Phi(1) = 1', \quad \Phi(S(n)) = S'(\Phi(n)) \, \forall n \in \mathbb{N}.
+
+\end{align*}$$
+
+
+<h2>Mathematical Induction</h2>
+[Principle of Mathematical Induction]
+Suppose $ (P_n)_{n \in{} \mathbb{N}} $ is a sequence of statements such that:
+<ol>
+<li>$ P_1 $ is true.</li>
+<li>For any $ n \in \mathbb{N} $, $ P_n $ implies $ P_{n+1} $.</li>
+</ol>
+Then $ P_n $ is true for all $ n \in{} \mathbb{N} $.
+
+
+[Induction Proof]
+Prove $ \sum_{k=1}^n k = \frac{n(n+1)}{2} $ for $ n \in{} \mathbb{N} $.
+
+{Proof.} Base case ($ n=1 $):
+$$\begin{align}
+
+\sum_{k=1}^1 k = 1 = \frac{1(1+1)}{2}.
+
+\end{align}$$
+Inductive step: Assume $ \sum_{k=1}^n k = \frac{n(n+1)}{2} $. Then:
+$$\begin{align}
+
+\sum_{k=1}^{n+1} k = \sum_{k=1}^n k + (n+1) = \frac{n(n+1)}{2} + (n+1).
+
+\end{align}$$
+Simplify:
+$$\begin{align}
+
+\sum_{k=1}^{n+1} k = \frac{n(n+1) + 2(n+1)}{2} = \frac{(n+1)(n+2)}{2}.
+
+\end{align}$$
+Thus, $ \sum_{k=1}^n k = \frac{n(n+1)}{2} $ holds for all $ n $.
+
+
+<h2>Properties of Integers</h2>
+[Addition Properties of $ \mathbb{Z} $]
+The integers $ \mathbb{Z} $ satisfy:
+<ol>
+<li>{Associativity:} $ a + (b + c) = (a + b) + c $ for all $ a, b, c \in \mathbb{Z} $.</li>
+<li>{Commutativity:} $ a + b = b + a $ for all $ a, b \in \mathbb{Z} $.</li>
+<li>{Neutral Element:} $ \exists 0 \in \mathbb{Z} $ such that $ a + 0 = a $.</li>
+<li>{Existence of Opposites:} For every $ a \in \mathbb{Z} $, $ \exists -a \in \mathbb{Z} $ such that $ a + (-a) = 0 $.</li>
+</ol>
+
+
+[Uniqueness of Additive Elements]
+<ol>
+<li>The neutral element $ 0 $ is unique.</li>
+<li>For any $ a \in \mathbb{Z} $, the opposite $ -a $ is unique.</li>
+</ol>
+
+
+<div class='proof'><strong>Proof.</strong>
+1. Suppose $ 0 $ and $ 0' $ are both neutral elements. Then:
+$$\begin{align}
+
+0 = 0 + 0' = 0'.
+
+\end{align}$$
+2. Suppose $ a + x = 0 $ and $ a + y = 0 $. Then:
+$$\begin{align}
+
+x = x + 0 = x + (a + y) = (x + a) + y = 0 + y = y.
+
+\end{align}$$
+Thus, $ -a $ is unique.
+<div class='qed'>∎</div></div><br>
+[Addition Properties of $ \mathbb{Z} $]
+<ol>
+<li>{Associativity:} $ a + (b + c) = (a + b) + c $ for all $ a, b, c \in \mathbb{Z} $.</li>
+<li>{Commutativity:} $ a + b = b + a $ for all $ a, b \in \mathbb{Z} $.</li>
+<li>{Neutral Element:} $ \exists 0 \in \mathbb{Z} $ such that $ a + 0 = a $ for all $ a \in \mathbb{Z} $.</li>
+<li>{Existence of Opposites:} $ \forall a \in \mathbb{Z}, \exists -a \in \mathbb{Z} $ such that $ a + (-a) = 0 $.</li>
+</ol>
+
+
+[Uniqueness of $ 0 $ and $ -a $]
+<ol>
+<li>The neutral element $ 0 $ is unique.</li>
+<li>For each $ a \in \mathbb{Z} $, the opposite $ -a $ is unique.</li>
+</ol>
+
+
+[Multiplication Properties of $ \mathbb{Z} $]
+
+<ol>
+<li>{Associativity:} $ a \cdot (b \cdot c) = (a \cdot b) \cdot c $ for all $ a, b, c \in \mathbb{Z} $.</li>
+<li>{Commutativity:} $ a \cdot b = b \cdot a $ for all $ a, b \in \mathbb{Z} $.</li>
+<li>{Neutral Element:} $ \exists 1 \in \mathbb{Z} $ such that $ 1 \cdot a = a $ for all $ a \in \mathbb{Z} $.</li>
+<li>{Distributive Law:} $ (a + b) \cdot c = a \cdot c + b \cdot c $ for all $ a, b, c \in \mathbb{Z} $.</li>
+</ol>
+
+
+[Multiplication by Zero]
+For any $ a \in{} \mathbb{Z} $, $ 0 \cdot{} a = 0 $.
+
+
+[Field Properties of $ \mathbb{Q} $]
+The rational numbers $ \mathbb{Q} $ satisfy:
+<ol>
+<li>{Inverse:} $ \forall a \in \mathbb{Q} \setminus \{0\}, \exists a^{-1} \in \mathbb{Q} $ such that $ a \cdot a^{-1} = 1 $.</li>
+</ol>
+If $ (X, +, 0, \cdot{}, 1) $ satisfies (A1–A4), (M1–M4), and the distributive law, $ X $ is called a field.
+
+
+<h3>Ordered Fields</h3>
+[Ordered Fields]
+A field $ F $ is ordered if equipped with a linear order $ \leq{} $ such that:
+<ol>
+<li>If $ a \leq b $, then $ a + c \leq b + c $ for all $ a, b, c \in F $.</li>
+<li>If $ a \leq b $ and $ c \geq 0 $, then $ ac \leq bc $.</li>
+</ol>
+
+
+[Properties of Ordered Fields]
+Let $ F $ be an ordered field. Then for all $ a, b, c \in{} F $:
+<ol>
+<li>If $ a \leq b $, then $ -b \leq -a $.</li>
+<li>If $ a \leq b $ and $ c \leq 0 $, then $ bc \leq ac $.</li>
+<li>If $ 0 \leq a $ and $ 0 \leq b $, then $ 0 \leq ab $.</li>
+<li>$ 0 \leq a^2 $ for all $ a \in F $.</li>
+</ol>
+
+
+<h3>Rational Zeros Theorem</h3>
+[Rational Zeros Theorem]
+Suppose $ p(x) = c_nx^n + \ldots{} + c_1x + c_0 $, with $ c_0, \ldots{}, c_n \in{} \mathbb{Z} $, $ c_0 \neq{} 0 $, $ c_n \neq{} 0 $. If $ p(r) = 0 $ for $ r = \frac{c}{d} $ (where $ c, d \in{} \mathbb{Z} $, $ d \neq{} 0 $, $ \gcd{}(c, d) = 1 $), then $ c \mid{} c_0 $ and $ d \mid{} c_n $.
+
+
+[Irrationality of $ \sqrt{2} $]
+No rational number $ r $ satisfies $ r^2 = 2 $.
+
+<h2>Ordered Fields and Completeness</h2>
+
+<h3>Fields and Order</h3>
+
+If $ F $ is a field with more than one element, then $ 0 \neq{} 1 $.
+
+<div class='proof'><strong>Proof.</strong>
+Let $ x \in{} F $ be distinct from $ 0 $. Then $ 0 = x \cdot{} 0 \neq{} x \cdot{} 1 = x $, hence $ 0 \neq{} 1 $.
+<div class='qed'>∎</div></div><br>
+
+[Ordered Fields]
+A field $ F $ is called ordered if it is equipped with a linear order $ \leq{} $ satisfying:
+<ol>
+<li>If $ a \leq b $, then $ a + c \leq b + c $ for all $ a, b, c \in F $.</li>
+<li>If $ a \leq b $ and $ c \geq 0 $, then $ ac \leq bc $.</li>
+</ol>
+
+
+<h3>Properties of Ordered Fields</h3>
+
+Let $ F $ be an ordered field. Then for all $ a, b, c \in{} F $:
+<ol>
+<li>If $ a \leq b $, then $ -b \leq -a $.</li>
+<li>If $ a \leq b $ and $ c \leq 0 $, then $ bc \leq ac $.</li>
+<li>If $ 0 \leq a $ and $ 0 \leq b $, then $ 0 \leq ab $.</li>
+<li>$ 0 \leq a^2 $ for all $ a \in F $.</li>
+</ol>
+
+
+<h3>Absolute Value and Distance</h3>
+[Absolute Value]
+For $ a \in{} F $, the absolute value $ |a| $ is defined as:
+$$\begin{align}
+
+|a| =
+\begin{cases}
+a & \text{if } a \geq 0, \\
+-a & \text{if } a < 0.
+\end{cases}
+
+\end{align}$$
+
+
+[Distance]
+The distance between $ a, b \in{} F $ is defined as:
+$$\begin{align}
+
+\text{dist}(a, b) = |a - b|.
+
+\end{align}$$
+
+
+<h3>Completeness Axiom</h3>
+[Completeness Axiom]
+If $ S \subset{} \mathbb{R} $ is non-empty and bounded above, then it has a unique least upper bound (supremum), denoted $ \sup{} S $.
+
+
+[Archimedean Property]
+If $ a, b &gt; 0 $ in $ \mathbb{R} $, then there exists $ n \in{} \mathbb{N} $ such that $ n \cdot{} a &gt; b $.
+
+
+[Denseness of $ \mathbb{Q} $]
+The rational numbers $ \mathbb{Q} $ are dense in $ \mathbb{R} $, meaning that for any $ a, b \in{} \mathbb{R} $ with $ a &lt; b $, there exists $ r \in{} \mathbb{Q} $ such that $ a &lt; r &lt; b $.
+
+<h2>Sequences and Limits (Sections 7-9)</h2>
+
+<h3>Definitions and Examples</h3>
+[Sequence]
+A sequence is a function $ s : \{m, m + 1, \dots{} \} \to{} \mathbb{R} $ (for $ m \in{} \mathbb{Z} $). We denote the sequence as $ (s_n)_{n \geq{} m} $, where $ s_n = s(n) $.
+
+
+[Convergence and Limit]
+A sequence $ (s_n) $ converges to $ L \in{} \mathbb{R} $ if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \in \mathbb{R} \text{ such that } |s_n - L| < \varepsilon \text{ for } n > N.
+
+\end{align}$$
+We write $ \lim_{n \to \infty} s_n = L $ or $ s_n \to{} L $.
+
+
+[Uniqueness of Limits]
+A sequence cannot have more than one limit.
+
+
+<h3>Examples of Limits</h3>
+<ol>
+<li>$ \lim_{n \to \infty} \frac{1}{n} = 0 $.</li>
+<li>The sequence $ ((-1)^n)_{n \in \mathbb{N}} $ does not converge.</li>
+<li>$ \lim_{n \to \infty} \frac{3n + 1}{2n + 1} = \frac{3}{2} $.</li>
+</ol>
+
+<h3>Facts about Limits</h3>
+
+If $ (s_n) $ converges, and $ s_n \geq{} a $ for all but finitely many $ n $, then $ \lim{} s_n \geq{} a $.
+
+
+
+If $ s_n \geq{} 0 $ for all $ n $ and $ \lim{} s_n = s $, then $ \lim{} \sqrt{s_n} = \sqrt{s} $.
+
+
+<h3>Convergent Sequences are Bounded</h3>
+[Bounded Sequence]
+A sequence $ (s_n) $ is called bounded if $ \exists{} A \in{} \mathbb{R} $ such that $ |s_n| \leq{} A $ for all $ n $.
+
+
+
+Convergent sequences are bounded.
+
+
+<h3>Arithmetic of Limits</h3>
+[Limits of Sums, Products, and Ratios]
+Suppose $ \lim{} s_n = s $ and $ \lim{} t_n = t $. Then:
+<ol>
+<li>$ \lim (s_n + t_n) = s + t $,</li>
+<li>$ \lim (a \cdot s_n) = a \cdot s $ for any $ a \in \mathbb{R} $,</li>
+<li>$ \lim (s_n \cdot t_n) = s \cdot t $,</li>
+<li>If $ t \neq 0 $, then $ \lim \frac{s_n}{t_n} = \frac{s}{t} $.</li>
+</ol>
+
+<h2>Sums, Products, Ratios of Limits (Section 9)</h2>
+
+<h3>Arithmetic of Limits</h3>
+[Arithmetic of Limits]
+Suppose $ \lim{} s_n = s $ and $ \lim{} t_n = t $. Then:
+<ol>
+<li>$ \lim (s_n + t_n) = s + t $,</li>
+<li>$ \lim (a \cdot s_n) = a \cdot s $ for any $ a \in \mathbb{R} $,</li>
+<li>$ \lim (s_n \cdot t_n) = s \cdot t $,</li>
+<li>If $ t \neq 0 $, then $ \lim \frac{s_n}{t_n} = \frac{s}{t} $.</li>
+</ol>
+
+
+[Squeeze Theorem]
+If $ a_n \leq{} s_n \leq{} b_n $ for all $ n $, and $ \lim{} a_n = \lim{} b_n = s $, then $ \lim{} s_n = s $.
+
+
+<h3>Basic Examples of Limits</h3>
+[Basic Examples]
+
+<ol>
+<li>$ \lim \frac{1}{n^p} = 0 $ for $ p > 0 $,</li>
+<li>$ \lim a^n = 0 $ if $ |a| < 1 $,</li>
+<li>$ \lim n^{1/n} = 1 $,</li>
+<li>$ \lim a^{1/n} = 1 $ for $ a > 0 $.</li>
+</ol>
+
+
+<h3>Diverging Sequences</h3>
+[Divergence to Infinity]
+We say $ \lim{} s_n = +\infty{} $ if for all $ A &gt; 0 $, there exists $ N \in{} \mathbb{R} $ such that $ s_n &gt; A $ for $ n &gt; N $. Similarly, $ \lim{} s_n = -\infty{} $ is defined.
+
+
+[Product Rule for Divergence]
+If $ \lim{} s_n = +\infty{} $ and $ \lim{} t_n &gt; 0 $, then $ \lim{} (s_n \cdot{} t_n) = +\infty{} $.
+
+
+
+If $ s_n &gt; 0 $ for all $ n $, then $ \lim{} s_n = +\infty{} $ if and only if $ \lim{} \frac{1}{s_n} = 0 $.
+
+
+<h3>Monotone Sequences (Section 10)</h3>
+[Monotone Sequences]
+A sequence $ (s_n) $ is:
+<ol>
+<li>\emph{Increasing} if $ s_n \leq s_{n+1} $ for all $ n $,</li>
+<li>\emph{Decreasing} if $ s_n \geq s_{n+1} $ for all $ n $,</li>
+<li>\emph{Monotone} if it is either increasing or decreasing.</li>
+</ol>
+
+
+[Examples of Monotone Sequences]
+
+<ol>
+<li>$ x_n = \sum_{k=1}^n \frac{1}{k^2} $ is increasing because $ x_{n+1} = x_n + \frac{1}{(n+1)^2} > x_n $.</li>
+<li>$ y_n = \frac{(-1)^n}{n^2} $ is not monotone because $ y_{n+1} > y_n $ if $ n $ is odd, and $ y_{n+1} < y_n $ if $ n $ is even.</li>
+</ol>
+
+<h2>Monotone Sequences and Convergence (Section 10)</h2>
+
+<h3>Monotone Sequences</h3>
+[Monotone Sequences]
+A sequence $ (s_n) $ is:
+<ol>
+<li>\emph{Increasing} if $ s_n \leq s_{n+1} $ for all $ n $,</li>
+<li>\emph{Decreasing} if $ s_n \geq s_{n+1} $ for all $ n $,</li>
+<li>\emph{Monotone} if it is either increasing or decreasing.</li>
+</ol>
+
+
+[Theorem 10.2]
+Any monotone bounded sequence converges.
+
+
+[Bounded Monotone Sequence]
+Consider $ s_n = \sum_{k=0}^{n-1} \frac{1}{k!} $. This sequence is:
+<ol>
+<li>Increasing, since $ s_{n+1} = s_n + \frac{1}{n!} > s_n $.</li>
+<li>Bounded, since $ s_n \leq 3 $ (using an induction-based proof that $ k! \geq 2^{k-1} $ for $ k \geq 1 $).</li>
+</ol>
+Thus, $ \lim{} s_n = e \approx{} 2.71828 $.
+
+
+<h3>Unbounded Monotone Sequences</h3>
+[Theorem 10.4]
+If $ (s_n)_{n \geq{} m} $ is an unbounded increasing (decreasing) sequence, then $ \lim{} s_n = +\infty{} $ (resp. $ \lim{} s_n = -\infty{} $).
+
+
+[Harmonic Sequence]
+Let $ s_n = \sum_{k=1}^n \frac{1}{k} $. This sequence is:
+<ol>
+<li>Increasing, since $ s_{n+1} = s_n + \frac{1}{n+1} > s_n $.</li>
+<li>Unbounded, as shown using a lower bound argument:
+    $$\begin{align}
+
+    s_{2^m} \geq \frac{1}{1} + \frac{1}{2} + \cdots + \frac{1}{2^{m-1}} \geq m.
+
+\end{align}$$</li>
+</ol>
+Thus, $ s_n \to{} +\infty{} $.
+
+
+<h3>Lim Sup and Lim Inf</h3>
+[Lim Sup and Lim Inf]
+Let $ u_N = \sup{}\{s_n : n &gt; N\} $ and $ v_N = \inf{}\{s_n : n &gt; N\} $. Then:
+$$\begin{align}
+
+\limsup s_n = \lim_{N \to \infty} u_N, \quad \liminf s_n = \lim_{N \to \infty} v_N.
+
+\end{align}$$
+
+
+[Properties of Lim Sup and Lim Inf]
+
+<ol>
+<li>$ \limsup s_n \geq \liminf s_n $.</li>
+<li>If $ \lim s_n $ exists, then $ \limsup s_n = \lim s_n = \liminf s_n $.</li>
+<li>If $ \limsup s_n = \liminf s_n = s $, then $ \lim s_n = s $.</li>
+</ol>
+
+
+[Oscillating Sequence]
+Let $$\begin{align}
+ s_n =
+\begin{cases}
+\frac{1}{n}, & n \text{ even} \\
+-n, & n \text{ odd}
+\end{cases}.
+
+\end{align}$$
+Then:
+<ol>
+<li>$ \limsup s_n = 0 $,</li>
+<li>$ \liminf s_n = -\infty $.</li>
+</ol>
+
+
+<h3>Decimal Expansions</h3>
+
+Any real number can be expressed as a decimal expansion $ K.d_1d_2d_3\ldots{} $, where $ K \in{} \{0, 1, 2, \dots{} \} $ and $ d_k \in{} \{0, \ldots{}, 9\} $. For instance:
+$$\begin{align}
+
+1 = 1.000\ldots = 0.999\ldots
+
+\end{align}$$
+
+<h2>Lim Inf, Lim Sup, and Cauchy Sequences (Sections 10-11)</h2>
+
+<h3>Lim Inf and Lim Sup</h3>
+[Lim Sup and Lim Inf]
+Let $ u_N = \sup{}\{s_n : n &gt; N\} $ and $ v_N = \inf{}\{s_n : n &gt; N\} $. Then:
+$$\begin{align}
+
+\limsup s_n = \lim_{N \to \infty} u_N, \quad \liminf s_n = \lim_{N \to \infty} v_N.
+
+\end{align}$$
+
+
+[Theorem 10.7]
+
+<ol>
+<li>If $ \lim s_n $ is defined, then $ \liminf s_n = \lim s_n = \limsup s_n $.</li>
+<li>If $ \liminf s_n = s = \limsup s_n $, then $ \lim s_n = s $.</li>
+</ol>
+
+
+
+Let $$\begin{align}
+
+    s_n =
+\begin{cases}
+\frac{1}{n} & \text{if } n \text{ is even}, \\
+-n & \text{if } n \text{ is odd}.
+\end{cases}
+
+\end{align}$$
+Then:
+<ol>
+<li>$ \limsup s_n = 0 $,</li>
+<li>$ \liminf s_n = -\infty $.</li>
+</ol>
+
+
+<h3>Cauchy Sequences</h3>
+[Cauchy Sequence]
+A sequence $ (s_n) $ is called Cauchy if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \in \mathbb{N} \text{ such that } |s_n - s_m| < \varepsilon \text{ for } n, m > N.
+
+\end{align}$$
+
+
+[Theorem 10.11]
+A sequence $ (s_n) $ converges if and only if it is Cauchy.
+
+
+[Lemma 10.9]
+Any convergent sequence is Cauchy.
+
+
+[Lemma 10.10]
+Any Cauchy sequence is bounded.
+
+
+<h3>Subsequences</h3>
+[Subsequence]
+A sequence $ (t_k) $ is a subsequence of $ (s_n) $ if there exists a strictly increasing sequence $ n_1 &lt; n_2 &lt; \ldots{} $ such that $ t_k = s_{n_k} $ for any $ k $.
+
+
+[Subsequence Examples]
+
+<ol>
+<li>$ s_n = \frac{1}{n} $: A subsequence $ t_k = \frac{1}{k^2} $, where $ n_k = k^2 $.</li>
+<li>$ s_n = (-1)^n + \frac{1}{n} $: The sequence diverges, but $ s_{2k} = 1 + \frac{1}{2k} $ converges.</li>
+</ol>
+
+
+[Subsequential Limits]
+Every sequence has a subsequence that converges to a limit.
+
+<h2>Subsequences and Subsequential Limits (Section 11)</h2>
+
+<h3>Subsequences</h3>
+[Subsequence]
+A sequence $ (t_k) $ is a subsequence of $ (s_n) $ if there exists a strictly increasing sequence $ n_1 &lt; n_2 &lt; \ldots{} $ such that $ t_k = s_{n_k} $ for any $ k $.
+
+
+[Subsequences of Subsequences]
+Any subsequence of a subsequence of $ (s_n) $ is a subsequence of $ (s_n) $.
+
+
+<h3>Convergence of Subsequences</h3>
+[Theorem 11.3]
+If $ \lim{} s_n = s $ (finite or $ \pm{}\infty{} $), then any subsequence $ (t_k) $ has the same limit.
+
+
+<div class='proof'><strong>Proof.</strong>
+Let $ \lim{} s_n = s $, and let $ t_k = s_{n_k} $. Then for $ \varepsilon{} &gt; 0 $, there exists $ N $ such that $ |s_n - s| &lt; \varepsilon{} $ for $ n &gt; N $. Since $ n_k \to{} \infty{} $, we can find $ K $ such that $ n_k &gt; N $ for $ k &gt; K $. Thus, $ |t_k - s| &lt; \varepsilon{} $ for $ k &gt; K $, implying $ \lim{} t_k = s $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Monotone Subsequences</h3>
+[Theorem 11.4]
+Every sequence has a monotone subsequence.
+
+
+[Bolzano-Weierstrass Theorem]
+Every bounded sequence has a convergent subsequence.
+
+
+[Divergent Sequence with Convergent Subsequence]
+Let $ s_n = (-1)^n (1 + \frac{1}{n}) $. This sequence is bounded but divergent. The subsequence $ s_{2k} = 1 + \frac{1}{2k} $ converges to $ 1 $.
+
+
+<h3>Subsequential Limits</h3>
+[Subsequential Limit]
+A subsequential limit of $ (s_n) $ is any limit of a subsequence, possibly $ \pm{}\infty{} $.
+
+
+[Theorem 11.2]
+Suppose $ (s_n) $ is a sequence.
+<ol>
+<li>$ t \in \mathbb{R} $ is a subsequential limit if and only if $ \forall \varepsilon > 0, \{n : |s_n - t| < \varepsilon\} $ is infinite.</li>
+<li>$ t = +\infty $ (or $ t = -\infty $) is a subsequential limit if $ (s_n) $ is not bounded above (or below).</li>
+</ol>
+
+
+<h3>Lim Inf and Lim Sup as Subsequential Limits</h3>
+[Theorem 11.7]
+For any sequence $ (s_n) $, $ \limsup{} s_n $ and $ \liminf{} s_n $ are limits of monotone subsequences.
+
+
+[Theorem 11.8]
+Let $ S $ be the set of subsequential limits of $ (s_n) $. Then:
+<ol>
+<li>$ S $ is non-empty.</li>
+<li>$ \inf S = \liminf s_n, \quad \sup S = \limsup s_n $.</li>
+<li>$ \lim s_n $ exists if and only if $ S $ consists of a single point, $ S = \{\lim s_n\} $.</li>
+</ol>
+
+<h2>Lim Sup, Lim Inf, and Metric Spaces (Sections 11-13)</h2>
+
+<h3>Subsequential Limits</h3>
+[Subsequential Limit (Definition 11.6)]
+For a sequence $ (s_n) $, a subsequential limit is any limit of a subsequence (in $ \mathbb{R} \cup{} \{\pm{}\infty{}\} $).
+
+
+[Properties of Subsequential Limits (Theorem 11.2)]
+Suppose $ (s_n) $ is a sequence.
+<ol>
+<li>$ t \in \mathbb{R} $ is a subsequential limit if and only if $ \forall \varepsilon > 0, \{n : |s_n - t| < \varepsilon\} $ is infinite.</li>
+<li>$ t = +\infty $ ($ t = -\infty $) is a subsequential limit if $ (s_n) $ is not bounded above (resp. below).</li>
+</ol>
+
+
+<h3>The Set of Subsequential Limits</h3>
+[Theorem 11.8]
+Suppose $ (s_n) $ is a sequence, and $ S $ is the set of subsequential limits. Then:
+<ol>
+<li>$ S $ is non-empty.</li>
+<li>$ \inf S = \liminf s_n $ and $ \sup S = \limsup s_n $.</li>
+<li>$ \lim s_n $ exists if and only if $ S $ consists of a single point. Then $ \{\lim s_n\} = S $.</li>
+</ol>
+
+
+[Convergent Sequences]
+If $ \lim{} s_n = s $, then $ S = \{s\} $, $ \limsup{} s_n = s = \liminf{} s_n $.
+
+
+<h3>Lim Sup and Lim Inf Revisited</h3>
+[Theorem 12.1]
+If $ \lim{} s_n = s \in{} (0, \infty{}) $, then for any sequence $ (t_n) $:
+$$\begin{align}
+
+\limsup (s_n t_n) = s \cdot \limsup t_n.
+
+\end{align}$$
+
+
+[Corollary 12.3]
+If $ (s_n) $ is a sequence of positive numbers and $ \lim{} \frac{s_{n+1}}{s_n} $ exists, then:
+$$\begin{align}
+
+\lim s_n^{1/n} \text{ also exists, and } \lim s_n^{1/n} = \lim \frac{s_{n+1}}{s_n}.
+
+\end{align}$$
+
+
+
+
+<ol>
+<li>$ \lim (n!)^{1/n} = +\infty $.</li>
+<li>$ \lim \frac{1}{n} (n!)^{1/n} = \frac{1}{e} $.</li>
+</ol>
+
+
+<h3>Metric Spaces</h3>
+[Metric (Definition 13.1)]
+A metric $ d : S \times{} S \to{} [0, \infty{}) $ satisfies:
+<ol>
+<li>{Non-degeneracy:} $ d(x, y) = 0 \iff x = y $.</li>
+<li>{Symmetry:} $ d(x, y) = d(y, x) $ for all $ x, y \in S $.</li>
+<li>{Triangle Inequality:} $ d(x, y) + d(y, z) \geq d(x, z) $ for all $ x, y, z \in S $.</li>
+</ol>
+
+
+[Metrics]
+
+<ol>
+<li>On $ \mathbb{R} $: $ d(x, y) = |x - y| $.</li>
+<li>On $ \mathbb{R}^n $: $ d(\vec{x}, \vec{y}) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2} $.</li>
+</ol>
+
+
+<h3>Convergence in Metric Spaces</h3>
+[Convergence (Definition 13.2)]
+A sequence $ (s_n) \subset{} S $ converges to $ s \in{} S $ if:
+$$\begin{align}
+
+\lim_{n \to \infty} d(s_n, s) = 0.
+
+\end{align}$$
+
+
+[Cauchy Sequence (Definition 13.2)]
+A sequence $ (s_n) \subset{} S $ is Cauchy if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \text{ such that } d(s_n, s_m) < \varepsilon \text{ for all } n, m > N.
+
+\end{align}$$
+
+
+[Cauchy and Convergence]
+If $ (s_n) $ converges in $ (S, d) $, then $ (s_n) $ is Cauchy.
+
+
+[Complete Metric Spaces]
+A metric space $ (S, d) $ is complete if every Cauchy sequence in $ S $ converges to a point in $ S $.
+
+
+
+The space $ \mathbb{R}^n $ with the Euclidean metric is complete.
+
+<h2>Metric Spaces (Section 13)</h2>
+
+<h3>Definition and Examples</h3>
+[Metric (Definition 13.1)]
+Suppose $ S $ is a set. A function $ d : S \times{} S \to{} [0, \infty{}) $ is called a metric if the following hold:
+<ol>
+<li>{Non-degeneracy:} $ d(x, y) = 0 \iff x = y $ (hence $ d(x, y) > 0 $ when $ x \neq y $).</li>
+<li>{Symmetry:} $ d(x, y) = d(y, x) $ for all $ x, y \in S $.</li>
+<li>{Triangle Inequality:} $ d(x, y) + d(y, z) \geq d(x, z) $ for all $ x, y, z \in S $.</li>
+</ol>
+
+
+[Examples of Metrics]
+
+<ol>
+<li>On $ \mathbb{R} $: $ d(x, y) = |x - y| $.</li>
+<li>On $ \mathbb{R}^n $: $ d(\vec{x}, \vec{y}) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2} $ (Euclidean metric).</li>
+<li>Discrete Metric: For $ x, y \in S $, define:
+    $$\begin{align}
+
+    d(x, y) =
+    \begin{cases}
+    0 & \text{if } x = y, \\
+    1 & \text{if } x \neq y.
+    \end{cases}
+
+\end{align}$$</li>
+</ol>
+
+
+<h3>Convergence and Completeness</h3>
+[Convergence (Definition 13.2)]
+Suppose $ (S, d) $ is a metric space. A sequence $ (s_n) \subset{} S $ converges to $ s \in{} S $ if $ \lim_{n \to \infty} d(s_n, s) = 0 $; that is, $ \forall{} \varepsilon{} &gt; 0, \exists{} N \text{such that} d(s_n, s) &lt; \varepsilon{} \text{for} n &gt; N $.
+
+
+[Cauchy Sequence (Definition 13.2 continued)]
+A sequence $ (s_n) \subset{} S $ is called Cauchy if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \text{ such that } d(s_n, s_m) < \varepsilon \text{ for } n, m > N.
+
+\end{align}$$
+
+
+[Cauchy Sequences are Convergent in Complete Spaces]
+If $ (S, d) $ is complete, then every Cauchy sequence in $ S $ converges to a point in $ S $.
+
+
+[Completeness of $ \mathbb{R} $]
+$ \mathbb{R} $ with the standard metric $ d(x, y) = |x - y| $ is complete. Any Cauchy sequence in $ \mathbb{R} $ converges to a real number.
+
+
+[Non-Completeness of $ \mathbb{Q} $]
+Consider $ \mathbb{Q} $ with $ d(x, y) = |x - y| $. The sequence $ r_n \in{} (\sqrt{2} - \frac{1}{n}, \sqrt{2}) $ is Cauchy in $ \mathbb{Q} $ but does not converge in $ \mathbb{Q} $ because $ \sqrt{2} \notin{} \mathbb{Q} $.
+
+
+<h3>Special Metrics</h3>
+[Manhattan (Taxicab) Metric]
+For $ \vec{x} = (x_1, \ldots{}, x_n) $ and $ \vec{y} = (y_1, \ldots{}, y_n) $ in $ \mathbb{R}^n $, the taxicab metric is defined as:
+$$\begin{align}
+
+d_1(\vec{x}, \vec{y}) = \sum_{i=1}^n |x_i - y_i|.
+
+\end{align}$$
+
+
+[Completeness of $ (\mathbb{R}^n, d_1) $]
+The metric space $ (\mathbb{R}^n, d_1) $ is complete.
+
+
+<h3>Inner Product and Triangle Inequality</h3>
+[Inner Product]
+For $ \vec{x}, \vec{y} \in{} \mathbb{R}^n $, define the inner product:
+$$\begin{align}
+
+\langle \vec{x}, \vec{y} \rangle = \sum_{i=1}^n x_i y_i.
+
+\end{align}$$
+The magnitude of $ \vec{x} $ is:
+$$\begin{align}
+
+\|\vec{x}\| = \sqrt{\langle \vec{x}, \vec{x} \rangle}.
+
+\end{align}$$
+
+
+[Bunyakovsky-Cauchy-Schwarz Inequality]
+For all $ \vec{x}, \vec{y} \in{} \mathbb{R}^n $:
+$$\begin{align}
+
+|\langle \vec{x}, \vec{y} \rangle| \leq \|\vec{x}\| \|\vec{y}\|.
+
+\end{align}$$
+
+
+[Triangle Inequality Lite]
+For $ \vec{x}, \vec{y} \in{} \mathbb{R}^n $:
+$$\begin{align}
+
+\|\vec{x} + \vec{y}\| \leq \|\vec{x}\| + \|\vec{y}\|.
+
+\end{align}$$
+
+<h2>Metric Spaces: Bounded Sets, Open and Closed Sets, and Closure (Section 13)</h2>
+
+<h3>Bounded Sets</h3>
+[Bounded Sets]
+A set $ E $ in a metric space $ (S, d) $ is bounded if there exists $ y \in{} S $ such that:
+$$\begin{align}
+
+\sup_{x \in E} d(y, x) < \infty.
+
+\end{align}$$
+
+
+
+If such a $ y $ exists, then for any $ z \in{} S $, $ \sup_{x \in E} d(z, x) &lt; \infty{} $. This follows from the triangle inequality:
+$$\begin{align}
+
+d(z, x) \leq d(y, x) + d(z, y).
+
+\end{align}$$
+
+
+
+A sequence $ (x_k) $ is bounded if the set $ \{x_1, x_2, \ldots{}\} $ is bounded. That is, for some (or any) $ y \in{} S $:
+$$\begin{align}
+
+\sup_k d(y, x_k) < \infty.
+
+\end{align}$$
+
+
+<h3>Bolzano-Weierstrass Theorem</h3>
+[Bolzano-Weierstrass for $ \mathbb{R}^n $]
+Any bounded sequence in $ \mathbb{R}^n $ has a convergent subsequence.
+
+
+[Failure of Bolzano-Weierstrass in Discrete Metrics]
+Consider $ \mathbb{N} $ equipped with the discrete metric $ d(x, y) = 1 $ for $ x \neq{} y $ and $ d(x, y) = 0 $ for $ x = y $. The sequence $ x_n = n $ is bounded but has no convergent subsequences because convergent sequences are eventually constant in discrete metrics.
+
+
+<h3>Interior Points and Open Sets</h3>
+[Open Ball]
+An open ball with center $ s_0 $ and radius $ r &gt; 0 $ is:
+$$\begin{align}
+
+B_r^o(s_0) = \{s \in S : d(s, s_0) < r\}.
+
+\end{align}$$
+
+
+[Interior Points]
+A point $ s_0 \in{} S $ is interior to $ E \subset{} S $ if there exists $ r &gt; 0 $ such that $ B_r^o(s_0) \subset{} E $. The set of all interior points is denoted $ E^o $, called the interior of $ E $.
+
+
+[Open Sets]
+A set $ E \subset{} S $ is open if $ E = E^o $.
+
+
+
+
+<ol>
+<li>In $ S = \mathbb{R} $ with the usual metric, $ [0, \infty) $ is not open, but $ (0, \infty) $ is.</li>
+<li>In $ S = \mathbb{R}^2 $, the set $ E = \{(x, 0) : x \geq 0\} $ has $ E^o = \emptyset $.</li>
+</ol>
+
+
+<h3>Properties of Open and Closed Sets</h3>
+[Facts about Open Sets]
+
+<ol>
+<li>$ S $ and $ \emptyset $ are open.</li>
+<li>A union of any collection of open sets is open.</li>
+<li>A finite intersection of open sets is open.</li>
+</ol>
+
+
+[Closed Sets]
+A set $ E \subset{} S $ is closed if $ S \setminus{} E $ is open.
+
+
+[Facts about Closed Sets]
+
+<ol>
+<li>$ S $ and $ \emptyset $ are closed.</li>
+<li>An intersection of any collection of closed sets is closed.</li>
+<li>A finite union of closed sets is closed.</li>
+</ol>
+
+
+<h3>Closure and Boundary</h3>
+[Closure]
+The closure of $ E \subset{} S $, denoted $ \overline{E} $, is the intersection of all closed sets containing $ E $.
+
+
+[Boundary]
+The boundary of $ E \subset{} S $ is:
+$$\begin{align}
+
+\partial E = \overline{E} \setminus E^o.
+
+\end{align}$$
+
+
+[Closure in $ \mathbb{R} $]
+Let $ E = \{\frac{1}{n} : n \in{} \mathbb{N}\} \subset{} \mathbb{R} $. Then:
+$$\begin{align}
+
+\overline{E} = E \cup \{0\}.
+
+\end{align}$$
+
+<h2>Closure, Boundary, and Open/Closed Sets (Section 13)</h2>
+
+<h3>Open Balls and Open Sets</h3>
+[Open Ball]
+For $ s_0 \in{} S $ and $ r &gt; 0 $, the open ball with center $ s_0 $ and radius $ r $ is:
+$$\begin{align}
+
+B_r^o(s_0) = \{s \in S : d(s, s_0) < r\}.
+
+\end{align}$$
+
+
+
+A set $ E \subset{} S $ is open if and only if it is a union of open balls.
+
+
+<h3>Closed Sets and De Morgan's Laws</h3>
+[Closed Sets]
+A set $ E \subset{} S $ is closed if $ S \setminus{} E $ is open.
+
+
+[Properties of Closed Sets]
+
+<ol>
+<li>$ S $ and $ \emptyset $ are closed.</li>
+<li>Any intersection of closed sets is closed.</li>
+<li>A finite union of closed sets is closed.</li>
+</ol>
+
+
+[De Morgan's Laws]
+For any collection $ \{A_i\}_{i \in{} I} \subset{} S $:
+$$\begin{align}
+
+S \setminus \bigcup_{i \in I} A_i = \bigcap_{i \in I} (S \setminus A_i), \quad S \setminus \bigcap_{i \in I} A_i = \bigcup_{i \in I} (S \setminus A_i).
+
+\end{align}$$
+
+
+<h3>Examples of Open and Closed Sets</h3>
+[Intervals in $ \mathbb{R} $]
+
+<ol>
+<li>$ (a, b) $ is open, but not closed.</li>
+<li>$ [a, b] $ is closed, but not open.</li>
+<li>$ (a, b], [a, b) $ are neither open nor closed.</li>
+</ol>
+
+
+[Discrete Metric]
+In a discrete metric space:
+<ol>
+<li>Every set is both open and closed.</li>
+</ol>
+
+
+<h3>Closure and Boundary</h3>
+[Closure]
+The closure of $ E \subset{} S $, denoted $ \overline{E} $, is the intersection of all closed sets containing $ E $.
+
+
+[Boundary]
+The boundary of $ E \subset{} S $ is:
+$$\begin{align}
+
+\partial E = \overline{E} \setminus E^o.
+
+\end{align}$$
+
+
+<h3>Properties of Closure and Boundary</h3>
+
+
+<ol>
+<li>$ E = \overline{E} $ if and only if $ E $ is closed.</li>
+<li>$ s \in \overline{E} $ if and only if $ s $ is a limit of a sequence in $ E $.</li>
+<li>$ \partial E = \overline{E} \cap (S \setminus E)^- $.</li>
+</ol>
+
+
+[Closure of $ E = \{\frac{1}{n} : n \in{} \mathbb{N}\} \subset{} \mathbb{R} $]
+The closure is:
+$$\begin{align}
+
+\overline{E} = \left\{\frac{1}{n} : n \in \mathbb{N}\right\} \cup \{0\}.
+
+\end{align}$$
+
+<h2>Compactness (Section 13)</h2>
+
+<h3>Definition of Compactness</h3>
+[Compactness (Definition 13.11)]
+Suppose $ E \subset{} S $. A family $ \mathcal{U} $ of open sets is an <em>open cover</em> for $ E $ if:
+$$\begin{align}
+
+E \subset \bigcup_{U \in \mathcal{U}} U.
+
+\end{align}$$
+A <em>subcover</em> is a subfamily of $ \mathcal{U} $ which is also an open cover. $ E $ is called <em>compact</em> if every open cover has a finite subcover.
+
+
+
+A cover $ \mathcal{U} $ is a collection of sets, not their union. Thus, a cover is a subset of $ \mathcal{P}(S) $ (the power set of $ S $), not $ S $.
+
+
+<h3>Examples in $ \mathbb{R</h3> $ with Usual Metric}
+<ol>
+<li>$ E = [0, \infty) $ is not compact. For example:
+    <ol>
+<li>$ U_k = (-1, k) $ ($ k \in \mathbb{N} $) is an open cover with no finite subcover.</li>
+</ol></li>
+<li>$ E = (0, 1) $ is not compact. For example:
+    <ol>
+<li>$ U_k = (1/k, 1) $ ($ k \in \mathbb{N} $) is an open cover with no finite subcover.</li>
+</ol></li>
+<li>$ E = [a, b] $ ($ a, b \in \mathbb{R} $) is compact (proof to follow).</li>
+</ol>
+
+[Compactness of Finite Sets]
+Any finite set is compact.
+
+<div class='proof'><strong>Proof.</strong>
+Let $ E = \{e_1, \ldots{}, e_N\} $. For any open cover $ \mathcal{U} $ of $ E $, select $ U_i \in{} \mathcal{U} $ containing $ e_i $. Then $ \{U_1, \ldots{}, U_N\} $ is a finite subcover.
+<div class='qed'>∎</div></div><br>
+
+<h3>Compactness and Boundedness</h3>
+
+Any compact set is bounded.
+
+<div class='proof'><strong>Proof.</strong>
+If $ E $ is not bounded, then for $ s \in{} S $, the sets $ B_k^o(s) $ ($ k \in{} \mathbb{N} $) form an open cover of $ E $ with no finite subcover.
+<div class='qed'>∎</div></div><br>
+
+[Bounded but Not Compact]
+Equip $ \mathbb{N} $ with the discrete metric
+$$\begin{align}
+
+     d(x, y) =
+\begin{cases}
+0 & x = y, \\
+1 & x \neq y.
+\end{cases}
+
+\end{align}$$
+Then $ \mathbb{N} $ is bounded, but it is not compact because the open cover $ U_n = \{n\} $ ($ n \in{} \mathbb{N} $) has no finite subcover.
+
+
+<h3>Properties of Compact Sets</h3>
+
+
+<ol>
+<li>A closed subset of a compact set is compact.</li>
+<li>A finite union of compact sets is compact.</li>
+</ol>
+
+
+<h3>Nested Sequences of Closed Sets</h3>
+
+Suppose $ F_1 \supset{} F_2 \supset{} \cdots{} $ are closed non-empty subsets of a compact set $ E $. Then:
+$$\begin{align}
+
+\bigcap_{n} F_n \neq \emptyset, \quad \text{and it is compact.}
+
+\end{align}$$
+
+
+<h3>Heine-Borel Theorem and Cantor Set</h3>
+[Heine-Borel Theorem]
+A subset of $ \mathbb{R}^n $ is compact if and only if it is closed and bounded.
+
+
+[Cantor Set]
+Define:
+$$\begin{align}
+
+F_0 = [0, 1], \quad F_1 = [0, 1/3] \cup [2/3, 1], \quad F_2 = [0, 1/9] \cup [2/9, 1/3] \cup [2/3, 7/9] \cup [8/9, 1], \dots
+
+\end{align}$$
+The Cantor set $ C = \bigcap_n{} F_n $ is non-empty, closed, and compact. It contains no intervals, and its interior is empty.
+
+<h2>Compactness and Total Boundedness (Section 13)</h2>
+
+<h3>Definition of Compactness</h3>
+[Compactness (Definition 13.11)]
+Suppose $ E \subset{} S $. A family $ \mathcal{U} $ of open sets is an <em>open cover</em> for $ E $ if:
+$$\begin{align}
+
+E \subset \bigcup_{U \in \mathcal{U}} U.
+
+\end{align}$$
+A <em>subcover</em> is a subfamily of $ \mathcal{U} $ which is also an open cover. $ E $ is called <em>compact</em> if every open cover has a finite subcover.
+
+
+
+A cover $ \mathcal{U} $ is a collection of sets, not their union. Thus, a cover is a subset of $ \mathcal{P}(S) $ (the power set of $ S $), not $ S $.
+
+
+<h3>Compactness and Completeness</h3>
+
+Suppose $ E \subset{} S $. If $ E $ is compact, then $ E $ is complete.
+
+
+<div class='proof'><strong>Proof.</strong>
+Suppose $ E $ is not complete. Then there exists a Cauchy sequence $ (s_n) \subset{} E $ which does not converge in $ E $. For $ k \in{} \mathbb{N} $, find $ n_k $ such that $ d(s_m, s_\ell{}) &lt; 2^{-k} $ for $ m, \ell{} \geq{} n_k $. Construct open sets $ U_k = \{s \in{} S : d(s, s_{n_k}) &gt; 2^{-k}\} $, which form an open cover for $ E $ with no finite subcover. Contradiction.
+<div class='qed'>∎</div></div><br>
+
+
+Any compact set is closed.
+
+
+[Compactness Criterion]
+$ E \subset{} S $ is compact if and only if it is complete and totally bounded.
+
+
+<h3>Total Boundedness</h3>
+[Total Boundedness]
+A set $ E \subset{} S $ is called totally bounded if $ \forall{} \varepsilon{} &gt; 0 $, there exist $ s_1, \ldots{}, s_n \in{} S $ such that:
+$$\begin{align}
+
+E \subset \bigcup_{i=1}^n B_\varepsilon^o(s_i).
+
+\end{align}$$
+
+
+
+A set is totally bounded if and only if any sequence in the set has a Cauchy subsequence.
+
+
+<h3>Characterization of Compactness</h3>
+
+For a subset $ E $ of a metric space, the following are equivalent:
+<ol>
+<li>$ E $ is compact.</li>
+<li>$ E $ is complete and totally bounded.</li>
+<li>Any sequence in $ E $ has a subsequence with a limit in $ E $.</li>
+</ol>
+
+
+
+The space $ \mathbb{N} $ with the discrete metric is complete and bounded but not compact.
+
+
+<h3>Heine-Borel Theorem</h3>
+[Heine-Borel Theorem]
+A subset of $ \mathbb{R}^n $ is compact if and only if it is closed and bounded.
+
+
+[Cantor Set]
+The Cantor set $ C $, constructed as:
+$$\begin{align}
+
+F_0 = [0, 1], \quad F_1 = [0, 1/3] \cup [2/3, 1], \quad F_2 = \cdots,
+
+\end{align}$$
+is compact, closed, and totally bounded but has no interior.
+
+<h2>A Note on Compactness</h2>
+
+<h3>Total Boundedness</h3>
+[Total Boundedness (Definition 1.1)]
+A set $ S \subset{} E $ is called totally bounded if for every $ \varepsilon{} &gt; 0 $, there exist $ p_1, \ldots{}, p_n \in{} E $ such that:
+$$\begin{align}
+
+S \subset \bigcup_{i=1}^n B_\varepsilon^o(p_i).
+
+\end{align}$$
+
+
+[Intrinsic Nature of Total Boundedness (Proposition 1.2)]
+A set $ S \subset{} E $ is totally bounded if and only if for every $ \varepsilon{} &gt; 0 $, there exist $ q_1, \ldots{}, q_m \in{} S $ such that:
+$$\begin{align}
+
+S \subset \bigcup_{j=1}^m B_\varepsilon^o(q_j).
+
+\end{align}$$
+
+
+[Total Boundedness and Cauchy Subsequences (Proposition 1.3)]
+A set $ S $ is totally bounded if and only if any sequence in $ S $ has a Cauchy subsequence.
+
+
+[Characterization of Compactness (Corollary 1.4)]
+A set $ S $ is totally bounded and complete if and only if any sequence in $ S $ has a subsequence converging to a limit in $ S $.
+
+
+<h3>Compactness</h3>
+[Characterization of Compactness (Theorem 2.1)]
+For a subset $ S \subset{} E $, the following are equivalent:
+<ol>
+<li>$ S $ is compact.</li>
+<li>Any sequence in $ S $ has a convergent subsequence.</li>
+<li>$ S $ is complete and totally bounded.</li>
+</ol>
+
+
+[Heine-Borel Theorem (Theorem 3.1)]
+A set $ S \subset{} \mathbb{R}^n $ is compact if and only if it is closed and bounded.
+
+
+[Total Boundedness in $ \mathbb{R}^n $ (Lemma 3.3)]
+A set $ S \subset{} \mathbb{R}^n $ is bounded if and only if it is totally bounded.
+
+
+[Bolzano-Weierstrass Theorem (Theorem 3.4)]
+Every bounded sequence in $ \mathbb{R}^n $ has a convergent subsequence.
+
+<h2>Compactness and Series (Sections 13-14)</h2>
+
+<h3>Total Boundedness</h3>
+[Total Boundedness]
+A set $ E \subset{} S $ is totally bounded if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists s_1, \ldots, s_n \in S \text{ such that } E \subset \bigcup_{i=1}^n B_\varepsilon^o(s_i).
+
+\end{align}$$
+
+
+
+A set $ E $ is totally bounded if and only if any sequence in $ E $ has a Cauchy subsequence.
+
+
+<div class='proof'><strong>Proof.</strong>
+For $ (s_i) \subset{} E $, construct $ \{s_{i_k}\} $ with $ s_{i_k} \in{} B_{2^{-k}}^o(x_{kj_k}) $. Using the triangle inequality, show $ (s_{i_k}) $ is Cauchy.
+<div class='qed'>∎</div></div><br>
+
+<h3>Characterization of Compactness</h3>
+
+For a subset $ E $ of a metric space, the following are equivalent:
+<ol>
+<li>$ E $ is compact.</li>
+<li>$ E $ is complete and totally bounded.</li>
+<li>Any sequence in $ E $ has a subsequence with a limit in $ E $.</li>
+</ol>
+
+
+<div class='proof'><strong>Proof.</strong>
+
+<ol>
+<li>$ (1) \implies (2) $: Shown in the last lecture.</li>
+<li>$ (2) \implies (3) $: Total boundedness guarantees a Cauchy subsequence, and completeness ensures convergence.</li>
+<li>$ (3) \implies (1) $: Contraposition: if $ E $ is not compact, construct an open cover with no finite subcover.</li>
+</ol>
+<div class='qed'>∎</div></div><br>
+
+[Heine-Borel]
+A subset of $ \mathbb{R}^n $ is compact if and only if it is closed and bounded.
+
+
+[Non-Compact Set]
+In $ \mathbb{N} $ with the discrete metric, $ \mathbb{N} $ is closed and bounded but not compact.
+
+
+<h3>Series</h3>
+[Series and Convergence]
+The $ n $-th partial sum of a series $ \sum_{j=k_0}^\infty{} a_j $ is:
+$$\begin{align}
+
+s_n = \sum_{j=k_0}^n a_j.
+
+\end{align}$$
+The series converges if $ \lim_{n \to \infty} s_n $ exists, diverges otherwise.
+
+
+[Geometric Series]
+$$\begin{align}
+
+\sum_{j=0}^\infty r^j =
+\begin{cases}
+\frac{1}{1-r}, & |r| < 1, \\
+\infty, & r \geq 1.
+\end{cases}
+
+\end{align}$$
+
+
+<h3>Cauchy Criterion for Convergence</h3>
+[Cauchy Criterion]
+A series $ \sum_j{} a_j $ satisfies the Cauchy criterion if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \text{ such that } \left| \sum_{j=m}^n a_j \right| < \varepsilon \text{ for } n \geq m > N.
+
+\end{align}$$
+
+
+
+A series converges if and only if it satisfies the Cauchy criterion.
+
+
+<h3>Comparison Test for Convergence</h3>
+[Comparison Test]
+
+<ol>
+<li>If $ |b_n| \leq a_n $ and $ \sum a_n $ converges, then $ \sum b_n $ converges.</li>
+<li>If $ 0 \leq a_n \leq b_n $ and $ \sum b_n = \infty $, then $ \sum a_n = \infty $.</li>
+</ol>
+
+<h2>Series and Decimal Expansions (Sections 14 and 16)</h2>
+
+<h3>Series</h3>
+[Partial Sums and Convergence of Series]
+The $ n $-th partial sum of a series $ \sum_{j=k_0}^\infty{} a_j $ is:
+$$\begin{align}
+
+s_n = \sum_{j=k_0}^n a_j.
+
+\end{align}$$
+The series $ \sum_{j=k_0}^\infty{} a_j $ converges if $ \lim_{n \to \infty} s_n $ exists. Otherwise, it diverges.
+
+
+[Geometric Series]
+$$\begin{align}
+
+\sum_{j=0}^\infty r^j =
+\begin{cases}
+\frac{1}{1-r}, & |r| < 1, \\
+\text{diverges}, & r \geq 1 \text{ or } r \leq -1.
+\end{cases}
+
+\end{align}$$
+
+
+<h3>Cauchy Criterion for Convergence</h3>
+[Cauchy Criterion (Definition 14.3)]
+A series $ \sum_j{} a_j $ satisfies the Cauchy Criterion if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \text{ such that } \left|\sum_{j=m}^n a_j\right| < \varepsilon \text{ for } n \geq m > N.
+
+\end{align}$$
+
+
+[Cauchy Criterion (Theorem 14.4)]
+A series converges if and only if it satisfies the Cauchy Criterion.
+
+
+<h3>Properties of Convergence</h3>
+[Necessary Condition for Convergence (Corollary 14.5)]
+If $ \sum_j{} a_j $ converges, then $ \lim_{n \to \infty} a_n = 0 $.
+
+
+
+If $ a_n = \frac{1}{n} $, then $ \lim_{n \to \infty} a_n = 0 $, but $ \sum_{n=1}^\infty{} \frac{1}{n} $ diverges.
+
+
+<h3>Tests for Convergence</h3>
+[Comparison Test (Theorem 14.6)]
+
+<ol>
+<li>If $ 0 \leq |b_n| \leq a_n $ and $ \sum a_n $ converges, then $ \sum b_n $ converges.</li>
+<li>If $ 0 \leq a_n \leq b_n $ and $ \sum b_n = \infty $, then $ \sum a_n = \infty $.</li>
+</ol>
+
+
+[Root Test (Theorem 14.9)]
+For a series $ \sum_n{} a_n $, let $ \alpha{} = \limsup_{n \to \infty} |a_n|^{1/n} $. Then:
+<ol>
+<li>The series converges absolutely if $ \alpha < 1 $.</li>
+<li>The series diverges if $ \alpha > 1 $.</li>
+<li>If $ \alpha = 1 $, the test gives no information.</li>
+</ol>
+
+
+[Ratio Test (Theorem 14.8)]
+For a series $ \sum_n{} a_n $ of nonzero terms:
+<ol>
+<li>The series converges absolutely if $ \limsup_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| < 1 $.</li>
+<li>The series diverges if $ \liminf_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| > 1 $.</li>
+<li>If $ \liminf_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| \leq 1 \leq \limsup_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| $, the test gives no information.</li>
+</ol>
+
+
+<h3>Decimal Expansions</h3>
+[Decimal Expansions (Theorem 16.2)]
+Any real number $ x \geq{} 0 $ has at least one decimal expansion:
+$$\begin{align}
+
+x = K.d_1d_2d_3\ldots = K + \sum_{j=1}^\infty \frac{d_j}{10^j},
+
+\end{align}$$
+where $ K \in{} \mathbb{Z} $ and $ d_j \in{} \{0, 1, \ldots{}, 9\} $.
+
+
+[Uniqueness of Decimal Expansions (Theorem 16.3)]
+Any $ x \geq{} 0 $ has either exactly one decimal expansion or exactly two, one ending in $ \ldots{} d000\ldots{} $ and the other in $ \ldots{} [d-1]999\ldots{} $.
+
+
+[Repeating Decimals (Theorem 16.5)]
+A real number $ x $ is rational if and only if its decimal expansion is repeating.
+
+<h2>Series and Decimal Expansions (Sections 17 and 21)</h2>
+
+<h3>Root and Ratio Tests for Series Convergence</h3>
+[Root Test]
+For a series $ \sum_{n} a_n $, let $ \alpha{} = \limsup_{n \to \infty} |a_n|^{1/n} $. Then:
+<ol>
+<li>The series converges absolutely if $ \alpha < 1 $.</li>
+<li>The series diverges if $ \alpha > 1 $.</li>
+<li>If $ \alpha = 1 $, the test gives no information.</li>
+</ol>
+
+
+[Ratio Test (Theorem 14.8)]
+For a series $ \sum_{n} a_n $ of nonzero terms:
+<ol>
+<li>The series converges absolutely if $ \limsup_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1 $.</li>
+<li>The series diverges if $ \liminf_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| > 1 $.</li>
+<li>If $ \liminf_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| \leq 1 \leq \limsup_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| $, the test gives no information.</li>
+</ol>
+
+
+
+
+<ol>
+<li>Consider $ \sum_{k=1}^\infty \frac{k^4}{2^k} $. Using the Root Test:
+    $$\begin{align}
+
+    a_k^{1/k} = \left( k^{1/k} \right)^4 \frac{1}{2}, \quad \lim_{k \to \infty} a_k^{1/k} = \frac{1}{2} < 1,
+
+\end{align}$$
+    so the series converges.</li>
+<li>The $ p $-series $ \sum_{k=1}^\infty \frac{1}{k^p} $ converges if and only if $ p > 1 $. The Root and Ratio Tests are inconclusive for this series.</li>
+</ol>
+
+
+<h3>Decimal Expansions</h3>
+[Decimal Expansion]
+For $ x \in{} [0, \infty{}) $, the decimal expansion of $ x $ is:
+$$\begin{align}
+
+x = K .d_1 d_2 d_3 \ldots = K + \sum_{j=1}^\infty \frac{d_j}{10^j},
+
+\end{align}$$
+where $ K \in{} \{0, 1, 2, \ldots{}\} $ and $ d_1, d_2, \ldots{} \in{} \{0, 1, \ldots{}, 9\} $.
+
+
+[Existence of Decimal Expansions (Theorem 16.2)]
+Any real number $ x \geq{} 0 $ has at least one decimal expansion.
+
+
+[Uniqueness of Decimal Expansions (Theorem 16.3)]
+Any $ x \geq{} 0 $ has either exactly one decimal expansion or exactly two:
+<ol>
+<li>One ending in $ \ldots d000 \ldots $, where $ d \in \{1, \ldots, 9\} $,</li>
+<li>Another ending in $ \ldots (d-1)999 \ldots $.</li>
+</ol>
+For example, $ \frac{1}{2} = 0.5000\ldots{} = 0.4999\ldots{} $.
+
+
+<h3>Repeating Decimal Expansions</h3>
+[Repeating Decimals (Definition 16.4)]
+A repeating decimal expansion is one of the form:
+$$\begin{align}
+
+K .d_1 \ldots d_\ell d_{\ell+1} \ldots d_{\ell+r} = K .d_1 \ldots d_\ell \overline{d_{\ell+1} \ldots d_{\ell+r}},
+
+\end{align}$$
+where the sequence $ d_{\ell{}+1} \ldots{} d_{\ell{}+r} $ repeats.
+
+
+[Repeating Decimals and Rational Numbers (Theorem 16.5)]
+A real number $ x $ is rational if and only if its decimal expansion is repeating.
+
+
+<div class='proof'><strong>Proof.</strong>
+
+<ol>
+<li>($ x $ is rational $ \implies $ repeating): Follows from performing long division.</li>
+<li>(Repeating $ \implies x $ is rational): Suppose $ x = K .d_1 \ldots d_\ell \overline{d_{\ell+1} \ldots d_{\ell+r}} $. Then:
+    $$\begin{align}
+
+    x = K + \sum_{j=1}^\ell \frac{d_j}{10^j} + 10^{-\ell} \left( \frac{z}{1 - 10^{-r}} \right),
+
+\end{align}$$
+    where $ z = \sum_{j=1}^r d_{\ell+j} 10^{-j} \in \mathbb{Q} $, so $ x \in \mathbb{Q} $.</li>
+</ol>
+<div class='qed'>∎</div></div><br>
+<h2>Continuity in Metric Spaces (Sections 17 and 21)</h2>
+
+<h3>Definition of Continuity</h3>
+[Continuity (Definition 21.1)]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces. The function $ f : \text{dom}(f) \to{} S^* $ (with $ \text{dom}(f) \subset{} S $) is continuous at $ x \in{} \text{dom}(f) $ if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists \delta > 0 \text{ such that } d^*(f(x), f(y)) < \varepsilon \text{ whenever } d(x, y) < \delta.
+
+\end{align}$$
+$ f $ is called continuous on $ E \subset{} S $ if it is continuous at every $ x \in{} E $.
+
+
+[Sequential Criterion for Continuity (Theorem 17.1 + 17.2)]
+$ f : S \to{} S^* $ is continuous at $ x \in{} S $ if and only if $ f(x_n) \to{} f(x) $ whenever $ x_n \to{} x $.
+
+
+<h3>Examples of Continuity and Discontinuity</h3>
+[Discontinuous Everywhere]
+The Dirichlet function $ f : \mathbb{R} \to{} \mathbb{R} $, defined as:
+$$\begin{align}
+
+f(x) =
+\begin{cases}
+1 & x \in \mathbb{Q}, \\
+0 & x \notin \mathbb{Q},
+\end{cases}
+
+\end{align}$$
+is discontinuous at every $ x \in{} \mathbb{R} $. This is because for any $ x \in{} \mathbb{R} $, one can find sequences $ (x_n) \subset{} \mathbb{Q} $ and $ (y_n) \not{}\subset{} \mathbb{Q} $ such that $ x_n, y_n \to{} x $, but $ f(x_n) \to{} 1 $ and $ f(y_n) \to{} 0 $, which do not match $ f(x) $.
+
+
+[Continuous at a Single Point]
+The modified Dirichlet function $ g : \mathbb{R} \to{} \mathbb{R} $, defined as:
+$$\begin{align}
+
+g(x) =
+\begin{cases}
+x & x \in \mathbb{Q}, \\
+0 & x \notin \mathbb{Q},
+\end{cases}
+
+\end{align}$$
+is continuous only at $ x = 0 $. At other points, similar reasoning as the Dirichlet function applies.
+
+
+[Continuous on $ \mathbb{R} \setminus{} \mathbb{Q} $]
+The Thomae function $ h : \mathbb{R} \to{} \mathbb{R} $, defined as:
+$$\begin{align}
+
+h(x) =
+\begin{cases}
+\frac{1}{b} & x = \frac{a}{b}, \, \gcd(a, b) = 1, \, b > 0, \, x \neq 0, \\
+0 & x \notin \mathbb{Q},
+\end{cases}
+
+\end{align}$$
+is continuous at $ x \notin{} \mathbb{Q} $ and discontinuous at $ x \in{} \mathbb{Q} $.
+
+
+<h3>Operations on Continuous Functions</h3>
+
+Suppose $ f, g $ are continuous at $ x_0 $ in a metric space $ (S, d) $. Then the following functions are also continuous at $ x_0 $:
+<ol>
+<li>$ |f| $,</li>
+<li>$ kf $ ($ k \in \mathbb{R} $),</li>
+<li>$ f + g $,</li>
+<li>$ f \cdot g $,</li>
+<li>$ f / g $ (if $ g(x_0) \neq 0 $).</li>
+</ol>
+
+
+
+If $ f, g $ are continuous at $ x_0 $, then $ \max{}(f, g) $ and $ \min{}(f, g) $ are continuous at $ x_0 $.
+
+
+<h3>Composition of Continuous Functions</h3>
+
+Suppose $ (S_1, d_1), (S_2, d_2), (S_3, d_3) $ are metric spaces, and $ f : \text{dom}(f) \to{} S_2 $, $ g : \text{dom}(g) \to{} S_3 $ are functions such that $ f $ is continuous at $ x_0 $, $ g $ is continuous at $ f(x_0) $, and $ x_0 \in{} \text{dom}(f) $. Then $ g \circ{} f $ is continuous at $ x_0 $.
+
+
+<h3>Characterization of Continuity</h3>
+[Characterization of Continuity (Theorem 21.3)]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces. $ f : S \to{} S^* $ is continuous if and only if $ f^{-1}(U) $ is open for every open $ U \subset{} S^* $, where:
+$$\begin{align}
+
+f^{-1}(U) = \{s \in S : f(s) \in U\}.
+
+\end{align}$$
+
+
+
+$ f $ is continuous at $ s_0 \in{} S $ if for any open set $ U $ containing $ f(s_0) $, there exists an open set $ V $ containing $ s_0 $ such that $ f(V) \subset{} U $.
+
+<h2>Continuity and the Intermediate Value Theorem (Sections 18 and 21)</h2>
+
+<h3>Another Characterization of Continuity</h3>
+[Theorem 21.3]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces. A function $ f : S \to{} S^* $ is continuous if and only if $ f^{-1}(U) $ is open for every open $ U \subset{} S^* $. Here:
+$$\begin{align}
+
+f^{-1}(U) = \{s \in S : f(s) \in U\}.
+
+\end{align}$$
+
+
+[Exercise 21.2]
+$ f $ is continuous at $ s_0 \in{} S $ if and only if for any open set $ U \ni{} f(s_0) $, there exists an open set $ V \ni{} s_0 $ such that $ f(V) \subset{} U $.
+
+
+[Exercise 21.4]
+Suppose $ (S, d) $ is a metric space. A function $ f : S \to{} \mathbb{R} $ is continuous if and only if $ f^{-1}((a, b)) $ is open whenever $ a &lt; b $.
+
+
+<h3>Continuous Image of a Compact Set</h3>
+
+If $ f : S \to{} S^* $ is continuous, and $ E \subset{} S $ is compact, then $ f(E) \subset{} S^* $ is compact.
+
+
+
+If $ f : S \to{} \mathbb{R} $ is continuous, and $ E \subset{} S $ is compact, then $ f(E) $ is bounded. Moreover, $ f $ attains its maximum and minimum values, i.e., there exist $ x, y \in{} E $ such that:
+$$\begin{align}
+
+f(x) = \sup_{e \in E} f(e), \quad f(y) = \inf_{e \in E} f(e).
+
+\end{align}$$
+
+
+<h3>Intermediate Value Theorem (IVT)</h3>
+[Theorem 18.2]
+Suppose $ I \subset{} \mathbb{R} $ is an interval, and $ f : I \to{} \mathbb{R} $ is continuous. Then $ f $ has the Intermediate Value Property (IVP) on $ I $: if $ a, b \in{} I $ with $ a &lt; b $, and $ y $ lies between $ f(a) $ and $ f(b) $, then there exists $ x \in{} (a, b) $ such that $ f(x) = y $.
+
+
+
+If $ I $ is an interval, and $ f : I \to{} \mathbb{R} $ has the IVP, then $ f(I) $ is either an interval or a single point.
+
+
+<h3>Applications of IVT</h3>
+[Roots of Polynomials]
+Any polynomial of odd degree has at least one real root.
+
+
+[Existence of Fixed Points]
+Any continuous function $ f : [0, 1] \to{} [0, 1] $ has a fixed point, i.e., $ x \in{} [0, 1] $ such that $ f(x) = x $.
+
+
+[Existence of $ m $-th Roots]
+For any $ m \in{} \mathbb{N} $ and $ y &gt; 0 $, there exists $ x &gt; 0 $ such that $ x^m = y $.
+
+
+<h3>Continuity of Inverse Functions</h3>
+[Theorem 18.4]
+Suppose $ I \subset{} \mathbb{R} $ is an interval, and $ f : I \to{} \mathbb{R} $ is strictly increasing and continuous. Then $ J = f(I) $ is an interval, and $ f^{-1} : J \to{} I $ is strictly increasing and continuous.
+
+
+
+The function $ x \mapsto{} x^{1/m} $, taking $ [0, \infty{}) $ to itself, is continuous.
+
+<h2>Continuity and Compactness (Section 18)</h2>
+
+<h3>Continuous Image of a Compact Set</h3>
+[Theorem 21.4(i)]
+Suppose $ f : S \to{} S^* $ is continuous, where $ (S, d) $ and $ (S^*, d^*) $ are metric spaces, and $ E \subset{} S $ is compact. Then $ f(E) \subset{} S^* $ is compact.
+
+
+<div class='proof'><strong>Proof.</strong>
+Let $ (U_i)_{i \in{} I} $ be an open cover for $ f(E) $. Define $ V_i = f^{-1}(U_i) $, which are open sets forming a cover for $ E $. By compactness of $ E $, there exist $ i_1, \ldots{}, i_n \in{} I $ such that $ E \subset{} \bigcup_{k=1}^n V_{i_k} $. It follows that $ f(E) \subset{} \bigcup_{k=1}^n U_{i_k} $, proving compactness of $ f(E) $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Maximum and Minimum of Continuous Functions</h3>
+[Similar to 18.1]
+If $ f : S \to{} \mathbb{R} $ is continuous and $ E \subset{} S $ is compact, then $ f(E) $ is bounded. Moreover, $ f $ attains its maximum and minimum values, i.e., there exist $ x, y \in{} E $ such that:
+$$\begin{align}
+
+f(x) = \sup_{e \in E} f(e), \quad f(y) = \inf_{e \in E} f(e).
+
+\end{align}$$
+
+
+<h3>Intermediate Value Property</h3>
+[IVP]
+Suppose $ I \subset{} \mathbb{R} $ is an interval, and $ f : I \to{} \mathbb{R} $ is a function. $ f $ has the Intermediate Value Property (IVP) on $ I $ if for any $ a, b \in{} I $ with $ a &lt; b $, and any $ y $ between $ f(a) $ and $ f(b) $, there exists $ x \in{} (a, b) $ such that $ f(x) = y $.
+
+
+[Theorem 18.2]
+Any continuous function has the IVP.
+
+
+<h3>Applications of IVP</h3>
+[18.3]
+If $ I $ is an interval, and $ f : I \to{} \mathbb{R} $ has the IVP, then $ f(I) $ is either an interval or a single point.
+
+
+[Roots of Polynomials]
+Any polynomial of odd degree has at least one real root.
+
+
+[Existence of Fixed Points]
+Any continuous function $ f : [0, 1] \to{} [0, 1] $ has a fixed point, i.e., a point $ x \in{} [0, 1] $ such that $ f(x) = x $.
+
+
+[Existence of $ m $-th Root]
+For any $ m \in{} \mathbb{N} $ and $ y &gt; 0 $, there exists $ x &gt; 0 $ such that $ x^m = y $.
+
+
+<h3>Continuity of Inverse Functions</h3>
+[Theorem 18.4]
+Suppose $ I \subset{} \mathbb{R} $ is an interval, and $ f : I \to{} \mathbb{R} $ is strictly increasing and continuous. Then $ f(I) $ is an interval, and $ f^{-1} : f(I) \to{} I $ is strictly increasing and continuous.
+
+
+
+The function $ x \mapsto{} x^{1/m} $, taking $ [0, \infty{}) $ to itself, is continuous.
+
+
+<h3>Monotonicity of Injective Functions</h3>
+[Theorem 18.6]
+Suppose $ f : I \to{} \mathbb{R} $ is a continuous one-to-one function on an interval $ I $. Then $ f $ is strictly monotone.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch]
+For $ a, b \in{} I $ with $ a &lt; b $, if $ f(a) &lt; f(b) $, then $ f $ is strictly increasing. Otherwise, by the IVP, there would exist $ x \in{} (a, b) $ such that $ f(x) = f(a) $, contradicting injectivity.
+<div class='qed'>∎</div></div><br>
+<h2>Uniform Continuity and Lipschitz Functions (Sections 18-19)</h2>
+
+<h3>Uniform Continuity</h3>
+[Uniform Continuity (Definition 21.1)]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces. A function $ f : S \to{} S^* $ is uniformly continuous on $ E \subset{} S $ if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists \delta > 0 \text{ such that } d^*(f(x), f(y)) < \varepsilon \text{ whenever } d(x, y) < \delta.
+
+\end{align}$$
+Here, $ \delta{} $ depends only on $ \varepsilon{} $ and not on the specific point $ x $.
+
+
+[Sequential Criterion for Uniform Continuity (Theorem 19.4)]
+If $ f : S \to{} S^* $ is uniformly continuous, then $ f $ maps Cauchy sequences in $ S $ to Cauchy sequences in $ S^* $.
+
+
+[Non-Uniformly Continuous Function]
+The function $ f(x) = \frac{1}{x} $ is not uniformly continuous on $ (0, \infty{}) $, as the Cauchy sequence $ x_n = \frac{1}{n} $ is mapped to $ f(x_n) = n $, which is not Cauchy.
+
+
+<h3>Lipschitz Functions</h3>
+[Lipschitz Continuity]
+A function $ f : S \to{} S^* $ is Lipschitz if there exists $ K &gt; 0 $ (called the Lipschitz constant) such that:
+$$\begin{align}
+
+d^*(f(s), f(t)) \leq K \cdot d(s, t), \quad \forall s, t \in S.
+
+\end{align}$$
+
+
+
+Any Lipschitz function is uniformly continuous.
+
+
+<div class='proof'><strong>Proof.</strong>
+Let $ \varepsilon{} &gt; 0 $ and set $ \delta{} = \frac{\varepsilon}{K} $. Then if $ d(s, t) &lt; \delta{} $, it follows that:
+$$\begin{align}
+
+d^*(f(s), f(t)) \leq K \cdot d(s, t) < K \cdot \frac{\varepsilon}{K} = \varepsilon.
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+
+For $ a &gt; 0 $, $ f(x) = \frac{1}{x} $ is Lipschitz (hence uniformly continuous) on $ [a, \infty{}) $.
+
+
+[Uniformly Continuous but Not Lipschitz]
+The function $ f(x) = \sqrt{x} $ is uniformly continuous on $ [0, \infty{}) $ but not Lipschitz.
+
+
+<h3>Uniform Continuity on Compact Sets</h3>
+[Uniform Continuity on Compact Sets (Theorem 21.4(ii))]
+If $ f : S \to{} S^* $ is continuous, and $ E \subset{} S $ is compact, then $ f $ is uniformly continuous on $ E $.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch of Proof]
+Assume $ f $ is not uniformly continuous. Then $ \exists{} \varepsilon{} &gt; 0 $ and sequences $ (x_n), (y_n) \subset{} E $ such that $ d(x_n, y_n) \to{} 0 $ but $ d^*(f(x_n), f(y_n)) \geq{} \varepsilon{} $. By compactness, $ (x_n) $ has a subsequence $ (x_{n_k}) $ converging to some $ x \in{} E $, and $ (y_{n_k}) $ also converges to $ x $. Continuity of $ f $ implies $ d^*(f(x_{n_k}), f(y_{n_k})) \to{} 0 $, contradicting $ d^*(f(x_{n_k}), f(y_{n_k})) \geq{} \varepsilon{} $.
+<div class='qed'>∎</div></div><br>
+<h2>Uniform Continuity and Connectedness (Section 22)</h2>
+
+<h3>Uniform Continuity on Compact Sets</h3>
+[Theorem 21.4(ii)]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces, and $ f : S \to{} S^* $ is continuous. If $ E \subset{} S $ is compact, then $ f|_E $ is uniformly continuous.
+
+
+<div class='proof'><strong>Proof.</strong>
+For $ \varepsilon{} &gt; 0 $, find $ \delta{} &gt; 0 $ such that $ d^*(f(s), f(t)) &lt; \varepsilon{} $ whenever $ d(s, t) &lt; \delta{} $. For $ s \in{} S $, find $ \delta_s{} &gt; 0 $ such that $ d^*(f(s), f(t)) &lt; \varepsilon{}/2 $ whenever $ d(s, t) &lt; \delta_s{} $. Since $ E $ is compact:
+$$\begin{align}
+
+E \subset \bigcup_{s \in E} B_{\delta_s/2}^o(s),
+
+\end{align}$$
+there exist $ s_1, \ldots{}, s_n $ such that $ E \subset{} \bigcup_{k=1}^n B_{\delta_{s_k}/2}^o(s_k) $. Define $ \delta{} = \frac{1}{2} \min_{1 \leq k \leq n} \delta_{s_k} $. For $ s, t \in{} E $ with $ d(s, t) &lt; \delta{} $, choose $ s_k $ such that $ s \in{} B_{\delta_{s_k}/2}^o(s_k) $. Then:
+$$\begin{align}
+
+d(t, s_k) \leq d(t, s) + d(s, s_k) < \delta + \frac{\delta_{s_k}}{2} \leq \delta_{s_k},
+
+\end{align}$$
+implying $ d^*(f(s), f(t)) \leq{} d^*(f(s), f(s_k)) + d^*(f(t), f(s_k)) &lt; \varepsilon{} $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Extension of Uniformly Continuous Functions</h3>
+
+Suppose $ E \subset{} S $ is compact, $ f : E \to{} S^* $, and $ S^* $ is complete. Then $ f $ is uniformly continuous if and only if it extends to a continuous $ \tilde{f} : \overline{E} \to{} S^* $.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch]
+If $ f $ is uniformly continuous, define $ \tilde{f}(x) = \lim_{n \to \infty} f(x_n) $ for $ x \in{} \overline{E} $, where $ x_n \subset{} E $ and $ x_n \to{} x $. The limit exists by completeness and does not depend on the sequence. Continuity of $ \tilde{f} $ follows from the uniform continuity of $ f $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Connectedness</h3>
+[Connected and Disconnected Sets]
+Suppose $ (S, d) $ is a metric space. A set $ E \subset{} S $ is disconnected if there exist open sets $ U_1, U_2 \subset{} S $ such that:
+<ol>
+<li>$ E \subset U_1 \cup U_2 $,</li>
+<li>$ (E \cap U_1) \cap (E \cap U_2) = \emptyset $,</li>
+<li>$ E \cap U_1 \neq \emptyset $ and $ E \cap U_2 \neq \emptyset $.</li>
+</ol>
+A set $ E $ is connected if it is not disconnected.
+
+
+
+$ E $ is disconnected if and only if there exist $ A, B \subset{} E $ such that:
+$$\begin{align}
+
+E = A \cup B, \quad A \neq \emptyset, \quad B \neq \emptyset, \quad A \cap \overline{B} = \emptyset, \quad \overline{A} \cap B = \emptyset.
+
+\end{align}$$
+
+
+<h3>Connectedness of Intervals</h3>
+
+Any interval $ I \subset{} \mathbb{R} $ is connected.
+
+
+<div class='proof'><strong>Proof.</strong>
+Suppose, for contradiction, that $ I = A \cup{} B $, where $ A, B \neq{} \emptyset{} $, $ \overline{A} \cap{} B = \emptyset{} $, and $ A \cap{} \overline{B} = \emptyset{} $. Choose $ a \in{} A $, $ b \in{} B $, with $ a &lt; b $. Define:
+$$\begin{align}
+
+c = \sup \{x \in A : x < b\}.
+
+\end{align}$$
+Then $ c \in{} I $ and $ c &lt; b $. If $ c \in{} A $, there exists $ \sigma{} &gt; 0 $ such that $ (c - \sigma{}, c + \sigma{}) \subset{} A $, contradicting the definition of $ c $. If $ c \in{} B $, there exists $ \sigma{} &gt; 0 $ such that $ (c - \sigma{}, c + \sigma{}) \subset{} B $, contradicting $ c = \sup{} \{x \in{} A : x &lt; b\} $.
+<div class='qed'>∎</div></div><br>
+<h2>Connectedness and Path Connectedness (Section 22)</h2>
+
+<h3>Connectedness</h3>
+[Connected Set (Definition 22.1)]
+Suppose $ (S, d) $ is a metric space. A set $ E \subset{} S $ is called disconnected if there exist open sets $ U_1, U_2 \subset{} S $ such that:
+<ol>
+<li>$ E \subset U_1 \cup U_2 $,</li>
+<li>$ (E \cap U_1) \cap (E \cap U_2) = \emptyset $,</li>
+<li>$ E \cap U_1 \neq \emptyset $ and $ E \cap U_2 \neq \emptyset $.</li>
+</ol>
+A set $ E $ is connected if it is not disconnected.
+
+
+
+An open set $ E $ is disconnected if and only if $ E = E_1 \cup{} E_2 $, where $ E_1, E_2 $ are disjoint, non-empty, open subsets.
+
+
+[Equivalent Characterization of Connectedness]
+A set $ E $ is disconnected if and only if there exist $ A, B \subset{} E $ such that:
+$$\begin{align}
+
+E = A \cup B, \quad A \neq \emptyset, \quad B \neq \emptyset, \quad A \cap \overline{B} = \emptyset, \quad \overline{A} \cap B = \emptyset.
+
+\end{align}$$
+
+
+<h3>Continuous Images of Connected Sets</h3>
+[Theorem 22.2]
+Suppose $ (S, d) $ and $ (S^*, d^*) $ are metric spaces. If $ E \subset{} S $ is connected and $ f : S \to{} S^* $ is continuous, then $ f(E) $ is connected.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch of Contrapositive Proof]
+If $ f(E) \subset{} S^* $ is disconnected, write $ f(E) = C \cup{} D $, where $ C, D $ are disjoint, non-empty, closed subsets. Define $ A = f^{-1}(C) \cap{} E $, $ B = f^{-1}(D) \cap{} E $. Then $ E = A \cup{} B $, $ A \cap{} \overline{B} = \emptyset{} $, and $ \overline{A} \cap{} B = \emptyset{} $, so $ E $ is disconnected.
+<div class='qed'>∎</div></div><br>
+
+<h3>Path Connectedness</h3>
+[Path Connectedness (Definition 22.4)]
+A set $ E \subset{} S $ is path connected if for all $ a, b \in{} E $, there exists a continuous function $ \gamma{} : [0, 1] \to{} E $ such that $ \gamma{}(0) = a $ and $ \gamma{}(1) = b $.
+
+
+[Path Connected Sets Are Connected (Theorem 22.5)]
+Every path connected set is connected.
+
+
+<div class='proof'><strong>Proof.</strong>
+If $ E $ is disconnected, then there exist open sets $ U_1, U_2 $ such that $ E \subset{} U_1 \cup{} U_2 $, $ E \cap{} U_1 \neq{} \emptyset{} $, $ E \cap{} U_2 \neq{} \emptyset{} $, and $ (E \cap{} U_1) \cap{} (E \cap{} U_2) = \emptyset{} $. Let $ a \in{} E \cap{} U_1 $, $ b \in{} E \cap{} U_2 $. A path $ \gamma{} : [0, 1] \to{} E $ with $ \gamma{}(0) = a $, $ \gamma{}(1) = b $ would imply $ \gamma{}([0, 1]) $ is connected, contradicting the disconnectedness of $ E $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Connected but Not Path Connected Sets</h3>
+
+Consider $ E \subset{} \mathbb{R}^2 $, where:
+$$\begin{align}
+
+E_1 = \{(0, y) : y \in (0, 1]\}, \quad
+E_2 = \{(x, 0) : x \in (0, 1]\} \cup \bigcup_{n \in \mathbb{N}} \{(1/n, y) : y \in (0, 1]\}.
+
+\end{align}$$
+Then $ E = E_1 \cup{} E_2 $ is connected but not path connected.
+
+
+<h3>Convex Sets</h3>
+[Convex Sets]
+A set $ E \subset{} \mathbb{R}^n $ is convex if for all $ \vec{x}, \vec{y} \in{} E $ and $ t \in{} [0, 1] $, the point:
+$$\begin{align}
+
+\vec{z} = (1-t)\vec{x} + t\vec{y} \in E.
+
+\end{align}$$
+
+
+
+Any convex set is path connected.
+
+
+<h3>Path Connectedness of Graphs</h3>
+
+The graph of a function $ f : I \to{} \mathbb{R} $, where $ I \subset{} \mathbb{R} $ is an interval, is path connected if and only if $ f $ is continuous.
+
+<h2>Graphs of Functions and Path Connectedness (Sections 22-23-24)</h2>
+
+<h3>Graphs and Path Connectedness</h3>
+[Graph of a Function]
+The graph of a function $ f : I \to{} \mathbb{R} $ (where $ I \subset{} \mathbb{R} $ is an interval) is:
+$$\begin{align}
+
+G(f) = \{(x, f(x)) : x \in I\}.
+
+\end{align}$$
+
+
+[Example 4 from Section 22]
+$ G(f) $ is path connected if and only if $ f $ is continuous on $ I $.
+
+
+[Discontinuous $ f $ with Connected $ G(f) $]
+Exercise 22.4 describes a function $ f $ such that $ G(f) $ is connected but $ f $ is discontinuous.
+
+
+[Multivariate Continuity]
+The function $ f : S \to{} \mathbb{R}^n $, $ x \mapsto{} (f_1(x), \ldots{}, f_n(x)) $, is continuous if and only if each $ f_i : S \to{} \mathbb{R} $ is continuous for $ 1 \leq{} i \leq{} n $.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch]
+If $ f $ is continuous, then $ G(f) $ is path connected. For $ \vec{x} = (a, f(a)) $, $ \vec{y} = (b, f(b)) \in{} G(f) $, define a path:
+$$\begin{align}
+
+\gamma(t) = ((1-t)a + tb, f((1-t)a + tb)), \quad t \in [0, 1].
+
+\end{align}$$
+If $ G(f) $ is path connected, continuity of $ f $ follows from the textbook proof.
+<div class='qed'>∎</div></div><br>
+
+<h3>Power Series</h3>
+[Power Series]
+A power series is a series of the form:
+$$\begin{align}
+
+\sum_{n=0}^\infty a_n x^n,
+
+\end{align}$$
+where $ x $ is a variable.
+
+
+[Radius of Convergence]
+Let $ \beta{} = \limsup{} |a_n|^{1/n} $ and $ R = 1/\beta{} $. The series:
+$$\begin{align}
+
+\sum_{n=0}^\infty a_n x^n
+
+\end{align}$$
+converges for $ |x| &lt; R $, diverges for $ |x| &gt; R $. $ R $ is called the radius of convergence.
+
+
+
+If $ \lim{} |a_{n+1}/a_n| $ exists, it equals $ \beta{} $. The series may converge or diverge at $ \pm{} R $. The interval of convergence is one of:
+$$\begin{align}
+
+(-R, R), \, [-R, R), \, (-R, R], \, \text{or} \, [-R, R].
+
+\end{align}$$
+
+
+<h3>Examples of Power Series</h3>
+<ol>
+<li>$ \sum_{n=0}^\infty \frac{x^n}{n!} $: $ a_n = \frac{1}{n!} $, $ \beta = 0 $, $ R = \infty $. Interval: $ (-\infty, \infty) $.
+    $$\begin{align}
+
+    \sum_{n=0}^\infty \frac{x^n}{n!} = e^x.
+
+\end{align}$$</li>
+<li>$ \sum_{n=0}^\infty x^n $: $ a_n = 1 $, $ \beta = 1 $, $ R = 1 $. Diverges for $ x = \pm 1 $. Interval: $ (-1, 1) $.
+    $$\begin{align}
+
+    \sum_{n=0}^\infty x^n = \frac{1}{1-x}.
+
+\end{align}$$</li>
+<li>$ \sum_{n=0}^\infty \frac{x^n}{n+1} $: $ a_n = \frac{1}{n+1} $, $ \beta = 1 $, $ R = 1 $. Diverges at $ x = 1 $, converges for $ x \in [-1, 1) $.
+    $$\begin{align}
+
+    \sum_{n=0}^\infty \frac{x^n}{n+1} = \ln(1-x).
+
+\end{align}$$</li>
+<li>$ \sum_{n=0}^\infty \frac{x^n}{(n+1)^2} $: $ a_n = \frac{1}{(n+1)^2} $, $ \beta = 1 $, $ R = 1 $. Converges for $ x \in [-1, 1] $.</li>
+<li>$ \sum_{n=0}^\infty n! x^n $: $ a_n = n! $, $ \beta = \infty $, $ R = 0 $. Diverges for all $ x \neq 0 $.</li>
+</ol>
+
+<h3>Uniform Convergence</h3>
+[Uniform Convergence (Definition 24.1-2)]
+A sequence $ f_n \to{} f $ pointwise on $ S $ if:
+$$\begin{align}
+
+\forall x \in S, \, \forall \varepsilon > 0, \exists N \text{ such that } |f_n(x) - f(x)| < \varepsilon \text{ for } n \geq N.
+
+\end{align}$$
+It converges uniformly if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists N \text{ such that } \sup_{x \in S} |f_n(x) - f(x)| < \varepsilon \text{ for } n \geq N.
+
+\end{align}$$
+
+
+[Preservation of Continuity (Theorem 24.3)]
+If $ f_n \to{} f $ uniformly on $ S $ and each $ f_n $ is continuous, then $ f $ is continuous.
+
+
+
+Consider $ f_n(x) = n^2 x^n (1-x) $ on $ [0, 1] $. It converges pointwise to $ f(x) = 0 $, but not uniformly.
+
+<h2>Uniform Convergence and Series of Functions (Sections 24-25)</h2>
+
+<h3>Uniform Convergence</h3>
+[Pointwise and Uniform Convergence (24.1-2)]
+Suppose $ f, f_1, f_2, \ldots{} $ are functions $ S \to{} \mathbb{R} $.
+<ol>
+<li>$ f_n \to f $ pointwise on $ S $ if:
+    $$\begin{align}
+
+    \forall x \in S, \, \forall \varepsilon > 0, \, \exists N \in \mathbb{N} \text{ such that } |f_n(x) - f(x)| < \varepsilon \text{ for } n \geq N.
+
+\end{align}$$</li>
+<li>$ f_n \to f $ uniformly on $ S $ if:
+    $$\begin{align}
+
+    \forall \varepsilon > 0, \, \exists N \in \mathbb{N} \text{ such that } |f_n(x) - f(x)| < \varepsilon \text{ for } n \geq N, \, \forall x \in S.
+
+\end{align}$$
+    Equivalently, $ \lim_{n \to \infty} \sup_{x \in S} |f_n(x) - f(x)| = 0 $.</li>
+</ol>
+
+
+[Preservation of Continuity (24.3)]
+If $ f_n \to{} f $ uniformly on $ S $, and each $ f_n $ is continuous at $ x_0 \in{} S $, then $ f $ is continuous at $ x_0 $.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch of Proof]
+Using an $ \varepsilon{}/3 $ argument, fix $ \varepsilon{} &gt; 0 $. For $ f_n \to{} f $ uniformly, find $ n $ such that $ |f_n(x) - f(x)| &lt; \varepsilon{}/3 $. By continuity of $ f_n $, there exists $ \delta{} &gt; 0 $ such that $ |f_n(x_0) - f_n(x)| &lt; \varepsilon{}/3 $ for $ |x - x_0| &lt; \delta{} $. Combine inequalities to conclude $ |f(x_0) - f(x)| &lt; \varepsilon{} $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Uniformly Cauchy Sequences</h3>
+[Uniformly Cauchy (25.3)]
+A sequence $ (f_n) $ of functions $ S \to{} \mathbb{R} $ is uniformly Cauchy if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \, \exists N \in \mathbb{N} \text{ such that } |f_i(x) - f_j(x)| < \varepsilon \, \forall x \in S \text{ for } i, j \geq N.
+
+\end{align}$$
+Equivalently, $ \sup_{x \in S} |f_i(x) - f_j(x)| &lt; \varepsilon{} $ for $ i, j \geq{} N $.
+
+
+[Uniformly Cauchy $ \iff{} $ Uniform Convergence (25.4)]
+A sequence $ (f_n) $ is uniformly Cauchy if and only if it converges uniformly to some $ f $.
+
+
+<h3>Series of Functions</h3>
+[Convergence of Series]
+A series $ \sum_{n=1}^\infty{} g_n(x) $ converges (uniformly) if the sequence of partial sums $ s_k(x) = \sum_{n=1}^k g_n(x) $ converges (uniformly).
+
+
+[Uniform Convergence Preserves Continuity (25.5)]
+If $ g_n : S \to{} \mathbb{R} $ are continuous and $ \sum_{n=1}^\infty{} g_n(x) $ converges uniformly on $ S $, then $ \sum_{n=1}^\infty{} g_n(x) $ is continuous.
+
+
+<h3>Weierstrass $ M $-Test</h3>
+[Weierstrass $ M $-Test (25.7)]
+Suppose $ M_1, M_2, \ldots{} \geq{} 0 $ and $ \sum_{k=1}^\infty{} M_k &lt; \infty{} $. If $ |g_k(x)| \leq{} M_k $ for all $ x \in{} S $ and $ k $, then $ \sum_{k=1}^\infty{} g_k(x) $ converges uniformly on $ S $.
+
+
+
+A power series $ \sum_{k=0}^\infty{} a_k x^k $ converges uniformly (to a continuous function) on $ [-b, b] $ if $ b &lt; R $, where $ R = (\limsup{} |a_k|^{1/k})^{-1} $.
+
+
+
+Convergence need not be uniform on $ (-R, R) $. For example, $ \sum_{k=0}^\infty{} x^k = \frac{1}{1-x} $ converges on $ (-1, 1) $, but not uniformly because the partial sums are bounded while $ \frac{1}{1-x} $ is not.
+
+<h2>Limits and Differentiation (Sections 20, 28-29)</h2>
+
+<h3>Limits</h3>
+[Limit (20.1, slightly modified)]
+Suppose $ S \subset{} \mathbb{R} $, $ a \in{} S^- $, $ f : S \to{} \mathbb{R} $, and $ L \in{} \mathbb{R} \cup{} \{\pm{} \infty{}\} $. Then:
+$$\begin{align}
+
+\lim_{x \to a, S} f = L
+
+\end{align}$$
+if $ \lim{} f(x_n) = L $ for any sequence $ (x_n) \subset{} S $ with $ \lim{} x_n = a $. Such sequences $ (x_n) $ exist because $ a \in{} S^- $.
+
+
+[Connection Between Limits and Continuity]
+If $ a \in{} S $, then $ f : S \to{} \mathbb{R} $ is continuous at $ a $ if and only if $ \lim_{x \to a, S} f = f(a) $.
+
+
+<h3>Common Set-Ups for Limits</h3>
+<ol>
+<li>**Usual Limit**: Let $ I $ be an interval, $ a $ be interior to $ I $, and $ S = I \setminus \{a\} $. Write $ \lim_{x \to a} f $ instead of $ \lim_{x \to a, S} f $.</li>
+<li>**One-Sided Limit**: For $ S = (a, b) $, write $ \lim_{x \to a^+} f $ (right-hand limit). Define $ \lim_{x \to a^-} f $ similarly.</li>
+</ol>
+
+<h3>Useful Theorems About Limits</h3>
+[Equivalent Definition of Limits (20.6, Simplified)]
+Suppose $ a \in{} S^- $. For $ f : S \to{} \mathbb{R} $ and $ L \in{} \mathbb{R} $, the following are equivalent:
+<ol>
+<li>$ \lim_{x \to a, S} f = L $.</li>
+<li>For all $ \varepsilon > 0 $, there exists $ \delta > 0 $ such that $ |f(x) - L| < \varepsilon $ whenever $ x \in (a - \delta, a + \delta) \cap S \setminus \{a\} $.</li>
+</ol>
+
+
+[Limit Operations (20.4)]
+Suppose $ \lim_{x \to a, S} f_1 = L_1 $ and $ \lim_{x \to a, S} f_2 = L_2 $. Then:
+<ol>
+<li>$ \lim_{x \to a, S} (f_1 + f_2) = L_1 + L_2 $,</li>
+<li>$ \lim_{x \to a, S} (f_1 \cdot f_2) = L_1 \cdot L_2 $,</li>
+<li>If $ L_2 \neq 0 $, $ \lim_{x \to a, S} \frac{f_1}{f_2} = \frac{L_1}{L_2} $.</li>
+</ol>
+
+
+[Squeeze Theorem]
+If $ f(x) \leq{} g(x) \leq{} h(x) $ for all $ x \in{} S $, and $ \lim_{x \to a, S} f = \lim_{x \to a, S} h = L $, then $ \lim_{x \to a, S} g = L $.
+
+
+<h3>Differentiation</h3>
+[Derivative (28.1)]
+Suppose $ I $ is an open interval, $ a \in{} I $, and $ f : I \to{} \mathbb{R} $. The derivative of $ f $ at $ a $ is:
+$$\begin{align}
+
+f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a},
+
+\end{align}$$
+if the limit exists and is finite.
+
+
+<h3>Rules of Differentiation</h3>
+[Product Rule]
+If $ f $ and $ g $ are differentiable at $ a $, then $ (fg)'(a) = f'(a)g(a) + f(a)g'(a) $.
+
+
+[Chain Rule (28.4)]
+If $ f $ is differentiable at $ a $, and $ g $ is differentiable at $ f(a) $, then $ g \circ{} f $ is differentiable at $ a $, with:
+$$\begin{align}
+
+(g \circ f)'(a) = g'(f(a)) \cdot f'(a).
+
+\end{align}$$
+
+
+<h3>Carathéodory’s Theorem</h3>
+[Carathéodory (Exercise 28.16)]
+Suppose $ I $ is an interval, $ f : I \to{} \mathbb{R} $. $ f $ is differentiable at $ a \in{} I $ if and only if there exists a function $ \phi{} : I \to{} \mathbb{R} $, continuous at $ a $, such that:
+$$\begin{align}
+
+f(x) - f(a) = \phi(x) \cdot (x - a), \quad \forall x \in I,
+
+\end{align}$$
+and $ \phi{}(a) = f'(a) $.
+
+<h2>Rules of Differentiation and Mean Value Theorem (Sections 28-29)</h2>
+
+<h3>Definition of Derivative</h3>
+[Derivative (28.1)]
+Suppose $ I $ is an open interval and $ a \in{} I $. A function $ f : I \to{} \mathbb{R} $ is differentiable at $ a $ if the derivative:
+$$\begin{align}
+
+f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+
+\end{align}$$
+exists and is finite.
+
+
+<h3>Rules of Differentiation</h3>
+[Product Rule (28.3)]
+Suppose $ f $ and $ g $ are differentiable at $ a $. Then $ fg $ is differentiable at $ a $, with:
+$$\begin{align}
+
+(fg)'(a) = f'(a)g(a) + f(a)g'(a).
+
+\end{align}$$
+
+
+
+If $ f(x) = x^m $ for $ m \in{} \mathbb{N} $, then:
+$$\begin{align}
+
+(x^m)' = mx^{m-1}.
+
+\end{align}$$
+
+
+[Chain Rule (28.4)]
+Suppose $ f $ is differentiable at $ a $ and $ g $ is differentiable at $ f(a) $. Then $ g \circ{} f $ is differentiable at $ a $, with:
+$$\begin{align}
+
+(g \circ f)'(a) = g'(f(a))f'(a).
+
+\end{align}$$
+
+
+<h3>Examples of Differentiation</h3>
+<ol>
+<li>If $ f(x) = x^n $ for $ n \in \mathbb{N} $, then $ f'(x) = nx^{n-1} $.</li>
+<li>If $ f(x) = x^{-n} $ for $ n \in \mathbb{N} $, then $ f'(x) = -nx^{-n-1} $.</li>
+<li>For $ f(x) = 1/g(x) $, if $ g(a) \neq 0 $, then:
+    $$\begin{align}
+
+    \left( \frac{1}{g} \right)'(a) = -\frac{g'(a)}{g(a)^2}.
+
+\end{align}$$</li>
+</ol>
+
+<h3>Criterion for Extrema</h3>
+[Extrema Criterion (29.1)]
+Suppose $ f $ is defined on an open interval $ I $ and has a maximum or minimum at $ x_0 \in{} I $. If $ f $ is differentiable at $ x_0 $, then:
+$$\begin{align}
+
+f'(x_0) = 0.
+
+\end{align}$$
+
+
+
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is continuous and attains its maximum or minimum at $ x_0 $. Then one of the following holds:
+<ol>
+<li>$ x_0 \in \{a, b\} $,</li>
+<li>$ f $ is not differentiable at $ x_0 $,</li>
+<li>$ f'(x_0) = 0 $.</li>
+</ol>
+
+
+<h3>Rolle’s Theorem</h3>
+[Rolle’s Theorem (29.2)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is continuous, differentiable on $ (a, b) $, and $ f(a) = f(b) $. Then there exists $ c \in{} (a, b) $ such that:
+$$\begin{align}
+
+f'(c) = 0.
+
+\end{align}$$
+
+
+<h3>Mean Value Theorem</h3>
+[Mean Value Theorem (29.3)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is continuous, differentiable on $ (a, b) $. Then there exists $ c \in{} (a, b) $ such that:
+$$\begin{align}
+
+f'(c) = \frac{f(b) - f(a)}{b - a}.
+
+\end{align}$$
+
+
+<h3>Examples and Consequences of MVT</h3>
+[Constant Function (29.4)]
+If $ f $ is differentiable on $ (a, b) $ and $ f'(x) = 0 $ for all $ x \in{} (a, b) $, then $ f $ is a constant function.
+
+
+[Equality of Derivatives (29.5)]
+If $ f $ and $ g $ are differentiable on $ (a, b) $ and $ f'(x) = g'(x) $ for all $ x \in{} (a, b) $, then $ f(x) - g(x) = c $ for some constant $ c $.
+
+<h2>Rolle’s Theorem, Mean Value Theorem, and Applications (Section 29)</h2>
+
+<h3>Rolle’s Theorem</h3>
+[Rolle’s Theorem (29.2)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is continuous, differentiable on $ (a, b) $, and $ f(a) = f(b) $. Then there exists $ x \in{} (a, b) $ such that:
+$$\begin{align}
+
+f'(x) = 0.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+The function $ f $ attains its maximum and minimum on $ [a, b] $. Let $ x_0, y_0 \in{} [a, b] $ such that $ f(y_0) \leq{} f(x) \leq{} f(x_0) $ for all $ x \in{} [a, b] $. If $ f(y_0) = f(a) = f(b) = f(x_0) $, then $ f $ is constant, so $ f' = 0 $ on $ (a, b) $. Otherwise:
+<ol>
+<li>If $ f(x_0) > f(a) = f(b) $, then $ x_0 \in (a, b) $, and $ f'(x_0) = 0 $.</li>
+<li>If $ f(y_0) < f(a) = f(b) $, then $ y_0 \in (a, b) $, and $ f'(y_0) = 0 $.</li>
+</ol>
+<div class='qed'>∎</div></div><br>
+
+<h3>Mean Value Theorem</h3>
+[Mean Value Theorem (29.3)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is continuous, differentiable on $ (a, b) $. Then there exists $ x \in{} (a, b) $ such that:
+$$\begin{align}
+
+f'(x) = \frac{f(b) - f(a)}{b - a}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+Define $ L(x) = f(a) + \frac{f(b) - f(a)}{b - a}(x - a) $ and $ g(x) = f(x) - L(x) $. The function $ g $ is continuous on $ [a, b] $, differentiable on $ (a, b) $, and $ g(a) = g(b) = 0 $. By Rolle’s Theorem, there exists $ x \in{} (a, b) $ such that $ g'(x) = 0 $. Thus:
+$$\begin{align}
+
+f'(x) = g'(x) + L'(x) = 0 + \frac{f(b) - f(a)}{b - a}.
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+[MVT Application]
+For $ x, y \in{} \mathbb{R} $, $ |\sin{} x - \sin{} y| \leq{} |x - y| $. Apply MVT to $ f(t) = \sin{} t $ on $ [x, y] $: $ \exists{} z \in{} (x, y) $ such that:
+$$\begin{align}
+
+\frac{f(x) - f(y)}{x - y} = f'(z) = \cos z.
+
+\end{align}$$
+Since $ |\cos{} z| \leq{} 1 $, $ | \frac{f(x) - f(y)}{x - y} | = |\cos{} z| \leq{} 1 $, hence $ |\sin{} x - \sin{} y| \leq{} |x - y| $.
+
+
+<h3>Corollaries of MVT</h3>
+[Constant Functions (29.4)]
+If $ f $ is differentiable on $ (a, b) $ and $ f' = 0 $ on $ (a, b) $, then $ f $ is constant.
+
+
+<div class='proof'><strong>Proof.</strong>
+If $ f $ is not constant, then there exist $ x &lt; y $ such that $ f(x) \neq{} f(y) $. By MVT, $ \exists{} z \in{} (x, y) $ such that:
+$$\begin{align}
+
+f'(z) = \frac{f(y) - f(x)}{y - x} \neq 0,
+
+\end{align}$$
+contradicting $ f'(z) = 0 $.
+<div class='qed'>∎</div></div><br>
+
+[Equality of Derivatives (29.5)]
+If $ f, g $ are differentiable on $ (a, b) $ and $ f' = g' $ on $ (a, b) $, then $ \exists{} c \in{} \mathbb{R} $ such that $ f(x) - g(x) = c $ for all $ x \in{} (a, b) $.
+
+
+<div class='proof'><strong>Proof.</strong>
+Define $ h(x) = f(x) - g(x) $. Then $ h' = f' - g' = 0 $. By Corollary 29.4, $ h $ is constant.
+<div class='qed'>∎</div></div><br>
+
+<h3>Increasing and Decreasing Functions</h3>
+[Monotonicity (29.6)]
+A function $ f $ on an interval $ I $ is:
+<ol>
+<li>{Increasing} if $ f(x_1) \leq f(x_2) $ for $ x_1 < x_2 $,</li>
+<li>{Strictly increasing} if $ f(x_1) < f(x_2) $ for $ x_1 < x_2 $.</li>
+</ol>
+
+
+[Monotonicity and Derivatives (29.7)]
+Suppose $ f $ is differentiable on $ (a, b) $:
+<ol>
+<li>$ f $ is increasing if and only if $ f' \geq 0 $ on $ (a, b) $,</li>
+<li>If $ f' > 0 $ on $ (a, b) $, then $ f $ is strictly increasing.</li>
+</ol>
+
+
+[Bernoulli’s Inequality]
+If $ n \in{} \mathbb{N} $ and $ x &gt; -1 $, then:
+$$\begin{align}
+
+(1 + x)^n \geq 1 + nx.
+
+\end{align}$$
+Let $ f(x) = (1 + x)^n - (1 + nx) $ and show $ f(x) \geq{} 0 $ for $ x &gt; -1 $. By differentiating $ f(x) $, we conclude $ f(x) $ is increasing and achieves its minimum at $ x = 0 $, where $ f(0) = 0 $.
+
+<h2>Differentiating Inverse Functions and Integration (Sections 29, 32)</h2>
+
+<h3>Differentiating Inverse Functions</h3>
+[Derivative of an Inverse Function (29.9)]
+Suppose $ I $ is an interval, $ f : I \to{} \mathbb{R} $ is a continuous, strictly monotone function. Let $ J = f(I) $, and $ g = f^{-1} : J \to{} I $. If $ f $ is differentiable at $ c \in{} I $, and $ f'(c) \neq{} 0 $, then $ g $ is differentiable at $ d = f(c) $, and:
+$$\begin{align}
+
+g'(d) = \frac{1}{f'(c)} = \frac{1}{f'(g(d))}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong> [Proof Sketch]
+Using Carathéodory’s Theorem:
+$$\begin{align}
+
+f(x) - f(c) = \phi(x)(x - c), \quad \phi(c) = f'(c),
+
+\end{align}$$
+where $ \phi{} $ is continuous at $ c $. For $ y = f(g(y)) $, differentiate both sides to find $ g'(d) = 1 / \phi{}(g(d)) $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Derivatives of Rational Powers</h3>
+[Derivative of Rational Powers]
+Let $ f(x) = x^n $ (strictly increasing on $ (0, \infty{}) $) with $ f'(x) = nx^{n-1} $. The inverse function is $ g(y) = y^{1/n} $. For $ y &gt; 0 $:
+$$\begin{align}
+
+g'(y) = \frac{1}{f'(g(y))} = \frac{1}{n(y^{1/n})^{n-1}} = \frac{1}{n} y^{1/n - 1}.
+
+\end{align}$$
+If $ n \in{} \mathbb{Z} $ is odd, extend $ f, g $ to $ \mathbb{R} $. Then $ g'(y) = \frac{1}{n} y^{1/n - 1} $ for $ y &lt; 0 $.
+
+
+[Derivative of $ h(x) = x^r $, $ r \in{} \mathbb{Q} $]
+Write $ r = m/n $, $ h(x) = x^{m/n} $. Use the chain rule:
+$$\begin{align}
+
+h'(x) = \frac{m}{n} x^{r-1}.
+
+\end{align}$$
+
+
+<h3>Inverse Trigonometric Functions</h3>
+[Arcsine]
+For $ f(x) = \sin{} x $ on $ [-\pi{}/2, \pi{}/2] $, $ g = \arcsin{} : [-1, 1] \to{} [-\pi{}/2, \pi{}/2] $. Since $ f'(x) = \cos{} x $, for $ y \in{} (-1, 1) $:
+$$\begin{align}
+
+(\arcsin y)' = \frac{1}{\sqrt{1-y^2}}.
+
+\end{align}$$
+
+
+[Arctangent]
+For $ f(x) = \tan{} x $ on $ (-\pi{}/2, \pi{}/2) $, $ g = \arctan{} : \mathbb{R} \to{} (-\pi{}/2, \pi{}/2) $. Since $ f'(x) = 1 + x^2 $, for $ y \in{} \mathbb{R} $:
+$$\begin{align}
+
+(\arctan y)' = \frac{1}{1 + y^2}.
+
+\end{align}$$
+
+
+<h3>Integration: Concepts and Definitions</h3>
+[Darboux Sums]
+Let $ f : [a, b] \to{} \mathbb{R} $ be bounded.
+<ol>
+<li>Partition $ P = \{t_0, t_1, \ldots, t_n\} $ of $ [a, b] $ gives subintervals $ [t_{k-1}, t_k] $.</li>
+<li>Lower Darboux sum:
+    $$\begin{align}
+
+    L(f, P) = \sum_{k=1}^n m(f, [t_{k-1}, t_k])(t_k - t_{k-1}),
+
+\end{align}$$
+    where $ m(f, [t_{k-1}, t_k]) = \inf_{x \in [t_{k-1}, t_k]} f(x) $.</li>
+<li>Upper Darboux sum:
+    $$\begin{align}
+
+    U(f, P) = \sum_{k=1}^n M(f, [t_{k-1}, t_k])(t_k - t_{k-1}),
+
+\end{align}$$
+    where $ M(f, [t_{k-1}, t_k]) = \sup_{x \in [t_{k-1}, t_k]} f(x) $.</li>
+</ol>
+
+
+[Integrability]
+$ f $ is integrable on $ [a, b] $ if:
+$$\begin{align}
+
+\sup_P L(f, P) = \inf_P U(f, P),
+
+\end{align}$$
+denoted $ \int_a{}^b f(x) dx $.
+
+
+<h3>Examples of Integrability</h3>
+[Constant Function]
+If $ f(x) = c $, then:
+$$\begin{align}
+
+\int_a^b f(x) dx = c(b-a).
+
+\end{align}$$
+
+
+[Discontinuous Function]
+Let $ g(x) = 1 $ if $ x \in{} \mathbb{Q} $, $ g(x) = 0 $ otherwise. Then:
+$$\begin{align}
+
+\sup_P L(g, P) = 0, \quad \inf_P U(g, P) = 1.
+
+\end{align}$$
+Since $ \sup_P{} L \neq{} \inf_P{} U $, $ g $ is not integrable.
+
+
+[Linear Function]
+If $ h(x) = x $, then:
+$$\begin{align}
+
+\int_0^b h(x) dx = \frac{b^2}{2}.
+
+\end{align}$$
+
+<h2>Darboux Sums, Integrability, and Riemann Integration (Sections 32-33)</h2>
+
+<h3>Darboux Sums and Integrals</h3>
+[Darboux Sums]
+Let $ f : [a, b] \to{} \mathbb{R} $ be bounded. For a partition $ P = \{a = t_0 &lt; t_1 &lt; \cdots{} &lt; t_n = b\} $:
+<ol>
+<li>Lower Darboux sum:
+    $$\begin{align}
+
+    L(f, P) = \sum_{k=1}^n m(f, [t_{k-1}, t_k])(t_k - t_{k-1}),
+
+\end{align}$$
+    where $ m(f, [t_{k-1}, t_k]) = \inf_{x \in [t_{k-1}, t_k]} f(x) $.</li>
+<li>Upper Darboux sum:
+    $$\begin{align}
+
+    U(f, P) = \sum_{k=1}^n M(f, [t_{k-1}, t_k])(t_k - t_{k-1}),
+
+\end{align}$$
+    where $ M(f, [t_{k-1}, t_k]) = \sup_{x \in [t_{k-1}, t_k]} f(x) $.</li>
+</ol>
+
+
+[Integrability]
+The lower Darboux integral is $ L(f) = \sup_P{} L(f, P) $, and the upper Darboux integral is $ U(f) = \inf_P{} U(f, P) $. $ f $ is integrable if $ L(f) = U(f) $, denoted:
+$$\begin{align}
+
+\int_a^b f = L(f) = U(f).
+
+\end{align}$$
+
+
+[32.4]
+If $ f : [a, b] \to{} \mathbb{R} $ is bounded, then $ L(f) \leq{} U(f) $.
+
+
+<h3>Integrals: Example</h3>
+[Linear Function]
+Is $ h(x) = x $ integrable on $ [0, b] $? Compute $ \int_0{}^b h(x) dx $.
+
+For $ P = \{0, \frac{b}{n}, \frac{2b}{n}, \ldots{}, b\} $:
+$$\begin{align}
+
+L(h, P_n) = \frac{b^2}{2}\left(1 - \frac{1}{n}\right), \quad U(h, P_n) = \frac{b^2}{2}.
+
+\end{align}$$
+Thus:
+$$\begin{align}
+
+L(h) \geq \sup_n L(h, P_n) = \frac{b^2}{2}, \quad U(h) \leq \lim_n U(h, P_n) = \frac{b^2}{2}.
+
+\end{align}$$
+Since $ L(h) = U(h) $, $ h(x) $ is integrable with:
+$$\begin{align}
+
+\int_0^b h(x) dx = \frac{b^2}{2}.
+
+\end{align}$$
+
+
+<h3>Criterion for Integrability</h3>
+[32.5]
+A bounded function $ f : [a, b] \to{} \mathbb{R} $ is integrable if and only if for all $ \varepsilon{} &gt; 0 $, there exists a partition $ P $ such that:
+$$\begin{align}
+
+U(f, P) - L(f, P) < \varepsilon.
+
+\end{align}$$
+
+
+<h3>Monotone and Continuous Functions</h3>
+[33.1]
+Any monotone function on $ [a, b] $ is integrable.
+
+
+[33.2]
+Any continuous function on $ [a, b] $ is integrable.
+
+
+<h3>Mesh of a Partition</h3>
+[Mesh (32.6)]
+The mesh of a partition $ P = \{t_0, t_1, \ldots{}, t_n\} $ is:
+$$\begin{align}
+
+\text{mesh}(P) = \max_{1 \leq k \leq n} (t_k - t_{k-1}).
+
+\end{align}$$
+
+
+[32.7]
+A bounded $ f : [a, b] \to{} \mathbb{R} $ is integrable if and only if for all $ \varepsilon{} &gt; 0 $, there exists $ \delta{} &gt; 0 $ such that:
+$$\begin{align}
+
+U(f, P) - L(f, P) < \varepsilon \quad \text{whenever mesh}(P) < \delta.
+
+\end{align}$$
+
+
+<h3>Riemann Integration</h3>
+[Riemann Integral (32.8)]
+Let $ f : [a, b] \to{} \mathbb{R} $ be bounded. For a partition $ P = \{t_0, t_1, \ldots{}, t_n\} $ and $ x_k \in{} [t_{k-1}, t_k] $, define the Riemann sum:
+$$\begin{align}
+
+S = \sum_{k=1}^n f(x_k)(t_k - t_{k-1}).
+
+\end{align}$$
+$ f $ is Riemann integrable if there exists $ r \in{} \mathbb{R} $ such that for all $ \varepsilon{} &gt; 0 $, there exists $ \delta{} &gt; 0 $ such that:
+$$\begin{align}
+
+|S - r| < \varepsilon \quad \text{whenever mesh}(P) < \delta.
+
+\end{align}$$
+
+
+[32.9]
+A bounded function $ f : [a, b] \to{} \mathbb{R} $ is Riemann integrable if and only if it is Darboux integrable. In this case:
+$$\begin{align}
+
+\int_a^b f = R\int_a^b f.
+
+\end{align}$$
+
+<h2>Integrability and Riemann Integration (Sections 32-33)</h2>
+
+<h3>Monotone and Continuous Functions</h3>
+[Integrability Criterion (32.5)]
+A bounded function $ f : [a, b] \to{} \mathbb{R} $ is integrable if and only if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists \text{ a partition } P \text{ such that } U(f, P) - L(f, P) < \varepsilon.
+
+\end{align}$$
+
+
+[Monotone Functions Are Integrable (33.1)]
+Any monotone function on $ [a, b] $ is integrable.
+
+
+<div class='proof'><strong>Proof.</strong>
+Assume $ f $ is increasing. Fix $ \varepsilon{} &gt; 0 $. Choose $ n \in{} \mathbb{N} $ such that:
+$$\begin{align}
+
+\frac{(f(b) - f(a))(b - a)}{n} < \varepsilon.
+
+\end{align}$$
+Consider the partition $ P $ with $ t_k = a + kh $ for $ 0 \leq{} k \leq{} n $, where $ h = \frac{b-a}{n} $. Then:
+$$\begin{align}
+
+U(f, P) - L(f, P) = h \sum_{k=1}^n (f(t_k) - f(t_{k-1})) = \frac{(f(b) - f(a))(b - a)}{n} < \varepsilon.
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+[Continuous Functions Are Integrable (33.2)]
+Any continuous function on $ [a, b] $ is integrable.
+
+
+<div class='proof'><strong>Proof.</strong>
+Fix $ \varepsilon{} &gt; 0 $. By uniform continuity, $ \exists{} \delta{} &gt; 0 $ such that $ |f(x) - f(y)| &lt; \frac{\varepsilon}{b-a} $ whenever $ |x - y| &lt; \delta{} $. Choose $ n \in{} \mathbb{N} $ such that $ h = \frac{b-a}{n} &lt; \delta{} $, and partition $ P $ with $ t_k = a + kh $. Then:
+$$\begin{align}
+
+M(f, [t_{k-1}, t_k]) - m(f, [t_{k-1}, t_k]) < \frac{\varepsilon}{b-a}.
+
+\end{align}$$
+Thus:
+$$\begin{align}
+
+U(f, P) - L(f, P) < hn \cdot \frac{\varepsilon}{b-a} = \varepsilon.
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+<h3>Mesh of a Partition</h3>
+[Mesh (32.6)]
+The mesh of a partition $ P = \{t_0, t_1, \ldots{}, t_n\} $ is:
+$$\begin{align}
+
+\text{mesh}(P) = \max_{1 \leq k \leq n} (t_k - t_{k-1}).
+
+\end{align}$$
+
+
+[Integrability and Mesh (32.7)]
+A bounded function $ f : [a, b] \to{} \mathbb{R} $ is integrable if and only if:
+$$\begin{align}
+
+\forall \varepsilon > 0, \exists \delta > 0 \text{ such that } U(f, P) - L(f, P) < \varepsilon \text{ whenever mesh}(P) < \delta.
+
+\end{align}$$
+
+
+<h3>Riemann Integration</h3>
+[Riemann Integral (32.8)]
+Let $ f : [a, b] \to{} \mathbb{R} $ be bounded. For a partition $ P = \{t_0, t_1, \ldots{}, t_n\} $ and $ x_k \in{} [t_{k-1}, t_k] $, define the Riemann sum:
+$$\begin{align}
+
+S = \sum_{k=1}^n f(x_k)(t_k - t_{k-1}).
+
+\end{align}$$
+$ f $ is Riemann integrable if:
+$$\begin{align}
+
+\exists r \in \mathbb{R} \text{ such that } \forall \varepsilon > 0, \exists \delta > 0 \text{ such that } |S - r| < \varepsilon \text{ whenever mesh}(P) < \delta.
+
+\end{align}$$
+
+
+[Equivalence of Riemann and Darboux Integrability (32.9)]
+A bounded $ f : [a, b] \to{} \mathbb{R} $ is Riemann integrable if and only if it is Darboux integrable. In this case:
+$$\begin{align}
+
+R\int_a^b f = \int_a^b f.
+
+\end{align}$$
+
+
+<h3>Properties of Integrable Functions</h3>
+[Exercise 32.7]
+If $ f $ is integrable on $ [a, b] $, and $ f = g $ except at finitely many points, then $ g $ is integrable on $ [a, b] $ and:
+$$\begin{align}
+
+\int_a^b f = \int_a^b g.
+
+\end{align}$$
+
+
+
+The statement fails if the set of exceptions is countably infinite. For example:
+$$\begin{align}
+
+f(x) = 0, \quad g(x) =
+\begin{cases}
+1 & x \in \mathbb{Q}, \\
+0 & x \notin \mathbb{Q}.
+\end{cases}
+
+\end{align}$$
+$ f $ is integrable, but $ g $ is not.
+
+<h2>Properties of Integrals and Convergence Theorems (Section 33)</h2>
+
+<h3>Properties of Integrals</h3>
+[Linearity and Comparison of Integrals (33.3, 33.4(i))]
+Suppose $ f, g $ are integrable on $ [a, b] $, and $ c \in{} \mathbb{R} $. Then:
+<ol>
+<li>$ cf $ is integrable, and:
+    $$\begin{align}
+
+    \int_a^b cf = c \int_a^b f.
+
+\end{align}$$</li>
+<li>$ f + g $ is integrable, and:
+    $$\begin{align}
+
+    \int_a^b (f + g) = \int_a^b f + \int_a^b g.
+
+\end{align}$$</li>
+<li>If $ f \geq g $, then:
+    $$\begin{align}
+
+    \int_a^b f \geq \int_a^b g.
+
+\end{align}$$</li>
+</ol>
+
+
+[Triangle Inequality for Integrals (33.5)]
+If $ f $ is integrable on $ [a, b] $, then $ |f| $ is integrable, and:
+$$\begin{align}
+
+\left| \int_a^b f \right| \leq \int_a^b |f|.
+
+\end{align}$$
+
+
+<h3>Integrability of Products and Piecewise Functions</h3>
+
+If $ f $ is integrable on $ [a, b] $, then $ f^2 $ is integrable.
+
+
+
+If $ f, g $ are integrable on $ [a, b] $, then $ fg $ is integrable.
+
+
+<div class='proof'><strong>Proof.</strong>
+Express $ fg $ as:
+$$\begin{align}
+
+fg = \frac{1}{4} \left( (f + g)^2 - (f - g)^2 \right).
+
+\end{align}$$
+Since $ f + g $ and $ f - g $ are integrable, their squares are integrable, and hence $ fg $ is integrable.
+<div class='qed'>∎</div></div><br>
+
+[Piecewise Monotone and Continuous Functions (33.8)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is either:
+<ol>
+<li>Piecewise monotone and bounded, or</li>
+<li>Piecewise continuous.</li>
+</ol>
+Then $ f $ is integrable.
+
+
+<div class='proof'><strong>Proof.</strong>
+Partition $ [a, b] $ such that $ f $ is monotone or uniformly continuous on each subinterval. On each subinterval, $ f $ is integrable. By additivity of the integral, $ f $ is integrable on $ [a, b] $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Convergence and Interchange of Limits and Integrals</h3>
+
+Suppose $ (f_n) $ is a sequence of integrable functions on $ [a, b] $ that converges uniformly to $ f $. Then $ f $ is integrable, and:
+$$\begin{align}
+
+\int_a^b f = \lim_{n \to \infty} \int_a^b f_n.
+
+\end{align}$$
+
+
+<h3>Convergence Theorems</h3>
+[Bounded Convergence (33.11)]
+Suppose $ (f_n) $ are integrable on $ [a, b] $, $ |f_n| \leq{} M $ for all $ n $, $ f_n \to{} f $ pointwise on $ [a, b] $, and $ f $ is integrable. Then:
+$$\begin{align}
+
+\lim_{n \to \infty} \int_a^b f_n = \int_a^b f.
+
+\end{align}$$
+
+
+[Monotone Convergence (33.12)]
+Suppose $ (f_n) $ are integrable on $ [a, b] $, $ f_1 \leq{} f_2 \leq{} \cdots{} $, $ f_n \to{} f $ pointwise on $ [a, b] $, and $ f $ is integrable. Then:
+$$\begin{align}
+
+\lim_{n \to \infty} \int_a^b f_n = \int_a^b f.
+
+\end{align}$$
+
+
+[Application of Monotone Convergence]
+Let $ f_n(x) = \frac{1}{1 + nx^3} $ on $ [0, 1] $. Then:
+$$\begin{align}
+
+\int_0^1 f_n(x) dx \to \int_0^1 f(x) dx = 0,
+
+\end{align}$$
+where
+$$\begin{align}
+
+     f(x) = \begin{cases} 1, & x = 0, \\ 0, & x \in (0, 1]. \end{cases}
+
+\end{align}$$
+
+<h2>Fundamental Theorems of Calculus and Change of Variable (Section 34)</h2>
+
+<h3>Fundamental Theorem of Calculus I</h3>
+[Fundamental Theorem of Calculus I (34.1)]
+Suppose $ g : [a, b] \to{} \mathbb{R} $ is continuous, differentiable on $ (a, b) $, and $ g' $ is integrable on $ [a, b] $. Then:
+$$\begin{align}
+
+\int_a^b g'(x) \, dx = g(b) - g(a).
+
+\end{align}$$
+
+
+
+Compute $ \int_a{}^b x^n \, dx $. Use $ g(x) = \frac{x^{n+1}}{n+1} $, so:
+$$\begin{align}
+
+\int_a^b x^n \, dx = \frac{b^{n+1} - a^{n+1}}{n+1}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+Partition $ P = \{a = t_0 &lt; t_1 &lt; \ldots{} &lt; t_n = b\} $. By the Mean Value Theorem:
+$$\begin{align}
+
+g'(x_k) = \frac{g(t_k) - g(t_{k-1})}{t_k - t_{k-1}},
+
+\end{align}$$
+for some $ x_k \in{} (t_{k-1}, t_k) $. Then:
+$$\begin{align}
+
+L(g', P) \leq \sum_{k=1}^n g'(x_k)(t_k - t_{k-1}) = g(b) - g(a) \leq U(g', P).
+
+\end{align}$$
+Thus $ \int_a{}^b g'(x) \, dx = g(b) - g(a) $.
+<div class='qed'>∎</div></div><br>
+
+<h3>Integration by Parts</h3>
+[Integration by Parts (34.2)]
+Suppose $ u, v : [a, b] \to{} \mathbb{R} $ are continuous, differentiable on $ (a, b) $, and $ u', v' $ are integrable on $ [a, b] $. Then:
+$$\begin{align}
+
+\int_a^b u(x)v'(x) \, dx + \int_a^b u'(x)v(x) \, dx = u(b)v(b) - u(a)v(a).
+
+\end{align}$$
+
+
+
+Compute $ \int_0{}^\pi{} x \cos{} x \, dx $. Let $ u(x) = x $, $ v'(x) = \cos{} x $:
+$$\begin{align}
+
+\int_0^\pi x \cos x \, dx = x \sin x \big|_0^\pi - \int_0^\pi \sin x \, dx = 0 - (-2) = -2.
+
+\end{align}$$
+
+
+<h3>Fundamental Theorem of Calculus II</h3>
+[Fundamental Theorem of Calculus II (34.3)]
+Suppose $ f : [a, b] \to{} \mathbb{R} $ is integrable. Define:
+$$\begin{align}
+
+F(x) = \int_a^x f(t) \, dt.
+
+\end{align}$$
+If $ f $ is continuous at $ c $, then $ F $ is differentiable at $ c $, with $ F'(c) = f(c) $.
+
+
+
+Let $ G(x) = \int_{x^2}^2 \sin{}(t^2) \, dt $. Then $ G'(x) = -2x \sin{}(x^4) $ by the Chain Rule.
+
+
+<div class='proof'><strong>Proof.</strong>
+Let $ F(x) = \int_a{}^x f(t) \, dt $. Then:
+$$\begin{align}
+
+F'(c) = \lim_{x \to c} \frac{F(x) - F(c)}{x - c} = \lim_{x \to c} \frac{\int_c^x f(t) \, dt}{x - c}.
+
+\end{align}$$
+Since $ f $ is continuous at $ c $, $ |f(t) - f(c)| \leq{} \varepsilon{} $ for $ |t - c| &lt; \delta{} $, and thus:
+$$\begin{align}
+
+\lim_{x \to c} \frac{\int_c^x f(t) \, dt}{x - c} = f(c).
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+<h3>Change of Variable in Integrals</h3>
+[Change of Variable (34.4)]
+Suppose $ u : J \to{} I $, $ u' $ is continuous, and $ f : I \to{} \mathbb{R} $ is continuous. Then for $ a, b \in{} J $:
+$$\begin{align}
+
+\int_a^b f(u(x)) u'(x) \, dx = \int_{u(a)}^{u(b)} f(t) \, dt.
+
+\end{align}$$
+
+
+
+Compute $ \int_1{}^4 \frac{\sin(\sqrt{x})}{\sqrt{x}} \, dx $. Let $ u(x) = \sqrt{x} $, then $ u'(x) = \frac{1}{2\sqrt{x}} $:
+$$\begin{align}
+
+\int_1^4 \frac{\sin(\sqrt{x})}{\sqrt{x}} \, dx = \int_1^2 2 \sin t \, dt = 2(-\cos t) \big|_1^2 = 2(\cos 1 - \cos 2).
+
+\end{align}$$
+
+<h2>Interchanging Integration, Differentiation, and Power Series (Section 26)</h2>
+
+<h3>Interchanging Integration with Limits and Sums</h3>
+[Exercise 33.9, Lecture 32]
+Suppose $ (f_n) $ is a sequence of integrable functions on $ [a, b] $ converging uniformly to $ f $. Then:
+$$\begin{align}
+
+\lim_{n \to \infty} \int_a^b f_n = \int_a^b f.
+
+\end{align}$$
+
+
+
+If $ g_n $ are integrable on $ [a, b] $, and $ f = \sum_{n=0}^\infty{} g_n $ converges uniformly, then $ f $ is integrable, and:
+$$\begin{align}
+
+\int_a^b f = \sum_{n=0}^\infty \int_a^b g_n.
+
+\end{align}$$
+
+
+<h3>Interchanging Differentiation with Limits and Sums</h3>
+
+Let $ f_n(x) = \frac{1}{n} \sin{}(n^2 x) $. Then $ f_n \to{} 0 $ uniformly on $ \mathbb{R} $. However:
+$$\begin{align}
+
+f_n'(x) = n \cos(n^2 x).
+
+\end{align}$$
+If $ x = \frac{p}{q} \pi{} $, then $ f_n'(x) $ does not converge, even pointwise.
+
+
+<h3>Power Series and Radius of Convergence</h3>
+[Radius of Convergence]
+For a power series $ \sum_{n=0}^\infty{} a_n x^n $, let:
+$$\begin{align}
+
+\beta = \limsup_{n \to \infty} |a_n|^{1/n}.
+
+\end{align}$$
+The radius of convergence is $ R = \frac{1}{\beta{}} $.
+
+
+[Uniform Convergence (26.1)]
+The series $ \sum_{n=0}^\infty{} a_n x^n $ converges uniformly on $ [-R_1, R_1] $ for $ R_1 &lt; R $.
+
+
+
+The series $ \sum_{n=0}^\infty{} a_n x^n $ converges to a continuous function on $ (-R, R) $.
+
+
+<h3>Differentiation and Integration of Power Series</h3>
+[Differentiation and Integration (26.3)]
+If $ \sum_{n=0}^\infty{} a_n x^n $ has radius of convergence $ R $, then:
+<ol>
+<li>$ \sum_{n=1}^\infty n a_n x^{n-1} $ has radius of convergence $ R $,</li>
+<li>$ \sum_{n=0}^\infty \frac{a_n}{n+1} x^{n+1} $ has radius of convergence $ R $.</li>
+</ol>
+
+
+[Integration of Power Series (26.4)]
+Suppose $ f(t) = \sum_{n=0}^\infty{} a_n t^n $ has radius of convergence $ R $. Then for $ |x| &lt; R $:
+$$\begin{align}
+
+\int_0^x f(t) \, dt = \sum_{n=0}^\infty \frac{a_n}{n+1} x^{n+1}.
+
+\end{align}$$
+
+
+
+For $ f(t) = \frac{1}{1-t} = \sum_{n=0}^\infty{} t^n $ ($ R = 1 $):
+$$\begin{align}
+
+-\ln(1-x) = \int_0^x f(t) \, dt = \sum_{n=0}^\infty \frac{x^{n+1}}{n+1}, \quad |x| < 1.
+
+\end{align}$$
+
+
+[Differentiation of Power Series (26.5)]
+Suppose $ f(t) = \sum_{n=0}^\infty{} a_n t^n $ has radius of convergence $ R $. Then for $ |t| &lt; R $:
+$$\begin{align}
+
+f'(t) = \sum_{n=1}^\infty n a_n t^{n-1}.
+
+\end{align}$$
+
+
+<h3>Abel’s Theorem</h3>
+[Abel’s Theorem (26.6)]
+Suppose $ f(x) = \sum_{n=0}^\infty{} a_n x^n $ has radius of convergence $ R &gt; 0 $. If the series converges at $ R $ (or $ -R $), then $ f $ is continuous at $ R $ (or $ -R $).
+
+<h2>Abel’s Theorem, Convexity, and Inequalities (Section 26)</h2>
+
+<h3>Abel Summation Theorem</h3>
+[Abel’s Theorem (26.6)]
+Let $ f(x) = \sum_{n=0}^\infty{} a_n x^n $ have radius of convergence $ R &gt; 0 $. If the series converges at $ R $ (or $ -R $), then $ f $ is continuous at $ R $ (or $ -R $.
+
+
+
+$$\begin{align}
+
+1 - \frac{1}{2} + \frac{1}{3} - \cdots = \ln 2.
+
+\end{align}$$
+Let $ g(t) = \frac{1}{1+t} = \sum_{n=0}^\infty{} (-1)^n t^n $ ($ R = 1 $), and $ f(x) = \sum_{k=1}^\infty{} \frac{(-1)^{k-1}}{k} x^k $. The series diverges at $ -1 $ but converges at $ 1 $:
+$$\begin{align}
+
+\ln(1+x) = \int_0^x g(t) \, dt = \sum_{k=1}^\infty \frac{(-1)^{k-1}}{k} x^k.
+
+\end{align}$$
+Thus:
+$$\begin{align}
+
+f(1) = \sum_{k=1}^\infty \frac{(-1)^{k-1}}{k} = \ln 2.
+
+\end{align}$$
+
+
+<h3>Alternating Series</h3>
+[Alternating Series Test]
+Suppose $ a_1 \geq{} a_2 \geq{} \cdots{} \geq{} 0 $. Then:
+$$\begin{align}
+
+\sum_{k=1}^\infty (-1)^{k-1} a_k = a_1 - a_2 + a_3 - \cdots
+
+\end{align}$$
+converges if and only if $ \lim_{k \to \infty} a_k = 0 $.
+
+
+
+$$\begin{align}
+
+1 - \frac{1}{3} + \frac{1}{5} - \cdots = \frac{\pi}{4}.
+
+\end{align}$$
+Let $ f(x) = \arctan{} x $, so $ f'(x) = \frac{1}{1+x^2} $. For $ |x| &lt; 1 $:
+$$\begin{align}
+
+f'(x) = \sum_{n=0}^\infty (-1)^n x^{2n}, \quad f(x) = \int_0^x f'(t) \, dt = \sum_{n=0}^\infty \frac{(-1)^n}{2n+1} x^{2n+1}.
+
+\end{align}$$
+At $ x = 1 $:
+$$\begin{align}
+
+\frac{\pi}{4} = \arctan 1 = \sum_{n=0}^\infty \frac{(-1)^n}{2n+1}.
+
+\end{align}$$
+
+
+<h3>Convex Functions</h3>
+[Convexity]
+A function $ f $ on $ I $ is convex if:
+$$\begin{align}
+
+f\left(\frac{x+y}{2}\right) \leq \frac{f(x) + f(y)}{2}, \quad \forall x, y \in I.
+
+\end{align}$$
+
+
+
+If $ f $ is convex, then:
+$$\begin{align}
+
+f((1-t)x + ty) \leq (1-t)f(x) + tf(y), \quad \forall t \in (0, 1).
+
+\end{align}$$
+
+
+<h3>Criteria for Convexity</h3>
+
+If $ f $ is differentiable on $ I $, and $ f' $ is increasing, then $ f $ is convex.
+
+
+
+If $ f $ is twice differentiable on $ I $, and $ f'' \geq{} 0 $, then $ f $ is convex.
+
+
+
+<ol>
+<li>$ f(x) = e^x $ is convex on $ \mathbb{R} $ because $ f''(x) = e^x > 0 $.</li>
+<li>$ g(x) = \ln x $ is concave on $ (0, \infty) $ because $ g''(x) = -\frac{1}{x^2} < 0 $.</li>
+</ol>
+
+
+<h3>Inequalities</h3>
+[Jensen’s Inequality]
+If $ f $ is convex on $ I $, $ x_1, \ldots{}, x_n \in{} I $, $ t_1, \ldots{}, t_n \geq{} 0 $, and $ \sum_{i=1}^n t_i = 1 $, then:
+$$\begin{align}
+
+f\left(\sum_{i=1}^n t_i x_i\right) \leq \sum_{i=1}^n t_i f(x_i).
+
+\end{align}$$
+
+
+[Arithmetic-Geometric Means Inequality]
+If $ x_1, \ldots{}, x_n &gt; 0 $, $ t_1, \ldots{}, t_n &gt; 0 $, and $ \sum_{i=1}^n t_i = 1 $, then:
+$$\begin{align}
+
+\sum_{i=1}^n t_i x_i \geq \prod_{i=1}^n x_i^{t_i}.
+
+\end{align}$$
+
+
+[Special Case]
+If $ x_1, \ldots{}, x_n &gt; 0 $, then:
+$$\begin{align}
+
+\frac{x_1 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 \cdots x_n}.
+
+\end{align}$$
+
+<h2>Convexity, Inequalities, and Nowhere Differentiable Functions (Section 36)</h2>
+
+<h3>Jensen’s Inequality for Convex Functions</h3>
+[Jensen’s Inequality]
+Let $ f $ be a convex function on an interval $ I $, and let $ x_1, \ldots{}, x_n \in{} I $ with $ t_1, \ldots{}, t_n \geq{} 0 $ and $ \sum_{i=1}^n t_i = 1 $. Then:
+$$\begin{align}
+
+f\left(\sum_{i=1}^n t_i x_i\right) \leq \sum_{i=1}^n t_i f(x_i).
+
+\end{align}$$
+If $ f $ is concave, the inequality is reversed.
+
+
+<h3>Inequalities Between Means</h3>
+[Power Mean Inequality]
+Suppose $ r &gt; 1 $ and $ x_1, \ldots{}, x_n \geq{} 0 $. Then:
+$$\begin{align}
+
+\frac{x_1 + \cdots + x_n}{n} \leq \left(\frac{x_1^r + \cdots + x_n^r}{n}\right)^{1/r}.
+
+\end{align}$$
+If $ r = 2 $, this gives the inequality between arithmetic and quadratic means:
+$$\begin{align}
+
+\frac{x_1 + \cdots + x_n}{n} \leq \sqrt{\frac{x_1^2 + \cdots + x_n^2}{n}}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+On $ [0, \infty{}) $, $ f(x) = x^r $ is convex because $ f'(x) = rx^{r-1} $ is increasing. Apply Jensen’s Inequality with $ t_i = \frac{1}{n} $:
+$$\begin{align}
+
+\left(\frac{x_1 + \cdots + x_n}{n}\right)^r \leq \frac{x_1^r + \cdots + x_n^r}{n}.
+
+\end{align}$$
+Taking the $ r $-th root gives the result.
+<div class='qed'>∎</div></div><br>
+
+<h3>Arithmetic and Harmonic Means</h3>
+[Arithmetic-Harmonic Mean Inequality]
+If $ x_1, \ldots{}, x_n &gt; 0 $, then:
+$$\begin{align}
+
+\frac{x_1 + \cdots + x_n}{n} \geq \frac{n}{\frac{1}{x_1} + \cdots + \frac{1}{x_n}}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+Let $ g(x) = \frac{1}{x} $, which is convex on $ (0, \infty{}) $. Let $ y_i = \frac{1}{x_i} $. By Jensen’s Inequality with $ t_i = \frac{1}{n} $:
+$$\begin{align}
+
+\frac{1}{n} \sum_{i=1}^n g(y_i) = \frac{\frac{1}{x_1} + \cdots + \frac{1}{x_n}}{n} \geq g\left(\frac{1}{n} \sum_{i=1}^n y_i\right) = \frac{n}{x_1 + \cdots + x_n}.
+
+\end{align}$$
+<div class='qed'>∎</div></div><br>
+
+<h3>Nowhere Differentiable Functions</h3>
+
+There exists a bounded, uniformly continuous function $ f : \mathbb{R} \to{} \mathbb{R} $ that is differentiable nowhere.
+
+
+<div class='proof'><strong>Proof.</strong> [Sketch]
+Construct a $ 1 $-periodic function $ f(x) = \sum_{k=0}^\infty{} 8^{-k}s(64^k x) $, where $ s(x) $ is the sawtooth function:
+$$\begin{align}
+
+s(x) = \phi(x - \lfloor x \rfloor), \quad \phi(t) = \min\{t, 1-t\}.
+
+\end{align}$$
+<ol>
+<li>$ f $ is bounded and uniformly continuous by the Weierstrass $ M $-test.</li>
+<li>For any $ x, \delta > 0, A > 0 $, there exists $ y $ with $ |x - y| \leq \delta $ and $ |f(x) - f(y)| \geq A|x - y| $, showing $ f $ is nowhere differentiable.</li>
+</ol>
+<div class='qed'>∎</div></div><br>
+
+<h3>Infinite Primes and Divergence of Series</h3>
+
+Let $ p_1 &lt; p_2 &lt; \cdots{} $ be the increasing sequence of prime numbers. Then:
+$$\begin{align}
+
+\sum_{n=1}^\infty \frac{1}{p_n} \quad \text{diverges}.
+
+\end{align}$$
+
+
+<div class='proof'><strong>Proof.</strong>
+Assume $ \sum_{n=1}^\infty{} \frac{1}{p_n} $ converges. Let $ \alpha{} = \sum_{n=1}^\infty{} \frac{1}{p_{2n}^2} &lt; 1 $, and $ \beta{} = \sum_{n=K+1}^\infty{} \frac{1}{p_n} &lt; 1 - \alpha{} $ for some $ K $. Consider $ N $ such that $ N &gt; 2K/(1 - \alpha{} - \beta{}) $. Counting arguments on $ \{1, 2, \ldots{}, N\} $ lead to a contradiction.
+<div class='qed'>∎</div></div><br>
+    </div>
+</body>
+</html>
