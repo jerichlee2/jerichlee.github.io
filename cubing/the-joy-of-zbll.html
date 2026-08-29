@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Joy of ZBLL | Jerich Lee</title>
+    <meta
+      name="description"
+      content="A twelve-year journey to learning full ZBLL, from trainers and probability to algorithm decomposition, recognition, and the next mountains in speedcubing."
+    >
+    <link rel="canonical" href="https://jerichlee.com/cubing/the-joy-of-zbll.html">
+    <meta property="og:title" content="The Joy of ZBLL | Jerich Lee">
+    <meta
+      property="og:description"
+      content="A twelve-year journey to learning full ZBLL, from trainers and probability to algorithm decomposition, recognition, and the next mountains in speedcubing."
+    >
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://jerichlee.com/cubing/the-joy-of-zbll.html">
+    <meta
+      property="og:image"
+      content="https://jerichlee.com/assets/cubing/the-joy-of-zbll/algorithm-decomposition.png"
+    >
+    <meta
+      property="og:image:alt"
+      content="A ZBLL algorithm decomposed into general block manipulation and a commutator core."
+    >
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Joy of ZBLL | Jerich Lee">
+    <meta
+      name="twitter:description"
+      content="A twelve-year journey to learning full ZBLL, from trainers and probability to algorithm decomposition, recognition, and the next mountains in speedcubing."
+    >
+    <meta
+      name="twitter:image"
+      content="https://jerichlee.com/assets/cubing/the-joy-of-zbll/algorithm-decomposition.png"
+    >
+    <meta
+      name="twitter:image:alt"
+      content="A ZBLL algorithm decomposed into general block manipulation and a commutator core."
+    >
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=8">
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="../builds/index.html">builds</a>
+          <a href="../notes/index.html">notes</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../guitar/index.html">guitar</a>
+          <a href="../grappling/index.html">grappling</a>
+          <a href="../cubing/index.html">cubing</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article class="article">
+          <p class="article-meta">
+            <time datetime="2026-08-29">August 29, 2026</time>
+          </p>
+          <h1>The Joy of ZBLL</h1>
+
+          <div class="article-body">
+            <p>
+              I finished learning full ZBLL on Monday, August 24th, 2026. I
+              learned my first ZBLL algorithm in spring 2014. Holy cow, I&rsquo;m
+              just processing how long my journey has been. That&rsquo;s 12 years!
+            </p>
+
+            <p>
+              For those who don&rsquo;t know, ZBLL stands for
+              <strong>Zborowski&ndash;Bruchem Last Layer</strong>. It&rsquo;s a
+              speedcubing algorithm set that solves the entire last layer in one
+              step when its edges are already oriented. It&rsquo;s basically
+              completing the entire last layer in one step. And it&rsquo;s 493
+              algorithms in totality. From a google search in 2026, supposedly
+              only a few dozen people in the whole world know the full algset,
+              but I&rsquo;m suspecting that the actual number is in the hundreds,
+              and I wouldn&rsquo;t be surprised if more than a thousand people
+              in the whole world knew it by the end of this year. More on this
+              in a later paragraph.
+            </p>
+
+            <p>
+              Full ZBLL is like one of those really crazy challenges that people
+              whisper of. It&rsquo;s like the Mount Everest of speedcubing. It&rsquo;s
+              the biggest flex to show your cubing friends a slick ZBLL mid solve.
+              You feel incredibly powerful when you recognize and execute a ZBLL
+              in a real solve and you see tangible improvement in your times.
+            </p>
+
+            <p>
+              It&rsquo;s also an incredibly frustrating journey. I actually gave
+              up completely for a few years because I lost all motivation. I
+              even gave my cubes away. Like multiple times. Thank goodness a
+              really good cube nowadays costs only $9.
+            </p>
+
+            <p>
+              I used
+              <a href="https://tao-yu.github.io/Alg-Trainer/">Tao Yu&rsquo;s open source ZBLL trainer</a>
+              to learn the full algset. Man I love this site. ZBLL is split into
+              7 different subsets, and 6 of those 7 subsets are further split
+              into 6 subsubsets, with each of those subsubsets in the current
+              directory containing 12 algorithms.
+            </p>
+
+            <pre class="article-tree" aria-label="ZBLL subset hierarchy"><code>ZBLL
+├── T
+│   ├── T1
+│   │   ├── T1.1
+│   │   ├── T1.2
+│   │   └── ...
+│   ├── T2
+│   │   ├── T2.1
+│   │   ├── T2.2
+│   │   └── ...
+│   └── ...
+├── U
+│   ├── U1
+│   │   ├── U1.1
+│   │   ├── U1.2
+│   │   └── ...
+│   ├── U2
+│   │   ├── U2.1
+│   │   ├── U2.2
+│   │   └── ...
+│   └── ...
+├── L
+│   ├── L1
+│   │   ├── L1.1
+│   │   ├── L1.2
+│   │   └── ...
+│   ├── L2
+│   │   ├── L2.1
+│   │   ├── L2.2
+│   │   └── ...
+│   └── ...
+├── H
+│   ├── H1
+│   │   ├── H1.1
+│   │   ├── H1.2
+│   │   └── ...
+│   ├── H2
+│   │   ├── H2.1
+│   │   ├── H2.2
+│   │   └── ...
+│   └── ...
+├── Pi
+│   ├── Pi1
+│   │   ├── Pi1.1
+│   │   ├── Pi1.2
+│   │   └── ...
+│   ├── Pi2
+│   │   ├── Pi2.1
+│   │   ├── Pi2.2
+│   │   └── ...
+│   └── ...
+├── Sune
+│   ├── Sune1
+│   │   ├── Sune1.1
+│   │   ├── Sune1.2
+│   │   └── ...
+│   ├── Sune2
+│   │   ├── Sune2.1
+│   │   ├── Sune2.2
+│   │   └── ...
+│   └── ...
+└── Antisune
+    ├── Antisune1
+    │   ├── Antisune1.1
+    │   ├── Antisune1.2
+    │   └── ...
+    ├── Antisune2
+    │   ├── Antisune2.1
+    │   ├── Antisune2.2
+    │   └── ...
+    └── ...</code></pre>
+
+            <p>
+              In Tao&rsquo;s trainer, you can select any one or more of the
+              subsubsets, and you can specify whether you want to go in order
+              to ensure you sweep the entirety of the set, or randomly. One
+              trick I used that wasn&rsquo;t included in Tao&rsquo;s trainer was
+              invoking the Coupon&rsquo;s Collector&rsquo;s Problem (CCP) for random
+              training. The Coupon Collector&rsquo;s Problem (CCP) is a classic
+              probability problem: suppose there are <var>n</var> distinct
+              coupon types, and each purchase gives you one coupon chosen
+              uniformly at random, with repeats allowed. The problem asks how
+              many coupons you expect to collect before obtaining at least one
+              of every type.
+            </p>
+
+            <p>
+              The expected number of samples is
+              <var>nH</var><sub>n</sub>, where <var>H</var><sub>n</sub> is the
+              <var>n</var>-th harmonic number.
+            </p>
+
+            <p>
+              The intuition is that collecting the first few unique coupons is
+              easy, but completing the set becomes progressively harder because
+              an increasing fraction of new draws are duplicates.
+            </p>
+
+            <p>
+              Because I wanted to maximize my chance of sweeping the entirety
+              of a given set at the minimal amount of samples, I would ask
+              Codex to compute (CCP) with the size of my training set as the
+              input.
+            </p>
+
+            <div
+              class="article-equation"
+              role="math"
+              aria-label="The expected value of T sub n equals n H sub n, which equals n times the sum from k equals 1 to n of one over k"
+            >
+              <math display="block">
+                <mrow>
+                  <mi mathvariant="normal">E</mi>
+                  <mo>[</mo>
+                  <msub><mi>T</mi><mi>n</mi></msub>
+                  <mo>]</mo>
+                  <mo>=</mo>
+                  <mi>n</mi>
+                  <msub><mi>H</mi><mi>n</mi></msub>
+                  <mo>=</mo>
+                  <mi>n</mi>
+                  <munderover>
+                    <mo>&sum;</mo>
+                    <mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow>
+                    <mi>n</mi>
+                  </munderover>
+                  <mfrac><mn>1</mn><mi>k</mi></mfrac>
+                  <mo>.</mo>
+                </mrow>
+              </math>
+            </div>
+
+            <p>For a ZBLL subsubset with <var>n</var> = 12,</p>
+
+            <div
+              class="article-equation"
+              role="math"
+              aria-label="The expected value of T sub 12 equals 12 H sub 12, or 12 times the harmonic sum through one twelfth, which is approximately 37.24"
+            >
+              <math display="block">
+                <mtable columnalign="right center left" rowspacing="0.45em">
+                  <mtr>
+                    <mtd>
+                      <mrow>
+                        <mi mathvariant="normal">E</mi>
+                        <mo>[</mo>
+                        <msub><mi>T</mi><mn>12</mn></msub>
+                        <mo>]</mo>
+                      </mrow>
+                    </mtd>
+                    <mtd><mo>=</mo></mtd>
+                    <mtd><mrow><mn>12</mn><msub><mi>H</mi><mn>12</mn></msub></mrow></mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd></mtd>
+                    <mtd><mo>=</mo></mtd>
+                    <mtd>
+                      <mrow>
+                        <mn>12</mn>
+                        <mo>(</mo>
+                        <mn>1</mn>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>5</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>6</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>7</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>8</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>9</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>10</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>11</mn></mfrac>
+                        <mo>+</mo><mfrac><mn>1</mn><mn>12</mn></mfrac>
+                        <mo>)</mo>
+                      </mrow>
+                    </mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd></mtd>
+                    <mtd><mo>&approx;</mo></mtd>
+                    <mtd><mrow><mn>12</mn><mo>(</mo><mn>3.10321</mn><mo>)</mo></mrow></mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd></mtd>
+                    <mtd><mo>&approx;</mo></mtd>
+                    <mtd><mn>37.24</mn></mtd>
+                  </mtr>
+                </mtable>
+              </math>
+            </div>
+
+            <p>
+              Thus, when randomly training a 12-algorithm ZBLL subsubset, one
+              should expect to perform approximately
+            </p>
+
+            <div class="article-equation article-equation-result" role="math" aria-label="37">
+              <math display="block">
+                <menclose notation="box"><mn>37</mn></menclose>
+              </math>
+            </div>
+
+            <p>
+              cases before having encountered every algorithm at least once.
+            </p>
+
+            <p class="article-caveat">
+              <em>Caveat:</em> 37 is the expected number of samples required to
+              complete a sweep, not a guarantee. For example, approximately 63
+              random samples are required for a 95% probability of having
+              encountered all 12 algorithms at least once.
+            </p>
+
+            <p>
+              As I became more familiar with the subset, there were often times
+              when I didn&rsquo;t know just a handful (&lt; 10) of cases across
+              different subsets, so in this case I would use
+              <a href="https://bestsiteever.net/zbll/#/select">the legendary Roman Strakhov&rsquo;s trainer</a>,
+              where I could hand-select each case and then CCP those. To engage
+              spaced-repetition, I would just solve normally and purposely solve
+              the last layer cross to always force a ZBLL case.
+            </p>
+
+            <p>
+              I finished PLL in early 2015 when I went to my first ever
+              speedcubing competition. Learning PLL took me an entire year
+              because I had no bases&mdash;it&rsquo;s like trying to understand what
+              thermodynamic entropy is without first understanding abstract
+              mathematics&mdash;every PLL was hardcoded in my wiring. I first
+              became interested in learning full ZBLL when I went to U.S.
+              Nationals 2018, when I learned an interesting perspective from a
+              friend; he showed me that ZBLL algorithms can be
+              <em>decomposed</em>&mdash;i.e., broken down into more fundamental
+              building blocks, glued together with general block manipulation.
+              This way I no longer needed to learn algorithms solely via muscle
+              memory, but now using an already existing <em>alphabet</em> in my
+              vocabulary. Once I understood the language of abstract
+              mathematics, understanding thermodynamic entropy was unlocked
+              because I now had an underlying alphabet. Entropy wasn&rsquo;t
+              something that was special, or hardcoded in my engineering
+              toolkit&mdash;I no longer had to appeal to intuition, which was the
+              scaffold I had relied previously upon my entire life to understand
+              new concepts; if I focused on building a strong, general alphabet,
+              then the concepts followed.
+            </p>
+
+            <p>
+              Continuing upon this new perspective, I began viewing new
+              algorithms in terms of the following building blocks in no
+              particular order:
+            </p>
+
+            <ol>
+              <li>Commutators</li>
+              <li>Winter Variation algs</li>
+              <li>Triggers</li>
+              <li>Pseudo change-of-basis</li>
+              <li>General Block Manipulation</li>
+            </ol>
+
+            <figure class="article-figure is-wide">
+              <img
+                src="../assets/cubing/the-joy-of-zbll/algorithm-decomposition.png"
+                alt="A ZBLL algorithm decomposed into general block manipulation, a commutator core, and another general block manipulation"
+                width="1483"
+                height="707"
+                loading="lazy"
+              >
+              <figcaption>
+                A ZBLL algorithm decomposed into familiar building blocks.
+              </figcaption>
+            </figure>
+
+            <p>
+              The coolest thing is you can combine any of the above to generate
+              a ZBLL algorithm. Something to note is the combination of the
+              above building blocks to generate algorithms for a given last
+              layer edge-oriented case is non-trivial. That is, it&rsquo;s really
+              difficult to &ldquo;freestyle&rdquo; or come up with algorithms for ZBLL
+              cases on the fly, like how we can pronounce new words we&rsquo;ve
+              never seen before in English because we can just sound it out.
+              This is really similar to learning Chinese characters; every
+              Chinese character can be decomposed into simpler radicals, but
+              the total combination of the radicals to obtain the meaning of a
+              specific Chinese character can&rsquo;t be directly computed from the
+              radicals alone&mdash;you have to learn the spatial positioning of the
+              radical as well as the meaning of the total result. Learning ZBLL
+              is like learning 3D Chinese with a temporal component. (I guess
+              that makes it 4D Chinese?)
+            </p>
+
+            <p>
+              One of the great things about each ZBLL algorithm has its own
+              <em>personality</em>. One shift in my perspective which helped me
+              stay on track on my journey was attaching this sort of sentiment
+              to each case. Instead of treating each algorithm as just a
+              combination of the 5 building blocks aforementioned above, I began
+              to really understand the unique feeling and flow of the algorithm.
+              I began to pay deeper attention to the momentum shift of each
+              algorithm, listening carefully to the rhythm and cadence of how
+              these 5 building blocks were parsed during execution. This has
+              actually made solving much more enjoyable too. It&rsquo;s like every
+              time I get to last layer, a familiar friend appears and we
+              exchange a friendly gesture.
+            </p>
+
+            <p>
+              I wanted to go over some advice on approaching learning full ZBLL
+              for newer solvers. I&rsquo;m in no position to call myself a master of
+              ZBLL, and I may never get to that point in my life. But I do want
+              to point some things out that I wished I had paid more attention
+              to when I was younger so perhaps it doesn&rsquo;t take you 12 years to
+              learn.
+            </p>
+
+            <p>
+              I guess the first thing is to really understand the 5 building
+              blocks of ZBLL algorithms. alphabet and the grammar of the Rubik&rsquo;s
+              Cube. Grammar-wise, it&rsquo;s important to understand commutators and
+              conjugation deeply. I would recommend going over these two videos.
+              I remember watching both of these several times spread across many
+              years.
+            </p>
+
+            <ul>
+              <li>
+                <a href="https://youtu.be/7LTCEyrQk44?si=1AQdOj2wEJdwPPsd">Commutators and conjugation video one</a>
+              </li>
+              <li>
+                <a href="https://youtu.be/3WLb0VddFNg?si=98bU1kJzIF_PbXEb">Commutators and conjugation video two</a>
+              </li>
+            </ul>
+
+            <p>
+              Learning full 3-style for blindfolded solving was when these
+              grammatical concepts finally &ldquo;clicked&rdquo;. That in itself is
+              another mountain, but the cubing community&rsquo;s general consensus
+              is that full ZBLL is a larger mountain that full 3-style.
+            </p>
+
+            <p>
+              Learning
+              <a href="https://www.speedsolving.com/wiki/index.php/Winter_Variation">full Winter Variation (WV)</a>
+              is also important. There&rsquo;s only 27 of them, and I think it took
+              me a week to learn.
+            </p>
+
+            <p>
+              Pseudo-slotting is important too. This is when you misalign the D
+              layer and solve F2L pairs with respect to the current misaligned
+              layer. There are a lot of ZBLL cases where you change coordinate
+              frames to a new misaligned D layer, do one or more of the 5
+              building blocks, and switch back to the original reference frame.
+              Pseudo-slotting takes a lot of time to get used to, I will probably
+              do another write-up just on this.
+            </p>
+
+            <p>
+              There is this notion of scaffold and iterative learning that I
+              want to include as well. What I mean by scaffolding is this:
+              Learning just enough of the algorithm so that you can solve the
+              ZBLL case without an external source; i.e., everything is from the
+              dome. It may take you a minute to sit down and think about the
+              ordering of the 5 building blocks, but you can always achieve the
+              solved state. This is where the 5 building blocks come in handy.
+              For example, there are many times when I know every building block
+              of the algorithm but I may have forgotten the last block; well if
+              I understand WV, I just have a WV case left that I know. If I
+              understanding commutators, I can just perform the commutator. If
+              there&rsquo;s a large block left, I can just perform general block
+              manipulation to solve the last block.
+            </p>
+
+            <p>
+              By iterative learning I mean that the more and more you are able
+              to recognize and complete the entire ZBLL algorithm, it may have
+              taken you a minute to recognize and execute the first time you
+              learned the algorithm, but each time you see it again it may take
+              you 57 seconds. And then the next 52 seconds until you get to the
+              elite caliber (recognition and recognition in under 2 seconds).
+              But the most important thing is you need the scaffold first to
+              begin this iterative process.
+            </p>
+
+            <p>
+              Another piece (sorry!) that helped me was building my own
+              recognition schemes. Yes many exist on the web, but I truly
+              believe that inventing your own recognition schemes is the only
+              way to really stay motivated throughout the long journey. ZBLL
+              recognition gets so convoluted that even learning schemes from
+              other people gets intimidating fast. I often made up arbitrary
+              markers for algs, for example, this case:
+            </p>
+
+            <div class="article-image-pair">
+              <figure class="article-figure">
+                <img
+                  src="../assets/cubing/the-joy-of-zbll/recognition-case.png"
+                  alt="A ZBLL last-layer case shown on three visible faces of a cube"
+                  width="247"
+                  height="249"
+                  loading="lazy"
+                >
+                <figcaption>The unannotated ZBLL case.</figcaption>
+              </figure>
+
+              <figure class="article-figure">
+                <img
+                  src="../assets/cubing/the-joy-of-zbll/recognition-markers.png"
+                  alt="The same ZBLL case annotated with colored brackets, circles, and a diagonal arrow for recognition"
+                  width="688"
+                  height="692"
+                  loading="lazy"
+                >
+                <figcaption>My personal recognition markers.</figcaption>
+              </figure>
+            </div>
+
+            <p>
+              This is literally what I see in my head when I get this case. But
+              the main point is that someone else who knows this case may not
+              see it this way. If none of the brackets or arrows match the same
+              corresponding colors, then it is not this case. This is cool
+              because I am implicitly learning how to recognize each case,
+              i.e., I am collecting a set of perhaps initially dependent
+              (redundant) set of markers from my scaffold, but as I iteratively
+              train these cases, my list of markers is a decreasing discrete
+              function over time. (Just retaining the essential markers needed
+              to linearly map those markers to a unique ZBLL case) Perhaps more
+              rigorously, the list of markers may be optimal, but the way these
+              markers are mapped to the case can (and should!) be different
+              across different people. Once you begin to come up with your own
+              schemes, learning new algs become really enjoyable (and personal).
+            </p>
+
+            <p>
+              This makes me realize that if someone knows full ZBLL, then it is
+              implied that that person has a very deep understanding of the cube
+              relative to someone who only knows full PLL. It&rsquo;s a great
+              benchmark to cube understanding, and maybe even perhaps
+              understanding general twisty puzzles (or perhaps most abstractly,
+              Cayley graphs of a permutation group generated by face turns).
+            </p>
+
+            <p>
+              I want to close this essay on some next steps. As of August 29th,
+              2026, only a few hundred people in the world know full ZBLL. But I
+              forecast that thousands of people will know full ZB (ZBLL and
+              ZBLS, cross + 3) within the next 5 years. I recently got a Gan UI
+              16 smartcube, and training any algset is just so nice, especially
+              experiencing the pain of repeatedly slamming my middle finger on
+              the spacebar during drilling sessions. I do anticipate the arrival
+              of solvers that can predict cross + 3, the ZBLS and the ZBLL
+              within 15 seconds&mdash;1-looking the entire cube with global averages
+              of under 3 seconds&mdash;all within the next 10 years.
+            </p>
+
+            <p>
+              The ZBLL mountain is conquered, but the full ZB journey isn&rsquo;t
+              finished. The next mountains in my journey are cross + 3 in
+              inspection (so planning the cross and three F2L pairs within 15
+              seconds of inspection) and ZBLS. ZBLS isn&rsquo;t too bad, but it will
+              still take time. Cross + 3 may be a larger mountain that ZBLL,
+              maybe even by an order of magnitude.
+            </p>
+
+            <p>
+              But I do believe that once the ZBLL mountain is climbed, it does
+              imply the other mountains get climbed eventually. It&rsquo;s like how
+              once you get into med school, there&rsquo;s a pretty good shot that
+              you&rsquo;re gonna become a doctor. The journey after med school is of
+              course also super difficult and maybe even harder than getting
+              into med school, but the character and discipline you build
+              during the first mountain gives you the principles to climb other
+              mountains.
+            </p>
+
+            <p>
+              My ultimate goal is to globally average under 6 seconds using full
+              color neutral pseudo ZB without trying too hard. Meaning, my solves
+              become a physical manifestation of myself, my feelings, my
+              emotions&mdash;i.e., one with the cube. I can predict cross + 3 every
+              solve and flow right into the ZBLS and into the ZBLL fluidly. In
+              essence, I want to ~<em>vibecube</em>~ at the elite caliber.
+            </p>
+          </div>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

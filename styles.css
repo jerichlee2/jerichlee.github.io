@@ -314,6 +314,82 @@ li + li {
   overflow-y: hidden;
 }
 
+.article-tree {
+  overflow-x: auto;
+  margin: 1.25rem 0 1.5rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.article-equation {
+  overflow-x: auto;
+  margin: 1.15rem 0;
+  text-align: center;
+}
+
+.article-equation math[display="block"] {
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.article-equation-result {
+  font-size: 1.15rem;
+}
+
+.article-caveat {
+  border-left: 3px solid var(--line);
+  padding-left: 0.85rem;
+  color: var(--muted);
+}
+
+.article-figure {
+  margin: 1.4rem auto 1.6rem;
+  text-align: center;
+}
+
+.article-figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 34rem;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.article-figure.is-wide img {
+  width: 100%;
+  max-width: 44rem;
+}
+
+.article-figure figcaption {
+  max-width: 34rem;
+  margin: 0.45rem auto 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.article-image-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 15.5rem));
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.4rem auto 1.6rem;
+}
+
+.article-image-pair .article-figure {
+  margin: 0;
+}
+
+.article-image-pair .article-figure img {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
 .build-details {
   display: grid;
   gap: 0.35rem;
@@ -707,6 +783,10 @@ footer {
     flex-flow: row wrap;
     gap: 0.3rem 0.85rem;
     margin-top: 1rem;
+  }
+
+  .article-image-pair {
+    grid-template-columns: minmax(0, 15.5rem);
   }
 
   .project-list div,
