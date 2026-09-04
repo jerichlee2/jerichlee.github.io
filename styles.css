@@ -97,6 +97,10 @@ a:focus-visible {
   padding: 0.08rem 0;
 }
 
+.nav a:not([href$="builds/index.html"]) {
+  display: none;
+}
+
 .content {
   max-width: var(--measure);
 }
