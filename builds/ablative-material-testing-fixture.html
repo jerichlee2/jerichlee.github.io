@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ablative Material Testing Fixture | Jerich Lee</title>
-    <meta name="description" content="Design and validation of a controlled torch-based ablative material test rig.">
+    <meta name="description" content="Torch-based ablative testing with a graphite reference and a 1D inverse-conduction model for estimating effective heat flux.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -12,6 +12,31 @@
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
     <link rel="stylesheet" href="../styles.css?v=7">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+      .thermal-table-scroll {
+        overflow-x: auto;
+        margin: 1.2rem 0;
+      }
+      .thermal-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+      .thermal-table caption {
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+      .thermal-table th,
+      .thermal-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 0.6rem 0.65rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      .thermal-table thead th {
+        border-top: 1px solid var(--line);
+      }
+    </style>
   </head>
   <body>
     <div class="site-shell">
@@ -38,20 +63,148 @@
           <p class="article-meta">Builds · 2026</p>
           <h1>Ablative Material Testing Fixture</h1>
 
-          <figure class="build-hero">
-            <img src="../assets/builds/ablative-material-testing-fixture/image-02.png" alt="Ablative Material Testing Fixture">
+          <figure class="article-figure">
+            <a href="../assets/builds/ablative-material-testing-fixture/test-rig.jpg">
+              <img src="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" alt="Ablative testing rig with a fixed torch, remotely indexed specimen holder, insulation, and thermocouple wiring" width="1200" height="1800" fetchpriority="high">
+            </a>
+            <figcaption>The torch-based test rig, with indexed specimens, insulation, and thermocouple instrumentation.</figcaption>
           </figure>
           <div class="article-body">
-            <p>This project focused on the design, iteration, and validation of a laboratory-scale ablative material testing setup for the UIUC Liquid Rocket Initiative (LRI). The goal was to enable repeatable, controlled heat-flux testing of candidate ablative materials while minimizing parasitic heat losses and measurement artifacts.</p><p>The final system integrates a fixed torch with a steel sliding-rail mechanism that allows rapid switching between a graphite reference sample and ablative specimens. Emphasis was placed on thermocouple placement, fixture rigidity, heat isolation, and experimental repeatability, informed through multiple design reviews and test iterations.</p>
+            <p>This project combines mechanical design, instrumentation, and thermal analysis for a laboratory-scale ablative testing setup at the UIUC Liquid Rocket Initiative (LRI). A fixed torch and remotely indexed specimen holder allow a graphite reference and ChamberSafe ablative specimens to be exposed at a common test position. Fixture rigidity, thermal isolation, and thermocouple placement shape both the experiment and its interpretation.</p>
+            <p>Without an optical pyrometer, the thermal question became an inverse problem: what effective heat flux would produce the graphite's measured back-face temperature history? The campaign report uses a 1D transient-conduction model to estimate that flux, compare torch settings, and calculate graphite-equivalent thermal doses for the paired ablator tests.</p>
           </div>
 
           <dl class="build-details">
               <div><dt>Documentation</dt><dd><a href="https://docs.google.com/presentation/d/1jl3m2g4kNlp3goj9nA_iyftrtbuAuW5E/edit?usp=sharing&amp;ouid=116749996814235097494&amp;rtpof=true&amp;sd=true" target="_blank">View documentation</a></dd></div>
               <div><dt>Group</dt><dd>UIUC Liquid Rocket Initiative (LRI)</dd></div>
               <div><dt>Role</dt><dd>Mechanical Design &amp; Experimental Systems Engineer</dd></div>
-              <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Heat Transfer, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
+              <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Inverse Heat Conduction, Crank–Nicolson, Parameter Estimation, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
               <div><dt>Year</dt><dd>2026</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="ablative-thermal-model-title">
+            <h2 id="ablative-thermal-model-title">1D transient heat-conduction model</h2>
+            <div class="article-body">
+              <p>The graphite reference acts as a transient conduction calorimeter. The forward model predicts its back-face temperature from an imposed hot-face heat flux; the inverse calculation uses the measured temperature to estimate the flux instead. Here the unknown is one constant pulse amplitude, \(q_0\), not an arbitrary heat-flux history or an unknown material property.</p>
+              <p>The report represents the graphite as a slab of thickness \(L = 0.02362\ \mathrm{m}\) (0.93 in), with constant properties \(k = 130\ \mathrm{W/(m\,K)}\), \(\rho = 1850\ \mathrm{kg/m^3}\), and \(c = 700\ \mathrm{J/(kg\,K)}\). Heat flows through the thickness from \(x=0\) to the back-face thermocouple at \(x=L\):</p>
+              <div class="article-equation">
+                \[
+                \rho c\,\frac{\partial T}{\partial t}
+                = k\,\frac{\partial^2 T}{\partial x^2},
+                \qquad 0 \leq x \leq L
+                \]
+              </div>
+              <p>The hot face receives a nominal three-second rectangular heat pulse. Silica cloth covers the back-face sensor region, motivating an adiabatic back boundary over the early fitting window. The initial temperature is uniform:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                -k\,\frac{\partial T}{\partial x}(0,t) &amp;= q(t) \\
+                -k\,\frac{\partial T}{\partial x}(L,t) &amp;= 0 \\
+                T(x,0) &amp;= T_0
+                \end{aligned}
+                \]
+              </div>
+              <div class="article-equation">
+                \[
+                q(t)=
+                \begin{cases}
+                q_0, &amp; 0 &lt; t &lt; 3\ \mathrm{s},\\
+                0, &amp; t \geq 3\ \mathrm{s}.
+                \end{cases}
+                \]
+              </div>
+              <p>A useful hand check is the diffusion time: \(\alpha=k/(\rho c)\approx 1.00\times10^{-4}\ \mathrm{m^2/s}\), so \(L^2/\alpha\approx5.6\ \mathrm{s}\). The three-second exposure is therefore transient; a steady-state temperature gradient would not describe this experiment.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="ablative-inverse-fit-title">
+            <h2 id="ablative-inverse-fit-title">Inferring heat flux from back-face temperature</h2>
+            <div class="article-body">
+              <p>The forward calculation uses Crank–Nicolson time integration, 101 spatial nodes, and a 0.01 s time step. Ghost-node relations impose the heat-flux boundary conditions, leaving a tridiagonal linear system at each time step.</p>
+              <p>Measured temperatures are baseline-subtracted before fitting. The report applies the TC-2 calibration coefficients, \(T_{\mathrm{corr}}=G T_{\mathrm{raw}}+b\), with \(G=1.0129\) and \(b=-0.6550\,^\circ\mathrm{C}\). Subtracting the pre-event baseline cancels the offset, so \(\Delta T_{\mathrm{corr}}=G\Delta T_{\mathrm{raw}}\).</p>
+              <p>The fitted flux minimizes squared error between the modeled and measured back-face rise over the first 3.5 s after detected onset:</p>
+              <div class="article-equation">
+                \[
+                \widehat q_0=\operatorname*{arg\,min}_{q_0}
+                \sum_{i\in W}
+                \left[
+                \Delta T_{\mathrm{model}}(t_i;q_0)
+                -\Delta T_{\mathrm{meas}}(t_i)
+                \right]^2
+                \]
+              </div>
+              <p>Because the constant-property model is linear in flux amplitude, only one reference simulation is needed. Let \(\Delta T_{\mathrm{ref}}\) be the response to \(q_{\mathrm{ref}}=1\ \mathrm{MW/m^2}\). Scaling that response gives a closed-form estimate, with the reference flux retained explicitly for consistent units:</p>
+              <div class="article-equation">
+                \[
+                \Delta T_{\mathrm{model}}(t;q_0)
+                =\frac{q_0}{q_{\mathrm{ref}}}\,\Delta T_{\mathrm{ref}}(t)
+                \]
+              </div>
+              <div class="article-equation">
+                \[
+                \widehat q_0=q_{\mathrm{ref}}\,
+                \frac{\displaystyle\sum_{i\in W}
+                \Delta T_{\mathrm{ref}}(t_i)\,\Delta T_{\mathrm{meas}}(t_i)}
+                {\displaystyle\sum_{i\in W}\Delta T_{\mathrm{ref}}(t_i)^2}
+                \]
+              </div>
+              <p>The flux history is restricted to a single pulse amplitude; the report does not reconstruct a general time-varying flux or apply an explicit regularization penalty. It also does not report a confidence interval for the fitted flux.</p>
+              <p class="article-caveat">“Onset” is detected from the back-face signal crossing 0.5 °C above baseline for five consecutive logged samples—not from an external flame-on trigger. Thermal lag therefore affects the time alignment. The logger's roughly 91–167 Hz polling rates also exceed the few-Hz rate of distinct temperature updates, so adjacent samples are not all new independent measurements.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="ablative-thermal-results-title">
+            <h2 id="ablative-thermal-results-title">Calibration results and thermal dose</h2>
+            <div class="article-body">
+              <p>The two graphite fits infer effective net inward heat fluxes of 0.2592 and 0.5844 MW/m². The hot torch condition is about 2.25 times the baseline condition under this model. These are inferred reference-specimen fluxes, not directly measured incident torch fluxes.</p>
+            </div>
+            <div class="thermal-table-scroll" role="region" aria-label="Graphite inverse-fit and paired dose results" tabindex="0">
+              <table class="thermal-table">
+                <caption>Three-second graphite checks and paired ChamberSafe exposures</caption>
+                <thead>
+                  <tr><th scope="col">Condition</th><th scope="col">Inferred flux (MW/m²)</th><th scope="col">Fit RMSE (°C)</th><th scope="col">Ablator exposure (s)</th><th scope="col">Estimated dose (MJ/m²)</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Baseline</th><td>0.2592</td><td>1.02</td><td>20</td><td>5.18</td></tr>
+                  <tr><th scope="row">Hot</th><td>0.5844</td><td>3.02</td><td>10</td><td>5.84</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png">
+                <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png" alt="Baseline graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.259 MW per square meter" width="1920" height="1440" loading="lazy">
+              </a>
+              <figcaption>Baseline graphite inverse fit, reproduced from Figure 3 of the campaign report. Time is aligned to detected onset; the nominal pulse ends at 3 s.</figcaption>
+            </figure>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png">
+                <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png" alt="Hot-condition graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.584 MW per square meter" width="1920" height="1440" loading="lazy">
+              </a>
+              <figcaption>Hot-condition inverse fit, reproduced from Figure 4. Its larger 3.02 °C fit error also shows the mismatch between the simplified model and measured response.</figcaption>
+            </figure>
+            <div class="article-body">
+              <p>For each specimen's own exposure window, thermal dose is energy per unit area. Holding the graphite-fitted flux amplitude constant throughout that window gives the proxy:</p>
+              <div class="article-equation">
+                \[
+                Q_{\mathrm{eq}}=\int_0^{t_{\mathrm{exp}}}q_{\mathrm{assumed}}(t)\,dt
+                \approx \widehat q_0\,t_{\mathrm{exp}}
+                \]
+              </div>
+              <p>Applying each graphite-derived flux to its paired ChamberSafe exposure gives about 5.18 MJ/m² for 20 s at baseline and 5.84 MJ/m² for 10 s at the hot setting. The estimated doses differ by about 13%, despite the twofold difference in exposure time.</p>
+              <p class="article-caveat">These are graphite-equivalent dose estimates for comparing the paired runs. Transferring the reference flux to ChamberSafe is a modeling assumption, not an independent measurement of the heat absorbed by the ablating material.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="ablative-thermal-limits-title">
+            <h2 id="ablative-thermal-limits-title">Limits and next measurements</h2>
+            <div class="article-body">
+              <p>The ChamberSafe back-face rises were only 0.317 °C and 0.241 °C—close to the 0.0625 °C readout increments and noise floor. A small signal can reflect insulation, sensor depth and thermal lag, or poor sensor coupling. It does not by itself establish ablation performance.</p>
+              <p>The inferred flux is also sensitive to graphite properties and the assumed one-dimensional heat flow. The report's heat-capacity sensitivity test shifts inferred flux by approximately −27% / +33% for a ±20% change in heat capacity. A localized torch footprint can introduce lateral spreading that the slab model omits; in that case, \(q_0\) is best treated as an effective severity index.</p>
+              <p>The analyzed dataset contains two graphite conditions and two ablator exposures, not a repeatability study. Independent event timing, repeated reference runs, and post-test recession measurements are needed to establish uncertainty and a recession-versus-dose relationship. Those measurements are not reported as completed here.</p>
+              <p>The inferred 0.26–0.58 MW/m² fluxes are below the report's separate, several-MW/m² engine estimate. Matching a single estimated dose would not by itself establish engine-representative test conditions.</p>
+              <p class="article-caveat">Source: UIUC LRI, <cite>Torch-Based Ablative Characterization Campaign Report: Graphite Calorimeter Inversion and ChamberSafe Back-Face Measurements</cite> (March 1, 2026), pp. 3–15. This page summarizes the report; it is not an independent rerun of the raw-data analysis.</p>
+            </div>
+          </section>
+
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
             <h2 id="ablative-material-testing-fixture-initial-design-title">Initial Design</h2>
             <div class="build-inline-gallery is-single">
@@ -165,12 +318,13 @@ N_{\max}
             <h2 id="ablative-material-testing-fixture-outcome-title">Outcome</h2>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-10.jpg" alt="Final ablative testing setup enabling controlled, repeatable heat-flux experiments with minimized parasitic losses.">
-                <figcaption>Final ablative testing setup enabling controlled, repeatable heat-flux experiments with minimized parasitic losses.</figcaption>
+                <img src="../assets/builds/ablative-material-testing-fixture/image-10.jpg" alt="Final torch-based setup for graphite-reference and ChamberSafe testing">
+                <figcaption>Final torch-based setup for graphite-reference and ChamberSafe testing.</figcaption>
               </figure>
             </div>
             <div class="article-body">
-              <p>The final fixture enabled consistent, repeatable ablative testing under controlled torch heating conditions. The sliding-rail system allowed rapid transitions between reference and test samples while maintaining identical thermal boundary conditions. Improved thermocouple placement and fixture isolation significantly reduced measurement error caused by heat sinking.</p><p>This work established a reliable experimental baseline for future ablative material characterization within LRI and informed subsequent heat-flux estimation using analytical models such as the Bartz equation. The system is now suitable for comparative testing of candidate materials under rocket-relevant thermal loads.</p>
+              <p>The fixture brought together controlled specimen positioning, a fixed torch, insulation, and back-face thermocouple logging for the graphite-reference and ChamberSafe campaign. The mechanical design work and thermal model address different parts of the same problem: positioning the sample consistently, then interpreting the temperature response.</p>
+              <p>The report establishes a model-based comparison of the two torch conditions and estimated doses for the paired ablator runs. It does not establish engine-condition qualification or a recession model. Repeated graphite checks, independent timing, and post-test recession measurements remain the next steps.</p>
             </div>
           </section>
           <section class="build-section build-video-section" aria-labelledby="demonstration-title">
