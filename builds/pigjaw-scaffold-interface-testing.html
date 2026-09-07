@@ -85,12 +85,74 @@
           </dl>
 
           <section class="build-section" aria-labelledby="pigjaw-geometry-title">
-            <h2 id="pigjaw-geometry-title">Geometry and hand calculations</h2>
+            <h2 id="pigjaw-geometry-title">Geometry and loading</h2>
             <div class="article-body">
               <p>The supplied solid has a 120 × 140 × 30 mm envelope, but only a 15 mm central web above the underside relief. A 25 mm opening is surrounded by a slotted annulus with two narrow connections, each represented by a minimum ligament width of about 6.08 mm. Using the overall 30 mm height as the bending thickness would overestimate the rectangular-section bending stiffness by a factor of eight.</p>
-              <p>The first calculation replaces the deck with a simply supported 60 mm bridge of reduced width, 75.7 mm. With an assumed PLA modulus of 2.0 GPa, bending plus transverse shear gives 31.77 µm of global deflection at 250 N. Separate local checks examine contact pressure, ligament shear, and sensitivity to the effective bending arm. The bridge does not resolve local annulus and ligament deformation, so its result alone cannot qualify the slotted fixture.</p>
               <p>The 250 N force is a literature-context benchmark, not a measured porcine test load. The 50 µm motion budget and PLA screening properties are analysis assumptions. Rev B also treats 500 N and 1000 N as sensitivity cases.</p>
               <p>A separate fit issue remains: a nominal 25 mm implant in a 25 mm opening has zero radial clearance. A provisional 0.7 mm radial-clearance starting point would imply a 26.4 mm opening before tolerances, but it is not a validated requirement for this porcine construct. Any enlargement also reduces the annulus width and needs a new structural check.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="pigjaw-handcalcs-title">
+            <h2 id="pigjaw-handcalcs-title">Simplified hand calculations</h2>
+            <div class="article-body">
+              <p>The starting point is an equivalent bridge: replace the deck with a simply supported beam carrying a central load of 250 N. Assume the bottom lands are backed by a rigid base, with effective supports 60 mm apart and a 15 mm web thickness. Removing the full 44.3 mm slot envelope from the 120 mm width gives a reduced beam width of 75.7 mm.</p>
+              <figure class="article-figure is-wide">
+                <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-simplified-bridge.png">
+                  <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-simplified-bridge.png" alt="Equivalent simply supported bridge with a central downward force F, upward reactions F/2 at both supports, a 60 mm span, and a 15 mm thickness" width="1180" height="390" loading="lazy">
+                </a>
+                <figcaption>Equivalent bridge and free-body diagram from Rev B, page 5. This is a simplified global model, not a literal beam in the CAD.</figcaption>
+              </figure>
+
+              <h3>1. Section properties and loading</h3>
+              <p>For the reduced rectangular section, the cross-sectional area and second moment of area are:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                A_g &amp;= b_g h = 1135.5\ \mathrm{mm^2} \\
+                I_g &amp;= \frac{b_g h^3}{12} = 21290.6\ \mathrm{mm^4}
+                \end{aligned}
+                \]
+              </div>
+              <p>The centered load splits equally between the supports. The maximum bending moment occurs at midspan:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                R_A = R_B &amp;= \frac{F}{2} = 125\ \mathrm{N} \\
+                M_{\max} &amp;= \frac{FL}{4} = 3750\ \mathrm{N\,mm}
+                \end{aligned}
+                \]
+              </div>
+              <p>The corresponding nominal global bending stress is:</p>
+              <div class="article-equation">
+                \[
+                \sigma_{g,\max} = \frac{M_{\max}(h/2)}{I_g}
+                = 1.321\ \mathrm{MPa}
+                \]
+              </div>
+
+              <h3>2. Bending plus shear deflection</h3>
+              <p>Using the assumed PLA properties \(E = 2000\ \mathrm{MPa}\) and \(\nu = 0.35\), the shear modulus is \(G = E/[2(1+\nu)] = 740.7\ \mathrm{MPa}\). The rectangular-section shear correction is \(\kappa = 5/6\). Midspan movement includes both bending and transverse shear:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                \delta_b &amp;= \frac{FL^3}{48EI_g} = 0.02642\ \mathrm{mm} \\
+                \delta_s &amp;= \frac{FL}{4\kappa GA_g} = 0.00535\ \mathrm{mm}
+                \end{aligned}
+                \]
+              </div>
+              <div class="article-equation article-equation-result">
+                \[
+                \boxed{\delta_g = \delta_b + \delta_s = 31.77\ \mathrm{\mu m}}
+                \]
+              </div>
+              <p>Shear contributes about 17% of the total, so it is worth retaining for this short bridge with \(L/h = 4\). The estimate is below the chosen 50 µm motion budget, but it describes only the equivalent bridge—not all the motion in the slotted fixture.</p>
+
+              <h3>3. What the bridge leaves out</h3>
+              <p>Separate local checks assume the load enters the annulus and divides equally between its two 6.08 mm ligaments. At 250 N, the average contact pressure is 0.490 MPa and the average ligament shear stress is 1.371 MPa. Applying a rectangular-section peak factor of 1.5 and an assumed concentration multiplier of 2 gives a shear screening value of 4.113 MPa.</p>
+              <p>Local bending is more sensitive to the unknown load path: effective moment arms of 5, 10, and 15 mm give screened stresses of 5.48, 10.97, and 16.45 MPa, respectively, with an assumed concentration multiplier of 2. These are sensitivity cases, not measured moment arms.</p>
+              <p class="article-caveat">The bridge does not resolve annulus bending, ligament deformation, or actual contact load sharing. Its reduced width does not guarantee an upper bound on real fixture motion, and passing this calculation alone does not qualify the fixture. The full PLA model below predicts 131.37 µm of maximum downward annular motion at the same 250 N load.</p>
+              <p><a href="../assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_B.pdf#page=5">See pages 5–6 of Rev B</a> for the complete global and local hand calculations.</p>
             </div>
           </section>
 
