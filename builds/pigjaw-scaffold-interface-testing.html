@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pigjaw Scaffold–Bone Interface Mechanical Testing | Jerich Lee</title>
-    <meta name="description" content="Pigjaw push-out fixture: retrospective hand calculations and ANSYS PLA analysis. Rev B predicts 0.131 mm annular motion at an assumed 250 N, above a chosen 0.050 mm target.">
+    <meta name="description" content="PLA fixture analysis and the metal Pigjaw push-out fixture I built. Rev B predicts 0.131 mm annular motion at an assumed 250 N, above a chosen 0.050 mm target.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -60,26 +60,28 @@
 
       <main class="content">
         <article>
-          <p class="article-meta">Builds · 2025 project · Retrospective analysis, September 2026</p>
+          <p class="article-meta">Builds · 2025 project · Analysis updated September 2026</p>
           <h1>Pigjaw Scaffold–Bone Interface Mechanical Testing</h1>
 
           <figure class="article-figure is-wide">
-            <img src="../assets/builds/pigjaw-scaffold-interface-testing/cover.png" alt="Earlier finite element assembly view of the Pigjaw push-out fixture">
-            <figcaption>Earlier project model. The Rev B analysis below isolates the fixture body and uses a separate PLA model in ANSYS Mechanical.</figcaption>
+            <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png">
+              <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" alt="ANSYS PLA fixture analysis showing maximum downward annular movement of 0.13137 mm" width="1881" height="1053" fetchpriority="high">
+            </a>
+            <figcaption>PLA fixture FEA: final M2 directional deformation of the loaded annulus at an assumed 250 N load, in mm. Open the image for the full-resolution result.</figcaption>
           </figure>
           <div class="article-body">
-            <p>This project explores fixtures for push-out testing at the interface between a biodegradable scaffold and porcine jawbone. During the original 2025 project, we set aside a fixture concept because of concerns that a printed PLA load path might break. In September 2026, I revisited the unused concept through hand calculations and finite element analysis of the supplied reference CAD.</p>
-            <p>Revision B brings those calculations together with the PLA results from ANSYS Mechanical. Under an assumed 250 N annular load, the final model predicts 0.13137 mm of maximum downward annular movement, about 2.63 times the chosen 0.050 mm target. The clearest finding is a fixture-compliance concern under the modeled conditions.</p>
-            <p class="article-caveat">The analysis is retrospective: it did not drive the 2025 decision. It does not establish observed breakage, a safe operating load, or experimental validation of the fixture.</p>
+            <p>This project explores fixtures for push-out testing at the interface between a biodegradable scaffold and porcine jawbone. Our PLA analysis informed my decision to build the metal push-out fixture shown below. The work connects fixture mechanics and material selection with the practical design of the test assembly.</p>
+            <p>Revision B brings the hand calculations together with the PLA results from ANSYS Mechanical. Under an assumed 250 N annular load, the final model predicts 0.13137 mm of maximum downward annular movement, about 2.63 times the chosen 0.050 mm target. The clearest finding is a fixture-compliance concern under the modeled conditions.</p>
+            <p class="article-caveat">The numerical results identify a compliance concern under the stated assumptions. They do not establish observed breakage, a safe operating load, or experimental validation of the fixture.</p>
           </div>
 
           <dl class="build-details">
               <div><dt>Calculation note</dt><dd><a href="../assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_B.pdf">Read Rev B (PDF, 16 pages)</a> · September 7, 2026</dd></div>
-              <div><dt>Project archive</dt><dd><a href="https://docs.google.com/presentation/d/16ZTf0txtsc4dDEmPQllnGm7Gk8GTumP-/edit?usp=sharing&amp;ouid=116749996814235097494&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Original project documentation</a></dd></div>
+              <div><dt>Documentation</dt><dd><a href="https://docs.google.com/presentation/d/16ZTf0txtsc4dDEmPQllnGm7Gk8GTumP-/edit?usp=sharing&amp;ouid=116749996814235097494&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Project documentation</a></dd></div>
               <div><dt>Group</dt><dd>Tissue and Biomechanics Laboratory</dd></div>
               <div><dt>Analysis focus</dt><dd>Fixture mechanics, material screening, hand calculations, ANSYS Mechanical FEA, contact assumptions, mesh sensitivity</dd></div>
               <div><dt>Geometry</dt><dd>Supplied reference CAD; not a claim of original CAD authorship or verified as-built dimensions</dd></div>
-              <div><dt>Timeline</dt><dd>2025 project; September 6–7, 2026 retrospective analysis</dd></div>
+              <div><dt>Timeline</dt><dd>2025 project; calculation note updated September 7, 2026</dd></div>
           </dl>
 
           <section class="build-section" aria-labelledby="pigjaw-geometry-title">
@@ -93,9 +95,9 @@
           </section>
 
           <section class="build-section" aria-labelledby="pigjaw-model-title">
-            <h2 id="pigjaw-model-title">Retrospective PLA model</h2>
+            <h2 id="pigjaw-model-title">PLA fixture model</h2>
             <div class="article-body">
-              <p>The follow-up uses ANSYS Mechanical 2025 R2 and a single isotropic, linear-elastic PLA fixture body with E = 2000 MPa and ν = 0.35. A downward pressure of 0.4901 MPa on the 510.1083 mm² top annulus supplies approximately 250 N total. Bone, scaffold, and interface failure are not modeled.</p>
+              <p>The analysis uses ANSYS Mechanical 2025 R2 and a single isotropic, linear-elastic PLA fixture body with E = 2000 MPa and ν = 0.35. A downward pressure of 0.4901 MPa on the 510.1083 mm² top annulus supplies approximately 250 N total. Bone, scaffold, and interface failure are not modeled.</p>
               <p>The two lowest bottom lands have compression-only plate support. Four 16 mm outer-diameter washer patches restrain vertical motion while allowing in-plane movement; two additional locators remove in-plane rigid motion. These idealized hold-downs include no bolt preload, washer bending, or bolt stretch. Contact uses a manual normal-stiffness factor of 10, and large deflection is off.</p>
               <p>Rev B records the setup and supplied result screenshots; it is not an independent solver rerun. The final solver project and complete logs were not included in that record.</p>
             </div>
@@ -120,12 +122,6 @@
               <p>The final annular Y-displacements range from −0.13137 to −0.054935 mm. Both are downward; the most negative value defines the maximum downward movement. It exceeds the target by 81.37 µm and is about 4.14 times the same-force bridge estimate. The two models have different geometry, restraints, and response measures, so that ratio is not a calibrated correction factor.</p>
               <p>Annular fixture motion is not automatically specimen displacement, interface strain, or crosshead measurement error. Relating it to measurement accuracy requires the actual specimen contact and displacement-measurement arrangement.</p>
             </div>
-            <figure class="article-figure is-wide">
-              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png">
-                <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" alt="ANSYS M2 annular Y-displacement result with a minimum of minus 0.13137 mm" width="1881" height="1053" loading="lazy">
-              </a>
-              <figcaption>Rev B, page 10: final M2 directional deformation of the loaded annulus, in mm. Open the image for the full-resolution result.</figcaption>
-            </figure>
           </section>
 
           <section class="build-section" aria-labelledby="pigjaw-checks-title">
@@ -152,21 +148,21 @@
             </div>
           </section>
 
-          <section class="build-section" aria-labelledby="pigjaw-archive-title">
-            <h2 id="pigjaw-archive-title">Original project images</h2>
-            <p>These images are retained from the earlier project archive. They are separate from the 2026 PLA analysis and do not establish that the exact Rev B geometry was manufactured or tested.</p>
+          <section class="build-section" aria-labelledby="pigjaw-fixture-title">
+            <h2 id="pigjaw-fixture-title">The fixture I built</h2>
+            <p>Following the results of our PLA analysis, I built this metal fixture for scaffold–bone push-out testing. The images show the push-out plate and CAD assembly, along with the adapter and threaded pusher connection.</p>
             <figure class="article-figure is-wide">
-              <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-03.png" alt="Archived Pigjaw push-out plate photograph and CAD assembly" loading="lazy">
-              <figcaption>Push-out plate and assembly views from the original project archive.</figcaption>
+              <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-03.png" alt="Metal Pigjaw push-out fixture I built and its CAD assembly" loading="lazy">
+              <figcaption>The metal push-out fixture I built, shown alongside its CAD assembly.</figcaption>
             </figure>
             <div class="article-image-pair">
               <figure class="article-figure">
-                <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-02.png" alt="Archived section view of the threaded pusher connection" loading="lazy">
+                <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-02.png" alt="Section view of the threaded pusher connection" loading="lazy">
                 <figcaption>Section view of the pusher connection.</figcaption>
               </figure>
               <figure class="article-figure">
-                <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-04.png" alt="Archived photograph of a cylindrical adapter and threaded rod" loading="lazy">
-                <figcaption>Adapter and threaded rod from the project archive.</figcaption>
+                <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-04.png" alt="Cylindrical adapter and threaded rod for the push-out fixture" loading="lazy">
+                <figcaption>Adapter and threaded rod for the push-out fixture.</figcaption>
               </figure>
             </div>
           </section>
