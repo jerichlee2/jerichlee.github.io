@@ -268,6 +268,26 @@ li + li {
   object-fit: cover;
 }
 
+.build-entry .fixture-thumbnail {
+  position: relative;
+  width: 8rem;
+  height: 6rem;
+  overflow: hidden;
+  background: #22272a;
+}
+
+.build-entry .fixture-thumbnail img {
+  /* Keep source pixels x=15..452, y=10..390 from the 462 × 402 screenshot. */
+  position: absolute;
+  top: -2.6316%;
+  left: 50%;
+  width: auto;
+  max-width: none;
+  height: 105.7895%;
+  transform: translateX(-50%);
+  clip-path: inset(2.4876% 2.1645% 2.9851% 3.2468%);
+}
+
 .build-entry span,
 .build-entry small,
 .build-entry em {
