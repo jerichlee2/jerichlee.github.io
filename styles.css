@@ -268,7 +268,8 @@ li + li {
   object-fit: cover;
 }
 
-.build-entry .fixture-thumbnail {
+.build-entry .fixture-thumbnail,
+.article-figure .fixture-thumbnail {
   position: relative;
   width: 8rem;
   height: 6rem;
@@ -276,7 +277,16 @@ li + li {
   background: #22272a;
 }
 
-.build-entry .fixture-thumbnail img {
+.article-figure .fixture-thumbnail {
+  display: block;
+  width: min(100%, 30rem);
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+}
+
+.build-entry .fixture-thumbnail img,
+.article-figure.is-wide .fixture-thumbnail img {
   /* Keep source pixels x=15..452, y=10..390 from the 462 × 402 screenshot. */
   position: absolute;
   top: -2.6316%;

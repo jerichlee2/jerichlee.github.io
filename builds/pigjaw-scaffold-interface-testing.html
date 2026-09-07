@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=7">
+    <link rel="stylesheet" href="../styles.css?v=9">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <style>
       .analysis-table-scroll {
@@ -64,13 +64,13 @@
           <h1>Pigjaw Scaffold–Bone Interface Mechanical Testing</h1>
 
           <figure class="article-figure is-wide">
-            <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png">
-              <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" alt="ANSYS PLA fixture analysis showing maximum downward annular movement of 0.13137 mm" width="1881" height="1053" fetchpriority="high">
+            <a class="fixture-thumbnail" href="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png">
+              <img src="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" alt="Metal Pigjaw push-out fixture with a circular center opening and mounting slots" width="462" height="402" fetchpriority="high">
             </a>
-            <figcaption>PLA fixture FEA: final M2 directional deformation of the loaded annulus at an assumed 250 N load, in mm. Open the image for the full-resolution result.</figcaption>
+            <figcaption>The metal Pigjaw push-out fixture I built following our PLA analysis.</figcaption>
           </figure>
           <div class="article-body">
-            <p>This project explores fixtures for push-out testing at the interface between a biodegradable scaffold and porcine jawbone. Our PLA analysis informed my decision to build the metal push-out fixture shown below. The work connects fixture mechanics and material selection with the practical design of the test assembly.</p>
+            <p>This project explores fixtures for push-out testing at the interface between a biodegradable scaffold and porcine jawbone. Our PLA analysis informed my decision to build the metal push-out fixture shown here. The work connects fixture mechanics and material selection with the practical design of the test assembly.</p>
             <p>Revision B brings the hand calculations together with the PLA results from ANSYS Mechanical. Under an assumed 250 N annular load, the final model predicts 0.13137 mm of maximum downward annular movement, about 2.63 times the chosen 0.050 mm target. The clearest finding is a fixture-compliance concern under the modeled conditions.</p>
             <p class="article-caveat">The numerical results identify a compliance concern under the stated assumptions. They do not establish observed breakage, a safe operating load, or experimental validation of the fixture.</p>
           </div>
@@ -184,6 +184,12 @@
               <p>The final annular Y-displacements range from −0.13137 to −0.054935 mm. Both are downward; the most negative value defines the maximum downward movement. It exceeds the target by 81.37 µm and is about 4.14 times the same-force bridge estimate. The two models have different geometry, restraints, and response measures, so that ratio is not a calibrated correction factor.</p>
               <p>Annular fixture motion is not automatically specimen displacement, interface strain, or crosshead measurement error. Relating it to measurement accuracy requires the actual specimen contact and displacement-measurement arrangement.</p>
             </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png">
+                <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" alt="ANSYS PLA fixture analysis showing maximum downward annular movement of 0.13137 mm" width="1881" height="1053" loading="lazy">
+              </a>
+              <figcaption>PLA fixture FEA: final M2 directional deformation of the loaded annulus at an assumed 250 N load, in mm. Open the image for the full-resolution result.</figcaption>
+            </figure>
           </section>
 
           <section class="build-section" aria-labelledby="pigjaw-checks-title">
