@@ -82,6 +82,115 @@
               <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Inverse Heat Conduction, Crank–Nicolson, Parameter Estimation, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
               <div><dt>Year</dt><dd>2026</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
+            <h2 id="ablative-material-testing-fixture-initial-design-title">Initial Design</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-03.jpg" alt="The bolt is bent from the bungee cords!">
+                <figcaption>The bolt is bent from the bungee cords!</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>Our first prototype used a bungee cord return and two indexing pins to define discrete stop positions. While the bungee enabled automatic rotation, we observed the stop bolts plastically deforming after only a handful of cycles, indicating impact-dominated loading at the hard stops. The layout also created a safety hazard: the operator could be positioned downstream of the torch plume during indexing if not sufficiently offset. In addition, the improvised “pins” (screwdrivers) did not seat repeatably in the gear holes, leading to inconsistent indexing angles and poor test-to-test repeatability. These issues motivated a redesigned indexing mechanism that (i) bounded impact loads, (ii) increased operator stand-off from the flame, and (iii) enforced repeatable, well-defined stop geometry.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-rotating-gear-design-title">
+            <h2 id="ablative-material-testing-fixture-rotating-gear-design-title">Rotating Gear Design</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-04.png" alt="Mechanically indexed rotating disk with bolt alignment and T-slot hard stops">
+                <figcaption>Mechanically indexed rotating disk with bolt alignment and T-slot hard stops</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>For the ablative test rig, I designed a mechanically constrained rotating disk system for rapid, repeatable sample exchange under flame exposure. Precision alignment bolts fix each specimen relative to the torch, while T-slot walls act as hard 180° stops to prevent over-rotation. Opposing cables enable remote indexing, maintaining operator distance from ~3000 K conditions and ensuring controlled, repeatable positioning for comparative ablation testing.</p><p>During early testing, cable-induced torque plastically deformed the clamping bolts. Even at reduced speeds, repeated cycling caused cumulative yielding, confirming that peak torque—not angular velocity—governed failure. This deformation degraded angular fidelity between ablative and graphite samples, directly compromising repeatability and thermal alignment.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-simplified-model-title">
+            <h2 id="ablative-material-testing-fixture-simplified-model-title">Simplified Model</h2>
+            <div class="build-inline-gallery">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-05.png" alt="A simplified, free-body diagram of the test setup">
+                <figcaption>A simplified, free-body diagram of the test setup</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-06.png" alt="Free-body diagram at start position">
+                <figcaption>Free-body diagram at start position</figcaption>
+              </figure>
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-07.png" alt="Free-body diagram illustrating the impact compliance">
+                <figcaption>Free-body diagram illustrating the impact compliance</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>To address this, I developed a simplified mechanical model of the disk--bolt--cable system to quantify the relationship between applied cable force, disk radius, and resulting bolt stresses. By treating the disk as a rigid body with reaction forces localized at the bolt interfaces and enforcing equilibrium under applied torque, I derived allowable force limits based on bolt material yield strength and cross-sectional properties. This analysis produced a safe operating force range for manual actuation, eliminating plastic deformation while preserving reliable indexing. The result was a mechanically bounded system with defined load constraints, transforming an empirical failure into a controlled, analytically governed design parameter.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
+E_k=\frac{1}{2}\frac{I}{g_c}\,\omega^2,
+\]<br/>where \(I\) is the mass moment of inertia in \(\mathrm{lbm\cdot in^2}\) and \(g_c=386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\).</p><p>Assuming the stop dissipates this energy over the compliance angle \(\Delta\theta_{\text{stop}}\), and using a linear torque ramp \((T_{\text{peak}}\approx 2T_{\text{avg}})\),<br/>\[
+T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
+\]<br/>Convert peak stop torque to bolt bending stress (threads in bending):<br/>\[
+\sigma_{\text{bolt,peak}}
+=
+\frac{32}{\pi d_{\text{minor}}^3}
+\left(\frac{T_{\text{stop,peak}}}{r_c}\right)
+L_{\text{bolt,eff}}.
+\]<br/>Combining all terms gives a speed--stress relationship:<br/>\[
+\sigma_{\text{bolt,peak}}
+=
+\left(
+\frac{
+32 I L_{\text{bolt,eff}}
+}{
+\pi d_{\text{minor}}^3
+\Delta\theta_{\text{stop}}
+r_c
+g_c
+}
+\right)\omega^2.
+\]</p><p><strong>Numerical evaluation<br/></strong>Using<br/>\(I = 351.352~\mathrm{lbm\cdot in^2}\),<br/>\(g_c = 386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\),<br/>\(\Delta\theta_{\text{stop}}=\pi/18\),<br/>\(r_c=3.75~\mathrm{in}\),<br/>\(L_{\text{bolt,eff}}=2.75~\mathrm{in}\),<br/>\(d_{\text{minor}}=0.19~\mathrm{in}\),<br/>the stress law reduces to<br/>\[
+\sigma_{\text{bolt,peak}}
+\approx
+5678\,\omega^2~\mathrm{psi}
+=
+5.678\,\omega^2~\mathrm{ksi},
+\qquad
+(\omega \text{ in rad/s}).
+\]</p><p><strong>Grade 2 &#x27;&#x27;no-yield&#x27;&#x27; speed<br/></strong>Assume Grade 2 yield strength \(S_y \approx 57~\mathrm{ksi}\). If ``do not yield&#x27;&#x27; means \(\sigma_{\text{allow}}=57~\mathrm{ksi}\),<br/>\[
+57 = 5.678\,\omega^2
+\quad\Rightarrow\quad
+\omega_{\max}=3.17~\mathrm{rad/s}.
+\]<br/>Convert to RPM:<br/>\[
+N_{\max}
+=
+\omega_{\max}\frac{60}{2\pi}
+=
+30.3~\mathrm{rpm}.
+\]<br/>\[
+\boxed{N_{\max}\approx 30~\text{rpm at the moment of impact}.}
+\]</p><p><strong>Recommended engineering limits (with safety factor)<br/></strong>If instead \(\sigma_{\text{allow}}=\frac{S_y}{n_y}\), then:<br/>- For \(n_y=2\): \(N_{\max}\approx 21.4~\mathrm{rpm}\).<br/>- For \(n_y=3\): \(N_{\max}\approx 17.5~\mathrm{rpm}\).</p><p>A conservative operating recommendation is therefore:<br/>\[
+\boxed{\text{Keep impact speed } \lesssim 17\text{--}20~\mathrm{rpm}.}
+\]<br/>\[
+\boxed{20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.}
+\]</p><p>At \(20~\mathrm{rpm}\) (\(0.333~\mathrm{rev/s}\)), the disk rotates at about \(120^\circ/\mathrm{s}\). That means a \(90^\circ\) index move takes roughly \(t \approx 0.75~\mathrm{s}\) if you rotate at a steady rate. Practically, this is a “moderate” motion—fast enough that you should consciously slow down as you approach the hard stop, since bolt yielding is driven by the impact speed at contact (i.e., \(\omega\) right before the stop), not the average speed over the full rotation.</p>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-process-title">
+            <h2 id="ablative-material-testing-fixture-process-title">Process</h2>
+            <div class="build-inline-gallery is-single">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-08.png" alt="Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.">
+                <figcaption>Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.</figcaption>
+              </figure>
+            </div>
+            <div class="article-body">
+              <p>Initial testing revealed several key challenges, including unstable torch mounting, parasitic heat sinking through fixtures, and thermal cross-talk between successive specimens. Early setups relied on single-point torch mounting and aluminum T-slot rails, both of which proved unsuitable under sustained high heat flux.</p><p>Following advisor feedback, the design evolved toward a rigid, multi-point torch mount and a steel sliding-rail system. This allowed controlled translation between a graphite reference sample and test specimens without disturbing torch alignment. Additional measures included silica cloth insulation, embedded thermocouples, and elimination of unintended heat sinks in the measurement chain.</p><p>Multiple design reviews guided refinements in torch orientation, thermocouple geometry, fixture materials, and test procedure sequencing.</p>
+            </div>
+          </section>
+            <div class="build-inline-gallery is-single is-wide">
+              <figure class="build-inline-figure">
+                <img src="../assets/builds/ablative-material-testing-fixture/image-09.png" alt="Preparation, labeling (Batch#_Sample#), disk-extender integration, and final bolted installation of ablative bricks.">
+                <figcaption>Preparation, labeling (Batch#_Sample#), disk-extender integration, and final bolted installation of ablative bricks.</figcaption>
+              </figure>
+            </div>
           <section class="build-section" aria-labelledby="ablative-thermal-model-title">
             <h2 id="ablative-thermal-model-title">1D transient heat-conduction model</h2>
             <div class="article-body">
@@ -206,115 +315,6 @@
             </div>
           </section>
 
-          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
-            <h2 id="ablative-material-testing-fixture-initial-design-title">Initial Design</h2>
-            <div class="build-inline-gallery is-single">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-03.jpg" alt="The bolt is bent from the bungee cords!">
-                <figcaption>The bolt is bent from the bungee cords!</figcaption>
-              </figure>
-            </div>
-            <div class="article-body">
-              <p>Our first prototype used a bungee cord return and two indexing pins to define discrete stop positions. While the bungee enabled automatic rotation, we observed the stop bolts plastically deforming after only a handful of cycles, indicating impact-dominated loading at the hard stops. The layout also created a safety hazard: the operator could be positioned downstream of the torch plume during indexing if not sufficiently offset. In addition, the improvised “pins” (screwdrivers) did not seat repeatably in the gear holes, leading to inconsistent indexing angles and poor test-to-test repeatability. These issues motivated a redesigned indexing mechanism that (i) bounded impact loads, (ii) increased operator stand-off from the flame, and (iii) enforced repeatable, well-defined stop geometry.</p>
-            </div>
-          </section>
-          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-rotating-gear-design-title">
-            <h2 id="ablative-material-testing-fixture-rotating-gear-design-title">Rotating Gear Design</h2>
-            <div class="build-inline-gallery is-single">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-04.png" alt="Mechanically indexed rotating disk with bolt alignment and T-slot hard stops">
-                <figcaption>Mechanically indexed rotating disk with bolt alignment and T-slot hard stops</figcaption>
-              </figure>
-            </div>
-            <div class="article-body">
-              <p>For the ablative test rig, I designed a mechanically constrained rotating disk system for rapid, repeatable sample exchange under flame exposure. Precision alignment bolts fix each specimen relative to the torch, while T-slot walls act as hard 180° stops to prevent over-rotation. Opposing cables enable remote indexing, maintaining operator distance from ~3000 K conditions and ensuring controlled, repeatable positioning for comparative ablation testing.</p><p>During early testing, cable-induced torque plastically deformed the clamping bolts. Even at reduced speeds, repeated cycling caused cumulative yielding, confirming that peak torque—not angular velocity—governed failure. This deformation degraded angular fidelity between ablative and graphite samples, directly compromising repeatability and thermal alignment.</p>
-            </div>
-          </section>
-          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-simplified-model-title">
-            <h2 id="ablative-material-testing-fixture-simplified-model-title">Simplified Model</h2>
-            <div class="build-inline-gallery">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-05.png" alt="A simplified, free-body diagram of the test setup">
-                <figcaption>A simplified, free-body diagram of the test setup</figcaption>
-              </figure>
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-06.png" alt="Free-body diagram at start position">
-                <figcaption>Free-body diagram at start position</figcaption>
-              </figure>
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-07.png" alt="Free-body diagram illustrating the impact compliance">
-                <figcaption>Free-body diagram illustrating the impact compliance</figcaption>
-              </figure>
-            </div>
-            <div class="article-body">
-              <p>To address this, I developed a simplified mechanical model of the disk--bolt--cable system to quantify the relationship between applied cable force, disk radius, and resulting bolt stresses. By treating the disk as a rigid body with reaction forces localized at the bolt interfaces and enforcing equilibrium under applied torque, I derived allowable force limits based on bolt material yield strength and cross-sectional properties. This analysis produced a safe operating force range for manual actuation, eliminating plastic deformation while preserving reliable indexing. The result was a mechanically bounded system with defined load constraints, transforming an empirical failure into a controlled, analytically governed design parameter.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
-E_k=\frac{1}{2}\frac{I}{g_c}\,\omega^2,
-\]<br/>where \(I\) is the mass moment of inertia in \(\mathrm{lbm\cdot in^2}\) and \(g_c=386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\).</p><p>Assuming the stop dissipates this energy over the compliance angle \(\Delta\theta_{\text{stop}}\), and using a linear torque ramp \((T_{\text{peak}}\approx 2T_{\text{avg}})\),<br/>\[
-T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
-\]<br/>Convert peak stop torque to bolt bending stress (threads in bending):<br/>\[
-\sigma_{\text{bolt,peak}}
-=
-\frac{32}{\pi d_{\text{minor}}^3}
-\left(\frac{T_{\text{stop,peak}}}{r_c}\right)
-L_{\text{bolt,eff}}.
-\]<br/>Combining all terms gives a speed--stress relationship:<br/>\[
-\sigma_{\text{bolt,peak}}
-=
-\left(
-\frac{
-32 I L_{\text{bolt,eff}}
-}{
-\pi d_{\text{minor}}^3
-\Delta\theta_{\text{stop}}
-r_c
-g_c
-}
-\right)\omega^2.
-\]</p><p><strong>Numerical evaluation<br/></strong>Using<br/>\(I = 351.352~\mathrm{lbm\cdot in^2}\),<br/>\(g_c = 386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\),<br/>\(\Delta\theta_{\text{stop}}=\pi/18\),<br/>\(r_c=3.75~\mathrm{in}\),<br/>\(L_{\text{bolt,eff}}=2.75~\mathrm{in}\),<br/>\(d_{\text{minor}}=0.19~\mathrm{in}\),<br/>the stress law reduces to<br/>\[
-\sigma_{\text{bolt,peak}}
-\approx
-5678\,\omega^2~\mathrm{psi}
-=
-5.678\,\omega^2~\mathrm{ksi},
-\qquad
-(\omega \text{ in rad/s}).
-\]</p><p><strong>Grade 2 &#x27;&#x27;no-yield&#x27;&#x27; speed<br/></strong>Assume Grade 2 yield strength \(S_y \approx 57~\mathrm{ksi}\). If ``do not yield&#x27;&#x27; means \(\sigma_{\text{allow}}=57~\mathrm{ksi}\),<br/>\[
-57 = 5.678\,\omega^2
-\quad\Rightarrow\quad
-\omega_{\max}=3.17~\mathrm{rad/s}.
-\]<br/>Convert to RPM:<br/>\[
-N_{\max}
-=
-\omega_{\max}\frac{60}{2\pi}
-=
-30.3~\mathrm{rpm}.
-\]<br/>\[
-\boxed{N_{\max}\approx 30~\text{rpm at the moment of impact}.}
-\]</p><p><strong>Recommended engineering limits (with safety factor)<br/></strong>If instead \(\sigma_{\text{allow}}=\frac{S_y}{n_y}\), then:<br/>- For \(n_y=2\): \(N_{\max}\approx 21.4~\mathrm{rpm}\).<br/>- For \(n_y=3\): \(N_{\max}\approx 17.5~\mathrm{rpm}\).</p><p>A conservative operating recommendation is therefore:<br/>\[
-\boxed{\text{Keep impact speed } \lesssim 17\text{--}20~\mathrm{rpm}.}
-\]<br/>\[
-\boxed{20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.}
-\]</p><p>At \(20~\mathrm{rpm}\) (\(0.333~\mathrm{rev/s}\)), the disk rotates at about \(120^\circ/\mathrm{s}\). That means a \(90^\circ\) index move takes roughly \(t \approx 0.75~\mathrm{s}\) if you rotate at a steady rate. Practically, this is a “moderate” motion—fast enough that you should consciously slow down as you approach the hard stop, since bolt yielding is driven by the impact speed at contact (i.e., \(\omega\) right before the stop), not the average speed over the full rotation.</p>
-            </div>
-          </section>
-          <section class="build-section" aria-labelledby="ablative-material-testing-fixture-process-title">
-            <h2 id="ablative-material-testing-fixture-process-title">Process</h2>
-            <div class="build-inline-gallery is-single">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-08.png" alt="Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.">
-                <figcaption>Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.</figcaption>
-              </figure>
-            </div>
-            <div class="article-body">
-              <p>Initial testing revealed several key challenges, including unstable torch mounting, parasitic heat sinking through fixtures, and thermal cross-talk between successive specimens. Early setups relied on single-point torch mounting and aluminum T-slot rails, both of which proved unsuitable under sustained high heat flux.</p><p>Following advisor feedback, the design evolved toward a rigid, multi-point torch mount and a steel sliding-rail system. This allowed controlled translation between a graphite reference sample and test specimens without disturbing torch alignment. Additional measures included silica cloth insulation, embedded thermocouples, and elimination of unintended heat sinks in the measurement chain.</p><p>Multiple design reviews guided refinements in torch orientation, thermocouple geometry, fixture materials, and test procedure sequencing.</p>
-            </div>
-          </section>
-            <div class="build-inline-gallery is-single is-wide">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-09.png" alt="Preparation, labeling (Batch#_Sample#), disk-extender integration, and final bolted installation of ablative bricks.">
-                <figcaption>Preparation, labeling (Batch#_Sample#), disk-extender integration, and final bolted installation of ablative bricks.</figcaption>
-              </figure>
-            </div>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-outcome-title">
             <h2 id="ablative-material-testing-fixture-outcome-title">Outcome</h2>
             <div class="build-inline-gallery is-single">
