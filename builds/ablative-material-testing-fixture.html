@@ -123,7 +123,7 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>To address this, I developed a simplified mechanical model of the disk--bolt--cable system to quantify the relationship between applied cable force, disk radius, and resulting bolt stresses. By treating the disk as a rigid body with reaction forces localized at the bolt interfaces and enforcing equilibrium under applied torque, I derived allowable force limits based on bolt material yield strength and cross-sectional properties. This analysis produced a safe operating force range for manual actuation, eliminating plastic deformation while preserving reliable indexing. The result was a mechanically bounded system with defined load constraints, transforming an empirical failure into a controlled, analytically governed design parameter.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
+              <p>To address this, I developed a simplified mechanical model of the disk—bolt—cable system to quantify the relationship between applied cable force, disk radius, and resulting bolt stresses. By treating the disk as a rigid body with reaction forces localized at the bolt interfaces and enforcing equilibrium under applied torque, I derived allowable force limits based on bolt material yield strength and cross-sectional properties. This analysis produced a safe operating force range for manual actuation, eliminating plastic deformation while preserving reliable indexing. The result was a mechanically bounded system with defined load constraints, transforming an empirical failure into a controlled, analytically governed design parameter.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
 E_k=\frac{1}{2}\frac{I}{g_c}\,\omega^2,
 \]<br/>where \(I\) is the mass moment of inertia in \(\mathrm{lbm\cdot in^2}\) and \(g_c=386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\).</p><p>Assuming the stop dissipates this energy over the compliance angle \(\Delta\theta_{\text{stop}}\), and using a linear torque ramp \((T_{\text{peak}}\approx 2T_{\text{avg}})\),<br/>\[
 T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
@@ -133,7 +133,7 @@ T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
 \frac{32}{\pi d_{\text{minor}}^3}
 \left(\frac{T_{\text{stop,peak}}}{r_c}\right)
 L_{\text{bolt,eff}}.
-\]<br/>Combining all terms gives a speed--stress relationship:<br/>\[
+\]<br/>Combining all terms gives a speed—stress relationship:<br/>\[
 \sigma_{\text{bolt,peak}}
 =
 \left(
@@ -167,7 +167,7 @@ N_{\max}
 \]<br/>\[
 \boxed{N_{\max}\approx 30~\text{rpm at the moment of impact}.}
 \]</p><p><strong>Recommended engineering limits (with safety factor)<br/></strong>If instead \(\sigma_{\text{allow}}=\frac{S_y}{n_y}\), then:<br/>- For \(n_y=2\): \(N_{\max}\approx 21.4~\mathrm{rpm}\).<br/>- For \(n_y=3\): \(N_{\max}\approx 17.5~\mathrm{rpm}\).</p><p>A conservative operating recommendation is therefore:<br/>\[
-\boxed{\text{Keep impact speed } \lesssim 17\text{--}20~\mathrm{rpm}.}
+\boxed{\text{Keep impact speed } \lesssim 17\text{—}20~\mathrm{rpm}.}
 \]<br/>\[
 \boxed{20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.}
 \]</p><p>At \(20~\mathrm{rpm}\) (\(0.333~\mathrm{rev/s}\)), the disk rotates at about \(120^\circ/\mathrm{s}\). A \(90^\circ\) index move at that steady rate takes roughly:</p>
