@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Spindle Vibration &amp; Deflection Reduction | Jerich Lee</title>
-    <meta name="description" content="Spindle vibration testing, a proposed bearing-stack redesign, and retrospective stepped-beam hand calculations compared with the original ANSYS results.">
+    <meta name="description" content="Spindle vibration testing, bearing-stack redesign, stepped-beam hand calculations, and Rev B rotordynamic sensitivity with forward/backward whirl and a Campbell diagram.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -56,7 +56,7 @@
           <div class="article-body">
             <p>Excessive vibration in high-speed milling spindles degrades cut quality, accelerates tool wear, and shortens machine life. In this industry-sponsored capstone project, our team investigated vibration in the vertical spindle of Peddinghaus Corporation’s <strong>PeddiSubX-1120</strong> steel mill.</p>
             <p>Operational testing and finite-element modeling pointed to bending at the motor-end overhang. We proposed a floating-bearing-stack modification that raised the first simulated modal frequency from <strong>307.17 Hz to 383.27 Hz</strong>, approximately <strong>24.8%</strong>. The result is a design prediction, not a measured post-installation reduction in vibration.</p>
-            <p>I later revisited the result with a stepped-beam hand model to understand how geometry, restraint, and distributed mass produce that bending mode. The original project work and the retrospective calculations are presented separately below.</p>
+            <p>I later revisited the result with a stepped-beam hand model to understand how geometry, restraint, and distributed mass produce that bending mode. The original project work and the retrospective calculations are presented separately below. <a href="#spindle-rotordynamics-title">Rev B adds a rotordynamic sensitivity check</a>, retaining the original bending calculations and separately examining rotary inertia and gyroscopic coupling.</p>
           </div>
 
           <dl class="build-details">
@@ -109,7 +109,7 @@
           <section class="build-section" aria-labelledby="spindle-hand-model-title">
             <h2 id="spindle-hand-model-title">Simplified hand calculations: the motor-end overhang</h2>
             <div class="article-body">
-              <p>These <strong>September 2026 retrospective calculations</strong> explain the bending mechanism observed in the spring 2025 project’s simulation. They were not used to choose the original design. Starting with a uniform cantilever gives a first estimate of <strong>255.2 Hz</strong>; retaining the stepped geometry and distributed inertia brings the estimate to roughly 334–337 Hz.</p>
+              <p>These <strong>September 2026 retrospective calculations</strong> explain the bending mechanism observed in the spring 2025 project’s simulation. They were not used to choose the original design. Starting with a uniform cantilever gives a first estimate of <strong>255.2 Hz</strong>; retaining the stepped geometry and distributed inertia brings the estimate to roughly 334–337 Hz. This nonrotating baseline is unchanged in Rev B.</p>
               <p>The local model begins at the floating bearing and retains a <strong>410 mm overhang</strong>, including the gear and tail. I use an ideal lateral clamp, \(w(0)=w'(0)=0\), to represent a rigid limiting support. This constrains bending displacement and slope, not spin about the shaft axis. “Floating” refers to axial freedom; it does not mean that radial support is absent.</p>
               <figure class="article-figure is-wide">
                 <a href="../assets/builds/spindle-vibration-deflection-reduction/stepped-overhang-rev-a.png">
@@ -164,7 +164,7 @@
           </section>
 
           <section class="build-section" aria-labelledby="spindle-two-coordinate-title">
-            <h2 id="spindle-two-coordinate-title">Two coordinates, two local modes</h2>
+            <h2 id="spindle-two-coordinate-title">Two stations, two local modes</h2>
             <div class="article-body">
               <p>A two-coordinate Rayleigh–Ritz reduction retains gear-center displacement at <strong>95 mm</strong> and tail displacement at <strong>410 mm</strong>. Unit-load beam flexibility supplies the interpolation, rather than assuming two independent lumped masses:</p>
               <div class="article-equation">\[
@@ -206,7 +206,7 @@
                   </tbody>
                 </table>
               </div>
-              <p>The two-coordinate result is <strong>26.53 Hz higher</strong> than the FE reference. It captures a similar bending scale, but geometry, support representation, retained components, and solver conditions differ. The original FE setup included 3000 rpm, Coriolis effects, and a damped modal solver; this local hand model is nonrotating and undamped.</p>
+              <p>The two-coordinate result is <strong>26.53 Hz higher</strong> than the FE reference. It captures a similar bending scale, but geometry, support representation, retained components, and solver conditions differ. The original FE setup included 3000 rpm, Coriolis effects, and a damped modal solver; the baseline compared here is nonrotating and undamped. The separate Rev B rotation check below does not make this a matched-speed FE comparison.</p>
               <p>Two other checks answer different questions:</p>
               <ul>
                 <li><strong>Original FE mesh sensitivity:</strong> four meshes, from 45,845 to 71,836 elements, gave first frequencies of 305–307 Hz. This tests sensitivity to mesh size, not accuracy against the real machine.</li>
@@ -242,13 +242,115 @@
             </div>
           </section>
 
+          <section class="build-section" aria-labelledby="spindle-rotordynamics-title">
+            <h2 id="spindle-rotordynamics-title">Rev B: rotordynamic sensitivity</h2>
+            <div class="article-body">
+              <p>The original hand model leaves out rotation. Rev B, added on <strong>13 September 2026</strong>, checks one part of that simplification: how cross-sectional rotary inertia and gyroscopic coupling change the frequency of the assumed overhang. It is a new reduced-model calculation, <strong>not a new ANSYS solve</strong>.</p>
+              <h3>One bending shape in two lateral planes</h3>
+              <p>A spinning cross-section carries angular momentum; tilting its axis couples motion in the two transverse directions. I retain the original tip-normalized static shape \(\phi(s)\), but allow it to move in two perpendicular, stationary planes:</p>
+              <div class="article-equation">\[
+                w_x(s,t)=\phi(s)q_x(t),\qquad w_y(s,t)=\phi(s)q_y(t),\qquad \phi(L)=1.
+              \]</div>
+              <p>This is different from the earlier <em>two-station</em> model. That model retained gear and tail motion in one plane to describe two spatial bending modes. This extension retains <strong>one frozen shape in two planes</strong> to obtain a forward/backward whirl pair.</p>
+              <p>The five-section geometry, material properties, ideal clamp, and stiffness stay unchanged. All five equivalent sections are assumed to co-rotate at a prescribed speed. The C-ring remains a translational point mass; its diametral and polar inertias are omitted. There is no added centrifugal-prestress calculation, physical damping, shear correction, or cutting load.</p>
+              <p class="article-caveat">The all-five-rotating assumption differs from the original ANSYS spin assignment, which excluded the bearing stacks and rotary union. The equivalent aluminum tail does not resolve the rotary union’s rotating and stationary internals. This is a sensitivity check, not a reconstruction or verified conservative bound for the real spindle.</p>
+              <h3>Rotary inertia is weighted by slope</h3>
+              <p>Translation is weighted by \(\phi^2\); cross-sectional tilting is weighted by \((\phi')^2\). Using the section area moments \(I_j\) and \(J_{p,j}\):</p>
+              <div class="article-equation">\[
+                m_\theta=\sum_j\rho_jI_j\int_{a_j}^{b_j}(\phi')^2\,ds,\qquad
+                g=\sum_j\rho_jJ_{p,j}\int_{a_j}^{b_j}(\phi')^2\,ds.
+              \]</div>
+              <p>For these circular equivalents, \(J_{p,j}=2I_j\). The original translational generalized mass is \(m_t=0.68843256\ \mathrm{kg}\); the added rotary term is \(m_\theta=0.00971902\ \mathrm{kg}\). Hence:</p>
+              <div class="article-equation">\[
+                m=m_t+m_\theta=0.69815157\ \mathrm{kg},\qquad g=2m_\theta=0.01943803\ \mathrm{kg}.
+              \]</div>
+              <p>These are generalized coefficients for tip displacement, so both have units of kilograms. The gear contributes only about <strong>1.4%</strong> of the translational generalized mass but about <strong>34.1%</strong> of the gyroscopic coefficient. Its small lateral displacement does not eliminate the effect of its large polar inertia.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="spindle-whirl-title">
+            <h2 id="spindle-whirl-title">Forward and backward whirl</h2>
+            <div class="article-body">
+              <p>Take right-handed fixed axes \((x,y,s)\), positive shaft spin \(\Omega\) about \(+s\), and \(\mathbf q=[q_x,q_y]^T\). The undamped two-plane equations are:</p>
+              <div class="article-equation">\[
+                m\ddot{\mathbf q}+\Omega\mathbf G_1\dot{\mathbf q}+k\mathbf q=\mathbf 0,\qquad
+                \mathbf G_1=\begin{bmatrix}0 &amp; g\\-g &amp; 0\end{bmatrix},\qquad k=k_L.
+              \]</div>
+              <p>With \(\omega_0=\sqrt{k/m}\) and \(a=g\Omega/(2m)\), the two positive stationary-frame frequencies for \(\Omega\geq0\) follow from the harmonic eigenproblem:</p>
+              <div class="article-equation">\[
+                (k-m\omega^2)^2-(g\Omega\omega)^2=0,\qquad
+                \boxed{\omega_\pm=\sqrt{\omega_0^2+a^2}\pm a},\qquad f_\pm=\frac{\omega_\pm}{2\pi}.
+              \]</div>
+              <p>For this sign convention, the upper branch \(f_+\) is forward whirl, in the same direction as shaft rotation; the lower branch \(f_-\) is backward whirl. At zero spin they coincide. Their separation is a split of one lateral bending family, not an additional spatial mode.</p>
+              <p>The gyroscopic matrix is skew-symmetric: \(\mathbf G_1^T=-\mathbf G_1\), so \(\dot{\mathbf q}^T\Omega\mathbf G_1\dot{\mathbf q}=0\). It changes the motion without dissipating energy. <strong>Gyroscopic coupling is not physical damping.</strong></p>
+              <p class="article-caveat">A nonspinning section can still tilt and contribute to \(m_\theta\). For different section speeds, \(g\Omega\) becomes \(\sum_j g_j\Omega_j\), while all tilting inertia is retained. No numerical spin partition is assigned here because the internal components are unresolved.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="spindle-rotation-results-title">
+            <h2 id="spindle-rotation-results-title">What changes at 3000 rpm?</h2>
+            <div class="article-body">
+              <p>At \(\Omega=314.15927\ \mathrm{rad/s}\), the unchanged stiffness is \(3.08262016\times10^6\ \mathrm{N/m}\) and \(g/m=0.02784214\). The calculation separates the effect of adding rotary inertia from the effect of turning on spin.</p>
+              <div class="analysis-table-scroll" role="region" aria-label="Rotary-inertia and gyroscopic frequency changes" tabindex="0">
+                <table class="analysis-table">
+                  <caption>One-shape sensitivity, Rev B, page 16. Frequencies are rounded; percentages use the unrounded calculation and the stated reference.</caption>
+                  <thead><tr><th scope="col">Case</th><th scope="col">Frequency</th><th scope="col">Change / reference</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Original Rayleigh model, no rotary inertia</th><td>336.78 Hz</td><td>Baseline \(f_R\)</td></tr>
+                    <tr><th scope="row">Rotary inertia added, zero spin \(f_0\)</th><td>334.43 Hz</td><td>−0.69849% / \(f_R\)</td></tr>
+                    <tr><th scope="row">3000 rpm · backward whirl</th><td>333.73 Hz</td><td>−0.20791% / \(f_0\)</td></tr>
+                    <tr><th scope="row">3000 rpm · forward whirl</th><td>335.13 Hz</td><td>+0.20835% / \(f_0\)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>Adding rotary inertia lowers the zero-spin result by about <strong>0.70%</strong>: sections tilt during bending whether or not the shaft spins. Gyroscopic coupling then shifts the two branches by approximately <strong>±0.208% relative to the extended zero-spin frequency \(f_0=334.43\ \mathrm{Hz}\)</strong>, not relative to the original 336.78 Hz. The branch separation is about <strong>1.392 Hz</strong>.</p>
+              <figure class="article-figure is-wide">
+                <a href="../assets/builds/spindle-vibration-deflection-reduction/whirl-branches-rev-b.png">
+                  <img src="../assets/builds/spindle-vibration-deflection-reduction/whirl-branches-rev-b.png" alt="Forward and backward whirl frequencies split from 334.43 Hz at zero speed to 335.13 and 333.73 Hz at 3000 rpm." width="1280" height="395" loading="lazy">
+                </a>
+                <figcaption>Stationary-frame branches from Rev B, page 16, for the one-shape, all-five-rotating model. The tight vertical scale reveals the small split. These are calculated sensitivity curves, not ANSYS results.</figcaption>
+              </figure>
+              <p class="article-caveat">Within this assumed beam, the small gyroscopic shift supports omitting gyroscopy from the original baseline explanation. It is not a bound on the complete spindle’s rotational effects. The lower branch’s proximity to the separate two-station result of 333.70 Hz is coincidental; they are different reductions.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="spindle-campbell-title">
+            <h2 id="spindle-campbell-title">Campbell diagram: frequency shift versus excitation</h2>
+            <div class="article-body">
+              <p>A Campbell diagram places frequency branches alongside speed-related excitation lines. For shaft speed \(n\) in rpm, the once-per-revolution line is \(f_{1X}=n/60\). A six-flute tool also introduces \(f_{6X}=6n/60\). At 3000 rpm, these reach <strong>50 Hz</strong> and <strong>300 Hz</strong>, respectively.</p>
+              <figure class="article-figure is-wide">
+                <a href="../assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png">
+                  <img src="../assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png" alt="Campbell diagram comparing the reduced whirl branches near 334 Hz, 1X excitation reaching 50 Hz, 6X reaching 300 Hz, and the single reported FE point at 307.17 Hz and 3000 rpm." width="1290" height="545" loading="lazy">
+                </a>
+                <figcaption>Rev B, page 17. The reduced branches nearly overlap at this scale. The 307.17 Hz marker is the original report’s single 3000 rpm FE result, not an FE speed sweep.</figcaption>
+              </figure>
+              <p>A small gyroscopic shift does not imply weak forcing. The maximum six-flute fundamental is only <strong>7.17 Hz below the reported FE mode</strong>. Frequency proximity alone does not establish a large response either: modal forcing, damping, higher harmonics, other modes, and regenerative cutting effects still matter. This diagram does not certify resonance avoidance.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="spindle-rotordynamic-checks-title">
+            <h2 id="spindle-rotordynamic-checks-title">Verification and the remaining FE comparison</h2>
+            <div class="article-body">
+              <p>Rev B checks the closed-form whirl frequencies against a four-state eigensolution of the same reduced system. It also checks the slope integrals, skew symmetry, coincident branches at zero spin, and branch exchange when spin reverses. These reproduce the calculation; <strong>they are not physical validation or a rotating beam-mesh convergence study</strong>.</p>
+              <p>A matched FE study would separate two different discrepancies:</p>
+              <div class="article-equation">\[
+                \Delta f_{\mathrm{structure}}=f_{\mathrm{hand}}(0)-f_{\mathrm{FE}}(0),\qquad
+                \Delta f_{\mathrm{speed},\pm}=f_{\mathrm{FE},\pm}(3000)-f_{\mathrm{FE}}(0).
+              \]</div>
+              <p>Here 0 and 3000 denote shaft speed in rpm. Each comparison needs the corresponding bending family in the same reference frame. No matched zero-speed FE result was supplied, so these differences remain unevaluated.</p>
+              <p>The next comparison would recover the actual geometry, contacts, bearings, and spinning components; extract modes at zero and 3000 rpm with an intervening sweep; and track complex mode shapes and whirl direction rather than relying on a mode number alone. A gyro-only check must hold mass and stiffness fixed. A total speed-effect study must separately state whether centrifugal prestress and stiffness are recomputed.</p>
+              <p class="article-caveat">Rev B holds stiffness fixed and does not calculate centrifugal stress or its effect on stiffness. The original report’s “damped solver” setting also does not supply a measured damping ratio. Neither omitted effect can be inferred from the ±0.208% gyroscopic result.</p>
+            </div>
+          </section>
+
           <section class="build-section" aria-labelledby="spindle-limits-title">
             <h2 id="spindle-limits-title">What the calculation establishes—and what it does not</h2>
             <div class="article-body">
               <p>The hand model makes the motor-end bending mechanism understandable with a small number of coordinates. Its arithmetic is more tightly checked than its physical inputs: a chosen ±5% change in all axial lengths alone moves the first estimate from about 303 to 370 Hz. That is a sensitivity exercise, not a measured uncertainty interval.</p>
-              <p>Stronger comparisons would require actual section dimensions and bores, component masses and connections, bearing stiffness and spacing, housing flexibility, and matched zero-speed FE mode shapes. Rotation, damping, and cutting forces would then need their own treatment. Neither the original frequency shift nor this hand calculation establishes a measured vibration-amplitude reduction, compliance with an operating vibration limit, or stable loaded cutting.</p>
-              <p><a href="../assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-a.pdf">Read the complete hand calculations — Rev A (PDF, 16 pages)</a>, including the derivations, sensitivity cases, numerical verification, and references.</p>
-              <p class="article-caveat">Project evidence: <em>Spindle Vibration and Deflection Reduction</em>, Spring 2025 ME 470 final report, by Zach Balakrishnan, Ryan VandeWiele, Eron Mahmudi, Liam Wydra, Jerich Lee, and Justin Frank. Testing: §§6.3–6.7; simulation and bearing comparisons: §§7.4–7.8 and Tables 3–5. The later calculations are documented in <em>Spindle Vibration Hand Calculations</em>, SVR–HC01, Rev A.</p>
+              <p>Stronger comparisons would require actual section dimensions and bores, component masses and connections, bearing stiffness and spacing, housing flexibility, and matched zero-speed FE mode shapes. Rev B quantifies rotary inertia and gyroscopic coupling only within the declared simplified model; the complete spindle’s speed dependence, centrifugal prestress, damping, and cutting forces remain unresolved. Neither the original frequency shift nor these hand calculations establish a measured vibration-amplitude reduction, compliance with an operating vibration limit, or stable loaded cutting.</p>
+              <p><a href="../assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-b.pdf">Read the complete hand calculations and rotordynamic analysis — Rev B (PDF, 24 pages)</a>. The new rotation analysis is on pages 13–18, with its numerical checks on page 22.</p>
+              <p><a href="../assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-a.pdf">Earlier revision — Rev A (PDF, 16 pages)</a>, retained for the original nonrotating derivation and figures.</p>
+              <p class="article-caveat">Project evidence: <em>Spindle Vibration and Deflection Reduction</em>, Spring 2025 ME 470 final report, by Zach Balakrishnan, Ryan VandeWiele, Eron Mahmudi, Liam Wydra, Jerich Lee, and Justin Frank. Testing: §§6.3–6.7; simulation and bearing comparisons: §§7.4–7.8 and Tables 3–5. The later calculations and rotation-specific references are documented in <em>Spindle Vibration Hand Calculations</em>, SVR–HC01, Rev B.</p>
             </div>
           </section>
         </article>
