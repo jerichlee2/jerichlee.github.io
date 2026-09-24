@@ -1,0 +1,65 @@
+# Publish only the current portfolio. Archived files stay in the repository
+# and local workspace, but are not served by GitHub Pages.
+exclude:
+  # Local tooling and working files.
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - output
+  # Sections absent from the current navigation.
+  - notes
+  - writing
+  - media
+  - guitar
+  - grappling
+  - cubing
+  - assets/chipotlean
+  - assets/cubing
+  - assets/demons-penguin-classics-cover.jpg
+  - assets/flowers-for-algernon-cover.jpg
+  # Unlisted projects and their assets.
+  - builds/8-bit-cpu-from-scratch.html
+  - builds/gpt-2-from-scratch.html
+  - builds/numerical-methods-on-a-6502-processor.html
+  - builds/project-hephaestus.html
+  - builds/fatigue-equivalent-load-analysis.html
+  - builds/forgesense.html
+  - assets/builds/8-bit-cpu-from-scratch
+  - assets/builds/gpt-2-from-scratch
+  - assets/builds/numerical-methods-on-a-6502-processor
+  - assets/builds/project-hephaestus
+  - assets/builds/fatigue-equivalent-load-analysis
+  - assets/builds/forgesense
+  # Unused source reports, alternate figures, and media.
+  - assets/builds/ablative-material-testing-fixture/cover.jpg
+  - assets/builds/ablative-material-testing-fixture/image-02.png
+  - assets/builds/ablative-material-testing-fixture/initial-prototype.mp4
+  - assets/builds/ablative-material-testing-fixture/initial-prototype-poster.jpg
+  - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/README.md
+  - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/cube_nonlinear_analysis.pdf
+  - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/cube_nonlinear_dashboard.html
+  - assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_B.pdf
+  - assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_C.pdf
+  - assets/builds/pigjaw-scaffold-interface-testing/cover.png
+  - assets/builds/pigjaw-scaffold-interface-testing/rev-b-principal-stress.png
+  - assets/builds/pigjaw-scaffold-interface-testing/pigjaw-fixture-drawing.pdf
+  - assets/builds/pigjaw-scaffold-interface-testing/pushin-fixture-drawing.pdf
+  - assets/builds/pressure-vessel-analysis-platform/ansys-von-mises-thumbnail.png
+  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.png
+  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.svg
+  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.tex
+  - assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.png
+  - assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png
+  - assets/builds/spindle-vibration-deflection-reduction/cover.png
+  - assets/builds/spindle-vibration-deflection-reduction/image-03.png
+  - assets/builds/spindle-vibration-deflection-reduction/image-04.png
+  - assets/builds/spindle-vibration-deflection-reduction/local-mode-shapes-rev-a.png
+  - assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz.png
+  - assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-a.pdf
+  - assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-b.pdf
+  - assets/builds/spindle-vibration-deflection-reduction/whirl-branches-rev-b.png
+  - assets/builds/spindle-vibration-deflection-reduction/final-presentation.pdf
+  - assets/builds/spindle-vibration-deflection-reduction/final-report.pdf
+  - assets/favicon.svg
+  - favicon.svg
