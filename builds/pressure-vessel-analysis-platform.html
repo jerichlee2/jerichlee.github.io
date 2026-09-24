@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <style>
       .pressure-vessel-project .article-figure.is-wide img {
@@ -91,40 +91,21 @@
             <div><dt>Tools</dt><dd>Python, FastAPI, HTML/CSS/JavaScript, ANSYS Mechanical</dd></div>
           </dl>
 
-          <section class="build-section" aria-labelledby="vessel-problem-title">
-            <h2 id="vessel-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="vessel-central-question" aria-labelledby="vessel-situation-title">
-                <h3 id="vessel-situation-title"><a class="summary-jump" href="#vessel-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can a quick calculator help us compare tank designs under pressure before running a detailed computer simulation?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="vessel-task-title">
-                <h3 id="vessel-task-title"><a class="summary-jump" href="#vessel-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
-                <p>Build a quick calculator to compare tank designs before running detailed simulations.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="vessel-action-title">
-                <h3 id="vessel-action-title"><a class="summary-jump" href="#vessel-workflow-title" aria-label="Action: Go to Engineering Workflow">Action</a></h3>
-                <p>I built a Python model and browser interface, then compared selected predictions with ANSYS.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="vessel-result-title">
-                <h3 id="vessel-result-title"><a class="summary-jump" href="#vessel-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
-                <p>One calculation finished in 4.523 seconds, while a separate FEA comparison showed average errors of 0.12% in von Mises stress and 0.03% in wall movement.</p>
-              </section>
-            </div>
-          </section>
-
           <section class="build-section" aria-labelledby="vessel-introduction-title">
             <h2 id="vessel-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Early pressure-vessel design involves comparing dimensions, materials, and loads. Running a full finite element analysis for every candidate adds modeling and computation work before the most promising options are clear.</p>
               <p>My graduate capstone focused on a fast, browser-based calculator for screening these options. The goal was to estimate stresses, deformation, and design limits with simpler models, then reserve detailed FEA for designs that need it.</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="vessel-central-question">
+                  <p class="summary-question"><strong>Can a quick calculator help us compare tank designs under pressure before running a detailed computer simulation?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
 
           <section class="build-section" aria-labelledby="vessel-workflow-title">
             <h2 id="vessel-workflow-title" tabindex="-1">Engineering Workflow</h2>
-            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The user selects a material, enters vessel dimensions and loads, and chooses a calculation mode. Forward calculations return stress, deformation, and safety-factor outputs; inverse calculations solve for pressure, diameter, or axial-load limits within the closed-form model. The full nonlinear wall solution is a separate calculation path.</p>
               <p>A FastAPI backend validates requests and runs the mechanics in SI units. The browser handles display-unit conversion, plots, and PDF, CSV, and JSON exports. Authentication and saved calculations make it possible to return to previous studies without rebuilding their inputs.</p>
@@ -240,7 +221,6 @@
 
           <section class="build-section" aria-labelledby="vessel-outcome-title">
             <h2 id="vessel-outcome-title" tabindex="-1">Outcome</h2>
-            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The capstone produced a working pressure-vessel calculator for rapid design screening before detailed FEA, with direct elastic calculations and a reduced nonlinear wall model. A retained nonlinear example reported 4.523 s of backend compute time. Separately, the corrected P06 comparison demonstrated mean errors of 0.12% for von Mises stress, 0.03% for radial displacement, and 0.70% for equivalent plastic strain against ANSYS.</p>
               <p>The application is a proof of concept for preliminary design screening, not a certified pressure-vessel design tool. The demonstrated comparisons cover selected geometries and load cases; design-code compliance, fatigue, buckling, and more complex vessel features remain outside this scope.</p>

@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
@@ -47,32 +47,15 @@
               <div><dt>Skills</dt><dd>Heat Transfer; Mass Transport; Reaction Kinetics; Finite Difference Methods; CFD (ANSYS Fluent); Python; Microfluidics; Transport Phenomena</dd></div>
               <div><dt>Year</dt><dd>2025</dd></div>
           </dl>
-          <section class="build-section" aria-labelledby="microchannel-transport-processes-problem-title">
-            <h2 id="microchannel-transport-processes-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="microchannel-transport-processes-central-question" aria-labelledby="microchannel-transport-processes-situation-title">
-                <h3 id="microchannel-transport-processes-situation-title"><a class="summary-jump" href="#microchannel-transport-processes-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can a simpler computer model predict how heat and chemicals change as they flow through a tiny channel?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="microchannel-transport-processes-task-title">
-                <h3 id="microchannel-transport-processes-task-title"><a class="summary-jump" href="#microchannel-transport-processes-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
-                <p>Build a simpler model and compare its predictions with a detailed flow simulation.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="microchannel-transport-processes-action-title">
-                <h3 id="microchannel-transport-processes-action-title"><a class="summary-jump" href="#microchannel-transport-processes-process-title" aria-label="Action: Go to Process">Action</a></h3>
-                <p>I built a Python model of heat flow, chemical mixing, and reactions, then compared it with ANSYS Fluent.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="microchannel-transport-processes-result-title">
-                <h3 id="microchannel-transport-processes-result-title"><a class="summary-jump" href="#microchannel-transport-processes-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
-                <p>The model predicted that fluid would cross the 2 mm channel in about 0.59 milliseconds, with cooling and mixing trends similar to the detailed simulation.</p>
-              </section>
-            </div>
-          </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-introduction-title">
             <h2 id="microchannel-transport-processes-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>In a microchannel reactor, flowing chemicals mix and react while the channel walls remove heat. These processes influence one another, so understanding the reactor means tracking temperature and chemical concentrations together. This project uses sulfuric acid formation as a case study to explore how a simpler model can capture that behavior before comparison with a detailed flow simulation.</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="microchannel-transport-processes-central-question">
+                  <p class="summary-question"><strong>Can a simpler computer model predict how heat and chemicals change as they flow through a tiny channel?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-simplified-model-title">
@@ -139,7 +122,6 @@ A e^{-E_a/(k T_m)} C_1 C_2.
           </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-process-title">
             <h2 id="microchannel-transport-processes-process-title" tabindex="-1">Process</h2>
-            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/microchannel-transport-processes/image-04.png" alt="Hydroxyl ion mass fraction near the outlet">
@@ -152,7 +134,6 @@ A e^{-E_a/(k T_m)} C_1 C_2.
           </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-outcome-title">
             <h2 id="microchannel-transport-processes-outcome-title" tabindex="-1">Outcome</h2>
-            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/microchannel-transport-processes/image-05.png" alt="Cross-section-averaged temperature">

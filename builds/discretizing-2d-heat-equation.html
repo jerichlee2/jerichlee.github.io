@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
@@ -46,33 +46,16 @@
               <div><dt>Skills</dt><dd>Finite Difference Methods, Heat Transfer, Stability Analysis, Numerical PDEs, Python</dd></div>
               <div><dt>Year</dt><dd>2024</dd></div>
           </dl>
-          <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-problem-title">
-            <h2 id="discretizing-2d-heat-equation-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="discretizing-2d-heat-equation-central-question" aria-labelledby="discretizing-2d-heat-equation-situation-title">
-                <h3 id="discretizing-2d-heat-equation-situation-title"><a class="summary-jump" href="#discretizing-2d-heat-equation-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can we predict how hot a material gets when a laser heats it, and how that changes as the laser moves?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="discretizing-2d-heat-equation-task-title">
-                <h3 id="discretizing-2d-heat-equation-task-title"><a class="summary-jump" href="#discretizing-2d-heat-equation-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
-                <p>Build a model to predict temperature changes under stationary and moving lasers.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="discretizing-2d-heat-equation-action-title">
-                <h3 id="discretizing-2d-heat-equation-action-title"><a class="summary-jump" href="#discretizing-2d-heat-equation-simulation-and-comparison-title" aria-label="Action: Go to Simulation and Comparison">Action</a></h3>
-                <p>I wrote a Python simulation that tracks heat spreading through the material and escaping from its surfaces.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="discretizing-2d-heat-equation-result-title">
-                <h3 id="discretizing-2d-heat-equation-result-title"><a class="summary-jump" href="#discretizing-2d-heat-equation-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
-                <p>With a fixed laser, the model predicted peak surface temperatures of about 1,388 °C after 30 seconds and 1,673 °C after 150 seconds.</p>
-              </section>
-            </div>
-          </section>
           <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-introduction-title">
             <h2 id="discretizing-2d-heat-equation-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#discretizing-2d-heat-equation-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Laser heating creates a concentrated hot region while heat spreads through a material and escapes from its surfaces by radiation. Predicting temperatures means tracking these effects together, including how heating changes with depth and as the laser moves.</p>
               <p>The goal was to build a two-dimensional computer model for stationary and moving lasers, then explore how laser power and speed affect temperatures in applications such as laser welding, surface treatment, and metal additive manufacturing.</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="discretizing-2d-heat-equation-central-question">
+                  <p class="summary-question"><strong>Can we predict how hot a material gets when a laser heats it, and how that changes as the laser moves?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
           <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-simplified-model-title">
@@ -189,7 +172,6 @@ x_L(t) = x_{L,0} + v_L t,
           </section>
           <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-simulation-and-comparison-title">
             <h2 id="discretizing-2d-heat-equation-simulation-and-comparison-title" tabindex="-1">Simulation and Comparison</h2>
-            <a class="star-return" href="#discretizing-2d-heat-equation-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/discretizing-2d-heat-equation/image-04.png" alt="Temperature distribution decaying as a function of space, time, heat source">
@@ -202,7 +184,6 @@ x_L(t) = x_{L,0} + v_L t,
           </section>
           <section class="build-section" aria-labelledby="discretizing-2d-heat-equation-outcome-title">
             <h2 id="discretizing-2d-heat-equation-outcome-title" tabindex="-1">Outcome</h2>
-            <a class="star-return" href="#discretizing-2d-heat-equation-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/discretizing-2d-heat-equation/image-05.png" alt="Maximum temperature on the vertical axis vs power">

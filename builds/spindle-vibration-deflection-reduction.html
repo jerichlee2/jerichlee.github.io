@@ -12,7 +12,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/looping-videos.js"></script>
     <script defer src="../assets/js/spindle-frequency-plots.js"></script>
@@ -232,34 +232,16 @@
             <div><dt>Timeline</dt><dd>2025 capstone; retrospective calculations: September 2026</dd></div>
           </dl>
 
-          <section class="build-section" aria-labelledby="spindle-problem-title">
-            <h2 id="spindle-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="spindle-central-question" aria-labelledby="spindle-summary-situation-title">
-                <h3 id="spindle-summary-situation-title"><a class="summary-jump" href="#spindle-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can changing where the drill’s shaft is supported reduce shaking and help protect the machine?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="spindle-summary-task-title">
-                <h3 id="spindle-summary-task-title"><a class="summary-jump" href="#spindle-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
-                <p>Find a better position for the shaft’s supports to reduce shaking during drilling.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="spindle-summary-action-title">
-                <h3 id="spindle-summary-action-title"><a class="summary-jump" href="#spindle-vibration-deflection-reduction-process-title" aria-label="Action: Go to Initial Testing">Action</a></h3>
-                <p>I compared shaft-support positions using vibration measurements and computer models.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="spindle-summary-result-title">
-                <h3 id="spindle-summary-result-title"><a class="summary-jump" href="#spindle-limits-title" aria-label="Result: Go to Outcome">Result</a></h3>
-                <p>The model predicted the shaft’s first bending frequency would rise from 307.17 to 383.27 Hz, a 24.8% increase.</p>
-              </section>
-            </div>
-          </section>
-
           <section class="build-section" aria-labelledby="spindle-introduction-title">
             <h2 id="spindle-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Peddinghaus reported excessive spindle vibration while drilling weight-reduction holes in O’Hare Airport I-beams, linking it to long-term damage to the electronics box.</p>
               <p>Our capstone used FEA to study how repositioning bearings changed spindle support, motor-end overhang, bending modes, and natural frequencies.</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="spindle-central-question">
+                  <p class="summary-question"><strong>Can changing where the drill’s shaft is supported reduce shaking and help protect the machine?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -467,7 +449,6 @@
 
           <section class="build-section testing-section" aria-labelledby="spindle-vibration-deflection-reduction-process-title">
             <h2 id="spindle-vibration-deflection-reduction-process-title" tabindex="-1">Initial Testing</h2>
-            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Our on-site campaign combined impact tests, unloaded free-spinning tests, and loaded cutting tests. A tri-axial accelerometer mounted on the spindle housing recorded the response.</p>
             </div>
@@ -573,7 +554,6 @@
 
           <section class="build-section outcome-section" aria-labelledby="spindle-limits-title">
             <h2 id="spindle-limits-title" tabindex="-1">Outcome</h2>
-            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The proposed bearing modification increased the first ANSYS bending-mode frequency from <strong>307.17 to 383.27 Hz (+24.8%)</strong>, moving it away from the observed ≈310 Hz response band to reduce resonance risk.</p>
               <p>The project linked measured vibration, a simulated bending mechanism, and a targeted bearing recommendation. The retrospective calculations added a clearer explanation of why support placement and distributed inertia mattered. Confirming the proposed modification’s operating benefit would require testing the modified spindle under representative cutting conditions.</p>

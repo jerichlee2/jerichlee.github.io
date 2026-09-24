@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/looping-videos.js"></script>
     <style>
@@ -94,37 +94,19 @@
               <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Inverse Heat Conduction, Crank–Nicolson, Parameter Estimation, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
               <div><dt>Year</dt><dd>2026</dd></div>
           </dl>
-          <section class="build-section" aria-labelledby="ablative-problem-title">
-            <h2 id="ablative-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="ablative-central-question" aria-labelledby="ablative-summary-situation-title">
-                <h3 id="ablative-summary-situation-title"><a class="summary-jump" href="#ablative-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can reliable heat tests help us build confidence that our liquid rocket engine won’t melt during a test firing?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="ablative-summary-task-title">
-                <h3 id="ablative-summary-task-title"><a class="summary-jump" href="#ablative-material-testing-fixture-initial-design-title" aria-label="Task: Go to Initial Design">Task</a></h3>
-                <p>Keep graphite and <a href="https://www.halfcatrocketry.com/chambersafe" target="_blank" rel="noopener noreferrer">ChamberSafe</a> samples lined up under a torch and switch them from a safer distance.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="ablative-summary-action-title">
-                <h3 id="ablative-summary-action-title"><a class="summary-jump" href="#ablative-material-testing-fixture-rotating-gear-design-title" aria-label="Action: Go to Rotating Gear Design">Action</a></h3>
-                <p>I designed a rotating holder controlled by cables and calculated how much force its bolts could handle.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="ablative-summary-result-title">
-                <h3 id="ablative-summary-result-title"><a class="summary-jump" href="#ablative-thermal-results-title" aria-label="Result: Go to Calibration results and thermal dose">Result</a></h3>
-                <p>The report’s model estimated 0.259 and 0.584 MW/m² entering the graphite, with the hotter setting delivering about 2.25 times as much heat per second.</p>
-              </section>
-            </div>
-          </section>
           <section class="build-section" aria-labelledby="ablative-introduction-title">
             <h2 id="ablative-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>For the Liquid Rocket Initiative, this project combined a remotely operated sample holder with a torch-based heat test. Graphite served as a reference alongside ChamberSafe samples, with temperature readings from the back of the graphite used to estimate heat input. The work covered both fixture design and interpretation of the test data.</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="ablative-central-question">
+                  <p class="summary-question"><strong>Can reliable heat tests help us build confidence that our liquid rocket engine won’t melt during a test firing?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
             <h2 id="ablative-material-testing-fixture-initial-design-title" tabindex="-1">Initial Design</h2>
-            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <figure class="build-video" id="ablative-initial-prototype">
               <video controls muted loop playsinline preload="none" data-autoplay-loop
                 width="540" height="720"
@@ -152,7 +134,6 @@
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-rotating-gear-design-title">
             <h2 id="ablative-material-testing-fixture-rotating-gear-design-title" tabindex="-1">Rotating Gear Design</h2>
-            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/ablative-material-testing-fixture/image-04.png" alt="Mechanically indexed rotating disk with bolt alignment and T-slot hard stops">
@@ -326,7 +307,6 @@ N_{\max}
 
           <section class="build-section" aria-labelledby="ablative-thermal-results-title">
             <h2 id="ablative-thermal-results-title" tabindex="-1">Calibration results and thermal dose</h2>
-            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The two graphite fits infer effective net inward heat fluxes of 0.2592 and 0.5844 MW/m². The hot torch condition is about 2.25 times the baseline condition under this model. These are inferred reference-specimen fluxes, not directly measured incident torch fluxes.</p>
             </div>

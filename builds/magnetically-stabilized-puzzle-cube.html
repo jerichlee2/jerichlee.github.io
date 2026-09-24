@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <link rel="stylesheet" href="../assets/css/cube-project.css?v=6">
     <link rel="stylesheet" href="../assets/css/cube-nonlinear-lab.css?v=5">
     <script defer src="../assets/js/cube-nonlinear-data.js?v=1"></script>
@@ -51,32 +51,15 @@
               <div><dt>Skills</dt><dd>Mechanical Design, CAD, Nonlinear Dynamics, Product Engineering, Patent Writing, Tolerance Design</dd></div>
               <div><dt>Year</dt><dd>2018-2020</dd></div>
           </dl>
-          <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-problem-title">
-            <h2 id="magnetically-stabilized-puzzle-cube-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary">
-              <section class="summary-box central-question" id="magnetically-stabilized-puzzle-cube-central-question" aria-labelledby="magnetically-stabilized-puzzle-cube-situation-title">
-                <h3 id="magnetically-stabilized-puzzle-cube-situation-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can moving the magnets make a puzzle cube easier to turn and help its sides line up?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-task-title">
-                <h3 id="magnetically-stabilized-puzzle-cube-task-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
-                <p>Keep the cube’s magnetic click while making fast turns easier to control and helping its sides line up.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-action-title">
-                <h3 id="magnetically-stabilized-puzzle-cube-action-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-process-title" aria-label="Action: Go to Process">Action</a></h3>
-                <p>I printed prototypes with magnets near the center, then compared their modeled motion with a side-mounted layout.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-result-title">
-                <h3 id="magnetically-stabilized-puzzle-cube-result-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
-                <p>In the model, a 15° release from rest returned to alignment with root-mounted magnets but settled at 45° with side-mounted magnets.</p>
-              </section>
-            </div>
-          </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-introduction-title">
             <h2 id="magnetically-stabilized-puzzle-cube-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>As a competitive speedcuber, I wanted the control of a magnetic cube without making it harder to turn. Magnetic attraction gives each turn a distinct click and helps the layers line up. This project grew from a simple question about the cube’s internal layout: could moving the magnets preserve that feel while improving control?</p>
+              <div class="project-summary">
+                <div class="summary-box central-question" id="magnetically-stabilized-puzzle-cube-central-question">
+                  <p class="summary-question"><strong>Can moving the magnets make a puzzle cube easier to turn and help its sides line up?</strong></p>
+                </div>
+              </div>
               <div class="build-inline-gallery cube-layout-comparison">
                 <figure class="build-inline-figure">
                   <img loading="lazy" width="590" height="524" src="../assets/builds/magnetically-stabilized-puzzle-cube/normal-cube.png" alt="Cutaway view of a normal puzzle cube showing its central mechanism and surrounding edge and corner pieces.">
@@ -91,7 +74,6 @@
           </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-process-title">
             <h2 id="magnetically-stabilized-puzzle-cube-process-title" tabindex="-1">Process</h2>
-            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/magnetically-stabilized-puzzle-cube/image-02.png" alt="Internal block geometry and magnetic alignment strategy used to stabilize rotation and reduce failure during high-speed manipulation.">
@@ -105,7 +87,6 @@
           </section>
           <section class="build-section cube-study" aria-labelledby="cube-nonlinear-title">
             <h2 id="cube-nonlinear-title" tabindex="-1">Nonlinear Analysis</h2>
-            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Think of alignment as the bottom of a bowl: the root-mounted model has a wider, gentler bowl, while the side-mounted model has a narrower, firmer one. The first can guide the layer home from farther away; the second limits its first swing past alignment.</p>
               <p><strong>These are model predictions, not prototype measurements.</strong> The study treats one turning layer as rigid and compares assumed magnet layouts, not a measured commercial cube; individual-piece wobble, contact, and dry friction are not included.</p>
@@ -135,7 +116,6 @@
           </section>
           <section class="build-section cube-study" aria-labelledby="cube-explore-title">
             <h2 id="cube-explore-title" tabindex="-1">Explore the Motion</h2>
-            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <p>Choose a starting condition, press Play, or drag the time slider: the two magnet views and every live plot follow the same physical moment.</p>
             <div id="cube-nonlinear-lab">
               <p>Interactive playback requires JavaScript; the reference plots are available below.</p>
@@ -185,7 +165,6 @@
           </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-outcome-title">
             <h2 id="magnetically-stabilized-puzzle-cube-outcome-title" tabindex="-1">Outcome</h2>
-            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <div class="cube-drawing-split">

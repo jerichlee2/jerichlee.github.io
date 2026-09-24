@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=15">
+    <link rel="stylesheet" href="../styles.css?v=16">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/pigjaw-displacement-plots.js"></script>
     <style>
@@ -155,39 +155,20 @@
             <div><dt>Analysis update</dt><dd>September 2026</dd></div>
           </dl>
 
-          <section class="build-section" aria-labelledby="pigjaw-problem-title">
-            <h2 id="pigjaw-problem-title" tabindex="-1">Problem Statement</h2>
-            <div class="project-summary" id="pigjaw-scaffold-context">
-              <section class="summary-box central-question" id="pigjaw-central-question" aria-labelledby="pigjaw-summary-situation-title">
-                <h3 id="pigjaw-summary-situation-title"><a class="summary-jump" href="#pigjaw-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
-                <p class="summary-question"><strong>Can a low-cost, 3D-printed holder keep the jawbone steady during a test without bending enough to throw off the results?</strong></p>
-              </section>
-              <section class="summary-box" aria-labelledby="pigjaw-summary-task-title">
-                <h3 id="pigjaw-summary-task-title"><a class="summary-jump" href="#pigjaw-geometry-title" aria-label="Task: Go to Initial Design">Task</a></h3>
-                <p>Hold the jawbone steady so a scaffold can be pushed out to test how firmly it has joined to the bone.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="pigjaw-summary-action-title">
-                <h3 id="pigjaw-summary-action-title"><a class="summary-jump" href="#pigjaw-handcalcs-title" aria-label="Action: Go to Simplified Model">Action</a></h3>
-                <p>I checked the plastic holder with hand calculations and a computer simulation, and built a metal holder for the planned test.</p>
-              </section>
-              <section class="summary-box" aria-labelledby="pigjaw-summary-result-title">
-                <h3 id="pigjaw-summary-result-title"><a class="summary-jump" href="#pigjaw-displacement-comparison-title" aria-label="Result: Go to Displacement Comparison">Result</a></h3>
-                <p>At an assumed 250 N load, the model predicted 0.131 mm of movement, about 2.6 times the chosen 0.050 mm limit.</p>
-              </section>
-            </div>
-          </section>
-
           <section class="build-section" aria-labelledby="pigjaw-introduction-title">
             <h2 id="pigjaw-introduction-title" tabindex="-1">Introduction</h2>
-            <a class="star-return" href="#pigjaw-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>Removing cancer from the jaw can leave a gap too large to heal on its own. Researchers are testing scaffolds that help new bone grow in that gap. The planned push-out test would measure force and displacement to estimate the scaffold–bone construct’s apparent stiffness and assess its mechanical integration.</p>
+              <div class="project-summary" id="pigjaw-scaffold-context">
+                <div class="summary-box central-question" id="pigjaw-central-question">
+                  <p class="summary-question"><strong>Can a low-cost, 3D-printed holder keep the jawbone steady during a test without bending enough to throw off the results?</strong></p>
+                </div>
+              </div>
             </div>
           </section>
 
           <section class="build-section" aria-labelledby="pigjaw-geometry-title">
             <h2 id="pigjaw-geometry-title" tabindex="-1">Initial Design</h2>
-            <a class="star-return" href="#pigjaw-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The PLA assessment used a supplied reference geometry with a central opening, a slotted annulus, and narrow connections to the surrounding plate. The thinner central web and interrupted load path made it important to look beyond the fixture’s overall dimensions when estimating stiffness.</p>
               <p>The analysis used an assumed 250 N load and a 50 µm maximum annular-motion target. These were screening assumptions, not measured test conditions or validated requirements.</p>
@@ -210,7 +191,6 @@
 
           <section class="build-section" aria-labelledby="pigjaw-handcalcs-title">
             <h2 id="pigjaw-handcalcs-title" tabindex="-1">Simplified Model</h2>
-            <a class="star-return" href="#pigjaw-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>I used an equivalent simply supported bridge to estimate global bending and shear deflection. This made the effects of material stiffness, web thickness, and support span easier to examine without resolving every geometric feature.</p>
               <p>The following steps expand the retrospective bridge calculation recorded in the September 2026 note. It treats the deck as a short, linear-elastic beam under a central load, not as an as-built model of the metal assembly.</p>
@@ -393,7 +373,6 @@
 
           <section class="build-section displacement-comparison" aria-labelledby="pigjaw-displacement-comparison-title">
             <h2 id="pigjaw-displacement-comparison-title" tabindex="-1">Displacement Comparison</h2>
-            <a class="star-return" href="#pigjaw-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>At the same assumed 250 N load, the PLA bridge predicts 31.77 µm of midspan motion, while the final M2 FEA predicts 131.37 µm of maximum downward annular motion. The FEA exceeds the chosen 50 µm annular-motion target; the bridge’s smaller result does not establish that the complete fixture meets it.</p>
             </div>
