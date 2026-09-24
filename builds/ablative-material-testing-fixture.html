@@ -10,10 +10,28 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=10">
+    <link rel="stylesheet" href="../styles.css?v=14">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/looping-videos.js"></script>
     <style>
+      .ablative-project #ablative-initial-prototype {
+        max-width: 24rem;
+        margin-inline: auto;
+      }
+      .ablative-project #ablative-initial-prototype video {
+        aspect-ratio: 3 / 4;
+      }
+      .ablative-project .fbd-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+      .ablative-project .fbd-overview {
+        grid-column: 1 / -1;
+      }
+      .ablative-project .fbd-overview img {
+        width: 100%;
+        max-height: none;
+      }
       .thermal-table-scroll {
         overflow-x: auto;
         margin: 1.2rem 0;
@@ -60,7 +78,7 @@
       </aside>
 
       <main class="content">
-        <article>
+        <article class="ablative-project">
           <p class="article-meta">Builds · 2026</p>
           <h1>Ablative Material Testing Fixture</h1>
 
@@ -68,22 +86,54 @@
             <a href="../assets/builds/ablative-material-testing-fixture/test-rig.jpg">
               <img src="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" alt="Ablative testing rig with a fixed torch, remotely indexed specimen holder, insulation, and thermocouple wiring" width="1200" height="1800" fetchpriority="high">
             </a>
-            <figcaption>The torch-based test rig, with indexed specimens, insulation, and thermocouple instrumentation.</figcaption>
           </figure>
-          <div class="article-body">
-            <p>This project combines mechanical design, instrumentation, and thermal analysis for a laboratory-scale ablative testing setup at the UIUC Liquid Rocket Initiative (LRI). A fixed torch and remotely indexed specimen holder allow a graphite reference and ChamberSafe ablative specimens to be exposed at a common test position. Fixture rigidity, thermal isolation, and thermocouple placement shape both the experiment and its interpretation.</p>
-            <p>Without an optical pyrometer, the thermal question became an inverse problem: what effective heat flux would produce the graphite's measured back-face temperature history? The campaign report uses a 1D transient-conduction model to estimate that flux, compare torch settings, and calculate graphite-equivalent thermal doses for the paired ablator tests.</p>
-          </div>
 
           <dl class="build-details">
-              <div><dt>Documentation</dt><dd><a href="https://docs.google.com/presentation/d/1jl3m2g4kNlp3goj9nA_iyftrtbuAuW5E/edit?usp=sharing&amp;ouid=116749996814235097494&amp;rtpof=true&amp;sd=true" target="_blank">View documentation</a></dd></div>
               <div><dt>Group</dt><dd>UIUC Liquid Rocket Initiative (LRI)</dd></div>
               <div><dt>Role</dt><dd>Mechanical Design &amp; Experimental Systems Engineer</dd></div>
               <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Inverse Heat Conduction, Crank–Nicolson, Parameter Estimation, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
               <div><dt>Year</dt><dd>2026</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="ablative-problem-title">
+            <h2 id="ablative-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="ablative-central-question" aria-labelledby="ablative-summary-situation-title">
+                <h3 id="ablative-summary-situation-title"><a class="summary-jump" href="#ablative-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can reliable heat tests help us build confidence that our liquid rocket engine won’t melt during a test firing?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="ablative-summary-task-title">
+                <h3 id="ablative-summary-task-title"><a class="summary-jump" href="#ablative-material-testing-fixture-initial-design-title" aria-label="Task: Go to Initial Design">Task</a></h3>
+                <p>Keep graphite and <a href="https://www.halfcatrocketry.com/chambersafe" target="_blank" rel="noopener noreferrer">ChamberSafe</a> samples lined up under a torch and switch them from a safer distance.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="ablative-summary-action-title">
+                <h3 id="ablative-summary-action-title"><a class="summary-jump" href="#ablative-material-testing-fixture-rotating-gear-design-title" aria-label="Action: Go to Rotating Gear Design">Action</a></h3>
+                <p>I designed a rotating holder controlled by cables and calculated how much force its bolts could handle.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="ablative-summary-result-title">
+                <h3 id="ablative-summary-result-title"><a class="summary-jump" href="#ablative-thermal-results-title" aria-label="Result: Go to Calibration results and thermal dose">Result</a></h3>
+                <p>The report’s model estimated 0.259 and 0.584 MW/m² entering the graphite, with the hotter setting delivering about 2.25 times as much heat per second.</p>
+              </section>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="ablative-introduction-title">
+            <h2 id="ablative-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>For the Liquid Rocket Initiative, this project combined a remotely operated sample holder with a torch-based heat test. Graphite served as a reference alongside ChamberSafe samples, with temperature readings from the back of the graphite used to estimate heat input. The work covered both fixture design and interpretation of the test data.</p>
+            </div>
+          </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
-            <h2 id="ablative-material-testing-fixture-initial-design-title">Initial Design</h2>
+            <h2 id="ablative-material-testing-fixture-initial-design-title" tabindex="-1">Initial Design</h2>
+            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <figure class="build-video" id="ablative-initial-prototype">
+              <video controls muted loop playsinline preload="none" data-autoplay-loop
+                width="540" height="720"
+                poster="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped-poster.jpg"
+                aria-label="Original ablative test fixture prototype in motion">
+                <source src="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4" type="video/mp4">
+                <a href="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4">Download the silent prototype video.</a>
+              </video>
+            </figure>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/ablative-material-testing-fixture/image-03.jpg" alt="The bolt is bent from the bungee cords!">
@@ -91,11 +141,18 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>Our first prototype used a bungee cord return and two indexing pins to define discrete stop positions. While the bungee enabled automatic rotation, we observed the stop bolts plastically deforming after only a handful of cycles, indicating impact-dominated loading at the hard stops. The layout also created a safety hazard: the operator could be positioned downstream of the torch plume during indexing if not sufficiently offset. In addition, the improvised “pins” (screwdrivers) did not seat repeatably in the gear holes, leading to inconsistent indexing angles and poor test-to-test repeatability. These issues motivated a redesigned indexing mechanism that (i) bounded impact loads, (ii) increased operator stand-off from the flame, and (iii) enforced repeatable, well-defined stop geometry.</p>
+              <p>The bungee return drove the holder into its stops, permanently bending the bolts after a few cycles. Screwdriver pins seated inconsistently, and the layout could expose the operator to the torch plume.</p>
+              <p>The redesign needed to:</p>
+              <ol>
+                <li>Limit impact loads on the bolts.</li>
+                <li>Increase the operator’s distance from the torch plume.</li>
+                <li>Use fixed stops for repeatable sample alignment.</li>
+              </ol>
             </div>
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-rotating-gear-design-title">
-            <h2 id="ablative-material-testing-fixture-rotating-gear-design-title">Rotating Gear Design</h2>
+            <h2 id="ablative-material-testing-fixture-rotating-gear-design-title" tabindex="-1">Rotating Gear Design</h2>
+            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/ablative-material-testing-fixture/image-04.png" alt="Mechanically indexed rotating disk with bolt alignment and T-slot hard stops">
@@ -103,13 +160,14 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>For the ablative test rig, I designed a mechanically constrained rotating disk system for rapid, repeatable sample exchange under flame exposure. Precision alignment bolts fix each specimen relative to the torch, while T-slot walls act as hard 180° stops to prevent over-rotation. Opposing cables enable remote indexing, maintaining operator distance from ~3000 K conditions and ensuring controlled, repeatable positioning for comparative ablation testing.</p><p>During early testing, cable-induced torque plastically deformed the clamping bolts. Even at reduced speeds, repeated cycling caused cumulative yielding, confirming that peak torque—not angular velocity—governed failure. This deformation degraded angular fidelity between ablative and graphite samples, directly compromising repeatability and thermal alignment.</p>
+              <p>I designed a cable-operated rotating disk for repeatable sample changes while keeping the operator away from the torch. Alignment bolts position the samples, and T-slot walls stop rotation at 180°.</p>
+              <p>Repeated cycling permanently bent the clamping bolts even at lower speeds, pointing to peak torque as the main failure driver and reducing alignment and test repeatability.</p>
             </div>
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-simplified-model-title">
             <h2 id="ablative-material-testing-fixture-simplified-model-title">Simplified Model</h2>
-            <div class="build-inline-gallery">
-              <figure class="build-inline-figure">
+            <div class="build-inline-gallery fbd-gallery">
+              <figure class="build-inline-figure fbd-overview">
                 <img src="../assets/builds/ablative-material-testing-fixture/image-05.png" alt="A simplified, free-body diagram of the test setup">
                 <figcaption>A simplified, free-body diagram of the test setup</figcaption>
               </figure>
@@ -123,7 +181,7 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>To address this, I developed a simplified mechanical model of the disk—bolt—cable system to quantify the relationship between applied cable force, disk radius, and resulting bolt stresses. By treating the disk as a rigid body with reaction forces localized at the bolt interfaces and enforcing equilibrium under applied torque, I derived allowable force limits based on bolt material yield strength and cross-sectional properties. This analysis produced a safe operating force range for manual actuation, eliminating plastic deformation while preserving reliable indexing. The result was a mechanically bounded system with defined load constraints, transforming an empirical failure into a controlled, analytically governed design parameter.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
+              <p>I modeled the disk, bolts, and cables to relate cable force and disk radius to bolt stress. Assuming a rigid disk and balancing torque at the bolt contacts, I calculated allowable cable forces from bolt geometry and yield strength to prevent permanent bending and maintain repeatable sample positioning.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
 E_k=\frac{1}{2}\frac{I}{g_c}\,\omega^2,
 \]<br/>where \(I\) is the mass moment of inertia in \(\mathrm{lbm\cdot in^2}\) and \(g_c=386.09~\mathrm{\frac{lbm\cdot in}{lbf\cdot s^2}}\).</p><p>Assuming the stop dissipates this energy over the compliance angle \(\Delta\theta_{\text{stop}}\), and using a linear torque ramp \((T_{\text{peak}}\approx 2T_{\text{avg}})\),<br/>\[
 T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
@@ -133,7 +191,7 @@ T_{\text{stop,peak}}\approx \frac{2E_k}{\Delta\theta_{\text{stop}}}.
 \frac{32}{\pi d_{\text{minor}}^3}
 \left(\frac{T_{\text{stop,peak}}}{r_c}\right)
 L_{\text{bolt,eff}}.
-\]<br/>Combining all terms gives a speed—stress relationship:<br/>\[
+\]<br/>Combining all terms gives the relationship between impact speed and bolt stress:<br/>\[
 \sigma_{\text{bolt,peak}}
 =
 \left(
@@ -167,14 +225,14 @@ N_{\max}
 \]<br/>\[
 \boxed{N_{\max}\approx 30~\text{rpm at the moment of impact}.}
 \]</p><p><strong>Recommended engineering limits (with safety factor)<br/></strong>If instead \(\sigma_{\text{allow}}=\frac{S_y}{n_y}\), then:<br/>- For \(n_y=2\): \(N_{\max}\approx 21.4~\mathrm{rpm}\).<br/>- For \(n_y=3\): \(N_{\max}\approx 17.5~\mathrm{rpm}\).</p><p>A conservative operating recommendation is therefore:<br/>\[
-\boxed{\text{Keep impact speed } \lesssim 17\text{—}20~\mathrm{rpm}.}
+\boxed{\text{Keep impact speed } \lesssim 17\text{ to }20~\mathrm{rpm}.}
 \]<br/>\[
 \boxed{20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.}
 \]</p><p>At \(20~\mathrm{rpm}\) (\(0.333~\mathrm{rev/s}\)), the disk rotates at about \(120^\circ/\mathrm{s}\). A \(90^\circ\) index move at that steady rate takes roughly:</p>
               <div class="article-equation">\[
                 \boxed{t \approx 0.75~\mathrm{s}.}
               \]</div>
-              <p>Practically, this is a “moderate” motion—fast enough that you should consciously slow down as you approach the hard stop, since bolt yielding is driven by the impact speed at contact (i.e., \(\omega\) right before the stop), not the average speed over the full rotation.</p>
+              <p>Although this is a “moderate” motion, you should consciously slow down as you approach the hard stop. Bolt yielding is driven by the impact speed at contact (i.e., \(\omega\) right before the stop), not the average speed over the full rotation.</p>
             </div>
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-process-title">
@@ -186,7 +244,8 @@ N_{\max}
               </figure>
             </div>
             <div class="article-body">
-              <p>Initial testing revealed several key challenges, including unstable torch mounting, parasitic heat sinking through fixtures, and thermal cross-talk between successive specimens. Early setups relied on single-point torch mounting and aluminum T-slot rails, both of which proved unsuitable under sustained high heat flux.</p><p>Following advisor feedback, the design evolved toward a rigid, multi-point torch mount and a steel sliding-rail system. This allowed controlled translation between a graphite reference sample and test specimens without disturbing torch alignment. Additional measures included silica cloth insulation, embedded thermocouples, and elimination of unintended heat sinks in the measurement chain.</p><p>Multiple design reviews guided refinements in torch orientation, thermocouple geometry, fixture materials, and test procedure sequencing.</p>
+              <p>Testing revealed unstable torch mounting, unwanted heat loss through fixtures, and heat transfer between successive samples.</p>
+              <p>Advisor-guided revisions added a rigid multi-point torch mount, steel sliding rails, silica-cloth insulation, and embedded thermocouples. The new setup maintained torch alignment when switching between graphite reference and test samples and reduced unintended heat loss.</p>
             </div>
           </section>
             <div class="build-inline-gallery is-single is-wide">
@@ -198,8 +257,8 @@ N_{\max}
           <section class="build-section" aria-labelledby="ablative-thermal-model-title">
             <h2 id="ablative-thermal-model-title">1D transient heat-conduction model</h2>
             <div class="article-body">
-              <p>The graphite reference acts as a transient conduction calorimeter. The forward model predicts its back-face temperature from an imposed hot-face heat flux; the inverse calculation uses the measured temperature to estimate the flux instead. Here the unknown is one constant pulse amplitude, \(q_0\), not an arbitrary heat-flux history or an unknown material property.</p>
-              <p>The report represents the graphite as a slab of thickness \(L = 0.02362\ \mathrm{m}\) (0.93 in), with constant properties \(k = 130\ \mathrm{W/(m\,K)}\), \(\rho = 1850\ \mathrm{kg/m^3}\), and \(c = 700\ \mathrm{J/(kg\,K)}\). Heat flows through the thickness from \(x=0\) to the back-face thermocouple at \(x=L\):</p>
+              <p>The graphite model predicts back-face temperature from heat flux; fitting it to measurements estimates the constant pulse amplitude, \(q_0\).</p>
+              <p>The slab has thickness \(L = 0.02362\ \mathrm{m}\) (0.93 in) and constant \(k = 130\ \mathrm{W/(m\,K)}\), \(\rho = 1850\ \mathrm{kg/m^3}\), and \(c = 700\ \mathrm{J/(kg\,K)}\), with heat flowing from \(x=0\) to the back-face thermocouple at \(x=L\):</p>
               <div class="article-equation">
                 \[
                 \rho c\,\frac{\partial T}{\partial t}
@@ -233,9 +292,9 @@ N_{\max}
           <section class="build-section" aria-labelledby="ablative-inverse-fit-title">
             <h2 id="ablative-inverse-fit-title">Inferring heat flux from back-face temperature</h2>
             <div class="article-body">
-              <p>The forward calculation uses Crank–Nicolson time integration, 101 spatial nodes, and a 0.01 s time step. Ghost-node relations impose the heat-flux boundary conditions, leaving a tridiagonal linear system at each time step.</p>
-              <p>Measured temperatures are baseline-subtracted before fitting. The report applies the TC-2 calibration coefficients, \(T_{\mathrm{corr}}=G T_{\mathrm{raw}}+b\), with \(G=1.0129\) and \(b=-0.6550\,^\circ\mathrm{C}\). Subtracting the pre-event baseline cancels the offset, so \(\Delta T_{\mathrm{corr}}=G\Delta T_{\mathrm{raw}}\).</p>
-              <p>The fitted flux minimizes squared error between the modeled and measured back-face rise over the first 3.5 s after detected onset:</p>
+              <p>The model uses Crank–Nicolson, 101 spatial nodes, and 0.01 s steps.</p>
+              <p>Baseline subtraction cancels the TC-2 offset, giving \(\Delta T_{\mathrm{corr}}=1.0129\Delta T_{\mathrm{raw}}\).</p>
+              <p>The fit minimizes squared error between modeled and measured back-face temperature rises over the first 3.5 s after detected onset:</p>
               <div class="article-equation">
                 \[
                 \widehat q_0=\operatorname*{arg\,min}_{q_0}
@@ -262,12 +321,12 @@ N_{\max}
                 \]
               </div>
               <p>The flux history is restricted to a single pulse amplitude; the report does not reconstruct a general time-varying flux or apply an explicit regularization penalty. It also does not report a confidence interval for the fitted flux.</p>
-              <p class="article-caveat">“Onset” is detected from the back-face signal crossing 0.5 °C above baseline for five consecutive logged samples—not from an external flame-on trigger. Thermal lag therefore affects the time alignment. The logger's roughly 91–167 Hz polling rates also exceed the few-Hz rate of distinct temperature updates, so adjacent samples are not all new independent measurements.</p>
             </div>
           </section>
 
           <section class="build-section" aria-labelledby="ablative-thermal-results-title">
-            <h2 id="ablative-thermal-results-title">Calibration results and thermal dose</h2>
+            <h2 id="ablative-thermal-results-title" tabindex="-1">Calibration results and thermal dose</h2>
+            <a class="star-return" href="#ablative-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
               <p>The two graphite fits infer effective net inward heat fluxes of 0.2592 and 0.5844 MW/m². The hot torch condition is about 2.25 times the baseline condition under this model. These are inferred reference-specimen fluxes, not directly measured incident torch fluxes.</p>
             </div>
@@ -304,18 +363,16 @@ N_{\max}
                 \]
               </div>
               <p>Applying each graphite-derived flux to its paired ChamberSafe exposure gives about 5.18 MJ/m² for 20 s at baseline and 5.84 MJ/m² for 10 s at the hot setting. The estimated doses differ by about 13%, despite the twofold difference in exposure time.</p>
-              <p class="article-caveat">These are graphite-equivalent dose estimates for comparing the paired runs. Transferring the reference flux to ChamberSafe is a modeling assumption, not an independent measurement of the heat absorbed by the ablating material.</p>
             </div>
           </section>
 
           <section class="build-section" aria-labelledby="ablative-thermal-limits-title">
             <h2 id="ablative-thermal-limits-title">Limits and next measurements</h2>
             <div class="article-body">
-              <p>The ChamberSafe back-face rises were only 0.317 °C and 0.241 °C—close to the 0.0625 °C readout increments and noise floor. A small signal can reflect insulation, sensor depth and thermal lag, or poor sensor coupling. It does not by itself establish ablation performance.</p>
-              <p>The inferred flux is also sensitive to graphite properties and the assumed one-dimensional heat flow. The report's heat-capacity sensitivity test shifts inferred flux by approximately −27% / +33% for a ±20% change in heat capacity. A localized torch footprint can introduce lateral spreading that the slab model omits; in that case, \(q_0\) is best treated as an effective severity index.</p>
-              <p>The analyzed dataset contains two graphite conditions and two ablator exposures, not a repeatability study. Independent event timing, repeated reference runs, and post-test recession measurements are needed to establish uncertainty and a recession-versus-dose relationship. Those measurements are not reported as completed here.</p>
-              <p>The inferred 0.26–0.58 MW/m² fluxes are below the report's separate, several-MW/m² engine estimate. Matching a single estimated dose would not by itself establish engine-representative test conditions.</p>
-              <p class="article-caveat">Source: UIUC LRI, <cite>Torch-Based Ablative Characterization Campaign Report: Graphite Calorimeter Inversion and ChamberSafe Back-Face Measurements</cite> (March 1, 2026), pp. 3–15. This page summarizes the report; it is not an independent rerun of the raw-data analysis.</p>
+              <p>ChamberSafe’s 0.317 °C and 0.241 °C back-face rises, with 0.0625 °C readout increments, cannot alone establish ablation performance.</p>
+              <p>A ±20% heat-capacity change shifts inferred flux by approximately −27% / +33%; lateral spreading omitted from the 1D model can make \(q_0\) an effective severity index.</p>
+              <p>Two graphite conditions and two ablator exposures are not a repeatability study; independent timing, repeat runs, and recession measurements remain next steps.</p>
+              <p>The inferred 0.26–0.58 MW/m² fluxes are below the report’s several-MW/m² engine estimate; matching dose alone does not establish engine-representative conditions.</p>
             </div>
           </section>
 
@@ -328,8 +385,8 @@ N_{\max}
               </figure>
             </div>
             <div class="article-body">
-              <p>The fixture brought together controlled specimen positioning, a fixed torch, insulation, and back-face thermocouple logging for the graphite-reference and ChamberSafe campaign. The mechanical design work and thermal model address different parts of the same problem: positioning the sample consistently, then interpreting the temperature response.</p>
-              <p>The report establishes a model-based comparison of the two torch conditions and estimated doses for the paired ablator runs. It does not establish engine-condition qualification or a recession model. Repeated graphite checks, independent timing, and post-test recession measurements remain the next steps.</p>
+              <p>The fixture combined controlled sample positioning and temperature logging; the model compared two torch conditions and estimated thermal doses for the paired ablator runs.</p>
+              <p>Engine qualification and a recession model still require further work, including repeated graphite checks, independent timing, and post-test recession measurements.</p>
             </div>
           </section>
           <section class="build-section build-video-section" aria-labelledby="demonstration-title">
@@ -348,7 +405,6 @@ N_{\max}
           </section>
           <section class="build-section build-video-section" aria-labelledby="test-footage-title">
             <h2 id="test-footage-title">Test footage</h2>
-            <p>Silent, looping clips from the test campaign. Use the controls to pause or scrub through each video.</p>
             <figure class="build-video">
               <video controls muted loop playsinline preload="none" data-autoplay-loop
                 width="1280" height="720"

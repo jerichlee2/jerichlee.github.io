@@ -1,0 +1,70 @@
+/* Scoped to the cube's source-trace explorer. */
+#cube-nonlinear-lab { --cube-blue:#176da5; --cube-orange:#b8520c; --cube-rule:#d6d0c5; min-width:0; margin:1.4rem 0 2rem; scroll-margin-top:1rem; }
+#cube-nonlinear-lab *, #cube-nonlinear-lab *::before, #cube-nonlinear-lab *::after { box-sizing:border-box; }
+#cube-nonlinear-lab h3 { margin:0 0 .35rem; font-size:1rem; }
+#cube-nonlinear-lab h4 { margin:0 0 .25rem; font-size:.92rem; }
+#cube-nonlinear-lab p { margin:.55rem 0; text-align:left; }
+#cube-nonlinear-lab .cube-small { font-size:.88rem; line-height:1.5; }
+#cube-nonlinear-lab .cube-lab-controls { position:sticky; top:.5rem; z-index:5; border:1px solid var(--cube-rule); padding:.65rem .75rem; background:#fffdf9; box-shadow:0 2px 5px #1f1e1b0d; }
+#cube-nonlinear-lab label { display:block; font-size:.78rem; font-weight:700; }
+#cube-nonlinear-lab select, #cube-nonlinear-lab button { font:inherit; font-size:.84rem; color:inherit; border:1px solid #908679; border-radius:0; background:#fffdf9; min-height:44px; padding:.3rem .5rem; }
+#cube-nonlinear-lab select { max-width:100%; width:100%; margin:.15rem 0 0; }
+#cube-nonlinear-lab .cube-setup { display:grid; grid-template-columns:minmax(0,1fr) 5rem; align-items:end; gap:.6rem; }
+#cube-nonlinear-lab .cube-case { min-width:0; }
+#cube-nonlinear-lab button { cursor:pointer; }
+#cube-nonlinear-lab button:hover { background:#f1ebe2; }
+#cube-nonlinear-lab .cube-play { background:#952a24; color:#fff; border-color:#952a24; min-width:60px; }
+#cube-nonlinear-lab .cube-play:hover { background:#7d211d; }
+#cube-nonlinear-lab :is(button, select, input, a):focus-visible { outline:2px solid #952a24; outline-offset:3px; }
+#cube-nonlinear-lab .cube-playback { display:flex; align-items:center; gap:.45rem; margin:.4rem 0; }
+#cube-nonlinear-lab .cube-speed { min-width:0; }
+#cube-nonlinear-lab .cube-speed select { margin-bottom:0; }
+#cube-nonlinear-lab .cube-timeline { min-width:0; flex:1; margin-left:.25rem; }
+#cube-nonlinear-lab .cube-timeline-top { display:flex; justify-content:space-between; gap:.5rem; flex-wrap:wrap; }
+#cube-nonlinear-lab .cube-clock { font-size:.76rem; font-variant-numeric:tabular-nums; }
+#cube-nonlinear-lab input[type="range"] { display:block; width:100%; height:28px; margin:0; accent-color:#952a24; cursor:pointer; }
+#cube-nonlinear-lab .cube-initial { font-variant-numeric:tabular-nums; }
+#cube-nonlinear-lab .cube-legend { display:flex; flex-wrap:wrap; gap:.35rem 1rem; margin:.65rem 0; font-size:.8rem; font-weight:700; }
+#cube-nonlinear-lab .cube-legend span { display:inline-flex; align-items:center; gap:.45rem; }
+#cube-nonlinear-lab .cube-swatch { display:inline-block; width:1.8rem; border-top:3px solid var(--cube-blue); }
+#cube-nonlinear-lab .cube-swatch-side { border-top:3px dashed var(--cube-orange); }
+#cube-nonlinear-lab .cube-root-text { color:var(--cube-blue); }
+#cube-nonlinear-lab .cube-side-text { color:var(--cube-orange); }
+#cube-nonlinear-lab .cube-geometry-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin-top:.5rem; }
+#cube-nonlinear-lab .cube-geometry { min-width:0; border:1px solid var(--cube-rule); padding:.5rem; background:#fffdf9; }
+#cube-nonlinear-lab .cube-geometry canvas { display:block; width:100%; height:clamp(140px,20vh,180px); object-fit:contain; }
+#cube-nonlinear-lab .cube-readout { font-variant-numeric:tabular-nums; font-size:.76rem; }
+#cube-nonlinear-lab .cube-plot-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin:.5rem 0; }
+#cube-nonlinear-lab .cube-chart { min-width:0; margin:0; border:1px solid var(--cube-rule); background:#fffdf9; padding:.5rem; }
+#cube-nonlinear-lab .cube-chart h4 { margin-bottom:.15rem; }
+#cube-nonlinear-lab .cube-chart-wide { grid-column:1 / -1; }
+#cube-nonlinear-lab .cube-chart[hidden] { display:none; }
+#cube-nonlinear-lab #cube-panel-potential { padding:0; border:0; background:transparent; }
+#cube-nonlinear-lab .cube-well-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; }
+#cube-nonlinear-lab .cube-well { min-width:0; border:1px solid var(--cube-rule); padding:.5rem; background:#fffdf9; }
+#cube-nonlinear-lab .cube-well-readout { font-size:.76rem; font-weight:bold; font-variant-numeric:tabular-nums; }
+#cube-nonlinear-lab p.cube-well-readout { margin:.25rem 0 0; }
+#cube-nonlinear-lab .cube-chart svg .cube-well-label { font-size:11px; paint-order:stroke; stroke:#fffdf9; stroke-width:3px; stroke-linejoin:round; }
+#cube-nonlinear-lab .cube-plot-tabs { display:flex; flex-wrap:wrap; gap:.3rem; margin:.4rem 0 0; padding-top:.4rem; border-top:1px solid var(--cube-rule); }
+#cube-nonlinear-lab .cube-plot-tabs button { font-size:.8rem; min-height:44px; padding:.3rem .5rem; }
+#cube-nonlinear-lab .cube-plot-tabs [aria-selected="true"] { border-color:#952a24; color:#952a24; font-weight:700; background:#f7eee8; }
+#cube-nonlinear-lab .cube-chart-host { width:100%; min-width:0; }
+#cube-nonlinear-lab .cube-chart svg { width:100%; display:block; overflow:visible; }
+#cube-nonlinear-lab .cube-chart figcaption { margin:.5rem 0 0; padding:0; color:#5e584f; font-size:.82rem; line-height:1.5; text-align:left; }
+#cube-nonlinear-lab .cube-chart svg text { font:12px Georgia,"Times New Roman",serif; fill:#48423a; }
+#cube-nonlinear-lab .cube-grid-line { stroke:#e4e0d8; stroke-width:1; }
+#cube-nonlinear-lab .cube-axis-line { stroke:#b6aea0; stroke-width:1; }
+#cube-nonlinear-lab .cube-cursor { stroke:#777066; stroke-width:1; stroke-dasharray:3 4; }
+#cube-nonlinear-lab .cube-visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media (max-width:700px) {
+  #cube-nonlinear-lab .cube-lab-controls { position:static; }
+  #cube-nonlinear-lab .cube-plot-grid { grid-template-columns:1fr; }
+  #cube-nonlinear-lab .cube-geometry-grid { grid-template-columns:1fr; gap:.75rem; }
+  #cube-nonlinear-lab .cube-well-grid { grid-template-columns:1fr; gap:.75rem; }
+  #cube-nonlinear-lab .cube-geometry canvas { height:180px; }
+  #cube-nonlinear-lab .cube-playback { flex-wrap:wrap; }
+  #cube-nonlinear-lab .cube-timeline { flex-basis:100%; margin:0; }
+}
+@media (max-height:560px) {
+  #cube-nonlinear-lab .cube-lab-controls { position:static; }
+}

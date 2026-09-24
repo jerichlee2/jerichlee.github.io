@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=7">
+    <link rel="stylesheet" href="../styles.css?v=14">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
@@ -41,17 +41,40 @@
           <figure class="build-hero">
             <img src="../assets/builds/microchannel-transport-processes/cover.png" alt="Microchannel Transport Processes">
           </figure>
-          <div class="article-body">
-            <p>This project investigates coupled heat and mass transport in a pressure-driven microchannel reactor where aqueous SO₂ and H₂O₂ react to form sulfuric acid. Microreactors enable high surface-to-volume ratios and precise thermal control, making them attractive for kinetic studies and process intensification.</p><p>A first-order numerical model was developed from the conservation of momentum, energy, and species under standard microchannel assumptions. The simplified model was compared against a two-dimensional CFD simulation in ANSYS Fluent to assess accuracy, limitations, and applicability for preliminary microreactor design.</p>
-          </div>
-
           <dl class="build-details">
-              <div><dt>Documentation</dt><dd><a href="https://drive.google.com/file/d/1bEQ2nLvoRDdiNollbssdfuKBFt_z8CoY/view?usp=sharing" target="_blank">View documentation</a></dd></div>
-              <div><dt>Group</dt><dd>Course Project — ME 420 (Intermediate Heat Transfer)</dd></div>
+              <div><dt>Group</dt><dd>Course Project: ME 420 (Intermediate Heat Transfer)</dd></div>
               <div><dt>Role</dt><dd>Co-author</dd></div>
               <div><dt>Skills</dt><dd>Heat Transfer; Mass Transport; Reaction Kinetics; Finite Difference Methods; CFD (ANSYS Fluent); Python; Microfluidics; Transport Phenomena</dd></div>
               <div><dt>Year</dt><dd>2025</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="microchannel-transport-processes-problem-title">
+            <h2 id="microchannel-transport-processes-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="microchannel-transport-processes-central-question" aria-labelledby="microchannel-transport-processes-situation-title">
+                <h3 id="microchannel-transport-processes-situation-title"><a class="summary-jump" href="#microchannel-transport-processes-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can a simpler computer model predict how heat and chemicals change as they flow through a tiny channel?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="microchannel-transport-processes-task-title">
+                <h3 id="microchannel-transport-processes-task-title"><a class="summary-jump" href="#microchannel-transport-processes-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
+                <p>Build a simpler model and compare its predictions with a detailed flow simulation.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="microchannel-transport-processes-action-title">
+                <h3 id="microchannel-transport-processes-action-title"><a class="summary-jump" href="#microchannel-transport-processes-process-title" aria-label="Action: Go to Process">Action</a></h3>
+                <p>I built a Python model of heat flow, chemical mixing, and reactions, then compared it with ANSYS Fluent.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="microchannel-transport-processes-result-title">
+                <h3 id="microchannel-transport-processes-result-title"><a class="summary-jump" href="#microchannel-transport-processes-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
+                <p>The model predicted that fluid would cross the 2 mm channel in about 0.59 milliseconds, with cooling and mixing trends similar to the detailed simulation.</p>
+              </section>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="microchannel-transport-processes-introduction-title">
+            <h2 id="microchannel-transport-processes-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>In a microchannel reactor, flowing chemicals mix and react while the channel walls remove heat. These processes influence one another, so understanding the reactor means tracking temperature and chemical concentrations together. This project uses sulfuric acid formation as a case study to explore how a simpler model can capture that behavior before comparison with a detailed flow simulation.</p>
+            </div>
+          </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-simplified-model-title">
             <h2 id="microchannel-transport-processes-simplified-model-title">Simplified Model</h2>
             <div class="build-inline-gallery">
@@ -111,11 +134,12 @@ u(y) \frac{\partial C_i}{\partial x}
 D_{AB} \frac{\partial^2 C_i}{\partial y^2}
 +
 A e^{-E_a/(k T_m)} C_1 C_2.
-\]</p><p>The final reduced-order system therefore consists of:<br/>- An analytical laminar velocity field,<br/>- A 1D nonlinear temperature ODE,<br/>- A convection–diffusion–reaction species equation.</p><p>The temperature ODE is integrated using explicit fourth-order Runge–Kutta, while the species equation is discretized via finite differences with a semi-implicit scheme to maintain stability under strong reaction coupling.</p><p>This reduced-order framework transforms a fully coupled multiphysics PDE system into a computationally efficient, physically interpretable model. It enables rapid parametric exploration of reaction kinetics, wall temperature effects, and inlet concentration ratios—providing predictive insight into microchannel transport behavior while retaining the dominant thermal and chemical physics governing sulfuric acid formation.</p>
+\]</p><p>The final reduced-order system therefore consists of:<br/>- An analytical laminar velocity field,<br/>- A 1D nonlinear temperature ODE,<br/>- A convection–diffusion–reaction species equation.</p><p>The temperature ODE is integrated using explicit fourth-order Runge–Kutta, while the species equation is discretized via finite differences with a semi-implicit scheme to maintain stability under strong reaction coupling.</p><p>This reduced-order framework transforms a fully coupled multiphysics PDE system into a computationally efficient, physically interpretable model. It enables rapid parametric exploration of reaction kinetics, wall temperature effects, and inlet concentration ratios, providing predictive insight into microchannel transport behavior while retaining the dominant thermal and chemical physics governing sulfuric acid formation.</p>
             </div>
           </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-process-title">
-            <h2 id="microchannel-transport-processes-process-title">Process</h2>
+            <h2 id="microchannel-transport-processes-process-title" tabindex="-1">Process</h2>
+            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/microchannel-transport-processes/image-04.png" alt="Hydroxyl ion mass fraction near the outlet">
@@ -127,7 +151,8 @@ A e^{-E_a/(k T_m)} C_1 C_2.
             </div>
           </section>
           <section class="build-section" aria-labelledby="microchannel-transport-processes-outcome-title">
-            <h2 id="microchannel-transport-processes-outcome-title">Outcome</h2>
+            <h2 id="microchannel-transport-processes-outcome-title" tabindex="-1">Outcome</h2>
+            <a class="star-return" href="#microchannel-transport-processes-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/microchannel-transport-processes/image-05.png" alt="Cross-section-averaged temperature">

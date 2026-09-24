@@ -4,14 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Magnetically Stabilized Puzzle Cube | Jerich Lee</title>
-    <meta name="description" content="A mechanically redesigned Rubik&#x27;s-style cube optimized for stability, precision, and speed solving.">
+    <meta name="description" content="A root-mounted magnetic puzzle cube, with a nonlinear model comparing alignment capture, overshoot, and motion through linked interactive plots.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=7">
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="../styles.css?v=14">
+    <link rel="stylesheet" href="../assets/css/cube-project.css?v=6">
+    <link rel="stylesheet" href="../assets/css/cube-nonlinear-lab.css?v=5">
+    <script defer src="../assets/js/cube-nonlinear-data.js?v=1"></script>
+    <script defer src="../assets/js/cube-potential-data.js?v=1"></script>
+    <script defer src="../assets/js/cube-nonlinear-lab.js?v=7"></script>
   </head>
   <body>
     <div class="site-shell">
@@ -35,24 +39,59 @@
 
       <main class="content">
         <article>
-          <p class="article-meta">Builds · 2018-2020</p>
+          <p class="article-meta">Builds · 2018-2020 · Nonlinear analysis, 2026</p>
           <h1>Magnetically Stabilized Puzzle Cube</h1>
+
 
           <figure class="build-hero">
             <img src="../assets/builds/magnetically-stabilized-puzzle-cube/cover.jpg" alt="Magnetically Stabilized Puzzle Cube">
           </figure>
-          <div class="article-body">
-            <p>As a competitive speedcuber, I was frustrated with the current hardware on the market. The state-of-the-art cube designs all showcased magnets, which would provide a distinct &quot;click&quot;, providing a solver control when moving at over 10 moves per second.</p>
-          </div>
-
           <dl class="build-details">
-              <div><dt>Documentation</dt><dd><a href="https://patents.google.com/patent/US10583351B2" target="_blank">View documentation</a></dd></div>
               <div><dt>Role</dt><dd>Inventor · Mechanical Designer</dd></div>
-              <div><dt>Skills</dt><dd>Mechanical Design, CAD, Kinematic Analysis, Product Engineering, Patent Writing, Tolerance Design</dd></div>
+              <div><dt>Skills</dt><dd>Mechanical Design, CAD, Nonlinear Dynamics, Product Engineering, Patent Writing, Tolerance Design</dd></div>
               <div><dt>Year</dt><dd>2018-2020</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-problem-title">
+            <h2 id="magnetically-stabilized-puzzle-cube-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="magnetically-stabilized-puzzle-cube-central-question" aria-labelledby="magnetically-stabilized-puzzle-cube-situation-title">
+                <h3 id="magnetically-stabilized-puzzle-cube-situation-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can moving the magnets make a puzzle cube easier to turn and help its sides line up?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-task-title">
+                <h3 id="magnetically-stabilized-puzzle-cube-task-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
+                <p>Keep the cube’s magnetic click while making fast turns easier to control and helping its sides line up.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-action-title">
+                <h3 id="magnetically-stabilized-puzzle-cube-action-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-process-title" aria-label="Action: Go to Process">Action</a></h3>
+                <p>I printed prototypes with magnets near the center, then compared their modeled motion with a side-mounted layout.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="magnetically-stabilized-puzzle-cube-result-title">
+                <h3 id="magnetically-stabilized-puzzle-cube-result-title"><a class="summary-jump" href="#magnetically-stabilized-puzzle-cube-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
+                <p>In the model, a 15° release from rest returned to alignment with root-mounted magnets but settled at 45° with side-mounted magnets.</p>
+              </section>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-introduction-title">
+            <h2 id="magnetically-stabilized-puzzle-cube-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>As a competitive speedcuber, I wanted the control of a magnetic cube without making it harder to turn. Magnetic attraction gives each turn a distinct click and helps the layers line up. This project grew from a simple question about the cube’s internal layout: could moving the magnets preserve that feel while improving control?</p>
+              <div class="build-inline-gallery cube-layout-comparison">
+                <figure class="build-inline-figure">
+                  <img loading="lazy" width="590" height="524" src="../assets/builds/magnetically-stabilized-puzzle-cube/normal-cube.png" alt="Cutaway view of a normal puzzle cube showing its central mechanism and surrounding edge and corner pieces.">
+                  <figcaption><strong>Normal cube (side magnets)</strong><span>Magnets sit along the sides of neighboring edge and corner pieces.</span></figcaption>
+                </figure>
+                <figure class="build-inline-figure">
+                  <img loading="lazy" width="1600" height="1200" src="../assets/builds/magnetically-stabilized-puzzle-cube/cover.jpg" alt="My 3D-printed cube with magnets visible at the roots of the pieces, closer to the center.">
+                  <figcaption><strong>My cube (root magnets)</strong><span>Magnets sit at the roots of the pieces, closer to the cube’s center.</span></figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-process-title">
-            <h2 id="magnetically-stabilized-puzzle-cube-process-title">Process</h2>
+            <h2 id="magnetically-stabilized-puzzle-cube-process-title" tabindex="-1">Process</h2>
+            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/magnetically-stabilized-puzzle-cube/image-02.png" alt="Internal block geometry and magnetic alignment strategy used to stabilize rotation and reduce failure during high-speed manipulation.">
@@ -60,19 +99,113 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>The main issue was that each magnet was arbitrarily placed at the outer radius of each piece. As each magnet had mass, the cube would oscillate about each quarter turn as a result of the placement; these oscillations would make turning uncontrollable. The magnets would provide the user a &quot;click&#x27;&quot; at the cost of making it more difficult to turn. Cubers swore by this &quot;click&quot;; something about this psychologically made turning satisfying.</p><p>To combat this, I realized that if I brought the magnets closer to the cube&#x27;s core, then I could retain the beloved &quot;click&quot; and make it easier to turn each side, thereby eliminating these oscillations. (Think ice skater angular momentum example; skater spins faster when he/she brings arms closer to axis). I then realized that by bringing the magnets closer to the core, the cube would turn on its own after a certain angular threshold; the magnetic attraction &quot;rounded up&quot; each turn!</p><p>I convinced my parents to get me the latest Prusa MK3 printer and I spent a whole week building it from the kit, fueled from the haribo gummy bears that was in the kit. I started printing cubes in my garage and I experimented with different magnet placements on each piece. I converged upon placing the magnets in the roots of the edges and the corners.</p>
+              <p>I wanted to preserve the magnetic click while making turns easier to control. Moving magnet mass toward the axis lowers rotational inertia, but it also changes the magnetic pull and its leverage. My original idea was to place the magnets closer to the core and help the layer finish each turn.</p>
+              <p>I built a Prusa MK3 from a kit, fueled by the included gummy bears, and began printing cubes in my garage. After trying different placements, I put the magnets in the roots of the edges and corners. The later analysis below tests that idea and shows why lower inertia does not automatically mean less overshoot.</p>
             </div>
           </section>
+          <section class="build-section cube-study" aria-labelledby="cube-nonlinear-title">
+            <h2 id="cube-nonlinear-title" tabindex="-1">Nonlinear Analysis</h2>
+            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>Think of alignment as the bottom of a bowl: the root-mounted model has a wider, gentler bowl, while the side-mounted model has a narrower, firmer one. The first can guide the layer home from farther away; the second limits its first swing past alignment.</p>
+              <p><strong>These are model predictions, not prototype measurements.</strong> The study treats one turning layer as rigid and compares assumed magnet layouts, not a measured commercial cube; individual-piece wobble, contact, and dry friction are not included.</p>
+            </div>
+            <div class="cube-table-wrap">
+              <table class="cube-comparison">
+                <caption>Selected baseline results</caption>
+                <thead><tr><th scope="col">Comparison</th><th scope="col">Root-mounted</th><th scope="col">Side-mounted</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Nearest ridge around alignment</th><td>±20.47°</td><td>±11.84°</td></tr>
+                  <tr><th scope="row">First overshoot: aligned at 5 rad/s</th><td>1.340°</td><td>0.778°</td></tr>
+                  <tr><th scope="row">Destination from 15° at rest</th><td>0°</td><td>45°</td></tr>
+                  <tr><th scope="row">Small-motion natural frequency</th><td>31.99 Hz</td><td>57.09 Hz</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figure class="build-inline-figure cube-reference" id="cube-potential-reference">
+              <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential.png" alt="Root and side magnetic potentials have alignment minima at 0 and 90 degrees, with a shallow unwanted minimum at 45 degrees; the root alignment well is wider."></a>
+              <figcaption>Reference potential, Figure 3: both layouts have an unwanted 45° resting position as well as the intended alignments; the ridges alone do not determine capture when the layer starts with speed.</figcaption>
+            </figure>
+            <section class="cube-method" aria-labelledby="cube-model-title">
+              <h3 id="cube-model-title">The model behind the motion</h3>
+              <p class="cube-equation" aria-label="Inertia times angular acceleration plus damping times angular velocity plus the potential gradient equals applied torque">Jθ̈ + cθ̇ + U′(θ) = τ(t)</p>
+              <p>The magnetic potential includes 48 finite cylindrical magnets: 20 move and 28 stay fixed, giving 560 changing interactions. Both layouts use the same assumed damping, c = 2 × 10<sup>−4</sup> N·m·s/rad; the release cases have no applied torque.</p>
+              <p>Root placement lowers layer inertia by 6.95%, but lowers local magnetic stiffness by about 71%. That softer restoring action explains its larger first overshoot. Near either aligned minimum, energy decreases as dV/dt = −cω², establishing local return in this reduced model, not return from every starting condition.</p>
+            </section>
+          </section>
+          <section class="build-section cube-study" aria-labelledby="cube-explore-title">
+            <h2 id="cube-explore-title" tabindex="-1">Explore the Motion</h2>
+            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <p>Choose a starting condition, press Play, or drag the time slider: the two magnet views and every live plot follow the same physical moment.</p>
+            <div id="cube-nonlinear-lab">
+              <p>Interactive playback requires JavaScript; the reference plots are available below.</p>
+            </div>
+          </section>
+          <section class="build-section cube-study" aria-labelledby="cube-release-findings-title">
+            <h2 id="cube-release-findings-title" tabindex="-1">Capture, Overshoot, and Decay</h2>
+            <p>Where a layer ends up, how far it first swings, and how quickly its motion fades are three different questions.</p>
+            <section class="cube-method" id="cube-capture-reference" aria-labelledby="cube-capture-title">
+              <h3 id="cube-capture-title">Capture: the same 15° release finds two different resting positions</h3>
+              <figure class="build-inline-figure cube-reference">
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" alt="Release from 15 degrees at rest: root motion decays toward zero, while side motion approaches 45 degrees."></a>
+                <figcaption>Report Figure 14: the root layout returns to alignment from this initial angle, but the side layout settles halfway through a turn.</figcaption>
+              </figure>
+            </section>
+            <section class="cube-method" id="cube-ringdown-reference" aria-labelledby="cube-ringdown-title">
+              <h3 id="cube-ringdown-title">Overshoot: a softer pull lets the first swing travel farther</h3>
+              <figure class="build-inline-figure cube-reference">
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" alt="Starting aligned at 5 radians per second, the root model swings farther and more slowly than the side model; both oscillations decay."></a>
+                <figcaption>Report Figure 6: first overshoot is 1.340° for root and 0.778° for side; this reference shows only the early part of the 1-second release.</figcaption>
+              </figure>
+            </section>
+            <section class="cube-method" id="cube-return-reference" aria-labelledby="cube-return-title">
+              <h3 id="cube-return-title">Decay: each pass through alignment loses speed</h3>
+              <figure class="build-inline-figure cube-reference">
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" alt="The next positive crossing speed is lower than the current crossing speed for both models; both return curves lie below the no-decay diagonal."></a>
+                <figcaption>Report Figure 17: the free Poincaré map compares consecutive passes through 0° in the positive direction, not consecutive animation frames.</figcaption>
+              </figure>
+              <p>Near alignment, the next crossing retains about 75.1% of the speed for root and 86.1% for side. Root loses more speed per cycle, but its cycles take longer; this is not the same advantage per second.</p>
+            </section>
+          </section>
+          <section class="build-section cube-study" aria-labelledby="cube-driven-title">
+            <h2 id="cube-driven-title" tabindex="-1">Response to Repeated Forcing</h2>
+            <p>A separate test applies a repeating 2 mN·m torque. At 30 Hz, the root response is much larger; at 55 Hz, the side response is larger. Neither layout has the smaller response at every frequency.</p>
+            <figure class="build-inline-figure cube-reference" id="cube-frequency-reference">
+              <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/13_frequency_sweep.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/13_frequency_sweep.png" alt="Forced frequency sweep: the largest sampled response is near 30 hertz for root and 54 hertz for side, with a crossover between the two peaks."></a>
+              <figcaption>Report Figure 21: a fixed frequency-sweep result, separate from the unforced release explorer above.</figcaption>
+            </figure>
+            <div class="cube-table-wrap">
+              <table class="cube-comparison">
+                <caption>Steady periodic response · report pp. 17–18</caption>
+                <thead><tr><th scope="col">Drive frequency</th><th scope="col">Root amplitude</th><th scope="col">Side amplitude</th></tr></thead>
+                <tbody><tr><th scope="row">30 Hz</th><td>3.016°</td><td>0.105°</td></tr><tr><th scope="row">55 Hz</th><td>0.132°</td><td>1.458°</td></tr></tbody>
+              </table>
+            </div>
+            <p>At 30 Hz, both modeled responses settle into a repeating cycle; Floquet multiplier magnitudes below 1 indicate local attraction of those cycles. This does not establish behavior at every forcing level or under real hand turns.</p>
+          </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-outcome-title">
-            <h2 id="magnetically-stabilized-puzzle-cube-outcome-title">Outcome</h2>
+            <h2 id="magnetically-stabilized-puzzle-cube-outcome-title" tabindex="-1">Outcome</h2>
+            <a class="star-return" href="#magnetically-stabilized-puzzle-cube-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
-                <img src="../assets/builds/magnetically-stabilized-puzzle-cube/image-03.png" alt="Assembled puzzle cube demonstrating stabilized internal mechanics and consistent rotational behavior.">
+                <div class="cube-drawing-split">
+                  <div class="cube-drawing-window">
+                    <img width="961" height="1600" src="../assets/builds/magnetically-stabilized-puzzle-cube/image-03.png" alt="Figure 11: top cutaway view showing the cube’s internal arrangement.">
+                  </div>
+                  <div class="cube-drawing-window is-lower">
+                    <img width="961" height="1600" src="../assets/builds/magnetically-stabilized-puzzle-cube/image-03.png" alt="Figure 12: perspective view of the assembled puzzle cube.">
+                    <svg class="cube-figure-label" viewBox="0 0 961 860" aria-hidden="true" focusable="false">
+                      <rect x="805" y="662" width="156" height="62" fill="white" />
+                      <text x="948" y="704" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="black">FIG. 12</text>
+                    </svg>
+                  </div>
+                </div>
                 <figcaption>Assembled puzzle cube demonstrating stabilized internal mechanics and consistent rotational behavior.</figcaption>
               </figure>
             </div>
             <div class="article-body">
-              <p>The final design results in a puzzle cube with improved rotational stability, reduced risk of piece popping, and enhanced tactile feedback during turns. The integration of magnetic alignment elements enables more predictable layer snapping without compromising speed.</p><p>This work culminated in the successful filing and issuance of a U.S. utility patent, validating the novelty and technical merit of the design. The project demonstrates the application of mechanical design principles, kinematic constraint, and user-centered engineering to a consumer product context.</p><p><em>This cube design was used to help break the world record for the fastest single 3×3×3 Rubik’s Cube solve —</em> <a href="https://www.youtube.com/watch?v=bTDZXzI_Ab8" target="_blank"><strong><em>2.76 seconds</em></strong></a><em> (Teodor Zajder, GLS Big Cubes Gdańsk 2026).</em></p>
+              <p>The design received U.S. Patent No. 10,583,351 B2 in 2020. The later nonlinear model gives a testable tradeoff: root placement recovers from a 15° stationary release that the side layout does not, while allowing greater first overshoot in the matched release tests.</p>
+              <p>Measuring torque against angle and recording real release motion would test whether those predictions hold for the prototype; this rigid-layer study does not establish individual-piece stability.</p><p><em>This cube design was used to help break the world record for the fastest single 3×3×3 Rubik’s Cube solve:</em> <a href="https://www.youtube.com/watch?v=bTDZXzI_Ab8" target="_blank"><strong><em>2.76 seconds</em></strong></a><em> (Teodor Zajder, GLS Big Cubes Gdańsk 2026).</em></p>
             </div>
           </section>
         </article>

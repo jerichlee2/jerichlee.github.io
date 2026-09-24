@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Builds | Jerich Lee</title>
-    <meta name="description" content="Builds, prototypes, experiments, and engineering artifacts by Jerich Lee.">
+    <meta name="description" content="Engineering projects by Jerich Lee, organized into Testing, Simulation &amp; Analysis, and Mechanical Design.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -39,7 +39,108 @@
             Engineering projects and prototypes.
           </p>
 
-          <ul class="build-list">
+          <section class="build-section" aria-labelledby="testing-title">
+            <h2 id="testing-title">Testing</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="ablative-material-testing-fixture.html">
+                  <img src="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" alt="Ablative testing rig with an indexed specimen holder and fixed torch" width="128" height="96">
+                  <span>
+                    <strong>Ablative Material Testing Fixture</strong>
+                    <em>Torch-based ablative testing and graphite-calibrated inverse heat-flux estimation.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="pigjaw-scaffold-interface-testing.html">
+                  <span class="fixture-thumbnail">
+                    <img src="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" alt="Metal Pigjaw push-out fixture with a circular center opening and mounting slots" width="462" height="402">
+                  </span>
+                  <span>
+                    <strong>Pigjaw Fixture Testing</strong>
+                    <em>PLA fixture analysis and the metal push-out fixture I built for scaffold–bone testing.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="spindle-vibration-deflection-reduction.html">
+                  <img src="../assets/builds/spindle-vibration-deflection-reduction/cutting-thumbnail.png" alt="Spindle and cutting tool machining a workpiece during vibration testing" width="128" height="96">
+                  <span>
+                    <strong>Spindle Vibration Reduction</strong>
+                    <em>Mitigating spindle vibration via experimental modal analysis and bearing-stack redesign.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="build-section" aria-labelledby="simulation-title">
+            <h2 id="simulation-title">Simulation &amp; Analysis</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="pressure-vessel-analysis-platform.html">
+                  <img src="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" alt="ANSYS pressure-vessel analysis showing the meshed model, normal-stress contours, and results legend" width="128" height="96">
+                  <span>
+                    <strong>Rapid Pressure Vessel Design Screening</strong>
+                    <em>Web-based pressure-vessel calculations with elastic and elastoplastic models compared against ANSYS.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="microchannel-transport-processes.html">
+                  <img src="../assets/builds/microchannel-transport-processes/cover.png" alt="Microchannel Transport Processes thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Microchannel Transport Processes</strong>
+                    <em>Numerical and CFD analysis of coupled heat, mass, and reaction transport in a pressure-driven microchannel reactor.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="discretizing-2d-heat-equation.html">
+                  <img src="../assets/builds/discretizing-2d-heat-equation/cover.png" alt="Discretizing the 2D Heat Equation with Radiative Boundary Conditions thumbnail" width="128" height="96">
+                  <span>
+                    <strong>2D Heat Transfer Simulation</strong>
+                    <em>Explicit finite-difference simulation of transient heat conduction with nonlinear radiation boundary conditions.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="build-section" aria-labelledby="mechanical-design-title">
+            <h2 id="mechanical-design-title">Mechanical Design</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="pedal-guitar-string-tensioner.html">
+                  <img src="../assets/builds/pedal-guitar-string-tensioner/cover.png" alt="Pedal-Actuated Guitar String Tensioner thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Pedal-Actuated Guitar String Tensioner</strong>
+                    <em>Low-cost pedal mechanism enabling controlled pitch modulation via precise string tension adjustment.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="rube-goldberg-me270.html">
+                  <img src="../assets/builds/rube-goldberg-me270/cover.png" alt="Desktop Rube Goldberg Machine thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Desktop Rube Goldberg Machine</strong>
+                    <em>A 10+ step marble-powered machine designed under strict DFM constraints.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="magnetically-stabilized-puzzle-cube.html">
+                  <img src="../assets/builds/magnetically-stabilized-puzzle-cube/cover.jpg" alt="Magnetically Stabilized Puzzle Cube thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Magnetically Stabilized Puzzle Cube</strong>
+                    <em>A mechanically redesigned Rubik’s-style cube optimized for stability, precision, and speed solving.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <ul class="build-list" hidden>
             <li hidden>
               <a class="build-entry" href="project-hephaestus.html">
                 <img src="../assets/builds/project-hephaestus/cover.jpg" alt="Project Hephaestus thumbnail" width="128" height="96">
@@ -73,80 +174,6 @@
                 <span>
                   <strong>GPT-2 from Scratch</strong>
                   <em>Details coming soon.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="ablative-material-testing-fixture.html">
-                <img src="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" alt="Ablative testing rig with an indexed specimen holder and fixed torch" width="128" height="96">
-                <span>
-                  <strong>Ablative Material Testing Fixture</strong>
-                  <em>Torch-based ablative testing and graphite-calibrated inverse heat-flux estimation.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="microchannel-transport-processes.html">
-                <img src="../assets/builds/microchannel-transport-processes/cover.png" alt="Microchannel Transport Processes thumbnail" width="128" height="96">
-                <span>
-                  <strong>Microchannel Transport Processes</strong>
-                  <em>Numerical and CFD analysis of coupled heat, mass, and reaction transport in a pressure-driven microchannel reactor.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="pigjaw-scaffold-interface-testing.html">
-                <span class="fixture-thumbnail">
-                  <img src="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" alt="Metal Pigjaw push-out fixture with a circular center opening and mounting slots" width="462" height="402">
-                </span>
-                <span>
-                  <strong>Pigjaw Scaffold–Bone Interface Mechanical Testing</strong>
-                  <em>PLA fixture analysis and the metal push-out fixture I built for scaffold–bone testing.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="spindle-vibration-deflection-reduction.html">
-                <img src="../assets/builds/spindle-vibration-deflection-reduction/cover.png" alt="Spindle Vibration &amp; Deflection Reduction thumbnail" width="128" height="96">
-                <span>
-                  <strong>Spindle Vibration &amp; Deflection Reduction</strong>
-                  <em>Mitigating spindle vibration via experimental modal analysis and bearing-stack redesign.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="discretizing-2d-heat-equation.html">
-                <img src="../assets/builds/discretizing-2d-heat-equation/cover.png" alt="Discretizing the 2D Heat Equation with Radiative Boundary Conditions thumbnail" width="128" height="96">
-                <span>
-                  <strong>Discretizing the 2D Heat Equation with Radiative Boundary Conditions</strong>
-                  <em>Explicit finite-difference simulation of transient heat conduction with nonlinear radiation boundary conditions.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="pedal-guitar-string-tensioner.html">
-                <img src="../assets/builds/pedal-guitar-string-tensioner/cover.png" alt="Pedal-Actuated Guitar String Tensioner thumbnail" width="128" height="96">
-                <span>
-                  <strong>Pedal-Actuated Guitar String Tensioner</strong>
-                  <em>Low-cost pedal mechanism enabling controlled pitch modulation via precise string tension adjustment.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="rube-goldberg-me270.html">
-                <img src="../assets/builds/rube-goldberg-me270/cover.png" alt="Desktop Rube Goldberg Machine thumbnail" width="128" height="96">
-                <span>
-                  <strong>Desktop Rube Goldberg Machine</strong>
-                  <em>A 10+ step marble-powered machine designed under strict DFM constraints.</em>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a class="build-entry" href="magnetically-stabilized-puzzle-cube.html">
-                <img src="../assets/builds/magnetically-stabilized-puzzle-cube/cover.jpg" alt="Magnetically Stabilized Puzzle Cube thumbnail" width="128" height="96">
-                <span>
-                  <strong>Magnetically Stabilized Puzzle Cube</strong>
-                  <em>A mechanically redesigned Rubik’s-style cube optimized for stability, precision, and speed solving.</em>
                 </span>
               </a>
             </li>

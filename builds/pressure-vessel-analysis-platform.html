@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapid Pressure Vessel Design Screening | Jerich Lee</title>
+    <meta name="description" content="A graduate capstone focused on rapid pressure-vessel design screening: closed-form elasticity and a reduced one-dimensional elastoplastic solver, with a recorded runtime example and comparisons with ANSYS.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=14">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+      .pressure-vessel-project .article-figure.is-wide img {
+        max-height: none;
+      }
+      .pressure-vessel-project h3 {
+        margin: 1.6rem 0 0.55rem;
+        font-size: 1.05rem;
+      }
+      .pressure-vessel-project .validation-table-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        margin: 1.2rem 0;
+      }
+      .pressure-vessel-project .validation-table-scroll:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .pressure-vessel-project .validation-table {
+        width: 100%;
+        min-width: 30rem;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        text-align: left;
+      }
+      .pressure-vessel-project .validation-table caption {
+        text-align: left;
+        padding-bottom: 0.6rem;
+        color: var(--muted);
+      }
+      .pressure-vessel-project .validation-table th,
+      .pressure-vessel-project .validation-table td {
+        padding: 0.65rem 0.7rem;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .pressure-vessel-project .validation-table thead th {
+        border-top: 1px solid var(--line);
+      }
+      .pressure-vessel-project .validation-table td:last-child {
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+          <span>Jerich Lee</span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="../builds/index.html">builds</a>
+          <a href="../notes/index.html">notes</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../guitar/index.html">guitar</a>
+          <a href="../grappling/index.html">grappling</a>
+          <a href="../cubing/index.html">cubing</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article class="pressure-vessel-project">
+          <p class="article-meta">Builds · 2026</p>
+          <h1>Rapid Pressure Vessel Design Screening</h1>
+          <figure class="article-figure">
+            <a href="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg">
+              <img src="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" alt="ANSYS pressure-vessel analysis showing the meshed model, normal-stress contours, and results legend" width="1189" height="1032" fetchpriority="high">
+            </a>
+          </figure>
+          <dl class="build-details">
+            <div><dt>Course</dt><dd>ENG 573 capstone · Spring 2026</dd></div>
+            <div><dt>Focus</dt><dd>Rapid design screening, reduced computational cost, and model verification</dd></div>
+            <div><dt>Tools</dt><dd>Python, FastAPI, HTML/CSS/JavaScript, ANSYS Mechanical</dd></div>
+          </dl>
+
+          <section class="build-section" aria-labelledby="vessel-problem-title">
+            <h2 id="vessel-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="vessel-central-question" aria-labelledby="vessel-situation-title">
+                <h3 id="vessel-situation-title"><a class="summary-jump" href="#vessel-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can a quick calculator help us compare tank designs under pressure before running a detailed computer simulation?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="vessel-task-title">
+                <h3 id="vessel-task-title"><a class="summary-jump" href="#vessel-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
+                <p>Build a quick calculator to compare tank designs before running detailed simulations.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="vessel-action-title">
+                <h3 id="vessel-action-title"><a class="summary-jump" href="#vessel-workflow-title" aria-label="Action: Go to Engineering Workflow">Action</a></h3>
+                <p>I built a Python model and browser interface, then compared selected predictions with ANSYS.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="vessel-result-title">
+                <h3 id="vessel-result-title"><a class="summary-jump" href="#vessel-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
+                <p>One calculation finished in 4.523 seconds, while a separate FEA comparison showed average errors of 0.12% in von Mises stress and 0.03% in wall movement.</p>
+              </section>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-introduction-title">
+            <h2 id="vessel-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>Early pressure-vessel design involves comparing dimensions, materials, and loads. Running a full finite element analysis for every candidate adds modeling and computation work before the most promising options are clear.</p>
+              <p>My graduate capstone focused on a fast, browser-based calculator for screening these options. The goal was to estimate stresses, deformation, and design limits with simpler models, then reserve detailed FEA for designs that need it.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-workflow-title">
+            <h2 id="vessel-workflow-title" tabindex="-1">Engineering Workflow</h2>
+            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>The user selects a material, enters vessel dimensions and loads, and chooses a calculation mode. Forward calculations return stress, deformation, and safety-factor outputs; inverse calculations solve for pressure, diameter, or axial-load limits within the closed-form model. The full nonlinear wall solution is a separate calculation path.</p>
+              <p>A FastAPI backend validates requests and runs the mechanics in SI units. The browser handles display-unit conversion, plots, and PDF, CSV, and JSON exports. Authentication and saved calculations make it possible to return to previous studies without rebuilding their inputs.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/app-plastic-strain-profile.png">
+                <img src="../assets/builds/pressure-vessel-analysis-platform/app-plastic-strain-profile.png" alt="Calculator interface with selectable radial quantities and a plot of equivalent plastic strain decreasing from the inner to outer vessel wall" width="833" height="517" loading="lazy">
+              </a>
+              <figcaption>A representative application view: selectable through-wall profiles and a marked critical location. This interface example is separate from the corrected P06 benchmark in the FEA comparison section.</figcaption>
+            </figure>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-runtime-title">
+            <h2 id="vessel-runtime-title">Runtime and Computational Efficiency</h2>
+            <div class="article-body">
+              <p>The central goal was to shorten the design loop: use a lower-cost mechanics model to screen candidate designs, then reserve detailed FEA for the cases that need it. The calculator reduces both the computational problem and the manual setup required for repeated pressure-vessel studies.</p>
+
+              <h3>Where the computational savings come from</h3>
+              <p>The closed-form elastic path evaluates thick-cylinder equations directly, without creating a finite element mesh or assembling a global stiffness system. It supports forward calculations and inverse searches for pressure, geometry, and load limits. The nonlinear path retains through-wall plasticity but reduces the spatial problem to one radial dimension: nodal radial displacements and a uniform axial strain, rather than a general two- or three-dimensional displacement field.</p>
+              <p>For geometries within these assumptions, an engineer can change inputs and rerun the existing calculation without rebuilding CAD, remeshing, or extracting a new set of FEA results. That workflow saving is separate from solver runtime; the nonlinear calculation still requires load stepping and equilibrium iterations.</p>
+
+              <h3>Recorded backend runtime</h3>
+              <p>A full-wall elastoplastic example retained in the final report shows:</p>
+              <div class="article-equation" id="vessel-runtime-result">
+                \[
+                \boxed{t_{\mathrm{backend}}=4.523\ \mathrm{s}}
+                \]
+              </div>
+              <p>This was a single recorded full 1D radial elastoplastic calculation with power-law hardening and entire-wall output at 101 radial sample points. It is an illustrative application run, separate from the corrected multilinear-hardening ANSYS comparison below.</p>
+
+              <h3>Computing engine and hardware</h3>
+              <p>The saved implementation uses a custom Python/NumPy solver on the CPU, accessed through a FastAPI backend. It assembles the one-dimensional radial equilibrium problem, advances the load adaptively, and solves the Newton correction systems with NumPy’s dense linear algebra. The calculation is performed by the backend, not by the browser or an ANSYS solver.</p>
+              <p>The 4.523-second run used the same Linux workstation as the <a href="microchannel-transport-processes.html#microchannel-transport-processes-process-title">Microchannel Transport Processes</a> project: an <strong>AMD Ryzen 7 7800X3D processor (8 cores, 16 threads)</strong> with <strong>32 GB DDR5 RAM</strong>. The run’s active thread count and numerical-library versions were not recorded.</p>
+              <p>The recorded value is backend compute time, not total browser-to-result latency. A matched ANSYS runtime and repeated timing measurements were not reported, so it does not establish a numerical speedup factor. The demonstrated result is a seconds-scale nonlinear example within a calculator designed for rapid screening.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-model-title">
+            <h2 id="vessel-model-title">Simplified Model</h2>
+            <div class="article-body">
+              <h3>Closed-form elasticity</h3>
+              <p>For an axisymmetric thick-walled cylinder, Lamé’s solution gives radial and hoop stress as functions of radius. With internal and external pressures \(p_i,p_o\) and radii \(r_i,r_o\):</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                \sigma_r(r)&amp;=A-\frac{B}{r^2}\\
+                \sigma_\theta(r)&amp;=A+\frac{B}{r^2}\\[0.5em]
+                A&amp;=\frac{p_i r_i^2-p_o r_o^2}{r_o^2-r_i^2}\\
+                B&amp;=\frac{(p_i-p_o)r_i^2r_o^2}{r_o^2-r_i^2}
+                \end{aligned}
+                \]
+              </div>
+              <p>For closed ends without an additional axial load, \(\sigma_z=A\). These stresses are combined through the von Mises criterion to assess first yield. The application can evaluate the inner surface or scan the full wall for the governing location.</p>
+
+              <h3>One-dimensional elastoplastic wall model</h3>
+              <p>Beyond first yield, the solver discretizes the wall into radial elements. Its unknowns are nodal radial displacements and a uniform axial strain; pressure tractions and an axial force balance supply the loading conditions. Small-strain J2 plasticity updates the stress at each integration point.</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                \varepsilon_r&amp;=\frac{du}{dr},\qquad
+                \varepsilon_\theta=\frac{u}{r}\\
+                q^{\mathrm{trial}}-3G\Delta\gamma
+                &amp;-\sigma_y(\alpha_n+\Delta\gamma)=0
+                \end{aligned}
+                \]
+              </div>
+              <p>The second equation enforces plastic consistency: \(q^{\mathrm{trial}}\) is trial equivalent stress, \(G\) is shear modulus, \(\Delta\gamma\) is the plastic increment, and \(\alpha\) tracks accumulated equivalent plastic strain. Adaptive load steps and Newton iteration solve equilibrium while the selected hardening law updates the yield stress.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-material-title">
+            <h2 id="vessel-material-title">Matching the Material Model</h2>
+            <div class="article-body">
+              <p>The first nonlinear comparisons showed large displacement and plastic-strain differences. The backend used a smooth power-law hardening curve, while ANSYS used a multilinear isotropic hardening table. The two solvers were not being asked to solve the same material problem.</p>
+              <p>Adding multilinear hardening support let the backend use the same plastic-strain/stress table as ANSYS. Repeating the comparison with matched constitutive inputs substantially improved agreement. This became the central lesson of the project: a solver comparison is only meaningful when the geometry, loads, and material definitions are aligned.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/hardening-law-comparison.png">
+                <img src="../assets/builds/pressure-vessel-analysis-platform/hardening-law-comparison.png" alt="Flow stress versus equivalent plastic strain, comparing the softer original power-law curve with the multilinear hardening table shared by ANSYS and the corrected backend" width="2234" height="1567" loading="lazy">
+              </a>
+              <figcaption>The original and aligned hardening laws. The corrected backend uses the same piecewise-linear material table as the ANSYS comparison.</figcaption>
+            </figure>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-validation-title">
+            <h2 id="vessel-validation-title">Comparison with Finite Element Analysis</h2>
+            <div class="article-body">
+              <p>The reference ANSYS model was two-dimensional and axisymmetric, with a 50 mm inner radius, 60 mm outer radius, and 500 mm length. Results were extracted across the wall at mid-length to reduce local end-condition effects. The elastic A01 case used 20 MPa internal pressure; the nonlinear P06 case used 100 MPa with matched multilinear hardening.</p>
+              <p>The final report records the following mean absolute percent errors for the selected benchmark outputs. These are numerical comparisons with ANSYS, not experimental measurements. The table scrolls horizontally on smaller screens.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/von-mises-comparison.png">
+                <img src="../assets/builds/pressure-vessel-analysis-platform/von-mises-comparison.png" alt="ANSYS and the updated one-dimensional solver predict closely overlapping von Mises stress profiles across the wall in the P06 pressure-vessel case" width="2234" height="1569" loading="lazy">
+              </a>
+              <figcaption>One-dimensional elastoplastic solver compared with ANSYS at 100 MPa internal pressure, after aligning the material hardening law. Open the figure for the full-resolution comparison.</figcaption>
+            </figure>
+            <div class="validation-table-scroll" role="region" aria-labelledby="vessel-validation-title" tabindex="0">
+              <table class="validation-table">
+                <caption>Reported benchmark comparisons</caption>
+                <thead>
+                  <tr><th scope="col">Case</th><th scope="col">Quantity</th><th scope="col">Mean absolute percent error</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">A01 · elastic</th><td>All comparable outputs</td><td>0.0156%</td></tr>
+                  <tr><th scope="row">P06 · elastoplastic</th><td>Radial stress</td><td>1.36%</td></tr>
+                  <tr><th scope="row">P06 · elastoplastic</th><td>Von Mises stress</td><td>0.12%</td></tr>
+                  <tr><th scope="row">P06 · elastoplastic</th><td>Radial displacement</td><td>0.03%</td></tr>
+                  <tr><th scope="row">P06 · elastoplastic</th><td>Equivalent plastic strain</td><td>0.70%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="vessel-outcome-title">
+            <h2 id="vessel-outcome-title" tabindex="-1">Outcome</h2>
+            <a class="star-return" href="#vessel-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>The capstone produced a working pressure-vessel calculator for rapid design screening before detailed FEA, with direct elastic calculations and a reduced nonlinear wall model. A retained nonlinear example reported 4.523 s of backend compute time. Separately, the corrected P06 comparison demonstrated mean errors of 0.12% for von Mises stress, 0.03% for radial displacement, and 0.70% for equivalent plastic strain against ANSYS.</p>
+              <p>The application is a proof of concept for preliminary design screening, not a certified pressure-vessel design tool. The demonstrated comparisons cover selected geometries and load cases; design-code compliance, fatigue, buckling, and more complex vessel features remain outside this scope.</p>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

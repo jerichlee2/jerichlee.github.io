@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=7">
+    <link rel="stylesheet" href="../styles.css?v=14">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
@@ -41,17 +41,42 @@
           <figure class="build-hero">
             <img src="../assets/builds/rube-goldberg-me270/cover.png" alt="Desktop Rube Goldberg Machine">
           </figure>
-          <div class="article-body">
-            <p>Inspired by Rube Goldberg, this ME 270 Design for Manufacturability project challenged teams of 3–5 students to design and build a themed machine that turns on a battery-powered LED light—starting with a marble. Using a provided base plate, side plate, brackets, marble, and light, we manufactured nearly all components ourselves while meeting tight size and mechanism requirements.</p>
-          </div>
-
           <dl class="build-details">
               <div><dt>Role</dt><dd>Team Member (Mechanical Design + Fabrication)</dd></div>
               <div><dt>Skills</dt><dd>Design for Manufacturability (DFM), Mechanism Design, Prototyping, Fabrication, Rapid Iteration, Mechanical Linkages, Motion Conversion (Rotary/Linear), Design Constraints, Team Collaboration</dd></div>
               <div><dt>Year</dt><dd>2022</dd></div>
           </dl>
+          <section class="build-section" aria-labelledby="rube-goldberg-me270-problem-title">
+            <h2 id="rube-goldberg-me270-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="rube-goldberg-me270-central-question" aria-labelledby="rube-goldberg-me270-situation-title">
+                <h3 id="rube-goldberg-me270-situation-title"><a class="summary-jump" href="#rube-goldberg-me270-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can one marble start a chain of moving parts that reliably turns on a light?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="rube-goldberg-me270-task-title">
+                <h3 id="rube-goldberg-me270-task-title"><a class="summary-jump" href="#rube-goldberg-me270-process-title" aria-label="Task: Go to Process">Task</a></h3>
+                <p>Build a marble-powered machine with at least ten mechanical steps, including a ten-second step, inside a 30 cm cube.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="rube-goldberg-me270-action-title">
+                <h3 id="rube-goldberg-me270-action-title"><a class="summary-jump" href="#rube-goldberg-me270-initial-design-title" aria-label="Action: Go to Initial Design">Action</a></h3>
+                <p>I redesigned the spiral staircase as snap-fit sections to reduce print cleanup and keep the marble moving.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="rube-goldberg-me270-result-title">
+                <h3 id="rube-goldberg-me270-result-title"><a class="summary-jump" href="#rube-goldberg-me270-outcome-title" aria-label="Result: Go to Outcome">Result</a></h3>
+                <p>The machine fit inside a 30 cm cube and switched on a light through 10+ steps, including a 10-second staircase.</p>
+              </section>
+            </div>
+          </section>
+          <section class="build-section" aria-labelledby="rube-goldberg-me270-introduction-title">
+            <h2 id="rube-goldberg-me270-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#rube-goldberg-me270-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>For ME 270, our team needed to build a desktop machine that starts with a marble and ends by turning on a battery-powered LED light. The project brought together a chain of small mechanisms, with each stage passing motion to the next. Most parts had to be made by the team, so the design also had to be practical to fabricate and assemble.</p>
+            </div>
+          </section>
           <section class="build-section" aria-labelledby="rube-goldberg-me270-initial-design-title">
-            <h2 id="rube-goldberg-me270-initial-design-title">Initial Design</h2>
+            <h2 id="rube-goldberg-me270-initial-design-title" tabindex="-1">Initial Design</h2>
+            <a class="star-return" href="#rube-goldberg-me270-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/rube-goldberg-me270/image-02.png" alt="Modular Staircase Global Assembly">
@@ -71,7 +96,8 @@
             </div>
           </section>
           <section class="build-section" aria-labelledby="rube-goldberg-me270-process-title">
-            <h2 id="rube-goldberg-me270-process-title">Process</h2>
+            <h2 id="rube-goldberg-me270-process-title" tabindex="-1">Process</h2>
+            <a class="star-return" href="#rube-goldberg-me270-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/rube-goldberg-me270/image-05.png" alt="Mechanism layout and staging focused on reliable handoffs and manufacturable parts.">
@@ -79,11 +105,12 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>The project requirements forced careful system-level planning: the machine had to fit within a 30 cm × 30 cm × 30 cm envelope and include at least 10 mechanically distinct “steps.” Both rotary and linear motion were required, and the design needed to incorporate rigid linkages, string-driven motion, and an elastic element.</p><p>To keep the build manufacturable, teams were limited to mousetraps plus only one other commercial product—everything else had to be made. We designed the sequence around reliable handoffs between stages (gravity-driven marble motion, constrained guides, trigger interfaces, and motion conversion), then iterated on geometry and tolerances to prevent stalls and misfires.</p>
+              <p>The project requirements forced careful system-level planning: the machine had to fit within a 30 cm × 30 cm × 30 cm envelope and include at least 10 mechanically distinct “steps.” Both rotary and linear motion were required, and the design needed to incorporate rigid linkages, string-driven motion, and an elastic element.</p><p>To keep the build manufacturable, teams were limited to mousetraps plus only one other commercial product; everything else had to be made. We designed the sequence around reliable handoffs between stages (gravity-driven marble motion, constrained guides, trigger interfaces, and motion conversion), then iterated on geometry and tolerances to prevent stalls and misfires.</p>
             </div>
           </section>
           <section class="build-section" aria-labelledby="rube-goldberg-me270-outcome-title">
-            <h2 id="rube-goldberg-me270-outcome-title">Outcome</h2>
+            <h2 id="rube-goldberg-me270-outcome-title" tabindex="-1">Outcome</h2>
+            <a class="star-return" href="#rube-goldberg-me270-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
                 <img src="../assets/builds/rube-goldberg-me270/image-06.jpg" alt="Final demo configuration prior to the marble start and light-on finale.">

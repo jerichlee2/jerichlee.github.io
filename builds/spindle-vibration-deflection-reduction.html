@@ -4,25 +4,195 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Spindle Vibration &amp; Deflection Reduction | Jerich Lee</title>
-    <meta name="description" content="Spindle vibration testing, bearing-stack redesign, stepped-beam hand calculations, and Rev B rotordynamic sensitivity with forward/backward whirl and a Campbell diagram.">
+    <meta name="description" content="An industry-sponsored spindle vibration investigation connecting operational testing, ANSYS modeling, a proposed bearing modification, and retrospective beam calculations.">
+    <meta property="og:description" content="An industry-sponsored spindle vibration investigation connecting operational testing, ANSYS modeling, a proposed bearing modification, and retrospective beam calculations.">
+    <meta name="twitter:description" content="An industry-sponsored spindle vibration investigation connecting operational testing, ANSYS modeling, a proposed bearing modification, and retrospective beam calculations.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=9">
+    <link rel="stylesheet" href="../styles.css?v=14">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script defer src="../assets/js/looping-videos.js"></script>
+    <script defer src="../assets/js/spindle-frequency-plots.js"></script>
     <style>
-      .analysis-table-scroll { overflow-x: auto; margin: 1.2rem 0; }
-      .analysis-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-      .analysis-table caption { margin-bottom: 0.5rem; text-align: left; }
-      .analysis-table th, .analysis-table td {
-        border-bottom: 1px solid var(--line);
-        padding: 0.6rem 0.65rem;
+      .spindle-project .modal-comparison .modal-label {
+        margin: 1.2rem 0 0.4rem;
         text-align: left;
+        font-size: 0.86rem;
+      }
+      .spindle-project .bearing-layout img,
+      .spindle-project .fea-model-comparison img {
+        max-height: none;
+      }
+      .spindle-project .essential-model h3,
+      .spindle-project .testing-section h3,
+      .spindle-project .frequency-comparison h3,
+      .spindle-project .outcome-section h3 {
+        margin: 1.6rem 0 0.55rem;
+        font-size: 1.05rem;
+      }
+      .spindle-project .essential-model .article-equation {
+        margin: 0.85rem 0;
+      }
+      .spindle-project .essential-model .article-equation mjx-container[display="true"] {
+        margin: 0.5em 0;
+      }
+      .spindle-project .frequency-table-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        margin: 1.2rem 0;
+      }
+      .spindle-project .frequency-table-scroll:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .spindle-project .frequency-scroll-hint {
+        margin-bottom: -0.5rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      .spindle-project .frequency-table {
+        width: 100%;
+        min-width: 34rem;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        text-align: left;
+      }
+      .spindle-project .frequency-table caption {
+        text-align: left;
+        padding-bottom: 0.6rem;
+        color: var(--muted);
+      }
+      .spindle-project .frequency-table th,
+      .spindle-project .frequency-table td {
+        padding: 0.65rem 0.7rem;
+        border-bottom: 1px solid var(--line);
         vertical-align: top;
       }
-      .analysis-table thead th { border-top: 1px solid var(--line); }
+      .spindle-project .frequency-table thead th {
+        border-top: 1px solid var(--line);
+      }
+      .spindle-project .frequency-table .frequency {
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .spindle-project .frequency-table .group-heading th {
+        padding-top: 1.15rem;
+        color: var(--muted);
+        font-weight: 400;
+        font-style: italic;
+      }
+      .spindle-project .frequency-figure {
+        margin: 1rem 0 1.8rem;
+      }
+      .spindle-project .frequency-figure figcaption {
+        margin-top: 0.5rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+        text-align: left;
+      }
+      .spindle-project .spindle-chart {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+      .spindle-project .spindle-chart text {
+        fill: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 12px;
+      }
+      .spindle-project .spindle-chart .chart-note {
+        fill: var(--muted);
+      }
+      .spindle-project .spindle-chart .chart-value {
+        font-variant-numeric: tabular-nums;
+      }
+      .spindle-project .spindle-chart .chart-row-highlight {
+        fill: #f0e9f6;
+        stroke: var(--link-visited);
+        stroke-width: 1;
+      }
+      .spindle-project .spindle-chart .chart-highlight-label {
+        fill: var(--link-visited);
+        font-weight: 700;
+      }
+      .spindle-project .spindle-chart .chart-frame,
+      .spindle-project .spindle-chart .chart-grid {
+        fill: none;
+        stroke: var(--line);
+        stroke-width: 1;
+      }
+      .spindle-project .spindle-chart .chart-axis {
+        stroke: var(--ink);
+      }
+      .spindle-project .spindle-chart .observed-reference {
+        stroke: var(--muted);
+        stroke-dasharray: 4 4;
+      }
+      .spindle-project .spindle-chart .mark-observed { fill: var(--ink); }
+      .spindle-project .spindle-chart .mark-fea { fill: var(--link); }
+      .spindle-project .spindle-chart .mark-modified { fill: var(--link-visited); }
+      .spindle-project .spindle-chart .mark-math { fill: var(--accent); }
+      .spindle-project .spindle-chart .model-reference {
+        stroke-width: 1.5;
+        fill: none;
+      }
+      .spindle-project .spindle-chart .reference-fea { stroke: var(--link); }
+      .spindle-project .spindle-chart .reference-modified { stroke: var(--link-visited); }
+      .spindle-project .spindle-chart .reference-math { stroke: var(--accent); }
+      .spindle-project .wavelet-controls {
+        border: 0;
+        padding: 0;
+        margin: 0.85rem 0;
+        min-width: 0;
+      }
+      .spindle-project .wavelet-controls legend {
+        font-size: 0.86rem;
+        margin-bottom: 0.3rem;
+      }
+      .spindle-project .wavelet-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 0.2rem 1rem;
+      }
+      .spindle-project .wavelet-options label {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        min-height: 2.75rem;
+        font-size: 0.86rem;
+        text-align: left;
+        cursor: pointer;
+      }
+      .spindle-project .wavelet-options input { flex: none; }
+      .spindle-project .wavelet-options input:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .spindle-project .wavelet-swatch {
+        display: inline-block;
+        width: 1.4rem;
+        height: 0;
+        flex: none;
+        border-top: 2px solid var(--accent);
+      }
+      .spindle-project .wavelet-swatch.fea { border-color: var(--link); border-top-style: dashed; }
+      .spindle-project .wavelet-swatch.modified { border-color: var(--link-visited); border-top-style: dotted; }
+      .spindle-project .wavelet-swatch.dashed { border-top-style: dashed; }
+      .spindle-project .wavelet-swatch.dotted { border-top-style: dotted; }
+      .spindle-project .wavelet-status {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      @media (min-width: 761px) {
+        .spindle-project .build-details div {
+          grid-template-columns: 8.5rem minmax(0, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
@@ -46,313 +216,376 @@
       </aside>
 
       <main class="content">
-        <article>
+        <article class="spindle-project">
           <p class="article-meta">Builds · 2025</p>
           <h1>Spindle Vibration &amp; Deflection Reduction</h1>
 
-          <figure class="build-hero">
-            <img src="../assets/builds/spindle-vibration-deflection-reduction/image-02.png" alt="Spindle Vibration &amp; Deflection Reduction">
+          <figure class="article-figure">
+            <a href="../assets/builds/spindle-vibration-deflection-reduction/cutting-thumbnail.png">
+              <img src="../assets/builds/spindle-vibration-deflection-reduction/cutting-thumbnail.png" alt="Spindle and cutting tool machining a workpiece during vibration testing" width="1390" height="776" fetchpriority="high">
+            </a>
           </figure>
-          <div class="article-body">
-            <p>Excessive vibration in high-speed milling spindles degrades cut quality, accelerates tool wear, and shortens machine life. In this industry-sponsored capstone project, our team investigated vibration in the vertical spindle of Peddinghaus Corporation’s <strong>PeddiSubX-1120</strong> steel mill.</p>
-            <p>Operational testing and finite-element modeling pointed to bending at the motor-end overhang. We proposed a floating-bearing-stack modification that raised the first simulated modal frequency from <strong>307.17 Hz to 383.27 Hz</strong>, approximately <strong>24.8%</strong>. The result is a design prediction, not a measured post-installation reduction in vibration.</p>
-            <p>I later revisited the result with a stepped-beam hand model to understand how geometry, restraint, and distributed mass produce that bending mode. The original project work and the retrospective calculations are presented separately below. <a href="#spindle-rotordynamics-title">Rev B adds a rotordynamic sensitivity check</a>, retaining the original bending calculations and separately examining rotary inertia and gyroscopic coupling.</p>
-          </div>
 
           <dl class="build-details">
-              <div><dt>Role</dt><dd>Structural modeling, FEA, CAD design, solution optimization</dd></div>
-              <div><dt>Skills</dt><dd>Experimental modal analysis, vibration testing, ANSYS Mechanical, SOLIDWORKS, mechanical design, frequency-domain analysis</dd></div>
-              <div><dt>Year</dt><dd>2025</dd></div>
+            <div><dt>Role</dt><dd>Structural modeling, FEA, CAD design, solution optimization</dd></div>
+            <div><dt>Skills</dt><dd>Vibration testing, ANSYS Mechanical, SOLIDWORKS</dd></div>
+            <div><dt>Timeline</dt><dd>2025 capstone; retrospective calculations: September 2026</dd></div>
           </dl>
-          <section class="build-section" aria-labelledby="spindle-vibration-deflection-reduction-process-title">
-            <h2 id="spindle-vibration-deflection-reduction-process-title">Process</h2>
-            <div class="build-inline-gallery is-single">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/spindle-vibration-deflection-reduction/image-03.png" alt="Tri-axial accelerometer mounted on the spindle housing during operational testing.">
-                <figcaption>Measuring operational vibration at the spindle housing.</figcaption>
-              </figure>
-            </div>
-            <div class="article-body">
-              <p>The project began with <strong>on-site vibration testing</strong> at Peddinghaus’ manufacturing facility. A tri-axial accelerometer recorded housing motion during free-spinning tests from 250 to 3000 rpm and during selected short- and long-tool cutting tests.</p>
-              <p>Wavelet analysis showed a persistent band near <strong>310 Hz in unloaded operation</strong>. Long-tool cutting produced multiple, speed-dependent frequency bands, and portions of those recordings saturated. Impact testing was inconclusive, so the report does not establish a measured full mode shape.</p>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/image-04.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/image-04.png" alt="Long-tool cutting wavelet plots with red regions marking saturated accelerometer data." loading="lazy">
-                </a>
-                <figcaption>Long-tool loaded test data, from the final report’s Figure 11. The red intervals mark saturated, unreliable measurements.</figcaption>
-              </figure>
-              <p>We developed an approximate spindle model in <strong>ANSYS Mechanical</strong> and refined its contacts and constraints. Its first frequency, 307.17 Hz, was about 0.9% below the unloaded band. The simulated shape concentrated bending at the motor-end tail, guiding comparisons of bracing, material changes, and bearing arrangements.</p>
-              <p class="article-caveat">That agreement is frequency correlation after model refinement, not independent mode-shape validation. The loaded simulation was not successfully validated against the cutting tests.</p>
+
+          <section class="build-section" aria-labelledby="spindle-problem-title">
+            <h2 id="spindle-problem-title" tabindex="-1">Problem Statement</h2>
+            <div class="project-summary">
+              <section class="summary-box central-question" id="spindle-central-question" aria-labelledby="spindle-summary-situation-title">
+                <h3 id="spindle-summary-situation-title"><a class="summary-jump" href="#spindle-introduction-title" aria-label="Situation: Go to Introduction">Situation</a></h3>
+                <p class="summary-question"><strong>Can changing where the drill’s shaft is supported reduce shaking and help protect the machine?</strong></p>
+              </section>
+              <section class="summary-box" aria-labelledby="spindle-summary-task-title">
+                <h3 id="spindle-summary-task-title"><a class="summary-jump" href="#spindle-introduction-title" aria-label="Task: Go to Introduction">Task</a></h3>
+                <p>Find a better position for the shaft’s supports to reduce shaking during drilling.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="spindle-summary-action-title">
+                <h3 id="spindle-summary-action-title"><a class="summary-jump" href="#spindle-vibration-deflection-reduction-process-title" aria-label="Action: Go to Initial Testing">Action</a></h3>
+                <p>I compared shaft-support positions using vibration measurements and computer models.</p>
+              </section>
+              <section class="summary-box" aria-labelledby="spindle-summary-result-title">
+                <h3 id="spindle-summary-result-title"><a class="summary-jump" href="#spindle-limits-title" aria-label="Result: Go to Outcome">Result</a></h3>
+                <p>The model predicted the shaft’s first bending frequency would rise from 307.17 to 383.27 Hz, a 24.8% increase.</p>
+              </section>
             </div>
           </section>
-          <section class="build-section" aria-labelledby="spindle-vibration-deflection-reduction-outcome-title">
-            <h2 id="spindle-vibration-deflection-reduction-outcome-title">Original FEA &amp; design recommendation</h2>
+
+          <section class="build-section" aria-labelledby="spindle-introduction-title">
+            <h2 id="spindle-introduction-title" tabindex="-1">Introduction</h2>
+            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
-              <p>The preferred concept modified the floating bearing stack and moved it <strong>22 mm toward the drive</strong>. This changed the spindle’s support conditions while pursuing the sponsor’s goals of a practical, low-cost solution with limited maintenance.</p>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.png" alt="Original ANSYS first mode at 307.17 Hz, with bending concentrated at the motor-end tail." width="1592" height="779" loading="lazy">
-                </a>
-                <figcaption>Baseline first mode: 307.17 Hz. Original final report, Figure 18.</figcaption>
-              </figure>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz.png" alt="ANSYS first mode of the report’s Modified 2x bearing case at 383.27 Hz." width="1585" height="775" loading="lazy">
-                </a>
-                <figcaption>Modified 2x first mode: 383.27 Hz, a 24.77% increase from the baseline. Original final report, Figure 21. Both images show scaled eigenvectors; their deformation legends are not operating vibration amplitudes.</figcaption>
-              </figure>
-              <p>The report labels the best-performing case <strong>“Modified 2x.”</strong> Its text is inconsistent about whether this means two bearings total or two additional bearings. I retain the case label rather than infer an exact stack configuration without the original CAD and joint definitions.</p>
-              <p>For a six-flute tool at 3000 rpm, shaft rotation is 50 Hz and the fundamental tooth-passing frequency is 300 Hz. Moving a mode above that fundamental is useful separation, but higher harmonics and cutting instability remain possible. A frequency shift alone does not establish lower vibration amplitude or chatter-free operation.</p>
+              <p>Peddinghaus reported excessive spindle vibration while drilling weight-reduction holes in O’Hare Airport I-beams, linking it to long-term damage to the electronics box.</p>
+              <p>Our capstone used FEA to study how repositioning bearings changed spindle support, motor-end overhang, bending modes, and natural frequencies.</p>
             </div>
           </section>
 
           <section class="build-section" aria-labelledby="spindle-hand-model-title">
-            <h2 id="spindle-hand-model-title">Simplified hand calculations: the motor-end overhang</h2>
+            <h2 id="spindle-hand-model-title">Simplified Model</h2>
             <div class="article-body">
-              <p>These <strong>September 2026 retrospective calculations</strong> explain the bending mechanism observed in the spring 2025 project’s simulation. They were not used to choose the original design. Starting with a uniform cantilever gives a first estimate of <strong>255.2 Hz</strong>; retaining the stepped geometry and distributed inertia brings the estimate to roughly 334–337 Hz. This nonrotating baseline is unchanged in Rev B.</p>
-              <p>The local model begins at the floating bearing and retains a <strong>410 mm overhang</strong>, including the gear and tail. I use an ideal lateral clamp, \(w(0)=w'(0)=0\), to represent a rigid limiting support. This constrains bending displacement and slope, not spin about the shaft axis. “Floating” refers to axial freedom; it does not mean that radial support is absent.</p>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/stepped-overhang-rev-a.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/stepped-overhang-rev-a.png" alt="Five-section overhang clamped at the floating-bearing root, with stations at 0, 70, 120, 280, 345, and 410 mm and a C-ring mass at 140 mm." width="1130" height="280" loading="lazy">
-                </a>
-                <figcaption>Stepped equivalent beam from Rev A, page 3. The section dimensions are rounded estimates from report figures, not a dimensioned CAD reconstruction.</figcaption>
-              </figure>
-              <div class="analysis-table-scroll" role="region" aria-label="Assumed stepped-beam inputs" tabindex="0">
-                <table class="analysis-table">
-                  <caption>Assumed solid equivalent sections; material properties follow the original report’s Table 2.</caption>
-                  <thead><tr><th scope="col">Region</th><th scope="col">Station (mm)</th><th scope="col">Diameter (mm)</th><th scope="col">E (GPa)</th><th scope="col">Density (kg/m³)</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">1 · Steel neck</th><td>0–70</td><td>60</td><td>205</td><td>7850</td></tr>
-                    <tr><th scope="row">2 · Bonded gear envelope</th><td>70–120</td><td>145</td><td>210</td><td>7800</td></tr>
-                    <tr><th scope="row">3 · Aluminum tail stem</th><td>120–280</td><td>55</td><td>71</td><td>2770</td></tr>
-                    <tr><th scope="row">4 · Aluminum rear step</th><td>280–345</td><td>60</td><td>71</td><td>2770</td></tr>
-                    <tr><th scope="row">5 · Aluminum terminal step</th><td>345–410</td><td>65</td><td>71</td><td>2770</td></tr>
-                  </tbody>
-                </table>
+              <p>In September 2026, I revisited the motor-end overhang using a stepped-beam model with varying geometry, materials, and distributed mass.</p>
+              <p>The gear near the support did not dominate modal inertia; the tail supplied bending flexibility. Frequency estimates resembled the simulation, but assumed geometry limits comparison.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/spindle-vibration-deflection-reduction/stepped-overhang-rev-a.png">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/stepped-overhang-rev-a.png" alt="Retrospective stepped-beam approximation with an idealized root clamp, five equivalent sections, a C-ring point mass, and estimated axial stations" width="1130" height="280" loading="lazy">
+              </a>
+              <figcaption>Retrospective stepped-beam approximation of the motor-end overhang. Dimensions were estimated from report figures. Rev A, page 3.</figcaption>
+            </figure>
+            <div class="article-body essential-model">
+              <p>The baseline is an undamped, nonrotating Euler–Bernoulli beam, ideally clamped at the root: \(w(0)=w'(0)=0\). Let \(s\) run from the root to the free tail at \(L\). The stepped sections have bending rigidity \(E(s)I(s)\) and mass per length \(\mu(s)=\rho(s)A(s)\); the C-ring is a point mass \(m_r\) at \(s_r\).</p>
+
+              <h3 id="spindle-rayleigh-title">Rayleigh estimate: one bending shape</h3>
+              <p>Use the static tip-load deflection \(v(s)\) as a trial shape, normalized by \(\phi(s)=v(s)/v(L)\). Then \(w(s,t)=\phi(s)q(t)\), where \(q\) is tail displacement. The tip stiffness and shape-weighted mass are:</p>
+              <div class="article-equation">
+                \[
+                k_L^{-1}=\int_0^L\frac{(L-s)^2}{E(s)I(s)}\,ds
+                \]
               </div>
-              <p>A C-ring contributes an assumed <strong>0.4135 kg</strong> at 140 mm. The solid-section approximation does not resolve bores, coaxial internals, or connection stiffnesses. Assigning the visible tail to the aluminum regions and treating the gear as one bonded section are modeling assumptions.</p>
-              <p class="article-caveat">No dimensioned spindle CAD, original solver archive, raw modal records, or measured bearing stiffness was available for this retrospective model. It is a mode-informed explanation, not a blind or validated prediction of the real spindle.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-stiffness-title">
-            <h2 id="spindle-stiffness-title">From bending flexibility to effective stiffness</h2>
-            <div class="article-body">
-              <p>Apply a conceptual transverse force \(P\) at the tail. With \(M(s)=P(L-s)\), the strain energy gives the tail compliance. For section endpoints \(a_j,b_j\), measured in meters:</p>
-              <div class="article-equation">\[
-                I_j=\frac{\pi D_j^4}{64},\qquad
-                C_{LL}=\frac{\delta_L}{P}=\sum_j\frac{(L-a_j)^3-(L-b_j)^3}{3E_jI_j},\qquad k_L=C_{LL}^{-1}.
-              \]</div>
-              <p>The five sections give <strong>\(C_{LL}=3.24399\times10^{-7}\ \mathrm{m/N}\)</strong> and <strong>\(k_L=3.08262\times10^6\ \mathrm{N/m}\)</strong>. An illustrative 100 N tail force therefore produces <strong>32.44 µm</strong> of local tail displacement. This is neither a measured milling load nor a prediction of cutting-tool deflection.</p>
-              <p>The aluminum stem contributes about <strong>71.5%</strong> of this model’s bending compliance; the steel root neck contributes 23.3%, and the large gear just 0.34%. The most visually prominent component is not necessarily the span that controls flexibility.</p>
-              <p>For a uniform solid beam, \(f_n\propto D L^{-2}\sqrt{E/\rho}\). That first-pass scaling helps explain why overhang geometry and restraint deserve attention before swapping between steel grades with similar elastic properties.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-rayleigh-title">
-            <h2 id="spindle-rayleigh-title">Rayleigh estimate: use the mass that moves</h2>
-            <div class="article-body">
-              <p>Normalize the static tip-load shape as \(\phi(s)=v(s)/v(L)\). Its squared displacement weights each section’s contribution to kinetic energy:</p>
-              <div class="article-equation">\[
-                m_{\mathrm{eff}}=\sum_j\int_{a_j}^{b_j}\rho_j A_j\phi(s)^2\,ds+m_r\phi(s_r)^2,
-                \qquad f_R=\frac{1}{2\pi}\sqrt{\frac{k_L}{m_{\mathrm{eff}}}}.
-              \]</div>
-              <p>The modeled overhang weighs <strong>10.57 kg</strong>, but its tip-normalized generalized mass is only <strong>0.688433 kg</strong>. Combined with the effective stiffness, that gives <strong>\(f_R=336.8\ \mathrm{Hz}\)</strong>.</p>
-              <p>The 6.44 kg gear sits near a nearly stationary root and contributes about 0.0098 kg to this modal mass. The 0.60 kg terminal step moves much more and contributes about 0.44 kg. Putting the entire assembly mass on a spring at the tip would describe a different motion.</p>
-              <p class="article-caveat">“Effective mass” here is the generalized mass for a mode normalized to unit tail motion, not the ANSYS base-excitation participation metric.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-two-coordinate-title">
-            <h2 id="spindle-two-coordinate-title">Two stations, two local modes</h2>
-            <div class="article-body">
-              <p>A two-coordinate Rayleigh–Ritz reduction retains gear-center displacement at <strong>95 mm</strong> and tail displacement at <strong>410 mm</strong>. Unit-load beam flexibility supplies the interpolation, rather than assuming two independent lumped masses:</p>
-              <div class="article-equation">\[
-                H(s,\xi)=\int_0^{\min(s,\xi)}\frac{(s-u)(\xi-u)}{E(u)I(u)}\,du,\qquad
-                C_{ij}=H(s_i,s_j),\qquad \mathbf K=\mathbf C^{-1}.
-              \]</div>
-              <p>Integrating the distributed mass with the same interpolation gives a coupled mass matrix. The resulting matrices and free-vibration equation are:</p>
-              <div class="article-equation">\[
-                \mathbf K=10^6\begin{bmatrix}593.53793 &amp; -22.53896\\-22.53896 &amp; 3.938513\end{bmatrix}\ \mathrm{N/m},
-                \qquad\mathbf M=\begin{bmatrix}12.188384 &amp; 0.788953\\0.788953 &amp; 0.610937\end{bmatrix}\ \mathrm{kg}.
-              \]</div>
-              <div class="article-equation">\[
-                \det(\mathbf K-\omega^2\mathbf M)=0
-                \quad\Longrightarrow\quad f_{1,\mathrm{local}}=333.7\ \mathrm{Hz},\quad f_{2,\mathrm{local}}=1242.9\ \mathrm{Hz}.
-              \]</div>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/local-mode-shapes-rev-a.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/local-mode-shapes-rev-a.png" alt="Tip-normalized local modes: the first bends predominantly at the tail; the second has opposing gear and tail motion with a zero near 317 mm." width="1235" height="450" loading="lazy">
-                </a>
-                <figcaption>Computed shapes of the assumed overhang, from Rev A, page 8. These are not measured shapes or digitized ANSYS eigenvectors. The dotted vertical line marks the gear center.</figcaption>
-              </figure>
-              <p>The first mode is qualitatively tail-dominated. The second has opposing gear and tail motion, with an interior zero near 317 mm. It is <strong>not identified with the report’s second system frequency of 523.67 Hz</strong>: the hand model omits other subassemblies, and the report does not supply that system mode’s shape.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-comparison-title">
-            <h2 id="spindle-comparison-title">Hand model versus the original FEA</h2>
-            <div class="article-body">
-              <p>The comparison uses the reported <strong>307.17 Hz FE result as a reference</strong>, not as experimental truth. Signed discrepancy is \(100(f_{\mathrm{hand}}-f_{\mathrm{FE}})/f_{\mathrm{FE}}\).</p>
-              <div class="analysis-table-scroll" role="region" aria-label="First-frequency model comparison" tabindex="0">
-                <table class="analysis-table">
-                  <caption>First-frequency comparison from Rev A, pages 1 and 9.</caption>
-                  <thead><tr><th scope="col">Model</th><th scope="col">First frequency</th><th scope="col">Relative to 307.17 Hz</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Uniform 60 mm steel cantilever</th><td>255.2 Hz</td><td>−16.93%</td></tr>
-                    <tr><th scope="row">Stepped beam · one Rayleigh coordinate</th><td>336.8 Hz</td><td>+9.64%</td></tr>
-                    <tr><th scope="row">Stepped beam · two coordinates</th><td>333.7 Hz</td><td>+8.64%</td></tr>
-                    <tr><th scope="row">Original ANSYS model</th><td>307.17 Hz</td><td>Reference</td></tr>
-                  </tbody>
-                </table>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                m_{\mathrm{eff}}&amp;=\int_0^L\mu(s)\phi(s)^2\,ds\\
+                &amp;\quad+m_r\phi(s_r)^2
+                \end{aligned}
+                \]
               </div>
-              <p>The two-coordinate result is <strong>26.53 Hz higher</strong> than the FE reference. It captures a similar bending scale, but geometry, support representation, retained components, and solver conditions differ. The original FE setup included 3000 rpm, Coriolis effects, and a damped modal solver; the baseline compared here is nonrotating and undamped. The separate Rev B rotation check below does not make this a matched-speed FE comparison.</p>
-              <p>Two other checks answer different questions:</p>
-              <ul>
-                <li><strong>Original FE mesh sensitivity:</strong> four meshes, from 45,845 to 71,836 elements, gave first frequencies of 305–307 Hz. This tests sensitivity to mesh size, not accuracy against the real machine.</li>
-                <li><strong>Internal hand-model verification:</strong> a 24-element Euler–Bernoulli discretization of the same assumed beam gave 331.15 and 1227.20 Hz. The two-coordinate estimates were 0.77% and 1.28% higher. This checks the mathematical reduction, not the physical assumptions.</li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-support-shift-title">
-            <h2 id="spindle-support-shift-title">What does moving the support actually explain?</h2>
-            <div class="article-body">
-              <p>To isolate one design change, move only the idealized root by <strong>22 mm</strong>, shortening the local overhang from 410 to 388 mm while keeping the physical gear and tail geometry unchanged.</p>
-              <div class="analysis-table-scroll" role="region" aria-label="Support-location sensitivity" tabindex="0">
-                <table class="analysis-table">
-                  <caption>Translation-only sensitivity, Rev A, page 10.</caption>
-                  <thead><tr><th scope="col">Quantity</th><th scope="col">Original root</th><th scope="col">Root shifted 22 mm</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Tail stiffness</th><td>3.08262 MN/m</td><td>3.36093 MN/m</td></tr>
-                    <tr><th scope="row">Rayleigh generalized mass</th><td>0.68843 kg</td><td>0.65662 kg</td></tr>
-                    <tr><th scope="row">Rayleigh frequency</th><td>336.78 Hz</td><td>360.07 Hz</td></tr>
-                    <tr><th scope="row">Two-coordinate first frequency</th><td>333.70 Hz</td><td>358.30 Hz</td></tr>
-                  </tbody>
-                </table>
+              <div class="article-equation">
+                \[
+                \begin{gathered}
+                m_{\mathrm{eff}}\ddot q+k_Lq=0\\
+                f_R=\frac{1}{2\pi}\sqrt{\frac{k_L}{m_{\mathrm{eff}}}}
+                \end{gathered}
+                \]
               </div>
-              <p>The two-coordinate model rises <strong>7.37%</strong>, compared with the full FE modification’s <strong>24.77%</strong>. The support shift explains the direction of the change, but not its full magnitude. The local root is already perfectly clamped: it has no remaining tilt for an additional bearing to suppress. Bearing spacing, effective restraint, and FE joint scopes can change more than the support’s location alone.</p>
-              <h3>Allowing support translation and tilt</h3>
-              <p>For massless, linear, uncoupled support springs referred to ground, with translational stiffness \(k_y\) and bending-rotation stiffness \(k_\theta\), the tail compliance becomes:</p>
-              <div class="article-equation">\[
-                C_{LL,\mathrm{total}}=C_{LL,\mathrm{beam}}+\frac{1}{k_y}+\frac{L^2}{k_\theta}.
-              \]</div>
-              <p>Two identical radial springs of stiffness \(k\), separated by distance \(d\), give \(k_y=2k\) and \(k_\theta=kd^2/2\) when translation and tilt are measured about the pair’s midpoint. This explains why axial bearing spacing can provide resistance to tilt while the real assembly must still accommodate axial thermal motion. It is an explanatory model, not a reconstruction of the ambiguous Modified 2x case.</p>
-              <p class="article-caveat">No measured bearing stiffness is assigned. Once support motion is included, the interpolation and mass matrix must be rebuilt along with the stiffness matrix; changing stiffness alone would not preserve the same model.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-rotordynamics-title">
-            <h2 id="spindle-rotordynamics-title">Rev B: rotordynamic sensitivity</h2>
-            <div class="article-body">
-              <p>The original hand model leaves out rotation. Rev B, added on <strong>13 September 2026</strong>, checks one part of that simplification: how cross-sectional rotary inertia and gyroscopic coupling change the frequency of the assumed overhang. It is a new reduced-model calculation, <strong>not a new ANSYS solve</strong>.</p>
-              <h3>One bending shape in two lateral planes</h3>
-              <p>A spinning cross-section carries angular momentum; tilting its axis couples motion in the two transverse directions. I retain the original tip-normalized static shape \(\phi(s)\), but allow it to move in two perpendicular, stationary planes:</p>
-              <div class="article-equation">\[
-                w_x(s,t)=\phi(s)q_x(t),\qquad w_y(s,t)=\phi(s)q_y(t),\qquad \phi(L)=1.
-              \]</div>
-              <p>This is different from the earlier <em>two-station</em> model. That model retained gear and tail motion in one plane to describe two spatial bending modes. This extension retains <strong>one frozen shape in two planes</strong> to obtain a forward/backward whirl pair.</p>
-              <p>The five-section geometry, material properties, ideal clamp, and stiffness stay unchanged. All five equivalent sections are assumed to co-rotate at a prescribed speed. The C-ring remains a translational point mass; its diametral and polar inertias are omitted. There is no added centrifugal-prestress calculation, physical damping, shear correction, or cutting load.</p>
-              <p class="article-caveat">The all-five-rotating assumption differs from the original ANSYS spin assignment, which excluded the bearing stacks and rotary union. The equivalent aluminum tail does not resolve the rotary union’s rotating and stationary internals. This is a sensitivity check, not a reconstruction or verified conservative bound for the real spindle.</p>
-              <h3>Rotary inertia is weighted by slope</h3>
-              <p>Translation is weighted by \(\phi^2\); cross-sectional tilting is weighted by \((\phi')^2\). Using the section area moments \(I_j\) and \(J_{p,j}\):</p>
-              <div class="article-equation">\[
-                m_\theta=\sum_j\rho_jI_j\int_{a_j}^{b_j}(\phi')^2\,ds,\qquad
-                g=\sum_j\rho_jJ_{p,j}\int_{a_j}^{b_j}(\phi')^2\,ds.
-              \]</div>
-              <p>For these circular equivalents, \(J_{p,j}=2I_j\). The original translational generalized mass is \(m_t=0.68843256\ \mathrm{kg}\); the added rotary term is \(m_\theta=0.00971902\ \mathrm{kg}\). Hence:</p>
-              <div class="article-equation">\[
-                m=m_t+m_\theta=0.69815157\ \mathrm{kg},\qquad g=2m_\theta=0.01943803\ \mathrm{kg}.
-              \]</div>
-              <p>These are generalized coefficients for tip displacement, so both have units of kilograms. The gear contributes only about <strong>1.4%</strong> of the translational generalized mass but about <strong>34.1%</strong> of the gyroscopic coefficient. Its small lateral displacement does not eliminate the effect of its large polar inertia.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-whirl-title">
-            <h2 id="spindle-whirl-title">Forward and backward whirl</h2>
-            <div class="article-body">
-              <p>Take right-handed fixed axes \((x,y,s)\), positive shaft spin \(\Omega\) about \(+s\), and \(\mathbf q=[q_x,q_y]^T\). The undamped two-plane equations are:</p>
-              <div class="article-equation">\[
-                m\ddot{\mathbf q}+\Omega\mathbf G_1\dot{\mathbf q}+k\mathbf q=\mathbf 0,\qquad
-                \mathbf G_1=\begin{bmatrix}0 &amp; g\\-g &amp; 0\end{bmatrix},\qquad k=k_L.
-              \]</div>
-              <p>With \(\omega_0=\sqrt{k/m}\) and \(a=g\Omega/(2m)\), the two positive stationary-frame frequencies for \(\Omega\geq0\) follow from the harmonic eigenproblem:</p>
-              <div class="article-equation">\[
-                (k-m\omega^2)^2-(g\Omega\omega)^2=0,\qquad
-                \boxed{\omega_\pm=\sqrt{\omega_0^2+a^2}\pm a},\qquad f_\pm=\frac{\omega_\pm}{2\pi}.
-              \]</div>
-              <p>For this sign convention, the upper branch \(f_+\) is forward whirl, in the same direction as shaft rotation; the lower branch \(f_-\) is backward whirl. At zero spin they coincide. Their separation is a split of one lateral bending family, not an additional spatial mode.</p>
-              <p>The gyroscopic matrix is skew-symmetric: \(\mathbf G_1^T=-\mathbf G_1\), so \(\dot{\mathbf q}^T\Omega\mathbf G_1\dot{\mathbf q}=0\). It changes the motion without dissipating energy. <strong>Gyroscopic coupling is not physical damping.</strong></p>
-              <p class="article-caveat">A nonspinning section can still tilt and contribute to \(m_\theta\). For different section speeds, \(g\Omega\) becomes \(\sum_j g_j\Omega_j\), while all tilting inertia is retained. No numerical spin partition is assigned here because the internal components are unresolved.</p>
-            </div>
-          </section>
-
-          <section class="build-section" aria-labelledby="spindle-rotation-results-title">
-            <h2 id="spindle-rotation-results-title">What changes at 3000 rpm?</h2>
-            <div class="article-body">
-              <p>At \(\Omega=314.15927\ \mathrm{rad/s}\), the unchanged stiffness is \(3.08262016\times10^6\ \mathrm{N/m}\) and \(g/m=0.02784214\). The calculation separates the effect of adding rotary inertia from the effect of turning on spin.</p>
-              <div class="analysis-table-scroll" role="region" aria-label="Rotary-inertia and gyroscopic frequency changes" tabindex="0">
-                <table class="analysis-table">
-                  <caption>One-shape sensitivity, Rev B, page 16. Frequencies are rounded; percentages use the unrounded calculation and the stated reference.</caption>
-                  <thead><tr><th scope="col">Case</th><th scope="col">Frequency</th><th scope="col">Change / reference</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">Original Rayleigh model, no rotary inertia</th><td>336.78 Hz</td><td>Baseline \(f_R\)</td></tr>
-                    <tr><th scope="row">Rotary inertia added, zero spin \(f_0\)</th><td>334.43 Hz</td><td>−0.69849% / \(f_R\)</td></tr>
-                    <tr><th scope="row">3000 rpm · backward whirl</th><td>333.73 Hz</td><td>−0.20791% / \(f_0\)</td></tr>
-                    <tr><th scope="row">3000 rpm · forward whirl</th><td>335.13 Hz</td><td>+0.20835% / \(f_0\)</td></tr>
-                  </tbody>
-                </table>
+              <p id="spindle-rayleigh-result"><strong>Numerical evaluation.</strong> For the assumed nonrotating overhang, the stiffness and shape-weighted mass evaluate to:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                k_L&amp;\approx 3.08262\times10^6~\mathrm{N/m}\\
+                m_{\mathrm{eff}}&amp;\approx 0.688433~\mathrm{kg}
+                \end{aligned}
+                \]
               </div>
-              <p>Adding rotary inertia lowers the zero-spin result by about <strong>0.70%</strong>: sections tilt during bending whether or not the shaft spins. Gyroscopic coupling then shifts the two branches by approximately <strong>±0.208% relative to the extended zero-spin frequency \(f_0=334.43\ \mathrm{Hz}\)</strong>, not relative to the original 336.78 Hz. The branch separation is about <strong>1.392 Hz</strong>.</p>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/whirl-branches-rev-b.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/whirl-branches-rev-b.png" alt="Forward and backward whirl frequencies split from 334.43 Hz at zero speed to 335.13 and 333.73 Hz at 3000 rpm." width="1280" height="395" loading="lazy">
-                </a>
-                <figcaption>Stationary-frame branches from Rev B, page 16, for the one-shape, all-five-rotating model. The tight vertical scale reveals the small split. These are calculated sensitivity curves, not ANSYS results.</figcaption>
-              </figure>
-              <p class="article-caveat">Within this assumed beam, the small gyroscopic shift supports omitting gyroscopy from the original baseline explanation. It is not a bound on the complete spindle’s rotational effects. The lower branch’s proximity to the separate two-station result of 333.70 Hz is coincidental; they are different reductions.</p>
+              <p>Substitute into the frequency expression:</p>
+              <div class="article-equation">
+                \[
+                f_R\approx\frac{1}{2\pi}
+                \sqrt{\frac{3.08262\times10^6}{0.688433}}~\mathrm{Hz}
+                \]
+              </div>
+              <div class="article-equation model-frequency-result">
+                \[
+                \boxed{f_R\approx336.8~\mathrm{Hz}}
+                \]
+              </div>
+              <p>The \(\phi^2\) weighting counts how much each part moves, rather than treating the whole assembly as a mass at the tip.</p>
+
+              <h3 id="spindle-rotordynamics-title">Rotating effects: one shape in two planes</h3>
+              <p>Rev B keeps the Rayleigh shape \(\phi\) and stiffness \(k_L\), but allows transverse motion \(w_x=\phi q_x\) and \(w_y=\phi q_y\). This uses one spatial shape in two perpendicular planes. Cross-sectional tilting adds rotary inertia \(m_\theta\) and a gyroscopic coefficient \(g\). Primes denote derivatives with respect to \(s\):</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                m_\theta&amp;=\int_0^L\rho I(\phi')^2\,ds\\
+                g&amp;=\int_0^L\rho J_p(\phi')^2\,ds\\
+                m&amp;=m_{\mathrm{eff}}+m_\theta
+                \end{aligned}
+                \]
+              </div>
+              <p>Here \(I\) and \(J_p\) are cross-sectional area moments; \(J_p=2I\) for the circular equivalents. For constant positive spin \(\Omega\) about \(+s\), using right-handed fixed axes \((x,y,s)\):</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                m\ddot q_x+g\Omega\dot q_y+k_Lq_x&amp;=0\\
+                m\ddot q_y-g\Omega\dot q_x+k_Lq_y&amp;=0
+                \end{aligned}
+                \]
+              </div>
+              <div class="article-equation">
+                \[
+                \begin{gathered}
+                \omega_0=\sqrt{k_L/m}\\
+                a=\frac{g\Omega}{2m}\\
+                \omega_\pm=\sqrt{\omega_0^2+a^2}\pm a\\
+                f_\pm=\frac{\omega_\pm}{2\pi}
+                \end{gathered}
+                \]
+              </div>
+              <p id="spindle-rotation-results-title"><strong>Numerical evaluation.</strong> The rotary-inertia integrals give the following values, with the original stiffness unchanged:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                m_\theta&amp;\approx0.00971902~\mathrm{kg}\\
+                m&amp;\approx0.69815157~\mathrm{kg}\\
+                g&amp;\approx0.01943803~\mathrm{kg}
+                \end{aligned}
+                \]
+              </div>
+              <p>First, include rotary inertia at zero spin:</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                f_0&amp;=\frac{1}{2\pi}\sqrt{\frac{k_L}{m}}\\
+                &amp;\approx\frac{1}{2\pi}
+                \sqrt{\frac{3.08262016\times10^6}{0.69815157}}~\mathrm{Hz}
+                \end{aligned}
+                \]
+              </div>
+              <div class="article-equation model-frequency-result">
+                \[
+                \boxed{f_0\approx334.43~\mathrm{Hz}}
+                \]
+              </div>
+              <p>Next, set the spin speed to <strong>3000 rpm</strong>. Express the gyroscopic term in Hz as \(b=a/(2\pi)\):</p>
+              <div class="article-equation">
+                \[
+                \begin{aligned}
+                \Omega&amp;=3000\frac{2\pi}{60}~\mathrm{rad/s}\\
+                &amp;\approx314.15927~\mathrm{rad/s}\\
+                b&amp;=\frac{g\Omega}{4\pi m}\\
+                 &amp;\approx0.69605~\mathrm{Hz}
+                \end{aligned}
+                \]
+              </div>
+              <p>The lower, backward-whirl branch is:</p>
+              <div class="article-equation">
+                \[
+                f_-=\sqrt{f_0^2+b^2}-b
+                \]
+              </div>
+              <div class="article-equation model-frequency-result">
+                \[
+                \boxed{f_-\approx333.73~\mathrm{Hz}}
+                \]
+              </div>
+              <p>The upper, forward-whirl branch is:</p>
+              <div class="article-equation">
+                \[
+                f_+=\sqrt{f_0^2+b^2}+b
+                \]
+              </div>
+              <div class="article-equation model-frequency-result">
+                \[
+                \boxed{f_+\approx335.13~\mathrm{Hz}}
+                \]
+              </div>
+              <p>These are stationary-frame predictions, not measurements; boxed results use full-precision calculations.</p>
+              <p>Here, \(+\)/\(−\) denote forward/backward whirl. Rotary inertia lowers their shared zero-spin frequency relative to Rayleigh. Gyroscopic coupling splits them without damping; the backward branch’s proximity to Rayleigh–Ritz is coincidental.</p>
             </div>
           </section>
 
-          <section class="build-section" aria-labelledby="spindle-campbell-title">
-            <h2 id="spindle-campbell-title">Campbell diagram: frequency shift versus excitation</h2>
+          <section class="build-section frequency-comparison" aria-labelledby="spindle-frequency-comparison-title">
+            <h2 id="spindle-frequency-comparison-title">Frequency Comparison</h2>
             <div class="article-body">
-              <p>A Campbell diagram places frequency branches alongside speed-related excitation lines. For shaft speed \(n\) in rpm, the once-per-revolution line is \(f_{1X}=n/60\). A six-flute tool also introduces \(f_{6X}=6n/60\). At 3000 rpm, these reach <strong>50 Hz</strong> and <strong>300 Hz</strong>, respectively.</p>
-              <figure class="article-figure is-wide">
-                <a href="../assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png">
-                  <img src="../assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png" alt="Campbell diagram comparing the reduced whirl branches near 334 Hz, 1X excitation reaching 50 Hz, 6X reaching 300 Hz, and the single reported FE point at 307.17 Hz and 3000 rpm." width="1290" height="545" loading="lazy">
-                </a>
-                <figcaption>Rev B, page 17. The reduced branches nearly overlap at this scale. The 307.17 Hz marker is the original report’s single 3000 rpm FE result, not an FE speed sweep.</figcaption>
-              </figure>
-              <p>A small gyroscopic shift does not imply weak forcing. The maximum six-flute fundamental is only <strong>7.17 Hz below the reported FE mode</strong>. Frequency proximity alone does not establish a large response either: modal forcing, damping, higher harmonics, other modes, and regenerative cutting effects still matter. This diagram does not certify resonance avoidance.</p>
+              <p>The original tests and full-spindle simulations date to 2025; the local beam models are retrospective calculations from September 2026. The plots and table compare their frequency scales while keeping the measured band, predicted modes, support configurations, and spin conditions distinct.</p>
+            </div>
+
+            <h3 id="spindle-frequency-detail-title">Local-model detail</h3>
+            <figure class="frequency-figure" aria-labelledby="spindle-frequency-detail-title">
+              <div id="spindle-frequency-detail-plot"></div>
+              <figcaption>Expanded frequency scale for the Rayleigh estimate and its rotary-inertia and rotating extensions. Reported decimal places do not establish physical accuracy.</figcaption>
+            </figure>
+
+            <div class="article-body">
+              <p>The full-spindle second modes near 524 Hz and the second local Ritz mode at 1242.9 Hz are listed separately below. They are different mode shapes, not matched counterparts, and lie outside the <a href="#spindle-wavelet-title">wavelet’s displayed frequency range</a>.</p>
+            </div>
+            <noscript><p>The interactive plots require JavaScript. All frequency values and conditions are available in the table below.</p></noscript>
+
+            <p class="frequency-scroll-hint">On smaller screens, scroll the table horizontally to read all columns.</p>
+            <div class="frequency-table-scroll" role="region" aria-labelledby="spindle-frequency-comparison-title" tabindex="0">
+              <table class="frequency-table">
+                <caption>Reported frequencies</caption>
+                <thead>
+                  <tr><th scope="col">Test or model</th><th scope="col">Frequency (Hz)</th><th scope="col">Condition and interpretation</th></tr>
+                </thead>
+                <tbody>
+                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Operational evidence and full-spindle FEA · 2025</th></tr>
+                  <tr><th scope="row">Unloaded test</th><td class="frequency">≈310</td><td>Observed y-direction band across 250–3000 rpm; no independently measured mode shape.</td></tr>
+                  <tr><th scope="row">Baseline FEA</th><td class="frequency">307.17</td><td>First bending mode; original bearing arrangement, 3000-rpm model.</td></tr>
+                  <tr><th scope="row">Modified “2x” FEA</th><td class="frequency">383.27</td><td>First bending mode; proposed floating-bearing modification and 22-mm shift. Prediction only.</td></tr>
+                </tbody>
+                <tbody>
+                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Local motor-end overhang models · September 2026</th></tr>
+                  <tr><th scope="row">Rayleigh</th><td class="frequency">336.8</td><td>One static bending shape; nonrotating, without rotary inertia.</td></tr>
+                  <tr><th scope="row">Rayleigh–Ritz</th><td class="frequency">333.7</td><td>First local mode; two station coordinates, nonrotating.</td></tr>
+                  <tr><th scope="row">Rotating extension: zero spin</th><td class="frequency">334.43</td><td>One shape in two planes, with rotary inertia; forward/backward branches coincide.</td></tr>
+                  <tr><th scope="row">Rotating extension: backward whirl</th><td class="frequency">333.73</td><td>3000 rpm; stationary-frame frequency.</td></tr>
+                  <tr><th scope="row">Rotating extension: forward whirl</th><td class="frequency">335.13</td><td>3000 rpm; stationary-frame frequency.</td></tr>
+                </tbody>
+                <tbody>
+                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Higher modes · different mode shapes, not matched counterparts</th></tr>
+                  <tr><th scope="row">Baseline FEA: second mode</th><td class="frequency">523.67</td><td>Full-spindle mode; the presentation shows bending concentrated toward the tool end.</td></tr>
+                  <tr><th scope="row">Modified “2x” FEA: second mode</th><td class="frequency">≈524</td><td>Full-spindle second mode, rounded as reported in the presentation.</td></tr>
+                  <tr><th scope="row">Rayleigh–Ritz: second local mode</th><td class="frequency">1242.9</td><td>Local motor-end overhang mode; not the full-spindle second mode.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
-          <section class="build-section" aria-labelledby="spindle-rotordynamic-checks-title">
-            <h2 id="spindle-rotordynamic-checks-title">Verification and the remaining FE comparison</h2>
+          <section class="build-section testing-section" aria-labelledby="spindle-vibration-deflection-reduction-process-title">
+            <h2 id="spindle-vibration-deflection-reduction-process-title" tabindex="-1">Initial Testing</h2>
+            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
             <div class="article-body">
-              <p>Rev B checks the closed-form whirl frequencies against a four-state eigensolution of the same reduced system. It also checks the slope integrals, skew symmetry, coincident branches at zero spin, and branch exchange when spin reverses. These reproduce the calculation; <strong>they are not physical validation or a rotating beam-mesh convergence study</strong>.</p>
-              <p>A matched FE study would separate two different discrepancies:</p>
-              <div class="article-equation">\[
-                \Delta f_{\mathrm{structure}}=f_{\mathrm{hand}}(0)-f_{\mathrm{FE}}(0),\qquad
-                \Delta f_{\mathrm{speed},\pm}=f_{\mathrm{FE},\pm}(3000)-f_{\mathrm{FE}}(0).
-              \]</div>
-              <p>Here 0 and 3000 denote shaft speed in rpm. Each comparison needs the corresponding bending family in the same reference frame. No matched zero-speed FE result was supplied, so these differences remain unevaluated.</p>
-              <p>The next comparison would recover the actual geometry, contacts, bearings, and spinning components; extract modes at zero and 3000 rpm with an intervening sweep; and track complex mode shapes and whirl direction rather than relying on a mode number alone. A gyro-only check must hold mass and stiffness fixed. A total speed-effect study must separately state whether centrifugal prestress and stiffness are recomputed.</p>
-              <p class="article-caveat">Rev B holds stiffness fixed and does not calculate centrifugal stress or its effect on stiffness. The original report’s “damped solver” setting also does not supply a measured damping ratio. Neither omitted effect can be inferred from the ±0.208% gyroscopic result.</p>
+              <p>Our on-site campaign combined impact tests, unloaded free-spinning tests, and loaded cutting tests. A tri-axial accelerometer mounted on the spindle housing recorded the response.</p>
             </div>
+            <figure class="article-figure is-wide" id="spindle-testing-overview">
+              <a href="../assets/builds/spindle-vibration-deflection-reduction/testing-overview.png">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/testing-overview.png" alt="Annotated test setup showing an impact hammer beside the spindle housing and mounted accelerometer on the left, the custom torsion bar at upper right, and the end mill cutting a workpiece at lower right" width="1794" height="1248" loading="lazy">
+              </a>
+              <figcaption>Test setup: housing-mounted accelerometer and impact hammer (left), custom torsion bar (upper right), and cutting operation (lower right). Open the image for the full-resolution view.</figcaption>
+            </figure>
+            <div class="article-body test-methods">
+              <h3 id="spindle-impact-tests-title">Impact tests</h3>
+              <p>Transverse x/y impacts and torsional impacts using a custom torsion bar did not establish quantitative modal conclusions.</p>
+
+              <h3 id="spindle-unloaded-tests-title">Unloaded tests</h3>
+              <p>Twelve 10-second free-spinning trials covered 250–3000 rpm in 250-rpm steps. Wavelet analysis showed a persistent band near <strong>310 Hz in the y-direction</strong>, not an experimentally established mode shape.</p>
+
+              <h3 id="spindle-loaded-tests-title">Loaded tests</h3>
+              <p>Cutting tests used short and long tools at multiple speeds. Long-tool bands varied with speed, with some accelerometer saturation and no single frequency for unloaded-model comparison.</p>
+            </div>
+            <figure class="build-video">
+              <video controls muted loop playsinline preload="none" data-autoplay-loop
+                width="1280" height="720"
+                poster="../assets/builds/spindle-vibration-deflection-reduction/cutting-test-poster.jpg"
+                aria-label="Spindle cutting-test footage"
+                aria-describedby="spindle-cutting-caption">
+                <source src="../assets/builds/spindle-vibration-deflection-reduction/cutting-test.mp4" type="video/mp4">
+                <a href="../assets/builds/spindle-vibration-deflection-reduction/cutting-test.mp4">Download the cutting-test video.</a>
+              </video>
+              <figcaption id="spindle-cutting-caption">Loaded test: an end mill cutting a steel workpiece, as shown in the final presentation. This footage illustrates the cutting operation; the approximately 310 Hz reference comes from the separate unloaded tests.</figcaption>
+            </figure>
+
+            <h3 id="spindle-wavelet-title">Model references over the unloaded wavelet</h3>
+            <figure class="frequency-figure" aria-labelledby="spindle-wavelet-title">
+              <div id="spindle-wavelet-plot" data-source="../assets/builds/spindle-vibration-deflection-reduction/unloaded-wavelet-original.jpg"></div>
+              <fieldset class="wavelet-controls" id="spindle-wavelet-controls" hidden>
+                <legend>Select model frequency references</legend>
+                <div class="wavelet-options">
+                  <label><input type="checkbox" value="baseline" checked><span class="wavelet-swatch fea" aria-hidden="true"></span><span>Baseline FEA · 307.17 Hz</span></label>
+                  <label><input type="checkbox" value="modified" checked><span class="wavelet-swatch modified" aria-hidden="true"></span><span>Modified FEA · 383.27 Hz</span></label>
+                  <label><input type="checkbox" value="rayleigh" checked><span class="wavelet-swatch" aria-hidden="true"></span><span>Rayleigh · 336.8 Hz</span></label>
+                  <label><input type="checkbox" value="zero"><span class="wavelet-swatch dotted" aria-hidden="true"></span><span>Rotary inertia, zero spin · 334.43 Hz</span></label>
+                  <label><input type="checkbox" value="backward"><span class="wavelet-swatch dashed" aria-hidden="true"></span><span>Backward whirl, 3000 rpm · 333.73 Hz</span></label>
+                  <label><input type="checkbox" value="forward"><span class="wavelet-swatch dashed" aria-hidden="true"></span><span>Forward whirl, 3000 rpm · 335.13 Hz</span></label>
+                </div>
+              </fieldset>
+              <p class="wavelet-status" id="spindle-wavelet-status" aria-live="polite" hidden>3 model reference lines shown.</p>
+              <figcaption>Y-direction data from the final report, Figure 9. Twelve separate 10-second tests at 250, 500, …, 3000 rpm are stitched along the time axis; this is not a continuous speed ramp. The original raster is preserved, with axes redrawn for readability. <a href="../assets/builds/spindle-vibration-deflection-reduction/unloaded-wavelet-original.jpg">View the original X/Y/Z plot at full resolution.</a></figcaption>
+            </figure>
+            <noscript><p>The interactive overlay requires JavaScript. View the original wavelet image linked above or the <a href="#spindle-frequency-comparison-title">frequency comparison table</a>.</p></noscript>
           </section>
 
-          <section class="build-section" aria-labelledby="spindle-limits-title">
-            <h2 id="spindle-limits-title">What the calculation establishes—and what it does not</h2>
+          <section class="build-section" aria-labelledby="spindle-fea-title">
+            <h2 id="spindle-fea-title">Finite Element Analysis</h2>
             <div class="article-body">
-              <p>The hand model makes the motor-end bending mechanism understandable with a small number of coordinates. Its arithmetic is more tightly checked than its physical inputs: a chosen ±5% change in all axial lengths alone moves the first estimate from about 303 to 370 Hz. That is a sensitivity exercise, not a measured uncertainty interval.</p>
-              <p>Stronger comparisons would require actual section dimensions and bores, component masses and connections, bearing stiffness and spacing, housing flexibility, and matched zero-speed FE mode shapes. Rev B quantifies rotary inertia and gyroscopic coupling only within the declared simplified model; the complete spindle’s speed dependence, centrifugal prestress, damping, and cutting forces remain unresolved. Neither the original frequency shift nor these hand calculations establish a measured vibration-amplitude reduction, compliance with an operating vibration limit, or stable loaded cutting.</p>
-              <p><a href="../assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-b.pdf">Read the complete hand calculations and rotordynamic analysis — Rev B (PDF, 24 pages)</a>. The new rotation analysis is on pages 13–18, with its numerical checks on page 22.</p>
-              <p><a href="../assets/builds/spindle-vibration-deflection-reduction/spindle-hand-calculations-rev-a.pdf">Earlier revision — Rev A (PDF, 16 pages)</a>, retained for the original nonrotating derivation and figures.</p>
-              <p class="article-caveat">Project evidence: <em>Spindle Vibration and Deflection Reduction</em>, Spring 2025 ME 470 final report, by Zach Balakrishnan, Ryan VandeWiele, Eron Mahmudi, Liam Wydra, Jerich Lee, and Justin Frank. Testing: §§6.3–6.7; simulation and bearing comparisons: §§7.4–7.8 and Tables 3–5. The later calculations and rotation-specific references are documented in <em>Spindle Vibration Hand Calculations</em>, SVR–HC01, Rev B.</p>
+              <p>Refined against unloaded tests, ANSYS placed the first mode near the observed band, with bending at the motor-end overhang.</p>
+              <p>It used grounded outer bearing faces, cylindrical joints, and Coriolis effects at 3000 rpm, with bearing stacks and the rotary union nonrotating. Unloaded-test correlation did not independently validate loaded cutting.</p>
             </div>
+            <figure class="article-figure">
+              <a href="../assets/builds/spindle-vibration-deflection-reduction/image-02.png">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/image-02.png" alt="Spindle assembly model showing the shaft, bearing regions, drive gear, and motor-end overhang" width="606" height="245" loading="lazy">
+              </a>
+              <figcaption>Spindle assembly model showing the shaft, bearing regions, drive gear, and motor-end overhang.</figcaption>
+            </figure>
+            <figure class="article-figure is-wide fea-model-comparison" id="spindle-fea-model-comparison">
+              <a href="../assets/builds/spindle-vibration-deflection-reduction/fea-model-comparison.png">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/fea-model-comparison.png" alt="Original spindle CAD assembly with detailed gear teeth and bearing features above a simplified assembly of stepped cylindrical sections, labeled Original Model and Approximate Model" width="1358" height="1056" loading="lazy">
+              </a>
+              <figcaption>Original spindle CAD (top) and the approximate geometry used for the finite element model (bottom). Open the image for the full-resolution comparison.</figcaption>
+            </figure>
           </section>
+
+          <section class="build-section" aria-labelledby="spindle-vibration-deflection-reduction-outcome-title">
+            <h2 id="spindle-vibration-deflection-reduction-outcome-title">Bearing Modification</h2>
+            <div class="article-body">
+              <p>We recommended modifying the floating-bearing stack and shifting it 22 mm toward the drive. The preferred configuration raised the first simulated frequency from <strong>approximately 307 Hz to 383 Hz, an increase of about 25%</strong>. This was a predicted frequency shift, not a measured reduction in operating vibration.</p>
+            </div>
+            <figure class="article-figure is-wide bearing-layout" id="spindle-bearing-layout">
+              <a href="../assets/builds/spindle-vibration-deflection-reduction/floating-bearing-comparison.png">
+                <img src="../assets/builds/spindle-vibration-deflection-reduction/floating-bearing-comparison.png" alt="Side-by-side spindle CAD cross-sections labeled Current and New, with red outlines highlighting the existing floating-bearing arrangement on the left and the proposed raised bearing stack on the right" width="1324" height="1288" loading="lazy">
+              </a>
+              <figcaption>Existing floating-bearing arrangement (left) and proposed configuration (right). The highlighted region shows the support change near the drive end. Open the image for the full-resolution comparison.</figcaption>
+            </figure>
+            <figure class="article-figure is-wide build-video modal-comparison">
+              <p class="modal-label" id="spindle-baseline-label"><strong>Baseline first bending mode.</strong> 307.17 Hz.</p>
+              <video id="spindle-baseline-video" controls muted loop playsinline preload="none" data-autoplay-loop
+                width="1920" height="1080"
+                poster="../assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz-poster.jpg"
+                aria-labelledby="spindle-baseline-label" aria-describedby="spindle-modal-caption">
+                <source src="../assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.mp4" type="video/mp4">
+                <a href="../assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.mp4">Download the baseline ANSYS animation.</a>
+              </video>
+              <p class="modal-label" id="spindle-modified-label"><strong>Proposed bearing-stack configuration.</strong> 383.27 Hz; “Modified 2x” case.</p>
+              <video id="spindle-modified-video" controls muted loop playsinline preload="none" data-autoplay-loop
+                width="1920" height="1080"
+                poster="../assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz-poster.jpg"
+                aria-labelledby="spindle-modified-label" aria-describedby="spindle-modal-caption">
+                <source src="../assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz.mp4" type="video/mp4">
+                <a href="../assets/builds/spindle-vibration-deflection-reduction/modified-mode-383hz.mp4">Download the proposed-configuration ANSYS animation.</a>
+              </video>
+              <figcaption id="spindle-modal-caption">ANSYS mode-shape animations. Displayed deformations are scaled mode shapes, not operating vibration amplitudes.</figcaption>
+            </figure>
+          </section>
+
+          <section class="build-section outcome-section" aria-labelledby="spindle-limits-title">
+            <h2 id="spindle-limits-title" tabindex="-1">Outcome</h2>
+            <a class="star-return" href="#spindle-problem-title" aria-label="Back to STAR summary">↑ Back to STAR</a>
+            <div class="article-body">
+              <p>The proposed bearing modification increased the first ANSYS bending-mode frequency from <strong>307.17 to 383.27 Hz (+24.8%)</strong>, moving it away from the observed ≈310 Hz response band to reduce resonance risk.</p>
+              <p>The project linked measured vibration, a simulated bending mechanism, and a targeted bearing recommendation. The retrospective calculations added a clearer explanation of why support placement and distributed inertia mattered. Confirming the proposed modification’s operating benefit would require testing the modified spindle under representative cutting conditions.</p>
+            </div>
+            <h3 id="spindle-frequency-overview-title">Observed band and model estimates</h3>
+            <figure class="frequency-figure" aria-labelledby="spindle-frequency-overview-title">
+              <div id="spindle-frequency-overview-plot"></div>
+              <figcaption>The highlighted final row shows the proposed FE configuration at 383.27 Hz, a 24.8% increase over the 307.17 Hz baseline. The dashed reference marks the reported unloaded band at approximately 310 Hz. Squares represent full-spindle FE configurations; circles represent the observation and local mathematical estimates. The proposed configuration is not a measured post-modification result.</figcaption>
+            </figure>
+            <noscript><p>The plot requires JavaScript; all values are available in the <a href="#spindle-frequency-comparison-title">frequency comparison table</a>.</p></noscript>
+          </section>
+
         </article>
       </main>
     </div>
