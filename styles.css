@@ -103,7 +103,7 @@ a:focus-visible {
   padding: 0.08rem 0;
 }
 
-.nav a:not([href$="builds/index.html"]) {
+.nav a:not([href$="builds/index.html"]):not([href$="contact/index.html"]) {
   display: none;
 }
 
