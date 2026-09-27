@@ -12,6 +12,8 @@ The steel remains approximately **20 °C at 10 s**, reaches approximately **91 �
 
 This case is distinct from the earlier ≈59 °C central result below: its imposed solid temperature, interface coupling, and post-pulse boundaries all differ. The 59 °C chart remains the earlier gas-heating/ambient-cooling comparison and must not be relabeled as conduction-only. Generator and self-checks: `output/ablative-sleeve-comparison/conduction-only.cjs`; input, result, and verification export: `sleeve-conduction-only.json`.
 
+The [boundary-condition diagram](sleeve-conduction-boundaries.svg) is generated directly from that JSON by `output/ablative-sleeve-comparison/build-conduction-diagram.cjs`. It separates the imposed-temperature pulse from the fully insulated heat soak, labels the three solid layers and their constant properties, and shows the idealized massless, zero-resistance gap. The straightened wall is not to scale; the calculation remains radial and cylindrical. Equal heat rate, rather than equal flux density at different radii, is transferred across the gap. The diagram introduces no new thermal assumptions or numerical results.
+
 ## What is documented, and what is selected
 
 The [Mk1 component list](https://docs.google.com/spreadsheets/d/1Zg9WjmT8dic_PtStrfykBivGqj8CVY54Y9kj8dExC5A/edit), housing Part #1, lists **304L stainless steel**, McMaster 89495K95. The master report instead calls it 304 stainless. The [dimension sheet](https://docs.google.com/spreadsheets/d/1HcJMnTM0SDfNXDDfdOUr65X4GkdxouMvA-WkfBdLpM0/edit) gives case ID 4 in, wall 0.25 in, length 12 in. Thus the nominal case radii are 50.8 and 57.15 mm. These records do not establish the as-fired alloy certificate, dimensions, manufacturing condition, or pressure/temperature allowable.

@@ -84,6 +84,25 @@
         overflow-x: auto;
         margin: 1.2rem 0;
       }
+      .ablative-project .conduction-diagram,
+      .ablative-project .conduction-diagram-frame {
+        min-width: 0;
+        max-width: 100%;
+      }
+      .ablative-project .conduction-diagram-frame {
+        border: 1px solid var(--line);
+      }
+      .ablative-project .conduction-diagram-frame img {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        max-height: none;
+        height: auto;
+      }
+      .ablative-project .conduction-diagram figcaption {
+        max-width: none;
+        text-align: left;
+      }
       .thermal-table {
         width: 100%;
         border-collapse: collapse;
@@ -359,6 +378,12 @@ N_{\max}\approx 30~\text{rpm at the moment of impact}.
             <h2 id="ablative-thermal-model-title">1D transient heat-conduction model</h2>
             <div class="article-body">
               <p>The graphite model predicts back-face temperature from heat flux; fitting it to measurements estimates the constant pulse amplitude, \(q_0\).</p>
+              <figure class="article-figure conduction-diagram">
+                <div class="conduction-diagram-frame">
+                  <img src="../assets/builds/ablative-material-testing-fixture/analysis/coupon-heat-transfer-boundaries.svg" alt="Graphite reference and ChamberSafe characterization diagrams. Graphite uses a three-second fitted flux pulse and fixed model properties. ChamberSafe conductivity and specific heat are unknown characterization targets, with no assigned values; density requires measured mass and volume. Heat input, back-side losses and sensor coupling also need constraints." width="1120" height="1080" loading="lazy">
+                </div>
+                <figcaption>Graphite calibrates the heating reference; <strong>ChamberSafe is the material to characterize</strong>. Its conductivity and specific heat are unknowns to determine—not prescribed inputs. Density requires measured mass and volume. The current temperature traces alone do not uniquely identify the thermal properties: heat input, losses and sensor coupling must also be constrained. The graphite’s insulated back boundary is not imposed on the brick. <a href="../assets/builds/ablative-material-testing-fixture/analysis/coupon-heat-transfer-boundaries.svg">Open the full-size diagram</a> for a closer look.</figcaption>
+              </figure>
               <p>The slab has thickness \(L = 0.02362\ \mathrm{m}\) (0.93 in) and constant \(k = 130\ \mathrm{W/(m\,K)}\), \(\rho = 1850\ \mathrm{kg/m^3}\), and \(c = 700\ \mathrm{J/(kg\,K)}\), with heat flowing from \(x=0\) to the back-face thermocouple at \(x=L\):</p>
               <div class="article-equation">
                 \[
@@ -764,6 +789,12 @@ N_{\max}\approx 30~\text{rpm at the moment of impact}.
               <p>Removing the sleeve entirely in a separate bare-wall radial-column benchmark drives the constant-property steel calculation beyond its supported temperature interval and even into the datasheet’s melting range. That output is <strong>not a reliable physical peak</strong>; temperature-dependent properties and phase change are missing. It is excluded from the intact-wall chart and retained only as a flagged model-breakdown case. It cannot reconstruct heating through a real crack of unknown width. Likewise, the alloy’s melting range is not an acceptable operating limit for a pressurized assembly: strength, thermal stress, joints, and seals require their own verified limits.</p>
               <h4 id="ablative-conduction-only-title">Simplified analysis: conduction only</h4>
               <p><strong>Within a conduction-only model, the intact sleeve keeps the modeled steel case far below melting for the assumed 10-second exposure.</strong> To make that question definite without calculating convection or radiation, we impose the heating directly at the solid surface and retain all deposited heat afterward.</p>
+              <figure class="article-figure conduction-diagram">
+                <div class="conduction-diagram-frame">
+                  <img src="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-conduction-boundaries.svg" alt="Radial heat-transfer diagram: 2 mm char, 6.89 mm virgin ablator, an idealized zero-resistance gap and 6.35 mm steel. For 10 seconds the bore surface is held at 3,000 K and the exterior is insulated; afterward both boundaries are insulated while stored heat redistributes. All solids start at 20 degrees Celsius." width="1120" height="952" loading="lazy">
+                </div>
+                <figcaption>Boundary conditions for this assumed conduction-only case—not measured engine conditions. The wall is drawn as a straightened radial section for readability; the solver uses cylindrical areas and volumes. Flux follows the evolving temperature gradient, so it is not constant through the heat-storing layers. <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-conduction-boundaries.svg">Open the full-size diagram</a> for a closer look.</figcaption>
+              </figure>
               <ul>
                 <li>The sleeve’s exposed <strong>solid surface is held at 3,000 K for 10 seconds</strong>. This is a prescribed surface temperature—not a measured flame temperature or a calculated flame-to-surface interaction. All material initially starts at 20 °C.</li>
                 <li>The already-recessed sleeve stays intact and fixed: <strong>2 mm of retained char plus 6.89 mm of uncharred material</strong>, followed by the 6.35 mm steel wall. We model radial conduction in the band alongside the sleeve, not the entire engine.</li>

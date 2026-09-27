@@ -10,11 +10,15 @@ const section = html.split('<section class="build-section" aria-labelledby="abla
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'results-and-provenance.json'), 'utf8'));
 (async () => {
   const imgs = [...section.matchAll(/<img\s+([^>]+)>/g)];
-  assert.equal(imgs.length, 9, 'Five supplied photos, digitized reconstruction, scenario plot, assumed sleeve-wall diagram, and computed case-temperature chart');
+  assert.equal(imgs.length, 10, 'Five supplied photos, digitized reconstruction, scenario plot, assumed sleeve-wall diagram, computed case-temperature chart, and conduction boundary diagram');
   assert(!section.includes('src="../assets/builds/ablative-material-testing-fixture/chambersafe-back-face-reported.png"'), 'Original figure removed from page; source asset retained');
   assert(section.includes('id="ablative-depth-surface"'), 'Interactive 3D plot mount present');
   assert(!section.includes('src="../assets/builds/ablative-material-testing-fixture/analysis/scenario-depth-dose.svg"'), 'Old 2D scenario graphic no longer displayed');
-  for (const [, attributes] of imgs) {
+  const thermalModelSection=html.split('<section class="build-section" aria-labelledby="ablative-thermal-model-title">')[1].split('</section>')[0];
+  const couponImages=[...thermalModelSection.matchAll(/<img\s+([^>]+)>/g)];
+  assert.equal(couponImages.length,1, 'Graphite/ablator boundary diagram placed in 1D model section');
+  assert(thermalModelSection.includes('coupon-heat-transfer-boundaries.svg'));
+  for (const [, attributes] of [...imgs,...couponImages]) {
     const a = Object.fromEntries([...attributes.matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
     const image = path.resolve(path.dirname(pagePath), a.src.split(/[?#]/)[0]);
     assert(fs.existsSync(image), `Present image: ${a.src}`);
@@ -148,7 +152,39 @@ const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'results-and-pr
   }
   assert(sleeveBlock.includes('Earlier comparison: gas heating and ambient cooling'));
   assert(sleeveBlock.includes('id="ablative-conduction-only-title"'));
+  const diagram=fs.readFileSync(path.join(root,'assets/builds/ablative-material-testing-fixture/analysis/sleeve-conduction-boundaries.svg'),'utf8');
+  const diagramText=diagram.replace(/<[^>]*>/g,'');
+  assert(sleeveBlock.includes('sleeve-conduction-boundaries.svg'));
+  assert(sleeveBlock.indexOf('sleeve-conduction-boundaries.svg') > sleeveBlock.indexOf('id="ablative-conduction-only-title"'));
+  for (const phrase of ['0 ≤ t &lt; 10 s', 't ≥ 10 s', 'Ts = 3,000 K', 'q″in = 0', 'q″out = 0',
+    '2.00 mm', '6.89 mm', '6.35 mm', '0.635 mm nominal gap', '293.15 K',
+    'not held constant', 'No resistance or heat storage', 'Avq″v = Asq″s', 'not to scale']) {
+    assert(diagramText.includes(phrase), `Conduction diagram assumption: ${phrase}`);
+  }
+  assert.equal([...html.matchAll(/<div class="conduction-diagram-frame">/g)].length,2, 'Both diagrams use responsive, non-scrolling frames');
+  assert(!html.includes('conduction-diagram-scroll') && !html.includes('scroll horizontally on smaller screens'));
+  const diagramImageRule=html.match(/\.ablative-project \.conduction-diagram-frame img\s*\{([^}]+)\}/)?.[1];
+  assert(diagramImageRule, 'Diagram image sizing is explicit');
+  for (const declaration of ['width: 100%;','min-width: 0;','max-width: 100%;','height: auto;','max-height: none;']) {
+    assert(diagramImageRule.includes(declaration), `Diagram scales to available width: ${declaration}`);
+  }
+  assert(!diagramImageRule.includes('800px'), 'No fixed minimum width forcing horizontal scroll');
   assert(sleeveBlock.includes('Yes—within the simplified conduction-only model'));
   assert(sleeveBlock.includes('not proof that the real sleeve remained intact'));
-  console.log('PASS: nine images; preserved source plot; mixed coupon evidence; sleeve mass bookkeeping; expanded sleeve section; distinct cooling/conduction-only results, boxed conditional verdict and actual-measurement nulls.');
+  const couponDiagram=fs.readFileSync(path.join(root,'assets/builds/ablative-material-testing-fixture/analysis/coupon-heat-transfer-boundaries.svg'),'utf8');
+  const couponText=couponDiagram.replace(/<[^>]*>/g,'');
+  for (const phrase of ['not stacked layers', '23.62 mm', '130 W/(m·K)', '1,850 kg/m³', '700 J/(kg·K)',
+    '0 &lt; t &lt; 3 s', 't ≥ 3 s', 'Early-window assumption', '0.2592 / 0.5844 MW/m²',
+    '20 s baseline / 10 s hot', 'Characterization targets', 'Conductivity k(T): unknown', 'Specific heat cp(T): unknown',
+    'No values assigned here', '12.7 mm', 'qa', 'Not assumed zero here', 'Depth / coupling uncertain',
+    'Bulk density: ρ = m / V', 'Requires measured initial mass and volume', 'do not uniquely identify']) {
+    // q has a double-prime before its subscript in the visible equation.
+    assert(couponText.replaceAll('″','').includes(phrase), `Coupon diagram evidence: ${phrase}`);
+  }
+  assert(!couponText.includes('3,000 K'), 'The sleeve what-if temperature is not a coupon boundary');
+  for (const removed of ['0.16', '1,000', '872', '1,444', '50 g assumed', 'Selected virgin-material inputs']) {
+    assert(!couponText.includes(removed), `No assumed ChamberSafe property in characterization diagram: ${removed}`);
+  }
+  assert(thermalModelSection.includes('unknowns to determine—not prescribed inputs'));
+  console.log('PASS: eleven checked images including sleeve and coupon boundary diagrams; preserved source plot; mixed coupon evidence; sleeve mass bookkeeping; expanded sleeve section; distinct cooling/conduction-only results, boxed conditional verdict and actual-measurement nulls.');
 })().catch(error => { console.error(error); process.exitCode = 1; });
