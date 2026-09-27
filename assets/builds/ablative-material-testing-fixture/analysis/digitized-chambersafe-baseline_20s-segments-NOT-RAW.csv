@@ -1,0 +1,17 @@
+classification,condition,visible_segment_id,time_start_log_s_approx,time_end_log_s_approx,delta_t_c_approx,time_graphical_uncertainty_s,temperature_graphical_uncertainty_c,source_x_start_px,source_x_end_px,source_y_center_px,status
+DIGITIZED_NOT_RAW,baseline_20s,1,0.000000,0.717489,0.000520,0.179372,0.003814,318,334,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,2,3.946188,6.726457,0.000520,0.179372,0.003814,406,468,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,3,7.085202,7.309417,0.000520,0.179372,0.003814,476,481,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,4,9.506726,10.493274,0.000520,0.179372,0.003814,530,552,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,5,11.121076,12.735426,0.000520,0.179372,0.003814,566,602,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,6,13.408072,14.080717,0.000520,0.179372,0.003814,617,632,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,7,14.573991,15.874439,0.000520,0.179372,0.003814,643,672,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,8,16.412556,20.089686,0.000520,0.179372,0.003814,684,766,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,9,20.762332,26.233184,0.000520,0.179372,0.003814,781,903,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,10,26.905830,27.130045,0.000520,0.179372,0.003814,918,923,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,11,27.668161,41.928251,0.000520,0.179372,0.003814,935,1253,688.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,12,42.825112,43.363229,0.063806,0.179372,0.003814,1273,1285,615.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,13,45.739910,46.457399,0.127091,0.179372,0.003814,1338,1354,542.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,14,46.771300,47.847534,0.190377,0.179372,0.003814,1361,1385,469.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,15,48.430493,49.775785,0.253663,0.179372,0.003814,1398,1428,396.000000,visible_horizontal_segment_not_sample_sequence
+DIGITIZED_NOT_RAW,baseline_20s,16,50.089686,52.959641,0.316948,0.179372,0.003814,1435,1499,323.000000,visible_horizontal_segment_not_sample_sequence

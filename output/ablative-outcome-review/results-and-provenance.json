@@ -1,0 +1,104 @@
+{
+  "provenance": "Campaign report Tables 4–6 and Figure 8, supplemented by later user-confirmed nominal brick dimensions and hot-run mass/depth measurements. Not a new thermocouple fit or raw-data reanalysis.",
+  "tests": [
+    {
+      "condition": "Baseline",
+      "raw_file_not_located": "Ablative 20s.csv",
+      "exposure_s": 20,
+      "log_duration_s": 52.887,
+      "graphite_net_flux_MW_m2": 0.2592,
+      "equivalent_dose_MJ_m2": 5.183999999999999,
+      "reported_peak_rise_C": 0.317,
+      "recession_mm": null
+    },
+    {
+      "condition": "Hot",
+      "raw_file_not_located": "Ablative Hot 10s.csv",
+      "exposure_s": 10,
+      "log_duration_s": 66.502,
+      "graphite_net_flux_MW_m2": 0.5844,
+      "equivalent_dose_MJ_m2": 5.844,
+      "reported_peak_rise_C": 0.241,
+      "recession_mm": 3.175,
+      "recession_basis": "User-reported approximate 1/8-inch dimple depth for the hot 10 s / approximately 2.25× reference-flux test; reference-plane method and measurement uncertainty unavailable.",
+      "recession_uncertainty_mm": null,
+      "pre_test_mass_g": 82.8,
+      "post_test_mass_g": 73.9,
+      "mass_difference_g": 8.9,
+      "mass_measurement_uncertainty_g": null,
+      "measurement_source": "User confirmation in this conversation; not inferred from photographs or thermocouple traces."
+    }
+  ],
+  "hot_to_baseline_flux": 2.2546296296296298,
+  "hot_to_baseline_equivalent_dose": 1.127314814814815,
+  "photo_observation": "The user initially described the right-hand 20 s specimen as appearing deeper. This is a qualitative photo observation, not a measured comparison. Later confirmation gives an approximate hot depth of 1/8 inch; baseline depth and spatial material-loss volumes remain unmeasured.",
+  "nominal_dimensions_mm": {
+    "width": 50.8,
+    "height": 88.9,
+    "thickness": 12.7,
+    "source": "User-confirmed nominal 2 × 3.5 × 0.5 inches; not individual specimen metrology."
+  },
+  "source_plot_sha256": "13aa0c43de0a275f371c320ba22770f5d53d0bf004ec3b12c8a8de488b09f92b",
+  "caveats": [
+    "TC-2 calibration gain is a report assumption, not verified channel mapping.",
+    "Original plot hot maximum is about 0.21 C; Table 6 reports 0.241 C. Raw CSV required to reconcile.",
+    "Plot time starts at logging, not flame-on.",
+    "Equivalent dose is not measured absorbed energy of brick.",
+    "No material properties or photo-based depths fitted."
+  ],
+  "photos": [
+    {
+      "original": "IMG_1350 (1).HEIC",
+      "source_sha256": "131a993b76396b3815cccc90aa6195a6ef73799ac4f67af0e187f8939902974e",
+      "asset": "outcome-sample-pair.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 171599,
+      "run_assignment": {
+        "left": "Hot, 10 s",
+        "right": "Baseline, 20 s",
+        "source": "User identification in this conversation"
+      }
+    },
+    {
+      "original": "0A1A5401.jpg",
+      "source_sha256": "4c9ea96142e524cb834d9918108b02bedd9cd0b1a29129102f3f4d7142994220",
+      "asset": "outcome-dimple-detail.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 92860,
+      "run_assignment": null
+    },
+    {
+      "original": "0A1A5419.jpg",
+      "source_sha256": "131dec3094b9da27526b268025838b7da3ee1792b12dac0eab92698eef7de9da",
+      "asset": "outcome-clamped-sample.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 114717,
+      "run_assignment": null
+    },
+    {
+      "original": "IMG_6750.HEIC",
+      "source_sha256": "07865fb234e5ecb887351cba3727cd01a543331b591b6016af0f162511f11cda",
+      "asset": "outcome-torch-position.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 264141,
+      "run_assignment": null
+    },
+    {
+      "original": "IMG_3254.HEIC",
+      "source_sha256": "b290edb9ac1c53d992fefc21686665a00003917ddc8f576d85302d0978567d94",
+      "asset": "outcome-material-section.jpg",
+      "width": 1200,
+      "height": 1600,
+      "bytes": 330860,
+      "run_assignment": {
+        "test": "First engine hotfire",
+        "specimen": "Ablative sleeve",
+        "source": "User identification in this conversation"
+      }
+    }
+  ]
+}

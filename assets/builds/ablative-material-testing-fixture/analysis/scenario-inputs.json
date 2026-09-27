@@ -1,0 +1,224 @@
+{
+  "status": "MIXED USER-REPORTED MEASUREMENTS AND SELECTED ASSUMPTIONS — NOT MEASURED THERMAL PROPERTIES",
+  "purpose": "Forward sensitivity / measurement planning; not a thermal-property fit, ablation model, or engine qualification.",
+  "range_interpretation": "Selected endpoint sensitivity envelope, not a statistical confidence interval or proven physical bound. Unlisted model errors can exceed it.",
+  "shared": {
+    "width_mm": {
+      "nominal": 50.8,
+      "range": [
+        48,
+        54
+      ],
+      "unit": "mm",
+      "basis": "User confirmed nominal brick size 2 × 3.5 × 0.5 inches in this conversation; corroborated by December 12 design review slide 11. Ranges analyst-selected, not measured manufacturing tolerances.",
+      "evidence_class": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP"
+    },
+    "height_mm": {
+      "nominal": 88.9,
+      "range": [
+        85,
+        93
+      ],
+      "unit": "mm",
+      "basis": "Same user-confirmed nominal dimensions; no individual caliper measurements or tolerances available.",
+      "evidence_class": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP"
+    },
+    "thickness_mm": {
+      "nominal": 12.7,
+      "range": [
+        10,
+        15
+      ],
+      "unit": "mm",
+      "basis": "Same user-confirmed nominal thickness; actual local thickness variation and sensor depth are not measured.",
+      "evidence_class": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP"
+    },
+    "cp_J_kgK": {
+      "nominal": 1000,
+      "range": [
+        700,
+        1500
+      ],
+      "unit": "J/(kg·K)",
+      "basis": "Analyst-selected constant-property scenario; not a measured or literature-validated value for this batch.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    },
+    "k_W_mK": {
+      "nominal": 0.16,
+      "range": [
+        0.08,
+        0.32
+      ],
+      "unit": "W/(m·K)",
+      "basis": "Nominal reused only as an assumption from semiinfiniteablative.tex lines 99–102; that earlier calculation cites no material-property measurement. Factor-two range analyst-selected.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    },
+    "dimple_diameter_mm": {
+      "nominal": 20,
+      "range": [
+        10,
+        30
+      ],
+      "unit": "mm",
+      "basis": "Analyst-selected circular footprint. Not dimensioned from photos; not a measured flame footprint.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    },
+    "heated_diameter_mm": {
+      "nominal": 20,
+      "range": [
+        10,
+        30
+      ],
+      "unit": "mm",
+      "basis": "Separate analyst-selected uniformly heated circular footprint. Not inferred from the dimple diameter and varied independently.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    },
+    "depression_shape_factor": {
+      "nominal": 0.5,
+      "range": [
+        0.3333333333333333,
+        1
+      ],
+      "unit": "dimensionless",
+      "basis": "V=f*projected_area*depth: paraboloid nominal; cone-to-cylinder scenario range. Not fitted to a surface scan.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    },
+    "graphite_flux_multiplier": {
+      "nominal": 1,
+      "range": [
+        0.73,
+        1.33
+      ],
+      "unit": "dimensionless",
+      "basis": "Report sensitivity to ±20% graphite heat capacity; not complete flux uncertainty and not a brick absorptivity factor.",
+      "evidence_class": "ANALYST_SELECTED_SCENARIO"
+    }
+  },
+  "runs": [
+    {
+      "id": "baseline_20s",
+      "label": "Baseline · 20 s · right",
+      "graphite_flux_MW_m2": 0.2592,
+      "mass_g": {
+        "nominal": 50,
+        "range": [
+          30,
+          80
+        ],
+        "unit": "g",
+        "basis": "Analyst-selected baseline pre-test mass; no baseline mass measurement is available.",
+        "evidence_class": "ANALYST_SELECTED_SCENARIO"
+      },
+      "duration_s": {
+        "nominal": 20,
+        "range": [
+          19,
+          21
+        ],
+        "unit": "s",
+        "basis": "Reported nominal exposure; ±1 s is an analyst timing scenario, not measured timing error.",
+        "evidence_class": "REPORT_NOMINAL_DURATION_WITH_SELECTED_SWEEP"
+      },
+      "depth_mm": {
+        "nominal": 3,
+        "range": [
+          1,
+          5
+        ],
+        "unit": "mm",
+        "basis": "Analyst-selected baseline example, NOT an image measurement. Retained as a hypothesis, not adjusted to enforce the earlier qualitative photo ordering.",
+        "evidence_class": "ANALYST_SELECTED_SCENARIO"
+      }
+    },
+    {
+      "id": "hot_10s",
+      "label": "Hot · 10 s · left",
+      "graphite_flux_MW_m2": 0.5844,
+      "mass_g": {
+        "nominal": 82.8,
+        "range": [
+          82.8,
+          82.8
+        ],
+        "unit": "g",
+        "basis": "User confirmed pre-test mass for the hot 10 s / approximately 2.25× reference-flux test. Instrument uncertainty and conditioning/cleaning state were not supplied.",
+        "evidence_class": "USER_REPORTED_MEASUREMENT",
+        "measurement_uncertainty": null,
+        "sensitivity_treatment": "Held fixed at reported value; unknown measurement uncertainty is excluded, not zero."
+      },
+      "post_test_mass_g": {
+        "nominal": 73.9,
+        "range": [
+          73.9,
+          73.9
+        ],
+        "unit": "g",
+        "basis": "User confirmed post-test mass for the same hot specimen. Instrument uncertainty and conditioning/cleaning state were not supplied.",
+        "evidence_class": "USER_REPORTED_MEASUREMENT",
+        "measurement_uncertainty": null,
+        "sensitivity_treatment": "Held fixed at reported value; unknown measurement uncertainty is excluded, not zero."
+      },
+      "duration_s": {
+        "nominal": 10,
+        "range": [
+          9,
+          11
+        ],
+        "unit": "s",
+        "basis": "Reported nominal exposure; ±1 s is an analyst timing scenario, not measured timing error.",
+        "evidence_class": "REPORT_NOMINAL_DURATION_WITH_SELECTED_SWEEP"
+      },
+      "depth_mm": {
+        "nominal": 3.175,
+        "range": [
+          3.175,
+          3.175
+        ],
+        "unit": "mm",
+        "basis": "User confirmed approximately 1/8 inch dimple depth for this hot specimen. Conversion is exactly 3.175 mm, not measurement precision. Reference-plane method and measurement uncertainty were not supplied.",
+        "evidence_class": "USER_REPORTED_MEASUREMENT",
+        "measurement_uncertainty": null,
+        "sensitivity_treatment": "Held fixed at reported value; unknown measurement uncertainty is excluded, not zero."
+      }
+    }
+  ],
+  "geometry": "Uniform rectangular specimen; circular depression V=f*πD²d/4 with paraboloid f=1/2 nominal and cone-to-cylinder f=1/3..1 scenarios. Char-rim swelling, cracks, shedding, porosity changes and density changes are excluded.",
+  "thermal_model": "Homogeneous constant-property original virgin slab, using alpha=k/(rho*cp). Diffusion length sqrt(alpha*t) is a convention, not a sharp front or ablation depth. L²/alpha is a characteristic scale, not an onset prediction.",
+  "sources": [
+    {
+      "role": "Design corroboration of nominal dimensions; user separately confirmed 2 × 3.5 × 0.5 inches. Not individual specimen metrology.",
+      "title": "Ablative Testing LRI Presentation 2025-12-12, slide 11: 2 x 3.5 x 0.5 Mold",
+      "url": "https://docs.google.com/presentation/d/18DxEOy2dH5_4A8xdhqXUpu7fwHjdE_QfHz8l_n1QdhM/edit#slide=id.g3aac5729a02_0_10"
+    },
+    {
+      "role": "User-reported hot 10 s measurements",
+      "source": "User confirmation in this conversation",
+      "pre_test_mass_g": 82.8,
+      "post_test_mass_g": 73.9,
+      "approximate_dimple_depth_in": 0.125,
+      "measurement_uncertainty": null
+    },
+    {
+      "role": "Reported exposures, graphite flux and sensitivity",
+      "local_path": "/Users/jerichlee/Documents/JerichCore/30_research/lri/projects/ablative-testing/final-report/ablative_test_final_report.tex"
+    },
+    {
+      "role": "Unvalidated prior k assumption only; its graphite thickness, heat flux and alpha are NOT reused",
+      "local_path": "/Users/jerichlee/Documents/JerichCore/30_research/lri/projects/ablative-testing/semi-infinite-model/semiinfiniteablative.tex",
+      "lines": "99–102"
+    },
+    {
+      "role": "Property relation, not numeric brick-property source",
+      "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication960-11.pdf",
+      "section": "6.3.1.6"
+    },
+    {
+      "role": "Property-identification method and uncertainty",
+      "url": "https://authors.library.caltech.edu/records/w7s9t-q5s59"
+    },
+    {
+      "role": "Recession / inverse-heat-transfer ambiguity",
+      "url": "https://ntrs.nasa.gov/citations/20170004352"
+    }
+  ]
+}

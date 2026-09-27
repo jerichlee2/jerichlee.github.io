@@ -1,0 +1,2036 @@
+{
+  "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+  "purpose": "Illustrative temperatures under explicitly selected heating, geometry, contact and cooling; not qualification or safe operating time.",
+  "documentation": "sleeve-thermal-README.md",
+  "source_ledger": "sleeve-case-sources.md",
+  "reproducibility": {
+    "solver": "output/ablative-sleeve-comparison/thermal-case-model.cjs",
+    "tests": "output/ablative-sleeve-comparison/thermal-case-check.cjs",
+    "history": "sleeve-thermal-history.csv"
+  },
+  "source_notes": {
+    "case_family": "Mk1 report identifies 304 family; BOM identifies 304L. Candidate geometry remains unverified for the fired part.",
+    "case_dimensions": "Case ID 4 in, OD 4.5 in, total length 12 in; only the 7.168 in sleeve overlap band is represented.",
+    "steel_property_source": "https://www.atimaterials.com/Products/Documents/datasheets/stainless-specialty-steel/austenitic/ati_302_304_304l_305_tds_en4_v1.pdf",
+    "steel_property_status": "ATI typical 304-family rho=7900 kg/m3, cp=500 J/(kg K) for 0–100 C and k=16.3 W/(m K) at 100 C used as constant low-temperature surrogate; not certified part data or structural limits.",
+    "heating": "Main Tg=2876 K and h=2240 W/(m2 K) are report estimates, not measured hotfire boundaries. 2175.1 K is a different Mk1 CEA estimate; 3000 K is a separate selected sensitivity. They are not interchangeable measurements.",
+    "duration": "10 s is a selected scenario, not verified actual heating duration. The 0.25 s controller-failure timestamp does not establish exposure duration.",
+    "recession": "Approximately measured coupon depth 1/8 in is imposed uniformly on the sleeve from t=0; the rig depth-vs-flux surface is NOT extrapolated to engine heat flux.",
+    "density": "82.8 g divided by nominal hot-brick volume gives conditional density, transferred to candidate sleeve without as-fired density verification.",
+    "char_and_interface": "Char thickness/density/k/cp and gap conductance are selected inputs. Gap h is referenced to sleeve outer area; heat rate is conserved across the different radial areas."
+  },
+  "omissions": [
+    "moving recession",
+    "pyrolysis kinetics/energy",
+    "temperature-dependent properties",
+    "radiation",
+    "gap gas flow",
+    "crack dynamics",
+    "axial/azimuthal heat spreading",
+    "metal strength and stress",
+    "phase changes",
+    "film-cooling distribution"
+  ],
+  "interpretation": "These cases are not measured results, confidence intervals, established bounds or an engine-survival conclusion. Even a cool intact-path case does not rule out bypass heating.",
+  "actual_case_temperature_C": null,
+  "actual_heating_duration_s": null,
+  "validated": false,
+  "scenario_count": 17,
+  "cases": [
+    {
+      "label": "Selected pre-receded sleeve and retained char",
+      "id": "central",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "central",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000001430802058,
+        "case_outer_C": 20.000000049106973,
+        "hot_face_C": 2527.3824831760294
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 59.303818663365576,
+        "time_s": 555
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 59.140988342917524,
+        "time_s": 560
+      },
+      "hot_face_peak": {
+        "temperature_C": 2527.3824831760294,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2431.5438483660346,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 59.301078257709946,
+        "time_s": 555
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 84837.21584902848,
+        "signed_outer_boundary_energy_J": -35195.89800676255,
+        "stored_energy_change_J": 49641.31784531034,
+        "closure_residual_J": 0.0000030444134608842432,
+        "residual_fraction_of_absolute_boundary_energy": 1.2679072523228181e-11,
+        "maximum_step_residual_J": 2.029807433245878e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Original virgin sleeve geometry",
+      "id": "original_virgin",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "original_virgin",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0,
+        "retainedCharM": 0,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "virgin",
+            "innerM": 0.0381,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0010011953465608341,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 19.999999999999773,
+        "case_outer_C": 20.000000000000853,
+        "hot_face_C": 2501.696969144856
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 57.72000110005746,
+        "time_s": 880
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 57.564301930175645,
+        "time_s": 885
+      },
+      "hot_face_peak": {
+        "temperature_C": 2501.696969144856,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2362.0120261224015,
+        "time_s": 10,
+        "layer": "virgin",
+        "radius_m": 0.03819876542936786
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 57.717400106039406,
+        "time_s": 880
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 103913.52406010973,
+        "signed_outer_boundary_energy_J": -34051.00856503111,
+        "stored_energy_change_J": 69862.51549804748,
+        "closure_residual_J": 0.0000029688526410609484,
+        "residual_fraction_of_absolute_boundary_energy": 9.994295839843932e-12,
+        "maximum_step_residual_J": 1.981142361273669e-9,
+        "initial_absolute_energy_J": 711789.0726545163
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 93,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Infinite gap-conductance limit",
+      "id": "perfect_coupling",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "perfect_coupling",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": "infinite_conductance_limit",
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00000894232079,
+        "case_outer_C": 20.000000329726788,
+        "hot_face_C": 2527.3824831760294
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 62.57286794330594,
+        "time_s": 451
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 62.3960558777826,
+        "time_s": 457
+      },
+      "hot_face_peak": {
+        "temperature_C": 2527.3824831760294,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2431.5438483660346,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 62.56988131433246,
+        "time_s": 452
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted.",
+        "Perfect coupling sets zero interface resistance across the retained physical gap; no fictitious solid or heat capacity is added."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 87689.59389509744,
+        "signed_outer_boundary_energy_J": -37521.58818105804,
+        "stored_energy_change_J": 50168.005717531356,
+        "closure_residual_J": 0.0000034919576137326658,
+        "residual_fraction_of_absolute_boundary_energy": 1.457493028777139e-11,
+        "maximum_step_residual_J": 2.2748380956727488e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected effective gap conductance 20 W/(m² K)",
+      "id": "gap_h20",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gap_h20",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 20,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000000327419627,
+        "case_outer_C": 20.000000011140912,
+        "hot_face_C": 2527.3824831760294
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 49.897597340211405,
+        "time_s": 858
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 49.774198381581925,
+        "time_s": 863
+      },
+      "hot_face_peak": {
+        "temperature_C": 2527.3824831760294,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2431.5438483660346,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 49.8955389585733,
+        "time_s": 858
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 75288.84182420581,
+        "signed_outer_boundary_energy_J": -27592.37923622535,
+        "stored_energy_change_J": 47696.46258972873,
+        "closure_residual_J": 0.0000017482743714936078,
+        "residual_fraction_of_absolute_boundary_energy": 7.222539745212847e-12,
+        "maximum_step_residual_J": 1.31614896758947e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected effective gap conductance 1000 W/(m² K)",
+      "id": "gap_h1000",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gap_h1000",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 1000,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000005884593804,
+        "case_outer_C": 20.000000210414896,
+        "hot_face_C": 2527.3824831760294
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 62.23431703349405,
+        "time_s": 462
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 62.058950038785554,
+        "time_s": 467
+      },
+      "hot_face_peak": {
+        "temperature_C": 2527.3824831760294,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2431.5438483660346,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 62.231341861061765,
+        "time_s": 462
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 87395.68041012417,
+        "signed_outer_boundary_energy_J": -37280.53883492608,
+        "stored_energy_change_J": 50115.14157955193,
+        "closure_residual_J": 0.000004353838448878378,
+        "residual_fraction_of_absolute_boundary_energy": 1.8168288504370853e-11,
+        "maximum_step_residual_J": 2.844835478299501e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Insulated bore after source shutoff",
+      "id": "insulated_bore_after_heating",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "insulated_bore_after_heating",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 0,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000001430802058,
+        "case_outer_C": 20.000000049106973,
+        "hot_face_C": 2527.3824831760294
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 74.32900599076959,
+        "time_s": 721
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 74.10474524010078,
+        "time_s": 726
+      },
+      "hot_face_peak": {
+        "temperature_C": 2527.3824831760294,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2431.5438483660346,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 74.32525735807917,
+        "time_s": 721
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 144877.28985004517,
+        "signed_outer_boundary_energy_J": -51811.353117578634,
+        "stored_energy_change_J": 93065.93673561793,
+        "closure_residual_J": 0.000003151391865685582,
+        "residual_fraction_of_absolute_boundary_energy": 1.6022236048495824e-11,
+        "maximum_step_residual_J": 2.063309523236967e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected char conductivity 0.08 W/(m K)",
+      "id": "char_k008",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "char_k008",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.08,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00000014239089,
+        "case_outer_C": 20.000000004056915,
+        "hot_face_C": 2551.449469438042
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 46.612812743456914,
+        "time_s": 568
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 46.502586499963,
+        "time_s": 573
+      },
+      "hot_face_peak": {
+        "temperature_C": 2551.449469438042,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2420.8990847193345,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 46.61095756523531,
+        "time_s": 568
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 58279.55498610783,
+        "signed_outer_boundary_energy_J": -23891.247266954604,
+        "stored_energy_change_J": 34388.30772214047,
+        "closure_residual_J": 0.00000298723898595199,
+        "residual_fraction_of_absolute_boundary_energy": 1.7501123357410693e-11,
+        "maximum_step_residual_J": 2.0095498598493577e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected char conductivity 0.64 W/(m K)",
+      "id": "char_k064",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "char_k064",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.64,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00002106757671,
+        "case_outer_C": 20.000000920187517,
+        "hot_face_C": 2483.747355017778
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 92.39665223483007,
+        "time_s": 544
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 92.0966530229399,
+        "time_s": 549
+      },
+      "hot_face_peak": {
+        "temperature_C": 2483.747355017778,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2445.9342819973003,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 92.39159622084333,
+        "time_s": 544
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 154334.2293380508,
+        "signed_outer_boundary_energy_J": -64682.779246533726,
+        "stored_energy_change_J": 89651.45009479602,
+        "closure_residual_J": 0.000003278953954577446,
+        "residual_fraction_of_absolute_boundary_energy": 7.616845867481818e-12,
+        "maximum_step_residual_J": 2.2009345457263407e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected char heat capacity 500 J/(kg K)",
+      "id": "char_cp500",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "char_cp500",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 500,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00000527226979,
+        "case_outer_C": 20.00000021051494,
+        "hot_face_C": 2538.5790154340057
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 51.25180127225468,
+        "time_s": 520
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 51.12223878001805,
+        "time_s": 525
+      },
+      "hot_face_peak": {
+        "temperature_C": 2538.5790154340057,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2456.9592182295123,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 51.24961377054615,
+        "time_s": 520
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 65670.4990611022,
+        "signed_outer_boundary_energy_J": -27864.551515756644,
+        "stored_energy_change_J": 37805.947548350436,
+        "closure_residual_J": 0.000003004886821145192,
+        "residual_fraction_of_absolute_boundary_energy": 1.6472332334909295e-11,
+        "maximum_step_residual_J": 1.9795436401182087e-9,
+        "initial_absolute_energy_J": 620084.884283871
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected char heat capacity 1500 J/(kg K)",
+      "id": "char_cp1500",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "char_cp1500",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1500,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00000048810699,
+        "case_outer_C": 20.000000015026387,
+        "hot_face_C": 2514.458028704931
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 65.60829850301315,
+        "time_s": 589
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 65.41945690442594,
+        "time_s": 594
+      },
+      "hot_face_peak": {
+        "temperature_C": 2514.458028704931,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2402.206212114181,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 65.60511595899595,
+        "time_s": 589
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 101148.49682914325,
+        "signed_outer_boundary_energy_J": -41013.402566051285,
+        "stored_energy_change_J": 60135.094266218206,
+        "closure_residual_J": 0.0000031262461561709642,
+        "residual_fraction_of_absolute_boundary_energy": 1.0863875934483266e-11,
+        "maximum_step_residual_J": 2.0669830291808466e-9,
+        "initial_absolute_energy_J": 640551.5096008839
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected virgin conductivity 0.08 W/(m K)",
+      "id": "virgin_k008",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "virgin_k008",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.08,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.00000000005292,
+        "case_outer_C": 20.000000000003354,
+        "hot_face_C": 2530.9608879041907
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 50.30494180059577,
+        "time_s": 759
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 50.17971398243844,
+        "time_s": 764
+      },
+      "hot_face_peak": {
+        "temperature_C": 2530.9608879041907,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2439.6665847268973,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 50.30284850115885,
+        "time_s": 759
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 71464.94297110944,
+        "signed_outer_boundary_energy_J": -27339.052131340468,
+        "stored_energy_change_J": 44125.890845055255,
+        "closure_residual_J": 0.0000052862815209664404,
+        "residual_fraction_of_absolute_boundary_energy": 2.1743299215273908e-11,
+        "maximum_step_residual_J": 3.32972049932323e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected virgin conductivity 0.32 W/(m K)",
+      "id": "virgin_k032",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "virgin_k032",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.32,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000816473544432,
+        "case_outer_C": 20.000055301520206,
+        "hot_face_C": 2524.0385594378495
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 66.1910862245719,
+        "time_s": 423
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 65.99910155463982,
+        "time_s": 428
+      },
+      "hot_face_peak": {
+        "temperature_C": 2524.0385594378495,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2423.9533679705924,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 66.1878245992607,
+        "time_s": 423
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 93732.09740610914,
+        "signed_outer_boundary_energy_J": -40587.90291203077,
+        "stored_energy_change_J": 53144.19449728384,
+        "closure_residual_J": 0.0000032054667826741934,
+        "residual_fraction_of_absolute_boundary_energy": 1.3415939103481103e-11,
+        "maximum_step_residual_J": 2.1123298665770562e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Different Mk1 CEA source-temperature estimate",
+      "id": "gas_2175K",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gas_2175K",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2175.1,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000001042531323,
+        "case_outer_C": 20.000000035782477,
+        "hot_face_C": 1846.9618693354732
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 48.638063199097815,
+        "time_s": 555
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 48.51941963808406,
+        "time_s": 560
+      },
+      "hot_face_peak": {
+        "temperature_C": 1846.9618693354732,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 1777.13066784074,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 48.636066448832196,
+        "time_s": 555
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 61815.20350269472,
+        "signed_outer_boundary_energy_J": -25644.896240304388,
+        "stored_energy_change_J": 36170.30726534495,
+        "closure_residual_J": 0.0000029546172299887985,
+        "residual_fraction_of_absolute_boundary_energy": 1.6887920771232346e-11,
+        "maximum_step_residual_J": 2.0148789303675585e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Approximately 3000 K source-temperature sensitivity",
+      "id": "gas_3000K",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gas_3000K",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 3000,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000001499493067,
+        "case_outer_C": 20.000000051464156,
+        "hot_face_C": 2647.7593644946596
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 61.19075499889129,
+        "time_s": 555
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 61.02010736046685,
+        "time_s": 560
+      },
+      "hot_face_peak": {
+        "temperature_C": 2647.7593644946596,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2547.319614359949,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 61.18788302914896,
+        "time_s": 555
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 88910.16424529847,
+        "signed_outer_boundary_energy_J": -36885.61725207673,
+        "stored_energy_change_J": 52024.546996278805,
+        "closure_residual_J": 0.0000030570663511753082,
+        "residual_fraction_of_absolute_boundary_energy": 1.2148529493413779e-11,
+        "maximum_step_residual_J": 2.004647114972613e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected hot-gas coefficient 500 W/(m² K)",
+      "id": "gas_h500",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gas_h500",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 500,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.0000009286872,
+        "case_outer_C": 20.00000003103372,
+        "hot_face_C": 2278.3383203811027
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 53.86181544126839,
+        "time_s": 555
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 53.72152665254055,
+        "time_s": 560
+      },
+      "hot_face_peak": {
+        "temperature_C": 2278.3383203811027,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2186.349960262499,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 53.859449735977876,
+        "time_s": 555
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 73092.91343491532,
+        "signed_outer_boundary_energy_J": -30318.429840614222,
+        "stored_energy_change_J": 42774.48359731008,
+        "closure_residual_J": 0.000003008983185281977,
+        "residual_fraction_of_absolute_boundary_energy": 1.4510070642092002e-11,
+        "maximum_step_residual_J": 2.0065797912138805e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Selected hot-gas coefficient 1000 W/(m² K)",
+      "id": "gas_h1000",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "gas_h1000",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 1000,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": false,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "char",
+            "innerM": 0.041275,
+            "outerM": 0.043275
+          },
+          {
+            "name": "virgin",
+            "innerM": 0.043275,
+            "outerM": 0.050165
+          },
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0008570472029071778,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 20.000001200273914,
+        "case_outer_C": 20.000000040684768,
+        "hot_face_C": 2435.965690964955
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 57.215799223425336,
+        "time_s": 555
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 57.061617517922514,
+        "time_s": 560
+      },
+      "hot_face_peak": {
+        "temperature_C": 2435.965690964955,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 2341.3532940509913,
+        "time_s": 10,
+        "layer": "char",
+        "radius_m": 0.041365809196177286
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 57.21320228324964,
+        "time_s": 555
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": false,
+      "metal_surrogate_reaches_ATI_melting_range": false,
+      "display_in_intact_layer_comparison": true,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 80331.23394712948,
+        "signed_outer_boundary_energy_J": -33324.20898864955,
+        "stored_energy_change_J": 47007.02496150611,
+        "closure_residual_J": 0.0000030261799111030996,
+        "residual_fraction_of_absolute_boundary_energy": 1.329723830351996e-11,
+        "maximum_step_residual_J": 1.997058518554695e-9,
+        "initial_absolute_energy_J": 630318.1969423775
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 78,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    },
+    {
+      "label": "Bare-wall radial column, no lateral spreading",
+      "id": "bare_wall_column",
+      "classification": "CONDITIONAL_FIXED_GEOMETRY_RADIAL_CONDUCTION_NOT_VALIDATED_ENGINE_TEMPERATURE",
+      "parameters": {
+        "id": "bare_wall_column",
+        "initialTemperatureK": 293.15,
+        "ambientTemperatureK": 293.15,
+        "gasTemperatureK": 2876,
+        "gasFilmCoefficientWm2K": 2240,
+        "selectedHeatingDurationS": 10,
+        "recessionM": 0.003175,
+        "retainedCharM": 0.002,
+        "charDensityRatio": 0.5,
+        "virginDensityKgm3": 1443.6474317268094,
+        "virginCpJkgK": 1000,
+        "virginKWmK": 0.16,
+        "charCpJkgK": 1000,
+        "charKWmK": 0.16,
+        "metalDensityKgm3": 7900,
+        "metalCpJkgK": 500,
+        "metalKWmK": 16.3,
+        "gapConductanceWm2K": 100,
+        "coolingBoreCoefficientWm2K": 10,
+        "outsideCoefficientWm2K": 10,
+        "directMetalPatch": true,
+        "maxCellWidthM": 0.0002,
+        "heatingTimeStepS": 0.02,
+        "earlyCoolingTimeStepS": 0.1,
+        "lateTimeStepS": 1,
+        "minimumEndTimeS": 1800,
+        "maximumEndTimeS": 7200,
+        "extendUntilPeakResolved": true
+      },
+      "geometry": {
+        "sleeveOriginalInnerM": 0.0381,
+        "sleeveOuterM": 0.050165,
+        "caseInnerM": 0.0508,
+        "caseOuterM": 0.05715,
+        "caseFullLengthM": 0.3048,
+        "modeledOverlapLengthM": 0.1820672,
+        "physicalRadialGapM": 0.0006349999999999967,
+        "layer_boundaries": [
+          {
+            "name": "metal",
+            "innerM": 0.0508,
+            "outerM": 0.05715
+          }
+        ],
+        "local_band_metal_mass_kg": 3.0974553108297633,
+        "solid_volume_m3": 0.0003920829507379448,
+        "scope": "Local overlap band only, no axial or azimuthal spreading; not a whole-case average or verified global hotspot."
+      },
+      "at_selected_heating_end": {
+        "time_s": 10,
+        "case_inner_C": 1572.4949961801622,
+        "case_outer_C": 1105.987527383134,
+        "hot_face_C": 1572.4949961801622
+      },
+      "local_band_case_inner_peak": {
+        "temperature_C": 1572.4949961801622,
+        "time_s": 10
+      },
+      "local_band_case_outer_peak": {
+        "temperature_C": 1251.9664739996247,
+        "time_s": 15.4
+      },
+      "hot_face_peak": {
+        "temperature_C": 1572.4949961801622,
+        "time_s": 10
+      },
+      "maximum_cell_hotspot": {
+        "temperature_C": 1558.4735052390433,
+        "time_s": 10,
+        "layer": "metal",
+        "radius_m": 0.050899122045473436
+      },
+      "maximum_metal_cell": {
+        "temperature_C": 1558.4735052390433,
+        "time_s": 10
+      },
+      "peak_resolved_within_simulation": true,
+      "simulated_until_s": 1800,
+      "low_temperature_metal_surrogate_extrapolated_above_100C": true,
+      "metal_surrogate_reaches_ATI_melting_range": true,
+      "display_in_intact_layer_comparison": false,
+      "warnings": [
+        "Fixed preselected geometry and char exist at t=0; this is not an evolving ablation/pyrolysis calculation or a proven conservative bound.",
+        "Constant virgin and char properties are unmeasured at the computed temperatures; decomposition, gas transport, surface radiation and material removal are omitted.",
+        "Metal exceeds 100 C: constant 0–100 C cp and 100 C conductivity surrogate is extrapolated; no strength or phase-change prediction is made.",
+        "Numerical metal temperature reaches the ATI 1399–1421 C melting range while this solver omits latent heat and phase change. This is an invalid constant-property-model output, not a physically predicted steel peak.",
+        "Bare-wall radial-column benchmark has no lateral spreading or specified patch width; it is not a measured crack width, leakage rate, whole-case temperature or failure prediction. Do not plot it as a valid intact-layer temperature."
+      ],
+      "energy_check": {
+        "signed_inner_boundary_energy_J": 1236226.0192506658,
+        "signed_outer_boundary_energy_J": -775040.3579334406,
+        "stored_energy_change_J": 461185.6613282422,
+        "closure_residual_J": 0.000011016963981091976,
+        "residual_fraction_of_absolute_boundary_energy": 3.2558827647226646e-12,
+        "maximum_step_residual_J": 1.0774556358228438e-8,
+        "initial_absolute_energy_J": 454009.5121848728
+      },
+      "numerical": {
+        "method": "Backward-Euler conservative annular finite volumes, exact annular capacities and logarithmic radial resistances",
+        "cells": 32,
+        "steps": 2740,
+        "factorizations": 3
+      },
+      "actual_engine_case_temperature_C": null,
+      "actual_thermal_exposure_s": null
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "classification": "DIGITIZED_NOT_RAW",
+  "source": {
+    "file": "chambersafe-back-face-reported.png",
+    "sha256": "13aa0c43de0a275f371c320ba22770f5d53d0bf004ec3b12c8a8de488b09f92b",
+    "dimensions_px": [
+      1920,
+      1440
+    ]
+  },
+  "method": "Tick-calibrated color masks; per-column graphical envelopes; centers only for narrow visible horizontal strokes; >=4-column stable runs form visible segments. No smoothing, interpolation, refitting or original sample recovery.",
+  "calibration": {
+    "x_ticks_px": [
+      318.0,
+      541.0,
+      764.0,
+      987.0,
+      1210.0,
+      1433.0,
+      1656.0
+    ],
+    "x_ticks_log_seconds": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60
+    ],
+    "y_ticks_px": [
+      227.0,
+      458.0,
+      689.0,
+      919.0,
+      1150.0
+    ],
+    "y_ticks_delta_c": [
+      0.4,
+      0.2,
+      0.0,
+      -0.2,
+      -0.4
+    ],
+    "x_mapping_seconds_per_pixel_and_intercept": [
+      0.04484304932735427,
+      -14.260089686098636
+    ],
+    "y_mapping_c_per_pixel_and_intercept": [
+      -0.0008669262560284635,
+      0.5969654199012001
+    ],
+    "max_tick_residual_s": 4.263256414560601e-14,
+    "max_tick_residual_c": 0.0003467705024112755,
+    "included_pixel_rectangle_xyxy": [
+      280,
+      290,
+      1840,
+      1260
+    ],
+    "legend": "Excluded by y >= 290 px; data start at y=321 px or below.",
+    "pixel_time_resolution_s": 0.04484304932735427,
+    "pixel_temperature_resolution_c": 0.0008669262560284635
+  },
+  "graphical_uncertainty": {
+    "time_s_approx": 0.179,
+    "temperature_c_approx": 0.0038,
+    "interpretation": "Conservative 4-pixel stroke/cap allowance plus tick fit residual. Not instrument uncertainty or a confidence interval."
+  },
+  "results": {
+    "baseline_20s": {
+      "visible_time_window_log_s_approx": [
+        0.0,
+        52.96
+      ],
+      "visible_maximum_delta_c_approx": 0.317,
+      "visible_minimum_delta_c_approx": 0.001,
+      "first_visible_maximum_segment_log_s_approx": [
+        50.09,
+        52.96
+      ],
+      "first_visible_maximum_time_graphical_interval_log_s": [
+        49.91,
+        50.27
+      ],
+      "first_visible_maximum_cap_log_s_approx": 49.82,
+      "first_visible_maximum_cap_time_graphical_interval_log_s": [
+        49.64,
+        50.0
+      ],
+      "maximum_timing_note": "Cap timing can identify an unresolved narrow spike; the first accepted horizontal segment can occur later. Neither is an original sample time.",
+      "visible_horizontal_segment_count_not_samples": 16,
+      "pixel_columns_not_samples": 1182,
+      "pixel_column_status_counts": {
+        "narrow_visible_horizontal_band": 909,
+        "missing_occluded_or_unresolved": 243,
+        "partial_stroke_or_occlusion_no_center": 1,
+        "vertical_transition_or_merged_strokes_no_center": 29
+      },
+      "first_resolved_rise_log_s_graphical_bracket": [
+        41.75,
+        42.38
+      ]
+    },
+    "hot_10s": {
+      "visible_time_window_log_s_approx": [
+        0.0,
+        66.59
+      ],
+      "visible_maximum_delta_c_approx": 0.214,
+      "visible_minimum_delta_c_approx": -0.166,
+      "first_visible_maximum_segment_log_s_approx": [
+        65.47,
+        65.78
+      ],
+      "first_visible_maximum_time_graphical_interval_log_s": [
+        65.29,
+        65.65
+      ],
+      "first_visible_maximum_cap_log_s_approx": 28.25,
+      "first_visible_maximum_cap_time_graphical_interval_log_s": [
+        28.07,
+        28.43
+      ],
+      "maximum_timing_note": "Cap timing can identify an unresolved narrow spike; the first accepted horizontal segment can occur later. Neither is an original sample time.",
+      "visible_horizontal_segment_count_not_samples": 54,
+      "pixel_columns_not_samples": 1486,
+      "pixel_column_status_counts": {
+        "vertical_transition_or_merged_strokes_no_center": 974,
+        "narrow_visible_horizontal_band": 512
+      },
+      "first_resolved_rise_log_s_graphical_bracket": null
+    }
+  },
+  "reported_value_comparison": {
+    "baseline_table6_maximum_delta_c": 0.317,
+    "hot_table6_maximum_delta_c": 0.241,
+    "hot_visible_curve_maximum_delta_c_approx": 0.214,
+    "hot_table_minus_curve_c_approx": 0.027,
+    "status": "Unresolved report-versus-figure discrepancy; do not replace one with the other."
+  },
+  "temperature_processing": {
+    "reported_gain": 1.0129,
+    "reported_raw_increment_c": 0.0625,
+    "gain_times_increment_c": 0.06330625,
+    "gain_reapplied": false,
+    "note": "The plot is already baseline-subtracted and corrected. Its visible increment is about 0.063 C; do not apply gain again."
+  },
+  "limitations": [
+    "Digitized figure pixels are not raw measurements; pixel columns and visible segments do not imply original sample count, sampling cadence, or individual measurement times.",
+    "Time is from start of each log, not synchronized flame-on time. Source legend labels 20 s and 10 s are nominal exposure durations, not plotted time-window lengths.",
+    "Vertical strokes and dense merged transitions produce only graphical min/max envelopes; blank center fields are intentional.",
+    "Missing colored pixels inside a trace can be occluded by the other trace; no interpolated values are inserted.",
+    "Hot baseline chatter prevents assigning a unique physical onset. The blue first visible rise is only log-relative, not a thermal lag measurement.",
+    "No response integral is reported: uncertain transition columns, occlusion, unequal windows and unsynchronized logs would require explicit assumptions.",
+    "No thermal model fit, conductivity, diffusivity, heat flux, heat-shield effectiveness or energy absorption can be validated from these back-face figure pixels alone."
+  ]
+}

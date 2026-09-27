@@ -1,0 +1,136 @@
+/* Scoped to the rotating-bolt impact explorer; all controls stay in document flow. */
+#bolt-impact-lab {
+  --bolt-blue:#176da5;
+  --bolt-orange:#b8520c;
+  --bolt-red:#952a24;
+  --bolt-rule:#d6d0c5;
+  --bolt-paper:#fffdf9;
+  min-width:0;
+  margin:1.4rem 0 2rem;
+  scroll-margin-top:1rem;
+  font-family:Georgia,"Times New Roman",Times,serif;
+  line-height:1.5;
+}
+#bolt-impact-lab *, #bolt-impact-lab *::before, #bolt-impact-lab *::after { box-sizing:border-box; }
+#bolt-impact-lab h3 { margin:0 0 .35rem; font-size:1rem; line-height:1.4; }
+#bolt-impact-lab h4 { margin:0 0 .25rem; font-size:.92rem; line-height:1.4; }
+#bolt-impact-lab p { margin:.55rem 0; text-align:left; }
+#bolt-impact-lab .bolt-small { font-size:.88rem; line-height:1.5; }
+#bolt-impact-lab .bolt-controls { border:1px solid var(--bolt-rule); padding:.65rem .75rem; background:var(--bolt-paper); box-shadow:0 2px 5px #1f1e1b0d; }
+#bolt-impact-lab .bolt-results { min-width:0; }
+#bolt-impact-lab .bolt-settings { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); align-items:end; gap:.4rem .75rem; margin:.45rem 0; }
+#bolt-impact-lab .bolt-settings > * { min-width:0; }
+#bolt-impact-lab label { display:block; min-width:0; font-size:.78rem; font-weight:700; }
+#bolt-impact-lab .bolt-control-head { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:.1rem .4rem; }
+#bolt-impact-lab output { font-variant-numeric:tabular-nums; }
+#bolt-impact-lab .bolt-control-head output { font-size:.76rem; font-weight:400; white-space:nowrap; }
+#bolt-impact-lab select, #bolt-impact-lab button { font:inherit; font-size:.84rem; color:inherit; border:1px solid #908679; border-radius:0; background:var(--bolt-paper); min-height:44px; padding:.3rem .5rem; }
+#bolt-impact-lab select { max-width:100%; width:100%; margin:.15rem 0 0; }
+#bolt-impact-lab button { cursor:pointer; }
+#bolt-impact-lab button:hover { background:#f1ebe2; }
+#bolt-impact-lab button:disabled { cursor:default; opacity:.6; }
+#bolt-impact-lab .bolt-play { background:var(--bolt-red); color:#fff; border-color:var(--bolt-red); min-width:60px; }
+#bolt-impact-lab .bolt-play:hover { background:#7d211d; }
+#bolt-impact-lab :is(button, select, input, a):focus-visible { outline:2px solid var(--bolt-red); outline-offset:3px; }
+#bolt-impact-lab input[type="range"] { display:block; width:100%; min-width:0; height:28px; margin:0; accent-color:var(--bolt-red); cursor:pointer; }
+#bolt-impact-lab .bolt-material { margin:.4rem 0; color:#5e584f; font-size:.78rem; line-height:1.5; }
+#bolt-impact-lab .bolt-material-fixed { margin:0 0 .4rem; color:#5e584f; font-size:.7rem; }
+#bolt-impact-lab .bolt-playback { display:flex; align-items:center; gap:.45rem; margin:.4rem 0; }
+#bolt-impact-lab .bolt-speed { min-width:0; }
+#bolt-impact-lab .bolt-speed select { margin-bottom:0; }
+#bolt-impact-lab .bolt-timeline { min-width:0; flex:1; margin-left:.25rem; }
+#bolt-impact-lab .bolt-timeline-top { display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; flex-wrap:wrap; }
+#bolt-impact-lab .bolt-timeline-top output { font-size:.76rem; }
+#bolt-impact-lab .bolt-view-control { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:.35rem; margin:.4rem 0 0; padding-top:.4rem; border-top:1px solid var(--bolt-rule); }
+#bolt-impact-lab .bolt-view-control select { margin:0; }
+#bolt-impact-lab .bolt-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; margin:.6rem 0; }
+#bolt-impact-lab .bolt-metrics > * { min-width:0; padding:.45rem .55rem; border:1px solid var(--bolt-rule); background:var(--bolt-paper); }
+#bolt-impact-lab .bolt-metric-label { display:block; color:#5e584f; font-size:.76rem; line-height:1.4; }
+#bolt-impact-lab .bolt-metric-value { display:block; margin-top:.1rem; font-size:1rem; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+#bolt-impact-lab .bolt-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin:.5rem 0; }
+#bolt-impact-lab .bolt-translation-control { margin-top:.25rem; min-width:0; }
+#bolt-impact-lab .bolt-stage { min-width:0; }
+#bolt-impact-lab .bolt-stage > .bolt-grid:first-child { margin-top:0; }
+#bolt-impact-lab .bolt-card { min-width:0; margin:0; border:1px solid var(--bolt-rule); background:var(--bolt-paper); padding:.5rem; }
+#bolt-impact-lab .bolt-card h4 { margin-bottom:.15rem; }
+#bolt-impact-lab .bolt-visual { display:block; width:100%; height:auto; min-width:0; max-height:none; aspect-ratio:440 / 300; margin:0; object-fit:contain; }
+#bolt-impact-lab canvas { display:block; }
+#bolt-impact-lab .bolt-card figcaption { margin:.5rem 0 0; padding:0; color:#5e584f; font-size:.82rem; line-height:1.5; text-align:left; }
+#bolt-impact-lab .bolt-card svg text { font-family:Georgia,"Times New Roman",Times,serif; }
+#bolt-impact-lab .bolt-readout { font-size:.76rem; font-variant-numeric:tabular-nums; }
+#bolt-impact-lab p.bolt-readout { margin:.25rem 0 0; }
+#bolt-impact-lab .bolt-state { font-weight:700; }
+#bolt-impact-lab .bolt-state[data-state="plastic"] { color:var(--bolt-orange); }
+#bolt-impact-lab .bolt-legend { display:flex; flex-wrap:wrap; gap:.35rem 1rem; margin:.6rem 0; font-size:.8rem; font-weight:700; }
+#bolt-impact-lab .bolt-legend span { display:inline-flex; align-items:center; gap:.4rem; }
+#bolt-impact-lab .bolt-dot { display:inline-block; flex:0 0 auto; width:.6rem; height:.6rem; border:1px solid var(--bolt-blue); border-radius:50%; background:var(--bolt-blue); }
+#bolt-impact-lab .bolt-plastic-dot { border-color:var(--bolt-orange); background:var(--bolt-orange); }
+#bolt-impact-lab :is(#bolt-space,#bolt-motion) { cursor:grab; touch-action:pan-y pinch-zoom; user-select:none; -webkit-user-select:none; }
+#bolt-impact-lab :is(#bolt-space,#bolt-motion)[data-dragging="true"] { cursor:grabbing; }
+#bolt-impact-lab :is(#bolt-space,#bolt-motion):focus-visible { outline:2px solid var(--bolt-red); outline-offset:3px; }
+#bolt-impact-lab #bolt-motion[aria-disabled="true"] { cursor:default; }
+#bolt-impact-lab .bolt-drag-hint { margin:.2rem 0 .35rem; color:#5e584f; font-size:.72rem; line-height:1.4; }
+#bolt-impact-lab .bolt-space-toolbar { display:flex; align-items:center; justify-content:space-between; gap:.35rem; margin:.2rem 0 .35rem; }
+#bolt-impact-lab .bolt-space-toolbar .bolt-drag-hint { margin:0; }
+#bolt-impact-lab .bolt-demand { display:inline-block; flex:0 0 auto; width:.6rem; height:.6rem; border:1.5px solid #777066; border-radius:50%; background:transparent; }
+#bolt-impact-lab .bolt-origin { display:inline-block; flex:0 0 auto; width:1.4rem; height:0; border:0; border-top:2px dashed #777066; border-radius:0; background:transparent; }
+#bolt-impact-lab .bolt-notes { margin:.65rem 0; padding-top:.5rem; border-top:1px solid var(--bolt-rule); color:#5e584f; font-size:.82rem; line-height:1.5; }
+#bolt-impact-lab .bolt-notes p:first-child { margin-top:0; }
+#bolt-impact-lab .bolt-visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+#bolt-impact-lab [hidden], #bolt-impact-lab .bolt-grid[hidden] { display:none !important; }
+/* Use the otherwise empty navigation rail without narrowing the plots.
+ * 15.25rem matches the site's 12rem sidebar + 3.25rem gutter.
+ * Both columns remain in normal flow, including when the controls are taller.
+ */
+@media (min-width:1000px) {
+  #bolt-impact-lab {
+    --bolt-visual-height:clamp(180px,calc(30svh - 2.25rem),225px);
+    display:grid;
+    grid-template-columns:11.25rem minmax(0,1fr);
+    column-gap:4rem;
+    row-gap:.5rem;
+    align-items:start;
+    width:calc(100% + 15.25rem);
+    margin-left:-15.25rem;
+  }
+  #bolt-impact-lab .bolt-controls { grid-column:1; grid-row:2; padding:.5rem; max-height:calc(100vh - 2rem); max-height:calc(100svh - 2rem); overflow-y:auto; }
+  #bolt-impact-lab .bolt-controls h3 { font-size:.9rem; margin-bottom:.15rem; }
+  #bolt-impact-lab .bolt-controls label { font-size:.72rem; }
+  #bolt-impact-lab .bolt-control-head { flex-wrap:nowrap; gap:.2rem; }
+  #bolt-impact-lab .bolt-control-head output { font-size:.7rem; }
+  #bolt-impact-lab .bolt-material-fixed { font-size:.65rem; }
+  #bolt-impact-lab .bolt-metrics { grid-column:2; grid-row:1; margin:0; }
+  #bolt-impact-lab .bolt-results { grid-column:2; grid-row:2; }
+  /* Resize the canvas box itself to preserve both aspect and drag mapping. */
+  #bolt-impact-lab .bolt-stage .bolt-visual { width:min(100%,calc(var(--bolt-visual-height) * 1.466666667)); margin-inline:auto; }
+  /* Reuse the removed footer's space; the fixture stays inside its card. */
+  #bolt-impact-lab .bolt-stage #bolt-motion { width:100%; }
+  #bolt-impact-lab .bolt-stage h4 { font-size:.86rem; line-height:1.35; }
+  #bolt-impact-lab .bolt-stage .bolt-readout { font-size:.7rem; line-height:1.35; }
+  #bolt-impact-lab .bolt-drag-hint { font-size:.7rem; }
+  #bolt-impact-lab .bolt-settings { grid-template-columns:minmax(0,1fr); gap:.25rem; margin:.3rem 0; }
+  #bolt-impact-lab .bolt-select-row { display:grid; grid-template-columns:4.2rem minmax(0,1fr); align-items:center; gap:.2rem; }
+  #bolt-impact-lab .bolt-select-row select { margin:0; }
+  #bolt-impact-lab .bolt-controls :is(select,button) { font-size:.72rem; padding:.2rem .2rem; }
+  #bolt-impact-lab .bolt-playback { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:end; gap:.25rem; }
+  #bolt-impact-lab .bolt-play { min-width:0; }
+  #bolt-impact-lab :is(.bolt-speed,.bolt-timeline) { grid-column:1 / -1; }
+  #bolt-impact-lab .bolt-speed { display:grid; grid-template-columns:4.2rem minmax(0,1fr); align-items:center; gap:.2rem; }
+  #bolt-impact-lab .bolt-speed select { margin:0; }
+  #bolt-impact-lab .bolt-timeline { margin-left:0; }
+  #bolt-impact-lab .bolt-timeline-top output { font-size:.7rem; }
+}
+@media (min-width:1000px) and (pointer:fine) {
+  #bolt-impact-lab .bolt-controls :is(select,button) { min-height:32px; }
+  #bolt-impact-lab .bolt-controls input[type="range"] { height:24px; }
+}
+@media (max-width:700px) {
+  #bolt-impact-lab .bolt-settings { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #bolt-impact-lab .bolt-grid { grid-template-columns:1fr; }
+  #bolt-impact-lab .bolt-playback { flex-wrap:wrap; }
+  #bolt-impact-lab .bolt-timeline { flex-basis:100%; margin:0; }
+}
+@media (max-width:360px) {
+  #bolt-impact-lab .bolt-settings { grid-template-columns:1fr; }
+  #bolt-impact-lab .bolt-metrics { grid-template-columns:1fr; }
+}

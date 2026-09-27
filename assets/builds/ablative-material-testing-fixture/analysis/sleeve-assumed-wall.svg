@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="440" viewBox="0 0 1100 440" role="img" aria-labelledby="sleeve-wall-title sleeve-wall-desc" style="max-width:100%;height:auto">
+  <title id="sleeve-wall-title">Illustrative wall section · not an observed sleeve cross-section</title>
+  <desc id="sleeve-wall-desc">One assumed full-bore sleeve case, drawn to scale through the radial wall. The original target wall is 12.065 millimeters. From the original bore surface toward the case, a 3.175-millimeter recessed region transfers the coupon's approximately measured dimple depth uniformly to the sleeve. Next is 2 millimeters of retained char chosen as an assumption, followed by 6.89 millimeters of modeled uncharred remainder. Char density is assumed to be 50 percent of virgin density. No actual sleeve char thickness, temperatures, or hotfire response are inferred.</desc>
+  <defs>
+    <pattern id="recess-hatch" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M-3 3L3-3M0 12L12 0M9 15L15 9" fill="none" stroke="#ac432c" stroke-opacity=".16" stroke-width="1"/>
+    </pattern>
+    <pattern id="char-grain" width="15" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r=".85" fill="#fffdf9" fill-opacity=".17"/>
+      <circle cx="11" cy="11" r=".65" fill="#fffdf9" fill-opacity=".13"/>
+    </pattern>
+  </defs>
+  <rect width="1100" height="440" fill="#fffdf9"/>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#38352f">
+    <text x="64" y="40" font-size="27" font-weight="bold">Illustrative wall section · not an observed sleeve cross-section</text>
+    <text x="64" y="72" font-size="19" fill="#6b655b">One selected scenario · uniform full-bore recession and retained char</text>
+    <path d="M64 94H1036" stroke="#d5cec2"/>
+    <path d="M64 126H1036M64 119V134M1036 119V134" fill="none" stroke="#958b7d" stroke-width="1.3"/>
+    <rect x="384" y="109" width="332" height="30" fill="#fffdf9"/>
+    <text x="550" y="130" text-anchor="middle" font-size="21">Original target wall ≈12.1 mm</text>
+
+    <rect x="64" y="159" width="255.789" height="98" fill="#fbf1ec"/>
+    <rect x="64" y="159" width="255.789" height="98" fill="url(#recess-hatch)"/>
+    <rect x="319.789" y="159" width="161.127" height="98" fill="#575047"/>
+    <rect x="319.789" y="159" width="161.127" height="98" fill="url(#char-grain)"/>
+    <rect x="480.917" y="159" width="555.083" height="98" fill="#e6dfd2"/>
+    <path d="M64 159H319.789M64 257H319.789M64 159V257" fill="none" stroke="#ac432c" stroke-width="1.6" stroke-dasharray="6 5"/>
+    <path d="M319.789 159H1036V257H319.789ZM480.917 159V257" fill="none" stroke="#71685b" stroke-width="1.3"/>
+
+    <g text-anchor="middle">
+      <text x="191.895" y="186" font-size="23">Recessed region</text>
+      <text x="191.895" y="219" font-size="28" fill="#ac432c">≈3.2 mm</text>
+      <text x="191.895" y="244" font-size="15">TRANSFERRED COUPON DEPTH</text>
+      <g fill="#fffdf9">
+        <text x="400.353" y="186" font-size="21">Retained char</text>
+        <text x="400.353" y="219" font-size="28">2.0 mm</text>
+        <text x="400.353" y="244" font-size="15">ASSUMED</text>
+      </g>
+      <text x="758.458" y="186" font-size="23">Uncharred remainder</text>
+      <text x="758.458" y="219" font-size="28">≈6.9 mm</text>
+      <text x="758.458" y="244" font-size="15">BY SUBTRACTION</text>
+    </g>
+    <path d="M64 260V277M1036 260V277" stroke="#958b7d" stroke-width="1.2"/>
+    <text x="64" y="299" font-size="18" fill="#6b655b">Original bore surface</text>
+    <text x="1036" y="299" text-anchor="end" font-size="18" fill="#6b655b">Case-side boundary</text>
+    <path d="M319.789 260V303" stroke="#ac432c" stroke-width="1.2"/>
+    <text x="319.789" y="324" text-anchor="middle" font-size="18" fill="#ac432c">Assumed new bore surface</text>
+
+    <path d="M64 346H1036" stroke="#d5cec2"/>
+    <text x="64" y="377" font-size="19">The brick’s ≈3.2 mm dimple was measured; transferring it to the entire sleeve is hypothetical.</text>
+    <text x="64" y="408" font-size="19">2.0 mm retained char and 50% char/virgin density are chosen inputs—not measured sleeve properties.</text>
+  </g>
+</svg>

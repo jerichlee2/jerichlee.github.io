@@ -1,0 +1,154 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const sharp = require('/Users/jerichlee/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp');
+const root = path.resolve(__dirname, '../..');
+const pagePath = path.join(root, 'builds/ablative-material-testing-fixture.html');
+const html = fs.readFileSync(pagePath, 'utf8');
+const section = html.split('<section class="build-section" aria-labelledby="ablative-material-testing-fixture-outcome-title">')[1].split('</section>')[0];
+const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'results-and-provenance.json'), 'utf8'));
+(async () => {
+  const imgs = [...section.matchAll(/<img\s+([^>]+)>/g)];
+  assert.equal(imgs.length, 9, 'Five supplied photos, digitized reconstruction, scenario plot, assumed sleeve-wall diagram, and computed case-temperature chart');
+  assert(!section.includes('src="../assets/builds/ablative-material-testing-fixture/chambersafe-back-face-reported.png"'), 'Original figure removed from page; source asset retained');
+  assert(section.includes('id="ablative-depth-surface"'), 'Interactive 3D plot mount present');
+  assert(!section.includes('src="../assets/builds/ablative-material-testing-fixture/analysis/scenario-depth-dose.svg"'), 'Old 2D scenario graphic no longer displayed');
+  for (const [, attributes] of imgs) {
+    const a = Object.fromEntries([...attributes.matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
+    const image = path.resolve(path.dirname(pagePath), a.src.split(/[?#]/)[0]);
+    assert(fs.existsSync(image), `Present image: ${a.src}`);
+    assert(a.alt.length > 30 && a.loading === 'lazy', 'Descriptive alt and lazy loading');
+    const m = await sharp(image).metadata();
+    assert.equal(m.width, Number(a.width));
+    assert.equal(m.height, Number(a.height));
+    const stats = await sharp(image).stats();
+    assert(stats.channels.some(c => c.stdev > 10), 'Not a blank/failed HEIC conversion');
+    assert(fs.statSync(image).size < 500000, 'Web-sized derivative');
+  }
+  const pair = manifest.photos.find(p => p.asset === 'outcome-sample-pair.jpg');
+  assert.equal(pair.run_assignment.left, 'Hot, 10 s');
+  assert.equal(pair.run_assignment.right, 'Baseline, 20 s');
+  assert.equal(manifest.tests[0].recession_mm, null, 'Baseline depth remains unmeasured');
+  assert.equal(manifest.tests[1].recession_mm, 3.175, 'Hot approximate 1/8-inch depth converted to mm');
+  assert.match(manifest.tests[1].recession_basis, /User-reported approximate/);
+  assert.equal(manifest.tests[1].recession_uncertainty_mm, null, 'Unknown depth uncertainty not fabricated');
+  assert.equal(manifest.tests[1].pre_test_mass_g, 82.8);
+  assert.equal(manifest.tests[1].post_test_mass_g, 73.9);
+  assert.equal(manifest.tests[1].mass_difference_g, 8.9);
+  assert.equal(manifest.tests[1].mass_measurement_uncertainty_g, null);
+  assert(Math.abs(manifest.tests[0].equivalent_dose_MJ_m2 - 5.184) < 1e-10);
+  assert(Math.abs(manifest.tests[1].equivalent_dose_MJ_m2 - 5.844) < 1e-10);
+  assert(Math.abs(manifest.hot_to_baseline_equivalent_dose - 1.127314814814815) < 1e-10);
+  const plot = fs.readFileSync(path.join(root, 'assets/builds/ablative-material-testing-fixture/chambersafe-back-face-reported.png'));
+  assert.equal(crypto.createHash('sha256').update(plot).digest('hex'), manifest.source_plot_sha256, 'Recovered plot unchanged');
+  for (const phrase of ['not time since flame-on', 'not measurements of energy absorbed', 'properties remain unmeasured', '0.241', '0.21']) assert(section.includes(phrase), `Evidence caveat: ${phrase}`);
+  assert(html.includes('Explore the Motion</h2>'));
+  assert(html.includes('waterjet-cut the sample extenders'));
+  assert(!html.includes('The model behind the motion'));
+  const results = JSON.parse(fs.readFileSync(path.join(root, 'assets/builds/ablative-material-testing-fixture/analysis/scenario-results.json'), 'utf8'));
+  assert.equal(results.fit_performed, false);
+  assert.deepEqual(results.runs.map(r => r.endpoint_cases), [4096, 1024]);
+  assert.deepEqual(results.runs.map(r => r.varied_inputs.length), [12, 10]);
+  assert.deepEqual(results.runs[1].fixed_inputs, ['mass_g', 'depth_mm']);
+  assert.equal(results.runs[1].input_evidence.mass_g, 'USER_REPORTED_MEASUREMENT');
+  assert.equal(results.runs[1].input_evidence.depth_mm, 'USER_REPORTED_MEASUREMENT');
+  assert.equal(results.runs[0].input_evidence.depth_mm, 'ANALYST_SELECTED_SCENARIO');
+  assert.match(results.runs[1].excluded_uncertainty, /unknown measurement uncertainties/);
+  assert(Math.abs(results.runs[1].nominal.density_kg_m3 - 1443.6474317268094) < 1e-8);
+  assert(Math.abs(results.runs[1].reported_mass_balance.mass_difference_g - 8.9) < 1e-12);
+  assert.equal(results.recovered_trace_comparison.runs[1].peak_delta_c_digitized, 0.214);
+  const surface = JSON.parse(fs.readFileSync(path.join(root, 'assets/builds/ablative-material-testing-fixture/analysis/depth-surface-scenarios.json'), 'utf8'));
+  assert.equal(surface.fit_performed, true, 'Algebraic depth-anchor constraint is disclosed');
+  assert.equal(surface.measured_data_fit, true, 'One approximate hot depth now partly anchors the model');
+  assert.equal(surface.measured_depth_anchor_count, 1);
+  assert.equal(surface.assumed_depth_anchor_count, 1);
+  assert.equal(surface.thermocouple_fit, false, 'No fit to thermocouple traces');
+  assert.equal(surface.validated, false);
+  assert.equal(surface.grid_rows, 2091);
+  assert.equal(surface.model.id, 'shared-power-law');
+  assert.equal(surface.anchor_points.length, 2);
+  assert.equal(surface.anchor_points.filter(p => p.measured).length, 1);
+  assert.equal(surface.scenarios, undefined);
+  assert(section.includes('Two points do not determine a unique surface'));
+  assert.match(section, /one measured depth and one assumed depth/i);
+  for (const phrase of ['not confidence intervals', 'not sensor accuracy', 'What the next tests need to record']) assert(section.includes(phrase), `Scenario/digitization caveat: ${phrase}`);
+  assert.match(section, /measurement uncertainty is unknown and excluded/);
+  assert.match(section, /baseline.*assumed|assumed.*baseline/i);
+  assert.match(section, /8\.9 g/);
+  const sleeve = JSON.parse(fs.readFileSync(path.join(root, 'assets/builds/ablative-material-testing-fixture/analysis/sleeve-comparison-results.json'), 'utf8'));
+  const cases = sleeve.expanded_what_if_scenarios, ref = cases.reference;
+  const near = (a,b) => assert(Math.abs(a-b)<1e-8*Math.max(1,Math.abs(b)));
+  assert.equal(cases.csv_row_count, 19);
+  assert.equal(ref.retained_char_thickness_mm, 2);
+  assert.equal(ref.char_to_virgin_density_ratio, .5);
+  assert.equal(ref.affected_original_bore_fraction, 1);
+  near(ref.local_uncharred_wall_mm, 6.89);
+  // Independent centimeter-unit calculation from documented geometry and
+  // the selected 2-mm, half-density char layer, rather than rounded table values.
+  const initialDensityGCM3 = 82.8 / (2 * 3.5 * .5 * 16.387064);
+  const innerAfterCM = 3.81 + .3175, charEdgeCM = innerAfterCM + .2;
+  const independentRemainingG = Math.PI * 18.20672 * initialDensityGCM3 *
+    (5.0165 ** 2 - charEdgeCM ** 2 + .5 * (charEdgeCM ** 2 - innerAfterCM ** 2));
+  near(ref.modeled_remaining_mass_g, independentRemainingG);
+  near(ref.modeled_remaining_mass_g + ref.modeled_net_mass_loss_g, sleeve.candidate_geometry.conditional_initial_mass_g);
+  assert.equal(sleeve.actual_sleeve_measurements.char_mass_g, null);
+  assert.equal(sleeve.actual_sleeve_measurements.char_thickness_mm, null);
+  assert.equal(sleeve.verified_hotfire_thermal_exposure_s, null);
+  assert.equal(sleeve.validation_performed, false);
+  for (const p of cases.affected_fraction_cases) {
+    near(p.local_uncharred_wall_mm, ref.local_uncharred_wall_mm);
+    near(p.modeled_net_mass_loss_g, p.affected_original_bore_fraction * ref.modeled_net_mass_loss_g);
+  }
+  for (const p of cases.retained_char_density_grid) {
+    assert(section.includes(p.modeled_remaining_mass_g.toFixed(1)), 'Char sensitivity value rendered on page');
+  }
+  const sleeveCsv = fs.readFileSync(path.join(root, 'assets/builds/ablative-material-testing-fixture/analysis/sleeve-scenarios.csv'), 'utf8');
+  assert.equal(sleeveCsv.trim().split('\n').length, 20, 'CSV header plus 19 cases');
+  assert(section.includes('601.4 g') && section.includes('277.9 g'));
+  assert(section.includes('retained-layer density deficit'));
+  assert(section.includes('not a calculation of how char forms'));
+  const sleeveBlock=section.split('id="ablative-sleeve-comparison"')[1].split('<details class="ablative-outcome-details article-body" id="ablative-next-tests">')[0];
+  assert(sleeveBlock && !sleeveBlock.includes('<details') && !sleeveBlock.includes('<summary'), 'Entire sleeve analysis permanently expanded, not merely default-open');
+  assert(sleeveBlock.includes('id="ablative-sleeve-verdict"'), 'Boxed protection conclusion present at end');
+  assert(sleeveBlock.includes('304L stainless steel'));
+  assert(sleeveBlock.includes('before heating begins'));
+  assert(sleeveBlock.includes('not established'));
+  const thermal=JSON.parse(fs.readFileSync(path.join(root,'assets/builds/ablative-material-testing-fixture/analysis/sleeve-thermal-results.json'),'utf8'));
+  assert.equal(thermal.validated,false);
+  assert.equal(thermal.actual_case_temperature_C,null);
+  assert.equal(thermal.actual_heating_duration_s,null);
+  for (const id of ['central','original_virgin','insulated_bore_after_heating','char_k064']) {
+    const c=thermal.cases.find(r=>r.id===id);
+    assert(c && c.peak_resolved_within_simulation);
+    assert(sleeveBlock.includes(c.local_band_case_inner_peak.temperature_C.toFixed(1)), `Rendered scenario peak: ${id}`);
+    assert(c.energy_check.residual_fraction_of_absolute_boundary_energy<1e-7);
+  }
+  const bare=thermal.cases.find(r=>r.id==='bare_wall_column');
+  assert(bare && bare.low_temperature_metal_surrogate_extrapolated_above_100C, 'Bare-wall reference explicitly outside constant-property validity');
+  assert(sleeveBlock.includes('not a reliable physical peak'));
+  assert(sleeveBlock.indexOf('id="ablative-sleeve-verdict"')>sleeveBlock.indexOf('sleeve-thermal-history.csv'), 'Conclusion follows results and downloads');
+  const conduction=JSON.parse(fs.readFileSync(path.join(root,'assets/builds/ablative-material-testing-fixture/analysis/sleeve-conduction-only.json'),'utf8'));
+  assert.equal(conduction.validated,false);
+  assert.equal(conduction.boundary_conditions.convection,false);
+  assert.equal(conduction.boundary_conditions.radiation,false);
+  assert.equal(conduction.boundary_conditions.inner_during_pulse.temperature_K,3000);
+  assert.equal(conduction.boundary_conditions.pulse_duration_s,10);
+  assert.equal(conduction.boundary_conditions.outer_throughout.type,'adiabatic');
+  assert.equal(conduction.boundary_conditions.inner_after_pulse.type,'adiabatic');
+  assert.equal(conduction.results.equilibrium_time_s,null, 'Insulated equilibrium is not a finite-time cooling peak');
+  assert.equal(conduction.measured_sleeve_data.case_temperature_C,null);
+  assert(conduction.numerical_checks.energy_closure_relative_error<1e-8);
+  assert(conduction.numerical_checks.post_pulse_no_steel_overshoot);
+  assert(conduction.numerical_checks.coarse_vs_fine_equilibrium_delta_C<.1);
+  near(conduction.results.asymptotic_equilibrium_C,20+conduction.results.deposited_energy_J/conduction.results.total_heat_capacity_J_per_K);
+  for (const [value,expected] of [[conduction.results.at_10_s.steel_inner_C,20],[conduction.results.at_600_s.steel_inner_C,91],[conduction.results.asymptotic_equilibrium_C,94]]) {
+    assert.equal(Math.round(value),expected);
+    assert(sleeveBlock.includes(`≈${expected} °C`));
+  }
+  assert(sleeveBlock.includes('Earlier comparison: gas heating and ambient cooling'));
+  assert(sleeveBlock.includes('id="ablative-conduction-only-title"'));
+  assert(sleeveBlock.includes('Yes—within the simplified conduction-only model'));
+  assert(sleeveBlock.includes('not proof that the real sleeve remained intact'));
+  console.log('PASS: nine images; preserved source plot; mixed coupon evidence; sleeve mass bookkeeping; expanded sleeve section; distinct cooling/conduction-only results, boxed conditional verdict and actual-measurement nulls.');
+})().catch(error => { console.error(error); process.exitCode = 1; });

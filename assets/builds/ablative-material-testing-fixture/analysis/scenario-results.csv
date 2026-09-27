@@ -1,0 +1,35 @@
+status,run,quantity,unit,nominal,selected_envelope_min,selected_envelope_max,envelope_notes
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,volume_cm3,cm³,57.354724,40.800000,75.330000,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,density_kg_m3,kg/m³,871.76777,398.24771,1960.7843,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,specimen_heat_capacity_J_K,J/K,50.000000,21.000000,120.00000,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,diffusivity_mm2_s,mm²/s,0.18353512,0.027200000,1.1478857,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,through_thickness_diffusion_time_s,s,878.79640,130.67503,5514.7059,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,fourier_number,dimensionless,0.022758400,0.0034453333,0.16070400,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,diffusion_length_mm,mm,1.9159077,0.71888803,4.9097454,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,equivalent_dose_MJ_m2,MJ/m²,5.1840000,3.5951040,7.2394560,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,equivalent_footprint_energy_kJ,kJ,1.6286016,0.28235881,5.1172699,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,depth_mm,mm,3.0000000,1.0000000,5.0000000,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,depth_rate_mm_s,mm/s,0.15000000,0.047619048,0.26315789,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,depth_per_equivalent_dose,mm/(MJ/m²),0.57870370,0.13813193,1.3907804,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,depression_volume_cm3,cm³,0.47123890,0.026179939,3.5342917,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,virgin_density_equivalent_mass_g,g,0.41081088,0.010426101,6.9299838,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,baseline_20s,remaining_geometric_thickness_mm,mm,9.7000000,5.0000000,14.000000,Selected assumption sensitivities; not confidence intervals
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,volume_cm3,cm³,57.354724,40.800000,75.330000,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,density_kg_m3,kg/m³,1443.6474,1099.1637,2029.4118,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,specimen_heat_capacity_J_K,J/K,82.800000,57.960000,124.20000,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,diffusivity_mm2_s,mm²/s,0.11083038,0.026280193,0.41590062,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,through_thickness_diffusion_time_s,s,1455.2868,360.66308,5707.7206,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,fourier_number,dimensionless,0.0068714976,0.0015768116,0.030499379,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,diffusion_length_mm,mm,1.0527601,0.48633501,2.1389032,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,equivalent_dose_MJ_m2,MJ/m²,5.8440000,3.8395080,8.5497720,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,equivalent_footprint_energy_kJ,kJ,1.8359467,0.30155425,6.0434777,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+USER_REPORTED_APPROXIMATE_DEPTH_UNCERTAINTY_UNKNOWN,hot_10s,depth_mm,mm,3.1750000,3.1750000,3.1750000,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,depth_rate_mm_s,mm/s,0.31750000,0.28863636,0.35277778,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,depth_per_equivalent_dose,mm/(MJ/m²),0.54329227,0.37135493,0.82692887,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,depression_volume_cm3,cm³,0.49872783,0.083121306,2.2442753,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,virgin_density_equivalent_mass_g,g,0.71998716,0.091363920,4.5545586,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+CONDITIONAL_FROM_MIXED_INPUTS_NOT_MEASURED_THERMAL_PROPERTY,hot_10s,remaining_geometric_thickness_mm,mm,9.5250000,6.8250000,11.825000,Hot mass and depth held fixed; their unknown measurement uncertainties are excluded
+USER_REPORTED_MASS_OR_DIRECT_ARITHMETIC,hot_10s,pre_test_mass_g,g,82.800000,,,No interval supplied; weighing uncertainty and conditioning protocol unknown
+USER_REPORTED_MASS_OR_DIRECT_ARITHMETIC,hot_10s,post_test_mass_g,g,73.900000,,,No interval supplied; weighing uncertainty and conditioning protocol unknown
+USER_REPORTED_MASS_OR_DIRECT_ARITHMETIC,hot_10s,mass_difference_g,g,8.9000000,,,No interval supplied; weighing uncertainty and conditioning protocol unknown
+USER_REPORTED_MASS_OR_DIRECT_ARITHMETIC,hot_10s,mass_difference_percent_initial,%,10.748792,,,No interval supplied; weighing uncertainty and conditioning protocol unknown

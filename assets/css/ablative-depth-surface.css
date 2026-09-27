@@ -1,0 +1,80 @@
+/* An analytical figure, scoped independently of the fixture explorer. */
+#ablative-depth-surface {
+  --depth-paper:#fffdf9;
+  --depth-ink:#38352f;
+  --depth-muted:#6b655b;
+  --depth-rule:#d5cec2;
+  --depth-accent:#ac432c;
+  min-width:0;
+  width:100%;
+  margin:1.1rem 0 .65rem;
+  color:var(--depth-ink);
+  font-family:Georgia,"Times New Roman",Times,serif;
+  line-height:1.5;
+}
+#ablative-depth-surface *,
+#ablative-depth-surface *::before,
+#ablative-depth-surface *::after { box-sizing:border-box; }
+#ablative-depth-surface [hidden] { display:none !important; }
+#ablative-depth-surface .depth-surface-interface { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; gap:.75rem; }
+#ablative-depth-surface .depth-surface-controls { min-width:0; border:1px solid var(--depth-rule); padding:.65rem .75rem; background:var(--depth-paper); box-shadow:0 2px 5px #1f1e1b0d; text-align:left; }
+#ablative-depth-surface .depth-surface-controls h3 { margin:0 0 .35rem; font-size:1rem; }
+#ablative-depth-surface p.depth-surface-settings-note { margin:0 0 .6rem; color:var(--depth-muted); font-size:.7rem; line-height:1.5; text-align:left; }
+#ablative-depth-surface .depth-surface-results { min-width:0; border:1px solid var(--depth-rule); background:var(--depth-paper); }
+#ablative-depth-surface label { display:block; min-width:0; font-size:.8rem; font-weight:700; }
+#ablative-depth-surface :is(select,button) { min-height:44px; padding:.4rem .6rem; border:1px solid #958b7d; border-radius:0; background:var(--depth-paper); color:var(--depth-ink); font:inherit; font-size:.82rem; }
+#ablative-depth-surface select { display:block; width:100%; max-width:100%; margin-top:.2rem; }
+#ablative-depth-surface button { cursor:pointer; }
+#ablative-depth-surface .depth-surface-controls button { width:100%; margin-top:.5rem; }
+#ablative-depth-surface button:hover { background:#f1ece2; }
+#ablative-depth-surface :is(select,button,input,canvas):focus-visible { outline:2px solid var(--depth-accent); outline-offset:3px; }
+#ablative-depth-surface p.depth-surface-help { padding:0 .75rem; margin:.6rem 0 0; text-align:left; color:var(--depth-muted); font-size:.76rem; line-height:1.5; }
+#ablative-depth-surface canvas.depth-surface-canvas { display:block; width:100%; max-width:100%; height:auto; min-width:0; margin:0; cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none; }
+#ablative-depth-surface canvas[data-dragging="true"] { cursor:grabbing; }
+#ablative-depth-surface .depth-surface-probe { padding:.8rem 1rem .85rem; border-top:1px solid var(--depth-rule); background:#f8f5ee; }
+#ablative-depth-surface .depth-surface-probe-heading { display:flex; align-items:baseline; justify-content:space-between; gap:.5rem; }
+#ablative-depth-surface .depth-surface-probe-heading h3 { margin:0; font-size:.95rem; font-weight:normal; }
+#ablative-depth-surface .depth-surface-probe-heading > span { font-size:.75rem; color:var(--depth-accent); }
+#ablative-depth-surface .depth-surface-inputs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.3rem 1.35rem; margin-top:.65rem; }
+#ablative-depth-surface .depth-surface-inputs label > span { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:.2rem .5rem; }
+#ablative-depth-surface output { font-variant-numeric:tabular-nums; }
+#ablative-depth-surface .depth-surface-controls output { font-weight:400; white-space:nowrap; }
+#ablative-depth-surface input[type="range"] { display:block; width:100%; min-width:0; height:36px; margin:.1rem 0 0; accent-color:var(--depth-accent); cursor:pointer; }
+#ablative-depth-surface .depth-surface-readout { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem 1.35rem; margin:.45rem 0 .2rem; }
+#ablative-depth-surface .depth-surface-readout > div { min-width:0; }
+#ablative-depth-surface .depth-surface-readout dt { font-size:.78rem; color:var(--depth-muted); }
+#ablative-depth-surface .depth-surface-readout dd { margin:.05rem 0 0; font-size:1.35rem; line-height:1.3; }
+#ablative-depth-surface p.depth-surface-note { margin:.7rem 0 0; font-size:.76rem; line-height:1.5; color:var(--depth-muted); text-align:left; }
+#ablative-depth-surface .depth-surface-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+#ablative-depth-surface-fallback { display:block; width:100%; height:auto; border:1px solid #d5cec2; }
+/* Match the Motion and Bolt settings rails: use the existing navigation
+ * column without narrowing the chart or taking controls out of document flow. */
+@media (min-width:1000px) {
+  #ablative-depth-surface[data-ready="true"] .depth-surface-interface { grid-template-columns:11.25rem minmax(0,1fr); column-gap:4rem; row-gap:.5rem; width:calc(100% + 15.25rem); margin-left:-15.25rem; }
+  #ablative-depth-surface .depth-surface-controls { grid-column:1; grid-row:1; padding:.5rem; }
+  #ablative-depth-surface .depth-surface-results { grid-column:2; grid-row:1; }
+  #ablative-depth-surface .depth-surface-controls h3 { font-size:.9rem; margin-bottom:.15rem; }
+  #ablative-depth-surface .depth-surface-controls label { font-size:.72rem; }
+  #ablative-depth-surface .depth-surface-controls output { font-size:.7rem; }
+  #ablative-depth-surface p.depth-surface-settings-note { font-size:.65rem; margin-bottom:.45rem; }
+  #ablative-depth-surface .depth-surface-inputs { grid-template-columns:minmax(0,1fr); gap:.35rem; }
+  #ablative-depth-surface .depth-surface-inputs label > span { gap:.1rem .2rem; }
+  #ablative-depth-surface .depth-surface-controls :is(select,button) { font-size:.72rem; padding:.2rem; }
+}
+@media (min-width:1000px) and (pointer:fine) {
+  #ablative-depth-surface .depth-surface-controls :is(select,button) { min-height:32px; }
+  #ablative-depth-surface .depth-surface-controls input[type="range"] { height:24px; }
+}
+@media (max-width:560px) {
+  #ablative-depth-surface p.depth-surface-help { padding:0 .7rem; }
+  #ablative-depth-surface .depth-surface-probe { padding:.7rem; }
+  #ablative-depth-surface .depth-surface-inputs { grid-template-columns:minmax(0,1fr); gap:.3rem; }
+  #ablative-depth-surface .depth-surface-readout { gap:.5rem .7rem; }
+  #ablative-depth-surface .depth-surface-readout dd { font-size:1.2rem; }
+}
+@media print {
+  #ablative-depth-surface .depth-surface-controls,
+  #ablative-depth-surface .depth-surface-help { display:none; }
+  #ablative-depth-surface[data-ready="true"] .depth-surface-interface { grid-template-columns:minmax(0,1fr); width:100%; margin-left:0; break-inside:avoid; }
+  #ablative-depth-surface .depth-surface-results { grid-column:1; grid-row:1; }
+}

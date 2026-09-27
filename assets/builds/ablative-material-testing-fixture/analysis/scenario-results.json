@@ -1,0 +1,295 @@
+{
+  "status": "MIXED USER-REPORTED MEASUREMENTS AND SELECTED ASSUMPTIONS — NOT MEASURED THERMAL PROPERTIES",
+  "range_interpretation": "Selected endpoint sensitivity envelope, not a statistical confidence interval or proven physical bound. Unlisted model errors can exceed it.",
+  "fit_performed": false,
+  "units": {
+    "volume_cm3": "cm³",
+    "density_kg_m3": "kg/m³",
+    "specimen_heat_capacity_J_K": "J/K",
+    "diffusivity_mm2_s": "mm²/s",
+    "through_thickness_diffusion_time_s": "s",
+    "fourier_number": "dimensionless",
+    "diffusion_length_mm": "mm",
+    "equivalent_dose_MJ_m2": "MJ/m²",
+    "equivalent_footprint_energy_kJ": "kJ",
+    "depth_mm": "mm",
+    "depth_rate_mm_s": "mm/s",
+    "depth_per_equivalent_dose": "mm/(MJ/m²)",
+    "depression_volume_cm3": "cm³",
+    "virgin_density_equivalent_mass_g": "g",
+    "remaining_geometric_thickness_mm": "mm"
+  },
+  "runs": [
+    {
+      "id": "baseline_20s",
+      "label": "Baseline · 20 s · right",
+      "endpoint_cases": 4096,
+      "varied_inputs": [
+        "width_mm",
+        "height_mm",
+        "thickness_mm",
+        "cp_J_kgK",
+        "k_W_mK",
+        "dimple_diameter_mm",
+        "heated_diameter_mm",
+        "depression_shape_factor",
+        "graphite_flux_multiplier",
+        "mass_g",
+        "duration_s",
+        "depth_mm"
+      ],
+      "fixed_inputs": [],
+      "excluded_uncertainty": null,
+      "input_evidence": {
+        "width_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "height_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "thickness_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "cp_J_kgK": "ANALYST_SELECTED_SCENARIO",
+        "k_W_mK": "ANALYST_SELECTED_SCENARIO",
+        "dimple_diameter_mm": "ANALYST_SELECTED_SCENARIO",
+        "heated_diameter_mm": "ANALYST_SELECTED_SCENARIO",
+        "depression_shape_factor": "ANALYST_SELECTED_SCENARIO",
+        "graphite_flux_multiplier": "ANALYST_SELECTED_SCENARIO",
+        "mass_g": "ANALYST_SELECTED_SCENARIO",
+        "duration_s": "REPORT_NOMINAL_DURATION_WITH_SELECTED_SWEEP",
+        "depth_mm": "ANALYST_SELECTED_SCENARIO"
+      },
+      "nominal": {
+        "volume_cm3": 57.354724,
+        "density_kg_m3": 871.7677727818898,
+        "specimen_heat_capacity_J_K": 50,
+        "diffusivity_mm2_s": 0.18353511679999998,
+        "through_thickness_diffusion_time_s": 878.7964004499438,
+        "fourier_number": 0.022758399999999998,
+        "diffusion_length_mm": 1.9159077055014941,
+        "equivalent_dose_MJ_m2": 5.183999999999999,
+        "equivalent_footprint_energy_kJ": 1.6286016316209486,
+        "depth_mm": 3,
+        "depth_rate_mm_s": 0.15,
+        "depth_per_equivalent_dose": 0.5787037037037038,
+        "depression_volume_cm3": 0.4712388980384691,
+        "virgin_density_equivalent_mass_g": 0.41081088459118825,
+        "remaining_geometric_thickness_mm": 9.7
+      },
+      "envelope": {
+        "volume_cm3": [
+          40.800000000000004,
+          75.32999999999998
+        ],
+        "density_kg_m3": [
+          398.2477100756671,
+          1960.7843137254902
+        ],
+        "specimen_heat_capacity_J_K": [
+          21,
+          120
+        ],
+        "diffusivity_mm2_s": [
+          0.027200000000000002,
+          1.1478857142857142
+        ],
+        "through_thickness_diffusion_time_s": [
+          130.67502986857826,
+          5514.705882352941
+        ],
+        "fourier_number": [
+          0.003445333333333333,
+          0.16070399999999996
+        ],
+        "diffusion_length_mm": [
+          0.7188880302244571,
+          4.9097454109149075
+        ],
+        "equivalent_dose_MJ_m2": [
+          3.595104,
+          7.239456
+        ],
+        "equivalent_footprint_energy_kJ": [
+          0.28235880788228196,
+          5.1172699017569725
+        ],
+        "depth_mm": [
+          1,
+          5
+        ],
+        "depth_rate_mm_s": [
+          0.047619047619047616,
+          0.2631578947368421
+        ],
+        "depth_per_equivalent_dose": [
+          0.13813192593476636,
+          1.3907803501651135
+        ],
+        "depression_volume_cm3": [
+          0.02617993877991495,
+          3.5342917352885173
+        ],
+        "virgin_density_equivalent_mass_g": [
+          0.010426100669022283,
+          6.929983794683366
+        ],
+        "remaining_geometric_thickness_mm": [
+          5,
+          14
+        ]
+      }
+    },
+    {
+      "id": "hot_10s",
+      "label": "Hot · 10 s · left",
+      "endpoint_cases": 1024,
+      "varied_inputs": [
+        "width_mm",
+        "height_mm",
+        "thickness_mm",
+        "cp_J_kgK",
+        "k_W_mK",
+        "dimple_diameter_mm",
+        "heated_diameter_mm",
+        "depression_shape_factor",
+        "graphite_flux_multiplier",
+        "duration_s"
+      ],
+      "fixed_inputs": [
+        "mass_g",
+        "depth_mm"
+      ],
+      "excluded_uncertainty": "Hot mass and approximate depth are fixed reported points. Their unknown measurement uncertainties are not included in these sensitivity envelopes.",
+      "input_evidence": {
+        "width_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "height_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "thickness_mm": "USER_CONFIRMED_NOMINAL_GEOMETRY_WITH_SELECTED_SWEEP",
+        "cp_J_kgK": "ANALYST_SELECTED_SCENARIO",
+        "k_W_mK": "ANALYST_SELECTED_SCENARIO",
+        "dimple_diameter_mm": "ANALYST_SELECTED_SCENARIO",
+        "heated_diameter_mm": "ANALYST_SELECTED_SCENARIO",
+        "depression_shape_factor": "ANALYST_SELECTED_SCENARIO",
+        "graphite_flux_multiplier": "ANALYST_SELECTED_SCENARIO",
+        "mass_g": "USER_REPORTED_MEASUREMENT",
+        "duration_s": "REPORT_NOMINAL_DURATION_WITH_SELECTED_SWEEP",
+        "depth_mm": "USER_REPORTED_MEASUREMENT"
+      },
+      "nominal": {
+        "volume_cm3": 57.354724,
+        "density_kg_m3": 1443.6474317268094,
+        "specimen_heat_capacity_J_K": 82.8,
+        "diffusivity_mm2_s": 0.11083038454106281,
+        "through_thickness_diffusion_time_s": 1455.2868391451068,
+        "fourier_number": 0.006871497584541064,
+        "diffusion_length_mm": 1.0527601081968427,
+        "equivalent_dose_MJ_m2": 5.844,
+        "equivalent_footprint_energy_kJ": 1.8359467467578752,
+        "depth_mm": 3.175,
+        "depth_rate_mm_s": 0.3175,
+        "depth_per_equivalent_dose": 0.5432922655715263,
+        "depression_volume_cm3": 0.4987278337573797,
+        "virgin_density_equivalent_mass_g": 0.7199871563345165,
+        "remaining_geometric_thickness_mm": 9.524999999999999
+      },
+      "envelope": {
+        "volume_cm3": [
+          40.800000000000004,
+          75.32999999999998
+        ],
+        "density_kg_m3": [
+          1099.1636798088414,
+          2029.4117647058822
+        ],
+        "specimen_heat_capacity_J_K": [
+          57.96,
+          124.2
+        ],
+        "diffusivity_mm2_s": [
+          0.02628019323671498,
+          0.41590062111801235
+        ],
+        "through_thickness_diffusion_time_s": [
+          360.66308243727605,
+          5707.720588235295
+        ],
+        "fourier_number": [
+          0.0015768115942028985,
+          0.030499378881987574
+        ],
+        "diffusion_length_mm": [
+          0.48633500709946315,
+          2.1389031844144175
+        ],
+        "equivalent_dose_MJ_m2": [
+          3.839508,
+          8.549772
+        ],
+        "equivalent_footprint_energy_kJ": [
+          0.30155425315498097,
+          6.043477703640236
+        ],
+        "depth_mm": [
+          3.175,
+          3.175
+        ],
+        "depth_rate_mm_s": [
+          0.28863636363636364,
+          0.35277777777777775
+        ],
+        "depth_per_equivalent_dose": [
+          0.3713549320379537,
+          0.8269288669277417
+        ],
+        "depression_volume_cm3": [
+          0.08312130562622995,
+          2.244275251908208
+        ],
+        "virgin_density_equivalent_mass_g": [
+          0.09136392016264226,
+          4.5545585994607745
+        ],
+        "remaining_geometric_thickness_mm": [
+          6.825,
+          11.825
+        ]
+      },
+      "reported_mass_balance": {
+        "evidence_class": "ARITHMETIC_FROM_USER_REPORTED_MASSES",
+        "pre_test_mass_g": 82.8,
+        "post_test_mass_g": 73.9,
+        "mass_difference_g": 8.899999999999991,
+        "mass_difference_percent_initial": 10.748792270531391,
+        "measurement_uncertainty": null,
+        "caveat": "Total specimen mass difference, not mass proven to have come from the dimple. Conditioning, residual char, moisture and collection/cleaning protocol are unverified."
+      }
+    }
+  ],
+  "recovered_trace_comparison": {
+    "classification": "DIGITIZED_PEAK_DIVIDED_BY_REFERENCE_DOSE_NOT_A_MATERIAL_PROPERTY",
+    "digitization_source": "digitized-chambersafe-summary.json",
+    "source_plot_sha256": "13aa0c43de0a275f371c320ba22770f5d53d0bf004ec3b12c8a8de488b09f92b",
+    "warning": "Each peak covers its entire unequal log window, not an aligned exposure window. This ratio is not heat transfer efficiency, conductivity, heat capacity, or a material ranking. Sensor errors and heating-boundary uncertainty are not quantified.",
+    "runs": [
+      {
+        "id": "baseline_20s",
+        "peak_delta_c_digitized": 0.317,
+        "graphical_allowance_c": 0.0038,
+        "peak_per_reference_dose_K_per_MJ_m2": 0.0611496913580247,
+        "selected_graphical_and_dose_envelope": [
+          0.043262919202768826,
+          0.08923246726659369
+        ]
+      },
+      {
+        "id": "hot_10s",
+        "peak_delta_c_digitized": 0.214,
+        "graphical_allowance_c": 0.0038,
+        "peak_per_reference_dose_K_per_MJ_m2": 0.03661875427789185,
+        "selected_graphical_and_dose_envelope": [
+          0.024585450933662323,
+          0.05672601802105895
+        ]
+      }
+    ],
+    "hot_table6_alternative": {
+      "reported_peak_delta_c": 0.241,
+      "peak_per_reference_dose_K_per_MJ_m2": 0.04123887748117727,
+      "note": "Separate report-table value, not substituted for the digitized curve peak."
+    }
+  }
+}

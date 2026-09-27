@@ -1,0 +1,3 @@
+status,run,peak_delta_c_digitized,graphical_allowance_c,peak_per_reference_dose_K_per_MJ_m2,selected_graphical_and_dose_min,selected_graphical_and_dose_max
+DIGITIZED_NOT_RAW_NOT_MATERIAL_PROPERTY,baseline_20s,0.317,0.0038,0.0611496913580247,0.043262919202768826,0.08923246726659369
+DIGITIZED_NOT_RAW_NOT_MATERIAL_PROPERTY,hot_10s,0.214,0.0038,0.03661875427789185,0.024585450933662323,0.05672601802105895

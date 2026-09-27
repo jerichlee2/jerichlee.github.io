@@ -1,0 +1,73 @@
+{
+  "classification": "PARTLY_CALIBRATED_MIXED_DEPTH_ANCHORS_NOT_VALIDATED",
+  "equation": "depth_mm = 3 * (graphite_reference_flux_MW_m2 / 0.2592) * (time_s / 20)^n",
+  "fit_performed": true,
+  "fit_target": "One approximate measured hot-run dimple depth and one assumed baseline depth. Flux exponent fixed at 1 by choice; time exponent solved from the mixed-evidence anchors.",
+  "measured_data_fit": true,
+  "measured_data_fit_scope": "One user-confirmed approximate hot-run dimple depth (about 1/8 in, shown as ≈3.2 mm). The baseline 3 mm remains assumed; no thermocouple temperatures, conductivity, or heat capacity were fitted.",
+  "measured_depth_anchor_count": 1,
+  "assumed_depth_anchor_count": 1,
+  "thermocouple_fit": false,
+  "validated": false,
+  "mass_interpretation": "Geometric dimple-equivalent mass using conditional hot-brick initial density (82.8 g / nominal 2 × 3.5 × 0.5 in volume), transferred across the entire surface. The 20 mm paraboloid shape remains assumed. This is not the reported 8.9 g whole-brick net loss, retained char mass, or an independent mass prediction.",
+  "limitations": "One of many possible surfaces through one approximate measured depth and one assumed depth. The conversion 1/8 in = 3.175 mm preserves unit arithmetic, not measurement precision. Equal dose need not give equal depth because of the chosen functional family, not a validated test finding. No onset, evolving thermal-history, char, erosion, or breakthrough physics. Reference flux is not measured absorbed brick flux. The plotted domain is not a validated operating range.",
+  "constants": {
+    "timeMax": 20,
+    "fluxMax": 0.8,
+    "depthMax": 12,
+    "massMax": 2.4,
+    "density": 1443.6474317268094,
+    "diameterMM": 20,
+    "shapeFactor": 0.5,
+    "thicknessMM": 12.7,
+    "massPerMM": 0.22676760829433584
+  },
+  "model": {
+    "id": "shared-power-law",
+    "fluxExponent": 1,
+    "referenceTime": 20,
+    "referenceFlux": 0.2592,
+    "referenceDepth": 3,
+    "timeExponent": 1.0910963687552264,
+    "classification": "partly-calibrated-not-validated",
+    "measuredDepthAnchorCount": 1,
+    "assumedDepthAnchorCount": 1,
+    "thermocoupleFit": false,
+    "validated": false
+  },
+  "anchor_points": [
+    {
+      "id": "baseline",
+      "time": 20,
+      "flux": 0.2592,
+      "depth": 3,
+      "mass": 0.6803028248830075,
+      "measured": false,
+      "approximate": false,
+      "depthSource": "assumed",
+      "label": "Baseline · assumed 3 mm"
+    },
+    {
+      "id": "hot",
+      "time": 10,
+      "flux": 0.5844,
+      "depth": 3.175,
+      "mass": 0.7199871563345163,
+      "measured": true,
+      "approximate": true,
+      "depthSource": "user-confirmed measurement, approximately 1/8 in",
+      "label": "Hot · measured ≈3.2 mm"
+    }
+  ],
+  "evidence": {
+    "hotInitialMassG": 82.8,
+    "hotFinalMassG": 73.9,
+    "hotNetMassLossG": 8.9,
+    "densityStatus": "Conditional on the weighed hot brick having nominal 2 × 3.5 × 0.5 in dimensions; transfer across the surface is assumed.",
+    "dimpleGeometryStatus": "20 mm diameter and paraboloid shape remain assumptions.",
+    "hotDepthSource": "User-confirmed measured dimple depth, reported approximately as 1/8 in; conversion digits are not measurement precision."
+  },
+  "source_inputs": "scenario-inputs.json",
+  "source_results": "scenario-results.json",
+  "grid_rows": 2091
+}

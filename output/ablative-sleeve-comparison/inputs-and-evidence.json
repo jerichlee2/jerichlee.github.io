@@ -1,0 +1,106 @@
+{
+  "classification": "CONDITIONAL_GEOMETRY_COMPARISON_NOT_HOTFIRE_VALIDATION",
+  "reviewed_on": "2026-09-27",
+  "requested_event": {
+    "user_description": "First engine hotfire, described as 10 seconds; user recalls early May",
+    "likely_matching_event": "2026-05-03, based on user recollection and team's subsequent review; exact run identity not independently verified",
+    "verified_run_id": null,
+    "verified_thermal_exposure_s": null
+  },
+  "candidate_geometry": {
+    "id": "sizing-task-target",
+    "status": "DOCUMENTED_TARGET_NOT_VERIFIED_AS_FIRED",
+    "outer_diameter_in": 3.95,
+    "outer_diameter_tolerance_in": 0.05,
+    "inner_diameter_in": 3,
+    "inner_diameter_tolerance_in": null,
+    "length_in": 7.168,
+    "length_tolerance_in": 0.05,
+    "source": "https://docs.google.com/document/d/1oIKhaOOdl2J4FMQjktNuqRRpTlfGJ7aP7FaxK298SMk/edit"
+  },
+  "alternate_geometry": {
+    "id": "overview-slides",
+    "status": "CONFLICTING_OVERVIEW_NOT_VERIFIED_AS_FIRED",
+    "inner_diameter_in": 3,
+    "wall_thickness_in": 0.25,
+    "length_in": 7,
+    "source": "https://docs.google.com/presentation/d/1NgaWUD77CgsMSfevq_a_1D9JKBlgk3bXCKqUYKJTw6o/edit"
+  },
+  "material_assumptions": {
+    "density_source": "Conditional density from the hot brick's reported initial mass, 82.8 g, divided by its nominal 2 × 3.5 × 0.5 in volume. Bare-specimen tare and individual dimensions are unverified. Applying this density to the sleeve additionally assumes a matching formulation, cure, and porosity; no sleeve density was measured.",
+    "thermal_conductivity_W_m_K": 0.16,
+    "specific_heat_J_kg_K": 1000,
+    "properties_measured": false,
+    "char_density_kg_m3": null,
+    "char_thickness_mm": null,
+    "composition_match_verified": false
+  },
+  "expanded_what_if_assumptions": {
+    "classification": "ANALYST_SELECTED_RETAINED_CHAR_AND_COVERAGE_SCENARIOS_NOT_MEASUREMENTS",
+    "purpose": "Conditional cylindrical volume and mass bookkeeping only; not a heat balance, pyrolysis/char-growth model, engine heat history, or validated prediction.",
+    "recession_reference": "The measured coupon dimple depth, approximately 1/8 inch (3.175 mm conversion), is hypothetically imposed on the affected sleeve area; sleeve recession was not measured.",
+    "retained_char_thickness_values_mm": [1, 2, 3],
+    "char_to_virgin_density_ratios": [0.25, 0.5, 0.75],
+    "affected_original_bore_fractions": [0.25, 0.5, 1],
+    "coverage_definition": "A uniform fraction of original bore surface extending through the modeled radial layers, representing an axial-length or azimuthal fraction. The rest remains unchanged virgin material. Layer-edge interactions and spatial gradients are omitted.",
+    "reference_scenario": {
+      "retained_char_thickness_mm": 2,
+      "char_to_virgin_density_ratio": 0.5,
+      "affected_original_bore_fraction": 1
+    },
+    "no_char_example": {
+      "retained_char_thickness_mm": 0,
+      "char_to_virgin_density_ratio": 0.5,
+      "note": "The density ratio has no effect when char volume is zero. This is an explicit no-char case, not a default for missing measurements."
+    },
+    "time_examples_s": [5, 10, 15],
+    "time_examples_graphite_reference_flux_MW_m2": 0.5844,
+    "flux_examples_MW_m2": [0.2592, 0.5844, 0.8],
+    "flux_examples_duration_s": 10,
+    "model_example_char_and_coverage_treatment": "Use the reference char thickness, density ratio and coverage independently of the rig-model depth. No char evolution is inferred from flux or time. Existing rig-model input limits are enforced; these examples do not validate transfer to an engine.",
+    "reference_area_energy_treatment": "q_reference * time * original_bore_area * affected_fraction is reported only as reference-area energy bookkeeping, not absorbed sleeve energy or a closed energy balance.",
+    "range_interpretation": "Selected cases are not confidence intervals or proven physical bounds. Unknown measurement, formulation, density-transfer and geometry errors are additional. No char thickness or density is supplied as an implicit default."
+  },
+  "actual_sleeve_measurements": {
+    "initial_mass_g": null,
+    "final_conditioned_mass_g": null,
+    "recession_mm": null,
+    "char_thickness_mm": null,
+    "char_mass_g": null,
+    "as_fired_geometry_verified": false,
+    "local_heat_flux_MW_m2": null
+  },
+  "confirmed_hot_brick_test": {
+    "status": "SLIDE_REPORTED_MASSES_AND_MEASURED_DIMPLE_DEPTH_USER_CONFIRMED_HOT_RIG_TEST_NOT_SLEEVE",
+    "run_association_source": "User confirmed in this conversation on 2026-09-27 that the 82.8 to 73.9 g data belong to the approximately 2.25x-flux ablative test.",
+    "duration_s": 10,
+    "graphite_reference_flux_MW_m2": 0.5844,
+    "baseline_graphite_reference_flux_MW_m2": 0.2592,
+    "nominal_brick_dimensions_in": [2, 3.5, 0.5],
+    "dimensions_status": "Previously confirmed nominal size, not individual specimen metrology",
+    "approximate_material_depth_loss_in": 0.125,
+    "depth_status": "Measured dimple depth, approximately reported as 1/8 inch on the slide; user confirmed it was measured on 2026-09-27. Instrument, datum, and uncertainty remain undocumented; 3.175 mm is the unit conversion, not measurement precision.",
+    "depth_measured": true,
+    "depth_confirmation_source": "User reply: a measured dimple depth",
+    "depth_uncertainty_mm": null,
+    "initial_mass_g": 82.8,
+    "final_mass_g": 73.9,
+    "mass_uncertainty_g": null,
+    "bare_specimen_tare_and_conditioning_verified": false,
+    "source": "https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.g3e65397d0ca_0_302"
+  },
+  "event_evidence": {
+    "review_title": "October 2026 Hotfire TRR",
+    "reviewed_event_date": "2026-05-03",
+    "controller_failure_reported_s": 0.25,
+    "controller_failure_is_not_total_thermal_exposure": true,
+    "postfire_observations": [
+      "Axial cracks at cast seams",
+      "Char within fractures",
+      "Deposits on outer surface"
+    ],
+    "preexisting_cracks_status": "Team inference from post-test observations, not verified pre-test measurements",
+    "timing_source": "https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.h33f62dd7f2c39b51_1_45",
+    "inspection_source": "https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.h33f62dd7f2c39b51_1_80"
+  }
+}

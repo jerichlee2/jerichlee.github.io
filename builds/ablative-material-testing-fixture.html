@@ -10,16 +10,64 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=16">
+    <link rel="stylesheet" href="../styles.css?v=17">
+    <link rel="stylesheet" href="../assets/css/bolt-impact-lab.css?v=12">
+    <link rel="stylesheet" href="../assets/css/ablative-fbd-lab.css?v=5">
+    <link rel="stylesheet" href="../assets/css/ablative-depth-surface.css?v=2">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/looping-videos.js"></script>
+    <script defer src="../assets/js/ablative-fbd-model.js?v=3"></script>
+    <script defer src="../assets/js/fixture-view-geometry.js?v=6"></script>
+    <script defer src="../assets/js/ablative-fbd-lab.js?v=18"></script>
+    <script defer src="../assets/js/bolt-impact-model.js?v=2"></script>
+    <script defer src="../assets/js/bolt-impact-lab.js?v=29"></script>
+    <script defer src="../assets/js/ablative-depth-surface-model.js?v=3"></script>
+    <script defer src="../assets/js/ablative-depth-surface.js?v=5"></script>
     <style>
-      .ablative-project #ablative-initial-prototype {
-        max-width: 24rem;
-        margin-inline: auto;
+      .ablative-project .ablative-initial-media {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        gap: 0.85rem;
+        margin: 0.8rem 0 1rem;
       }
-      .ablative-project #ablative-initial-prototype video {
+      .ablative-project .ablative-initial-media > figure {
+        min-width: 0;
+        margin: 0;
+      }
+      .ablative-project .ablative-initial-media video,
+      .ablative-project .ablative-initial-media img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: none;
         aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: center;
+      }
+      .ablative-project .ablative-thermal-plots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        gap: 0.85rem;
+        margin: 1.4rem 0 1.6rem;
+      }
+      .ablative-project .ablative-thermal-plots > figure {
+        min-width: 0;
+        margin: 0;
+      }
+      .ablative-project .ablative-thermal-plots img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        aspect-ratio: 4 / 3;
+        object-fit: contain;
+      }
+      @media (max-width: 480px) {
+        .ablative-project .ablative-initial-media,
+        .ablative-project .ablative-thermal-plots {
+          grid-template-columns: minmax(0, 1fr);
+        }
       }
       .ablative-project .fbd-gallery {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -55,9 +103,65 @@
       .thermal-table thead th {
         border-top: 1px solid var(--line);
       }
+      .ablative-project .ablative-property-highlight {
+        padding: 0.85rem 1rem;
+        border-left: 4px solid #9b7839;
+        background: #f8f0dc;
+      }
+      .ablative-project .ablative-property-highlight caption {
+        font-weight: 700;
+      }
+      .ablative-project .ablative-properties-explainer {
+        margin: 1.2rem 0;
+      }
+      .ablative-project .ablative-properties-explainer h3 {
+        margin: 0 0 0.65rem;
+        font-size: 1.1rem;
+      }
+      .ablative-project .central-question.ablative-properties-explainer p {
+        margin: 0 0 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      .ablative-project .central-question.ablative-properties-explainer p:last-child {
+        margin-bottom: 0;
+      }
+      .ablative-project .ablative-outcome-pair img {
+        width: 100%;
+        height: auto;
+        max-height: 32rem;
+        object-fit: contain;
+      }
+      .ablative-project .ablative-outcome-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 1.2rem 0;
+      }
+      .ablative-project .ablative-outcome-gallery figure { margin: 0; min-width: 0; }
+      .ablative-project .ablative-outcome-gallery img {
+        width: 100%;
+        height: auto;
+        max-height: 23rem;
+        aspect-ratio: 4 / 3;
+        object-fit: contain;
+      }
+      .ablative-project .ablative-outcome-details { margin: 1rem 0; }
+      .ablative-project .ablative-outcome-details summary { cursor: pointer; font-weight: 700; }
+      .ablative-project .ablative-outcome-details summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+      .ablative-project .ablative-sleeve-analysis { margin: 2rem 0; }
+      .ablative-project .ablative-sleeve-analysis h4 { margin: 1.6rem 0 0.7rem; font-size: 1.08rem; }
+      .ablative-project .ablative-sleeve-analysis h5 { margin: 1.15rem 0 0.6rem; font-size: 1rem; }
+      .ablative-project .ablative-sleeve-verdict { margin-top: 1.5rem; }
+      .ablative-project .ablative-sleeve-verdict h4 { margin-top: 0; }
+      .ablative-project .ablative-sleeve-verdict p + p { margin-top: 0.8rem; font-size: 1rem; font-weight: 400; }
+      @media (max-width: 560px) {
+        .ablative-project .ablative-outcome-gallery { grid-template-columns: minmax(0, 1fr); }
+      }
     </style>
   </head>
-  <body>
+  <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
         <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
@@ -82,7 +186,7 @@
           </figure>
 
           <dl class="build-details">
-              <div><dt>Group</dt><dd>UIUC Liquid Rocket Initiative (LRI)</dd></div>
+              <div><dt>Group</dt><dd><a href="https://www.liquidrocket.org/">Liquid Rocketry at Illinois (LRI)</a></dd></div>
               <div><dt>Role</dt><dd>Mechanical Design &amp; Experimental Systems Engineer</dd></div>
               <div><dt>Skills</dt><dd>Thermal Testing, Experimental Design, Inverse Heat Conduction, Crank–Nicolson, Parameter Estimation, CAD (Fusion 360), Instrumentation, Thermocouples, Ablative Materials, Design for Safety</dd></div>
               <div><dt>Year</dt><dd>2026</dd></div>
@@ -90,7 +194,7 @@
           <section class="build-section" aria-labelledby="ablative-introduction-title">
             <h2 id="ablative-introduction-title" tabindex="-1">Introduction</h2>
             <div class="article-body">
-              <p>For the Liquid Rocket Initiative, this project combined a remotely operated sample holder with a torch-based heat test. Graphite served as a reference alongside ChamberSafe samples, with temperature readings from the back of the graphite used to estimate heat input. The work covered both fixture design and interpretation of the test data.</p>
+              <p>For <a href="https://www.liquidrocket.org/">Liquid Rocketry at Illinois</a>, this project combined a remotely operated sample holder with a torch-based heat test. Graphite served as a reference alongside ChamberSafe samples, with temperature readings from the back of the graphite used to estimate heat input. The work covered both fixture design and interpretation of the test data.</p>
               <div class="project-summary">
                 <div class="summary-box central-question" id="ablative-central-question">
                   <p class="summary-question"><strong>Can reliable heat tests help us build confidence that our liquid rocket engine won’t melt during a test firing?</strong></p>
@@ -100,19 +204,18 @@
           </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-initial-design-title">
             <h2 id="ablative-material-testing-fixture-initial-design-title" tabindex="-1">Initial Design</h2>
-            <figure class="build-video" id="ablative-initial-prototype">
-              <video controls muted loop playsinline preload="none" data-autoplay-loop
-                width="540" height="720"
-                poster="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped-poster.jpg"
-                aria-label="Original ablative test fixture prototype in motion">
-                <source src="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4" type="video/mp4">
-                <a href="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4">Download the silent prototype video.</a>
-              </video>
-            </figure>
-            <div class="build-inline-gallery is-single">
+            <div class="ablative-initial-media">
+              <figure class="build-video" id="ablative-initial-prototype">
+                <video controls muted loop playsinline preload="none" data-autoplay-loop
+                  width="540" height="720"
+                  poster="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped-poster.jpg"
+                  aria-label="Original ablative test fixture prototype in motion">
+                  <source src="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4" type="video/mp4">
+                  <a href="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4">Download the silent prototype video.</a>
+                </video>
+              </figure>
               <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-03.jpg" alt="The bolt is bent from the bungee cords!">
-                <figcaption>The bolt is bent from the bungee cords!</figcaption>
+                <img src="../assets/builds/ablative-material-testing-fixture/image-03.jpg" alt="The bolt is bent from the bungee cords!" width="1600" height="1600">
               </figure>
             </div>
             <div class="article-body">
@@ -138,8 +241,21 @@
               <p>Repeated cycling permanently bent the clamping bolts even at lower speeds, pointing to peak torque as the main failure driver and reducing alignment and test repeatability.</p>
             </div>
           </section>
+          <section class="build-section build-video-section" aria-labelledby="demonstration-title">
+            <h2 id="demonstration-title">Demonstration</h2>
+            <figure class="build-video">
+              <video controls muted loop playsinline preload="none" data-autoplay-loop
+                width="1280" height="720"
+                poster="../assets/builds/ablative-material-testing-fixture/demonstration-poster.jpg"
+                aria-label="Ablative testing fixture demonstration">
+                <source src="../assets/builds/ablative-material-testing-fixture/demonstration.mp4" type="video/mp4">
+                <a href="../assets/builds/ablative-material-testing-fixture/demonstration.mp4">Download the demonstration.</a>
+              </video>
+            </figure>
+          </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-simplified-model-title">
             <h2 id="ablative-material-testing-fixture-simplified-model-title">Simplified Model</h2>
+            <div id="ablative-fbd-lab">
             <div class="build-inline-gallery fbd-gallery">
               <figure class="build-inline-figure fbd-overview">
                 <img src="../assets/builds/ablative-material-testing-fixture/image-05.png" alt="A simplified, free-body diagram of the test setup">
@@ -153,6 +269,7 @@
                 <img src="../assets/builds/ablative-material-testing-fixture/image-07.png" alt="Free-body diagram illustrating the impact compliance">
                 <figcaption>Free-body diagram illustrating the impact compliance</figcaption>
               </figure>
+            </div>
             </div>
             <div class="article-body">
               <p>I modeled the disk, bolts, and cables to relate cable force and disk radius to bolt stress. Assuming a rigid disk and balancing torque at the bolt contacts, I calculated allowable cable forces from bolt geometry and yield strength to prevent permanent bending and maintain repeatable sample positioning.</p><p><strong>Impact (slam) speed limit<br/></strong>Assume one bolt takes the full stop load (worst-case). If the disk impacts the stop at angular speed \(\omega\) (rad/s), the rotational kinetic energy is<br/>\[
@@ -197,11 +314,11 @@ N_{\max}
 =
 30.3~\mathrm{rpm}.
 \]<br/>\[
-\boxed{N_{\max}\approx 30~\text{rpm at the moment of impact}.}
+N_{\max}\approx 30~\text{rpm at the moment of impact}.
 \]</p><p><strong>Recommended engineering limits (with safety factor)<br/></strong>If instead \(\sigma_{\text{allow}}=\frac{S_y}{n_y}\), then:<br/>- For \(n_y=2\): \(N_{\max}\approx 21.4~\mathrm{rpm}\).<br/>- For \(n_y=3\): \(N_{\max}\approx 17.5~\mathrm{rpm}\).</p><p>A conservative operating recommendation is therefore:<br/>\[
-\boxed{\text{Keep impact speed } \lesssim 17\text{ to }20~\mathrm{rpm}.}
+\text{Keep impact speed } \lesssim 17\text{ to }20~\mathrm{rpm}.
 \]<br/>\[
-\boxed{20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.}
+20~\mathrm{rpm} \approx 0.333~\mathrm{rev/s}.
 \]</p><p>At \(20~\mathrm{rpm}\) (\(0.333~\mathrm{rev/s}\)), the disk rotates at about \(120^\circ/\mathrm{s}\). A \(90^\circ\) index move at that steady rate takes roughly:</p>
               <div class="article-equation">\[
                 \boxed{t \approx 0.75~\mathrm{s}.}
@@ -209,17 +326,27 @@ N_{\max}
               <p>Although this is a “moderate” motion, you should consciously slow down as you approach the hard stop. Bolt yielding is driven by the impact speed at contact (i.e., \(\omega\) right before the stop), not the average speed over the full rotation.</p>
             </div>
           </section>
+          <section class="build-section" aria-labelledby="ablative-explore-title">
+            <h2 id="ablative-explore-title" tabindex="-1">Explore the Motion</h2>
+            <div class="article-body">
+              <p>How much does slowing the disk change the bolt’s response? Adjust the impact speed and geometry, then follow one material point at the bolt’s outer bending surface through the load cycle. The motion sketch, stress–strain curve, and yield plots share the same state.</p>
+            </div>
+            <div id="bolt-impact-lab">
+              <p>The interactive explorer requires JavaScript. At the dimensions above, the elastic estimate is 5.678ω² ksi and first yield is approximately 3.17 rad/s (30.3 rpm). This estimate is not a fatigue-life or post-impact deformation prediction.</p>
+            </div>
+          </section>
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-process-title">
             <h2 id="ablative-material-testing-fixture-process-title">Process</h2>
             <div class="build-inline-gallery is-single">
               <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-08.png" alt="Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.">
-                <figcaption>Iterative evolution from a fixed single-sample setup to a rotating steel system enabling repeatable reference and specimen testing.</figcaption>
+                <img src="../assets/builds/ablative-material-testing-fixture/image-10.jpg" alt="Final torch-based setup for graphite-reference and ChamberSafe testing">
+                <figcaption>Final torch-based setup for graphite-reference and ChamberSafe testing.</figcaption>
               </figure>
             </div>
             <div class="article-body">
               <p>Testing revealed unstable torch mounting, unwanted heat loss through fixtures, and heat transfer between successive samples.</p>
               <p>Advisor-guided revisions added a rigid multi-point torch mount, steel sliding rails, silica-cloth insulation, and embedded thermocouples. The new setup maintained torch alignment when switching between graphite reference and test samples and reduced unintended heat loss.</p>
+              <p>I waterjet-cut the sample extenders and rotating disk from low-carbon steel.</p>
             </div>
           </section>
             <div class="build-inline-gallery is-single is-wide">
@@ -315,17 +442,25 @@ N_{\max}
                 </tbody>
               </table>
             </div>
-            <figure class="article-figure is-wide">
-              <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png">
-                <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png" alt="Baseline graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.259 MW per square meter" width="1920" height="1440" loading="lazy">
+            <div class="ablative-thermal-plots">
+              <figure class="article-figure is-wide">
+                <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png">
+                  <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-baseline.png" alt="Baseline graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.259 MW per square meter" width="1920" height="1440" loading="lazy">
+                </a>
+                <figcaption>Baseline graphite inverse fit, reproduced from Figure 3 of the campaign report. Time is aligned to detected onset; the nominal pulse ends at 3 s.</figcaption>
+              </figure>
+              <figure class="article-figure is-wide">
+                <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png">
+                  <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png" alt="Hot-condition graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.584 MW per square meter" width="1920" height="1440" loading="lazy">
+                </a>
+                <figcaption>Hot-condition inverse fit, reproduced from Figure 4. Its larger 3.02 °C fit error also shows the mismatch between the simplified model and measured response.</figcaption>
+              </figure>
+            </div>
+            <figure class="article-figure is-wide ablative-thermal-overlay">
+              <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-overlay.svg">
+                <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-overlay.svg" alt="Shared-axis comparison of baseline and hot graphite responses: the hot curve rises much higher, with a model temperature gap of about 22.1 degrees Celsius at 3 seconds. Solid bands show digitized measurements; dashed curves show reconstructed model fits." width="1000" height="740" loading="lazy">
               </a>
-              <figcaption>Baseline graphite inverse fit, reproduced from Figure 3 of the campaign report. Time is aligned to detected onset; the nominal pulse ends at 3 s.</figcaption>
-            </figure>
-            <figure class="article-figure is-wide">
-              <a href="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png">
-                <img src="../assets/builds/ablative-material-testing-fixture/graphite-inverse-fit-hot.png" alt="Hot-condition graphite back-face temperature rise and fitted 1D response over 3.5 seconds, with inferred heat flux 0.584 MW per square meter" width="1920" height="1440" loading="lazy">
-              </a>
-              <figcaption>Hot-condition inverse fit, reproduced from Figure 4. Its larger 3.02 °C fit error also shows the mismatch between the simplified model and measured response.</figcaption>
+              <figcaption>Baseline and hot conditions on the same axes. Measured bands are approximately digitized from the two figures above; dashed fits are reconstructed from the report’s 1D model and fitted fluxes. Shading shows the model-to-model difference, not an uncertainty band.</figcaption>
             </figure>
             <div class="article-body">
               <p>For each specimen's own exposure window, thermal dose is energy per unit area. Holding the graphite-fitted flux amplitude constant throughout that window gives the proxy:</p>
@@ -339,42 +474,356 @@ N_{\max}
             </div>
           </section>
 
-          <section class="build-section" aria-labelledby="ablative-thermal-limits-title">
-            <h2 id="ablative-thermal-limits-title">Limits and next measurements</h2>
-            <div class="article-body">
-              <p>ChamberSafe’s 0.317 °C and 0.241 °C back-face rises, with 0.0625 °C readout increments, cannot alone establish ablation performance.</p>
-              <p>A ±20% heat-capacity change shifts inferred flux by approximately −27% / +33%; lateral spreading omitted from the 1D model can make \(q_0\) an effective severity index.</p>
-              <p>Two graphite conditions and two ablator exposures are not a repeatability study; independent timing, repeat runs, and recession measurements remain next steps.</p>
-              <p>The inferred 0.26–0.58 MW/m² fluxes are below the report’s several-MW/m² engine estimate; matching dose alone does not establish engine-representative conditions.</p>
-            </div>
-          </section>
-
           <section class="build-section" aria-labelledby="ablative-material-testing-fixture-outcome-title">
             <h2 id="ablative-material-testing-fixture-outcome-title">Outcome</h2>
-            <div class="build-inline-gallery is-single">
-              <figure class="build-inline-figure">
-                <img src="../assets/builds/ablative-material-testing-fixture/image-10.jpg" alt="Final torch-based setup for graphite-reference and ChamberSafe testing">
-                <figcaption>Final torch-based setup for graphite-reference and ChamberSafe testing.</figcaption>
+            <details class="ablative-outcome-details article-body" id="ablative-torch-repeatability">
+              <summary>Making the torch conditions repeatable</summary>
+              <p>Resetting the acetylene torch between tests proved difficult without a working pyrometer or a calibrated thermal preset. We selected the torch’s valve settings manually, without a verified setting corresponding to our intended reference: the engine’s approximately 3,000 K combustion-gas temperature. The graphite fits later indicated substantially different heating conditions—0.2592 versus 0.5844 MW/m² of effective net inward heat flux, about a 2.25× difference. The paired ablative exposures lasted 20 and 10 seconds, respectively, so their graphite-equivalent doses were 5.184 and 5.844 MJ/m², only 12.7% apart. The comparison highlights the need to control heating intensity as well as exposure time; it does not isolate valve settings as the sole cause of the difference.</p>
+              <p>For future tests, we would keep the same rotating-disk setup with the graphite reference and ablative sample. The torch would first impinge on the graphite while a calibrated, appropriately rated surface pyrometer monitors its heated face. We would establish a prescribed reference-temperature band and stabilization interval, checked against an independent heat-flux calibration, rather than rely on knob position alone. Once those criteria are met, we would rotate the disk to place the ablative sample in the same torch position without readjusting the flame, then record the timed exposure. Torch settings, standoff, alignment, and the graphite’s initial temperature and thermal history would be recorded and controlled.</p>
+              <p>The graphite provides the radiating target for this surface-temperature measurement; the pyrometer does not directly measure the torch’s heat flux or combustion-gas temperature. Simply waiting for a 3,000 K reading would therefore not establish engine-equivalent heating. Any such graphite-surface setpoint would first need validation against the required heat flux, instrument range, and specimen/fixture limits. Emissivity, viewing spot, and radiation from the intervening flame must also be accounted for. See <a href="https://arxiv.org/abs/2203.09689">surface pyrometry through flames</a> and <a href="https://ntrs.nasa.gov/api/citations/20000003033/downloads/20000003033.pdf">NASA’s separate graphite-temperature and heat-flux measurements</a>.</p>
+            </details>
+            <div class="article-body">
+              <h3>Post-test material observations</h3>
+              <p>The exposed bricks developed darkened surfaces and localized depressions at the torch impingement region. The 10-second hot specimen is on the left and the 20-second baseline specimen is on the right. The photographs document surface condition, but their lighting and viewing angles do not establish which depression is deeper.</p>
+              <p><strong>The higher-flux, 10-second test has a measured dimple depth of approximately ⅛ inch (3.2 mm) and a reported mass change from 82.8 to 73.9 g—an 8.9 g net loss, or 10.7% of its initial mass.</strong> These values are recorded in the <a href="https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.g3e65397d0ca_0_302">team’s test summary</a>; the experimenter confirmed the run association and that the depth was measured. Instrument uncertainty, the depth reference surface, weighing tare, and post-test cleaning remain undocumented. These are brick-test results, not sleeve measurements.</p>
+            </div>
+            <figure class="article-figure is-wide ablative-outcome-pair">
+              <a href="../assets/builds/ablative-material-testing-fixture/outcome-sample-pair.jpg">
+                <img src="../assets/builds/ablative-material-testing-fixture/outcome-sample-pair.jpg" alt="Two exposed ablative bricks side by side: 10-second hot test on the left and 20-second baseline test on the right, with darkened surfaces and localized depressions" width="1600" height="1200" loading="lazy">
+              </a>
+              <figcaption>Left: 10 s, hot condition. Right: 20 s, baseline condition. Run identification supplied by the experimenter; no calibrated depth scale is present.</figcaption>
+            </figure>
+            <div class="ablative-outcome-gallery">
+              <figure class="article-figure">
+                <a href="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg"><img src="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg" alt="Close view of a darkened ablative brick with a central depression, held after testing" width="1067" height="1600" loading="lazy"></a>
+                <figcaption>Close-up of the exposed surface.</figcaption>
+              </figure>
+              <figure class="article-figure">
+                <a href="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg"><img src="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg" alt="Exposed ablative sample still clamped to its steel extender, with cracking around the central impingement region" width="1600" height="1067" loading="lazy"></a>
+                <figcaption>Surface condition with the sample still clamped.</figcaption>
+              </figure>
+              <figure class="article-figure">
+                <a href="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg"><img src="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg" alt="Torch nozzle positioned near the central darkened region of a mounted ablative sample" width="1600" height="1200" loading="lazy"></a>
+                <figcaption>Torch position relative to the exposed region.</figcaption>
+              </figure>
+              <figure class="article-figure">
+                <a href="../assets/builds/ablative-material-testing-fixture/outcome-material-section.jpg"><img src="../assets/builds/ablative-material-testing-fixture/outcome-material-section.jpg" alt="Sectioned ablative sleeve used during the team's first engine hotfire, showing its darkened inner surface and pale exposed edges" width="1200" height="1600" loading="lazy"></a>
+                <figcaption>Ablative sleeve after our first engine hotfire.</figcaption>
               </figure>
             </div>
             <div class="article-body">
-              <p>The fixture combined controlled sample positioning and temperature logging; the model compared two torch conditions and estimated thermal doses for the paired ablator runs.</p>
-              <p>Engine qualification and a recession model still require further work, including repeated graphite checks, independent timing, and post-test recession measurements.</p>
+              <h3>Back-face temperature in both tests</h3>
+              <p>The campaign report preserves both thermocouple traces and their summary values. The traces use time from the start of each log, not time since flame-on. The original CSV logs have not yet been recovered. The approximate digitization below recovers the visible curves without claiming to recover the original samples.</p>
             </div>
-          </section>
-          <section class="build-section build-video-section" aria-labelledby="demonstration-title">
-            <h2 id="demonstration-title">Demonstration</h2>
-            <figure class="build-video">
-              <video controls muted loop playsinline preload="none" data-autoplay-loop
-                width="1280" height="720"
-                poster="../assets/builds/ablative-material-testing-fixture/demonstration-poster.jpg"
-                aria-label="Ablative testing fixture demonstration"
-                aria-describedby="demonstration-caption">
-                <source src="../assets/builds/ablative-material-testing-fixture/demonstration.mp4" type="video/mp4">
-                <a href="../assets/builds/ablative-material-testing-fixture/demonstration.mp4">Download the demonstration.</a>
-              </video>
-              <figcaption id="demonstration-caption">Demonstration of the rotating sample holder.</figcaption>
+            <div class="thermal-table-scroll" role="region" aria-label="Reported back-face temperature and equivalent dose comparison" tabindex="0">
+              <table class="thermal-table">
+                <caption>Report summary and depth evidence</caption>
+                <thead><tr><th scope="col">Test</th><th scope="col">Equivalent dose (MJ/m²)</th><th scope="col">Reported maximum back-face rise (°C)</th><th scope="col">Dimple depth</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Baseline · 20 s · right</th><td>5.18</td><td>0.317</td><td>No measurement recovered</td></tr>
+                  <tr><th scope="row">Hot · 10 s · left</th><td>5.84</td><td>0.241*</td><td>≈3.2 mm; measured, experimenter-confirmed</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="article-body">
+              <p>Maximum rises are over the complete logged windows, not verified exposure-only peaks. *The hot trace appears to peak near 0.21 °C, while Table 6 reports 0.241 °C; the raw log is needed to resolve this discrepancy.</p>
+              <h3>Recovered curves—not recovered raw samples</h3>
+              <p>The 1920 × 1440 source image was calibrated against its axis ticks and separated by curve color. CSVs retain visible horizontal segments and graphical bounds at unresolved transitions. Occluded data stay missing; no smoothing, interpolation, or extra sensor samples are invented. The TC-2 gain is already present in the plotted values and was not applied again.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-reconstruction.svg"><img src="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-reconstruction.svg" alt="Approximately digitized back-face traces with unresolved transitions shown as graphical envelopes, resolved plateaus retained, missing regions left blank, and visible peaks of 0.317 and 0.214 degrees Celsius" width="1120" height="750" loading="lazy"></a>
+              <figcaption>Digitized from Figure 8—not raw measurements. The graphical reading allowance is approximately ±0.004 °C and ±0.18 s; this is not sensor accuracy or a confidence interval. <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-source-overlay.svg">Inspect the extraction over the unchanged source image</a>.</figcaption>
             </figure>
+            <div class="thermal-table-scroll" role="region" aria-label="Digitized trace summaries and descriptive normalized response" tabindex="0">
+              <table class="thermal-table">
+                <caption>Quantities recovered from the figure and combined with the reference dose</caption>
+                <thead><tr><th scope="col">Quantity</th><th scope="col">Baseline · 20 s</th><th scope="col">Hot · 10 s</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Visible peak rise (°C)</th><td>≈0.317</td><td>≈0.214; report table says 0.241</td></tr>
+                  <tr><th scope="row">Visible log window (s)</th><td>≈0–53.0</td><td>≈0–66.6</td></tr>
+                  <tr><th scope="row">First resolved rise (time from log start)</th><td>≈41.8–42.4 s</td><td>Not assigned: baseline chatter</td></tr>
+                  <tr><th scope="row">Peak rise / nominal equivalent dose (K per MJ/m²)</th><td>≈0.0611</td><td>≈0.0366</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="article-body">
+              <p>The normalized peak is only a descriptive ratio across unequal log windows—not conductivity, heat capacity, absorbed-energy efficiency, or a material ranking. Using the graphical allowance and the selected flux/timing variations below gives ranges of 0.043–0.089 and 0.025–0.057 K per MJ/m², respectively; sensor errors are additional. Using the hot report-table value instead gives 0.0412 K per MJ/m². These alternatives are not silently reconciled.</p>
+              <p>Downloads: <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-baseline_20s-columns-NOT-RAW.csv" download>baseline digitization (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-hot_10s-columns-NOT-RAW.csv" download>hot digitization (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-chambersafe-README.md">method and column definitions</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/digitized-peak-reference-dose-comparison.csv" download>peak/reference-dose comparison (CSV)</a>.</p>
+              <h3>Thermal dose and dimple depth</h3>
+              <p>The hot run used about 2.25× the graphite-calibrated flux for half the time, giving only 12.7% more equivalent dose. Its measured ≈3.2 mm dimple gives an exposure-averaged depth change of ≈0.32 mm/s—not an established constant recession rate. The baseline depth is still unknown, so the two runs do not yet establish a measured depth ordering or a depth–dose law. The equivalent doses are reference-based estimates, not measurements of energy absorbed by the bricks.</p>
+              <p>The hot depth comes from the test record, not from these unscaled oblique photographs. Future measurements should record the original undamaged reference surface and distinguish a depression from a raised char rim. Dimple depth, char thickness, and total mass loss describe different aspects of the material response.</p>
+              <h3>What the data say about thermal properties</h3>
+              <p>The reported temperature rises span only about four to five readout increments (0.0625 °C each before the TC-2 gain correction). Such small signals may reflect insulation, thermal lag, or poor sensor coupling; they do not uniquely determine conductivity, diffusivity, or heat capacity. Those properties remain unmeasured here.</p>
+              <h3>Measured results and conditional material estimates</h3>
+              <p><strong>The hot-test mass and depth are reported measurements; the thermal properties and missing geometry remain conditional.</strong> Conductivity and specific heat are inputs—not parameters recovered by fitting the temperature curves. The baseline mass and depth remain assumed. The ranges are selected sensitivity envelopes, not confidence intervals or guaranteed bounds; they omit the unreported measurement uncertainties of the hot-test mass and depth.</p>
+            </div>
+            <details class="ablative-outcome-details article-body" open>
+              <summary>Measured and assumed inputs, with their sources</summary>
+              <div class="thermal-table-scroll" role="region" aria-label="Measured and assumed material and geometry inputs" tabindex="0">
+                <table class="thermal-table">
+                  <caption>Central scenario · selected range · evidence status</caption>
+                  <thead><tr><th scope="col">Input</th><th scope="col">Central value</th><th scope="col">Selected range</th><th scope="col">Basis / uncertainty</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Width × height × thickness</th><td>50.8 × 88.9 × 12.7 mm</td><td>48–54 × 85–93 × 10–15 mm</td><td>The experimenter confirmed the nominal 2 × 3.5 × 0.5 inch brick size, also supported by the <a href="https://docs.google.com/presentation/d/18DxEOy2dH5_4A8xdhqXUpu7fwHjdE_QfHz8l_n1QdhM/edit#slide=id.g3aac5729a02_0_10">December design review’s mold</a>. Individual specimen measurements are unavailable; these selected ranges are not measured manufacturing tolerances.</td></tr>
+                    <tr><th scope="row">Initial mass · baseline / hot</th><td>50 / 82.8 g</td><td>30–80 g / held at 82.8 g</td><td>Baseline: analyst-selected example. Hot: reported initial mass; final mass 73.9 g. Unreported weighing uncertainty is excluded from the sweep, not assumed to be zero.</td></tr>
+                    <tr><th scope="row">Specific heat, \(c_p\)</th><td>1,000 J/(kg·K)</td><td>700–1,500 J/(kg·K)</td><td>Analyst-selected constant-property input, not a value verified for this formulation.</td></tr>
+                    <tr><th scope="row">Conductivity, \(k\)</th><td>0.16 W/(m·K)</td><td>0.08–0.32 W/(m·K)</td><td>Reuses the assumed value in the project’s earlier semi-infinite calculation. That value has no supporting material measurement; its factor-two range is selected for sensitivity only.</td></tr>
+                    <tr><th scope="row">Depression depth · baseline / hot</th><td>3 mm assumed / ≈3.2 mm measured</td><td>1–5 mm / held at 3.175 mm</td><td>Baseline: selected what-if value, not a photo measurement. Hot: approximately ⅛ inch, confirmed measured by the experimenter. The exact unit conversion is retained for arithmetic, not claimed precision; measurement uncertainty is unknown and excluded.</td></tr>
+                    <tr><th scope="row">Depression diameter and shape</th><td>20 mm; paraboloid</td><td>10–30 mm; cone to cylinder</td><td>Idealized shape: volume = shape factor × circular area × depth; factor ½ nominal, ⅓–1 in the sweep. Cracks and raised char are not represented.</td></tr>
+                    <tr><th scope="row">Uniform heating-footprint diameter</th><td>20 mm</td><td>10–30 mm</td><td>A separate assumption, varied independently of depression diameter. A crater is not a heat-flux footprint.</td></tr>
+                    <tr><th scope="row">Exposure · baseline / hot</th><td>20 / 10 s</td><td>19–21 / 9–11 s</td><td>Reported nominal durations; ±1 s is an assumed timing sensitivity, not measured timing uncertainty.</td></tr>
+                    <tr><th scope="row">Graphite-reference flux multiplier</th><td>1×</td><td>0.73–1.33×</td><td>The report’s ±20% graphite heat-capacity sensitivity shifts inferred flux by approximately −27% / +33%. This is not a complete heating uncertainty budget or a brick absorptivity factor.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <div class="article-body">
+              <p>Using those inputs, \(\rho=m/(WHL)\), \(C=mc_p\), and \(\alpha=k/(\rho c_p)\). The diffusivity relation is standard; none of the numerical property inputs is supplied by that relation. See <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication960-11.pdf">NIST’s material-property guidance, §6.3.1.6</a>.</p>
+            </div>
+            <div class="thermal-table-scroll ablative-property-highlight" role="region" aria-label="Conditional material-property calculations" tabindex="0">
+              <table class="thermal-table">
+                <caption>Original, uniform-brick calculations · central value (selected sensitivity envelope), not a property fit</caption>
+                <thead><tr><th scope="col">Derived quantity</th><th scope="col">Baseline · assumed 50 g</th><th scope="col">Hot · reported 82.8 g</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Bulk density (kg/m³)</th><td>872 (398–1,961)</td><td>1,444 (1,099–2,029)</td></tr>
+                  <tr><th scope="row">Whole-brick heat capacity, \(mc_p\) (J/K)</th><td>50 (21–120)</td><td>82.8 (58.0–124.2)</td></tr>
+                  <tr><th scope="row">Thermal diffusivity, \(\alpha\) (mm²/s)</th><td>0.184 (0.027–1.15)</td><td>0.111 (0.026–0.416)</td></tr>
+                  <tr><th scope="row">Through-thickness diffusion scale, \(L^2/\alpha\)</th><td>879 s ≈ 14.6 min<br>Envelope: 2.2–92 min</td><td>1,455 s ≈ 24.3 min<br>Envelope: 6.0–95.1 min</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="article-body">
+              <p>The sweep evaluates 4,096 endpoint combinations for the baseline and 1,024 for the hot test, recomputing density from mass and geometry. The hot mass and depth are held at their reported values because their measurement uncertainties are unknown; those uncertainties are omitted, not zero. The wide diffusivity envelopes are consequences of the selected inputs—not experimentally established property ranges. The diffusion time is a characteristic scale, not a predicted first detectable temperature rise. No heating boundary, char evolution, or sensor response is fitted.</p>
+              <aside class="central-question ablative-properties-explainer" aria-labelledby="ablative-properties-explainer-title">
+                <h3 id="ablative-properties-explainer-title">This brick, in everyday terms</h3>
+                <p>For the 82.8 g hot-test brick, here is what the conditional calculations mean in everyday terms. <strong>The heating comparisons still depend on assumed thermal properties.</strong></p>
+                <p><strong>Think wooden handle, not metal pan.</strong> The heat-conduction value we chose puts the sample in roughly the same ballpark as common wood at room temperature: heat passes through it reluctantly. This compares heat flow—not how wood and the ablator behave in a flame.</p>
+                <p><strong>The whole brick warms like about four teaspoons of water.</strong> With the assumed specific heat, raising the entire brick evenly by 10 °C would take roughly the same energy as warming that small amount of water by 10 °C. That comparison is just for warming up, before counting energy used in charring or losing material.</p>
+                <p><strong>The measured dimple is about one and a half nickels deep.</strong> The hot test left an approximately 3.2 mm depression in a nominally 12.7 mm brick—about 1.6 nickel thicknesses in a brick about 6½ nickels thick. That pictures the local depression, not the thickness of char or a promise of how long the material survives.</p>
+                <details>
+                  <summary>Comparison calculations and sources</summary>
+                  <p>Wood comparison: the assumed 0.16 W/(m·K) is near the 0.10–0.14 W/(m·K) range reported for common structural softwoods across the grain at 12% moisture content. See the <a href="https://research.fs.usda.gov/download/treesearch/43846.pdf#page=17">US Forest Service-hosted CLT handbook, §2.1.4</a>. It is not a high-temperature property match.</p>
+                  <p>Water comparison: 0.0828 kg × 1,000 J/(kg·K) × 10 K = 828 J. Using <a href="https://www.usgs.gov/water-science-school/science/specific-heat-capacity-and-water">water’s approximate specific heat of 4,184 J/(kg·K)</a> and <a href="https://www.usgs.gov/water-science-school/science/water-density">density of 1 g/mL</a> gives about 20 mL of water, or roughly four teaspoons (<a href="https://www.nist.gov/document/dietetictechnicianspdf">about 5 mL each</a>). This assumes a uniform temperature rise and unchanged properties; it is not an estimate of energy absorbed during the torch test.</p>
+                  <p>Coin comparison: the reported ⅛ inch converts to 3.175 mm, about 1.6 times the <a href="https://www.usmint.gov/learn/coins-and-medals/circulating-coins/nickel">US nickel’s 1.95 mm thickness</a>. The nominal brick thickness is 12.7 mm, about 6½ nickels. The measurement was approximately reported; the conversion adds no precision.</p>
+                </details>
+              </aside>
+            </div>
+            <div class="thermal-table-scroll" role="region" aria-label="Conditional comparison using mixed measured and assumed inputs" tabindex="0">
+              <table class="thermal-table">
+                <caption>Conditional test comparison · central value (selected envelope)</caption>
+                <thead><tr><th scope="col">Quantity</th><th scope="col">Baseline · 20 s</th><th scope="col">Hot · 10 s</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Equivalent dose (MJ/m²)</th><td>5.18 (3.60–7.24)</td><td>5.84 (3.84–8.55)</td></tr>
+                  <tr><th scope="row">Equivalent energy over assumed heating footprint (kJ)</th><td>1.63 (0.28–5.12)</td><td>1.84 (0.30–6.04)</td></tr>
+                  <tr><th scope="row">Diffusion length scale, \(\sqrt{\alpha t}\) (mm)</th><td>1.92 (0.72–4.91)</td><td>1.05 (0.49–2.14)</td></tr>
+                  <tr><th scope="row">Depth / exposure (mm/s)</th><td>0.150 (0.048–0.263); assumed depth</td><td>0.318 (0.289–0.353); measured depth, timing sensitivity only</td></tr>
+                  <tr><th scope="row">Depth / equivalent dose (mm per MJ/m²)</th><td>0.579 (0.138–1.391)</td><td>0.543 (0.371–0.827)</td></tr>
+                  <tr><th scope="row">Idealized depression volume (cm³)</th><td>0.471 (0.026–3.534)</td><td>0.499 (0.083–2.244)</td></tr>
+                  <tr><th scope="row">Virgin-density-equivalent depression mass (g)</th><td>0.411 (0.010–6.930)</td><td>0.720 (0.091–4.555)</td></tr>
+                  <tr><th scope="row">Reported whole-specimen net mass loss</th><td>Unknown</td><td>8.9 g (10.7%); uncertainty not reported</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="article-body">
+              <p>The hot depth divided by exposure is ≈0.32 mm/s; the baseline’s 0.15 mm/s still comes from an assumed depth. These are not two measured rates. The hot dimple’s conditional geometric mass equivalent is ≈0.72 g, compared with the reported 8.9 g net specimen loss. The assumed diameter and shape, decomposition-related density changes, loose fragments, and weighing conditions prevent equating those quantities. Neither number separately gives char mass.</p>
+              <p>Equivalent footprint energy is not absorbed heat, and \(mc_p\Delta T_{\mathrm{back}}\) cannot give total stored heat because the brick is not uniformly warm. Diffusion length is neither a sharp thermal front nor an ablation or char depth.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <h3 id="ablative-depth-surface-title">Dimple depth across exposure time and heat flux</h3>
+              <p><strong>One shared surface: one measured depth and one assumed depth.</strong></p>
+              <div id="ablative-depth-surface" aria-labelledby="ablative-depth-surface-title">
+                <img id="ablative-depth-surface-fallback" src="../assets/builds/ablative-material-testing-fixture/analysis/scenario-depth-surface.png?v=2" alt="Illustrative shared depth surface with a filled hot-test marker at 10 seconds and approximately 3.2 mm measured depth, and a hollow baseline marker at 20 seconds and 3 mm assumed depth. Colors show geometric dimple-equivalent mass, not total measured loss." width="1000" height="720" loading="lazy">
+              </div>
+              <figcaption>The filled hot marker uses the approximately 3.2 mm measured depth; the hollow baseline marker still assumes 3 mm. The surface between and beyond them is model-generated, not a validated ablation law. Colors show geometric dimple-equivalent mass—not the recorded 8.9 g whole-brick loss.</figcaption>
+            </figure>
+            <details class="ablative-outcome-details article-body">
+              <summary>How this 3D surface is constructed</summary>
+              <p>We assume depth is proportional to reference heat flux and give time a power-law dependence: \(d=(3\,\mathrm{mm})\left(q_{\mathrm{ref}}/(0.2592\,\mathrm{MW/m^2})\right)\left(t/(20\,\mathrm{s})\right)^n\). With \(n\approx1.09110\), this surface passes through the assumed 3 mm baseline at 20 s and 0.2592 MW/m², and the reported ⅛-inch hot depth at 10 s and 0.5844 MW/m². We use 3.175 mm for the conversion, while displaying the measurement as approximately 3.2 mm.</p>
+              <p>Linear flux dependence is an added assumption; the time exponent depends on both the measured hot depth and the unmeasured baseline assumption. Two points do not determine a unique surface. Equal graphite-reference doses can give different depths because of the chosen equation—not because the tests have established that effect. This is partial calibration, not independent validation. The surface is not fitted to the recovered thermocouple traces and does not model char formation, heating thresholds, or breakthrough. Graphite-reference flux is not measured absorbed heat flux in the brick.</p>
+              <p>The mass colors use \(m_{\mathrm{eq}}=\rho\,\pi D^2d/8\): an assumed 20 mm diameter paraboloid and conditional initial density of about 1,444 kg/m³ from the hot specimen’s 82.8 g mass and nominal dimensions. This one density is used across the entire surface, including the baseline marker; the comparison table above instead retains a separate 50 g baseline assumption. With density and shape fixed, color is a direct conversion of depth, not a separate prediction of mass loss. The display covers 0–20 s and 0–0.8 MW/m²; its maximum modeled depth is 9.26 mm, below the nominal 12.7 mm brick thickness. This plotting range is not a validated operating range or a breakthrough prediction.</p>
+              <p><a href="../assets/builds/ablative-material-testing-fixture/analysis/depth-surface-grid-NOT-MEASURED.csv" download>Download the synthetic surface grid (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/depth-surface-scenarios.json" download>Surface assumptions (JSON)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/depth-surface-README.md">Full equations and limitations</a>.</p>
+            </details>
+            <div class="article-body">
+              <p><a href="../assets/builds/ablative-material-testing-fixture/analysis/scenario-inputs.json" download>Download assumptions and provenance (JSON)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/scenario-results.csv" download>Download conditional calculations (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/assumption-analysis-README.md">Full calculation notes and next-test plan</a>. Extra exported digits preserve arithmetic; they do not imply measurement precision.</p>
+            </div>
+            <div class="article-body ablative-sleeve-analysis" id="ablative-sleeve-comparison" role="region" aria-labelledby="ablative-sleeve-title">
+              <h3 id="ablative-sleeve-title">Conditional comparison with the engine sleeve</h3>
+              <p>The <a href="https://docs.google.com/document/d/1oIKhaOOdl2J4FMQjktNuqRRpTlfGJ7aP7FaxK298SMk/edit">sleeve-sizing record</a> specifies a 3-inch inner diameter, 3.95-inch outer diameter, and 7.168-inch length: a nominal 12.065 mm wall. These are documented targets, not verified dimensions of the fired part. An older overview lists a thinner sleeve, so the as-built revision still needs confirmation.</p>
+              <p><strong>What if the measured brick dimple depth occurred uniformly over the whole sleeve bore?</strong> Treating the sleeve as a plain cylinder and transferring the hot brick’s conditional 1,444 kg/m³ initial density gives the following geometry-only comparison. Uniform recession and identical material density are additional assumptions; a local coupon depression does not establish either.</p>
+              <div class="thermal-table-scroll" role="region" aria-label="Hypothetical sleeve geometry transfer, not hotfire results" tabindex="0">
+                <table class="thermal-table">
+                  <caption>Hypothetical uniform 3.175 mm bore recession · not measured sleeve changes</caption>
+                  <thead><tr><th scope="col">Quantity</th><th scope="col">Conditional result</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Initial density-based mass estimate</th><td>≈879 g</td></tr>
+                    <tr><th scope="row">Removed-volume mass equivalent</th><td>≈208 g</td></tr>
+                    <tr><th scope="row">Remaining-volume mass equivalent</th><td>≈671 g</td></tr>
+                    <tr><th scope="row">Remaining geometric wall</th><td>≈8.9 mm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>These mass equivalents apply the initial material density to geometry; <strong>they are not actual mass loss, retained-char mass, or remaining sleeve mass</strong>. The brick’s measured 8.9 g loss and an assumed 20 mm dimple’s ≈0.72 g geometric equivalent already show why those quantities cannot be treated as interchangeable. A sleeve comparison needs conditioned pre/post weighing, bore profiles, and separate char-thickness and char-density measurements.</p>
+              <h4>Adding an assumed retained-char layer</h4>
+              <p>We can go one step further by choosing the missing char inputs explicitly. For a reference scenario, impose the approximately 3.2 mm coupon depth everywhere on the bore, then assume <strong>2 mm of retained char at half the original material density</strong>. This is a selected final state—not a calculation of how char forms. The original wall is divided into a receded region, retained char, and material treated as unchanged.</p>
+              <figure class="article-figure is-wide">
+                <img src="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-assumed-wall.svg" alt="Hypothetical radial sleeve wall section: approximately 3.2 mm receded, 2 mm of assumed retained char, and 6.9 mm of uncharred material; not an observed sleeve cross-section" width="1100" height="440" loading="lazy">
+                <figcaption>A local slice through the affected region. The measured brick depth is transferred by assumption; the sleeve’s char thickness is not measured.</figcaption>
+              </figure>
+              <div class="thermal-table-scroll" role="region" aria-label="Mass balance for an explicitly assumed sleeve char state" tabindex="0">
+                <table class="thermal-table">
+                  <caption>Full-bore reference scenario · 3.175 mm recession, 2 mm char, 50% initial density</caption>
+                  <thead><tr><th scope="col">Mass-accounting quantity</th><th scope="col">Scenario value</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Original-density equivalent of receded volume</th><td>208.1 g</td></tr>
+                    <tr><th scope="row">Mass deficit assigned to the lower-density retained layer</th><td>69.8 g</td></tr>
+                    <tr><th scope="row">Total scenario mass decrease</th><td>277.9 g</td></tr>
+                    <tr><th scope="row">Retained-char mass</th><td>69.8 g</td></tr>
+                    <tr><th scope="row">Remaining uncharred material</th><td>531.6 g</td></tr>
+                    <tr><th scope="row">Total remaining mass, including char</th><td>601.4 g</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>The accounting closes: <strong>879.3 − 601.4 = 208.1 + 69.8 g</strong>. The remaining 8.89 mm geometric wall consists of 2 mm of selected char plus 6.89 mm of uncharred material. The extra mass decrease is a <em>retained-layer density deficit</em>, not a measured amount of pyrolysis gas. This simplified partition does not identify erosion, gas release, fragments, or deposits. <a href="https://ntrs.nasa.gov/api/citations/20170005508/downloads/20170005508.pdf">NASA’s material-response formulation</a> distinguishes surface removal from in-depth decomposition and separate virgin/char properties; it does not establish the numerical char assumptions used here.</p>
+              <div>
+                <h4>How the assumptions change the result</h4>
+                <h5>Less affected area does not mean a shallower local recess</h5>
+                <p>Keep the same local depth and char state, but apply them to 25%, 50%, or 100% of the original bore area. We approximate an affected axial segment or circumferential sector with unchanged material elsewhere; edge effects are excluded.</p>
+                <div class="thermal-table-scroll" role="region" aria-label="Assumed affected-area sensitivity" tabindex="0">
+                  <table class="thermal-table">
+                    <caption>Same local state, different affected area</caption>
+                    <thead><tr><th scope="col">Affected bore area</th><th scope="col">Retained-char mass</th><th scope="col">Scenario mass decrease</th><th scope="col">Remaining mass</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">25%</th><td>17.5 g</td><td>69.5 g</td><td>809.9 g</td></tr>
+                      <tr><th scope="row">50%</th><td>34.9 g</td><td>139.0 g</td><td>740.4 g</td></tr>
+                      <tr><th scope="row">100%</th><td>69.8 g</td><td>277.9 g</td><td>601.4 g</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>All three still have an 8.89 mm local geometric wall and 6.89 mm local uncharred wall in the affected region. <strong>Weighing alone cannot tell us the thinnest remaining wall.</strong></p>
+                <h5>Char thickness and density are independent choices</h5>
+                <p>The grid below varies retained char from 1 to 3 mm and its density from 25% to 75% of the original density. These are selected sensitivities—not measurements, literature property ranges, or confidence intervals. Each cell is total remaining sleeve mass, including char, with full coverage and the same 3.175 mm recession.</p>
+                <div class="thermal-table-scroll" role="region" aria-label="Assumed char thickness and density sensitivity" tabindex="0">
+                  <table class="thermal-table">
+                    <caption>Total remaining mass (g) · all char inputs assumed</caption>
+                    <thead><tr><th scope="col">Retained char</th><th scope="col">25% initial density</th><th scope="col">50% initial density</th><th scope="col">75% initial density</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">1 mm</th><td>619.5</td><td>636.7</td><td>654.0</td></tr>
+                      <tr><th scope="row">2 mm</th><td>566.5</td><td>601.4</td><td>636.3</td></tr>
+                      <tr><th scope="row">3 mm</th><td>512.3</td><td>565.3</td><td>618.3</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>Remaining mass is not a thermal-protection score. This mass calculation alone supplies no char conductivity, cracking response, outer-wall temperature, or allowable burn duration. The separate conduction scenarios below require additional thermal assumptions.</p>
+              </div>
+              <div>
+                <h4>Selected exposure-time and reference-flux cases</h4>
+                <p>The shared depth surface can supply other hypothetical local recessions within its existing range. Only the approximately 3.2 mm hot-test depth is measured; the other depths depend on the assumed baseline point and chosen flux/time law. In every row below, full coverage and a 2 mm char layer at half density are held fixed to isolate the comparison—not to predict char growth over time.</p>
+                <div class="thermal-table-scroll" role="region" aria-label="Within-domain modeled sleeve exposure cases" tabindex="0">
+                  <table class="thermal-table">
+                    <caption>Hypothetical sleeve transfers · not the engine’s measured heating history</caption>
+                    <thead><tr><th scope="col">Time (s)</th><th scope="col">Reference flux (MW/m²)</th><th scope="col">Local depth (mm)</th><th scope="col">Local uncharred wall (mm)</th><th scope="col">Remaining mass (g)</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">5</th><td>0.5844</td><td>1.49</td><td>8.57</td><td>716.7</td></tr>
+                      <tr><th scope="row">10</th><td>0.5844</td><td>≈3.2; measured coupon anchor</td><td>6.89</td><td>601.4</td></tr>
+                      <tr><th scope="row">15</th><td>0.5844</td><td>4.94</td><td>5.12</td><td>475.5</td></tr>
+                      <tr><th scope="row">10</th><td>0.2592</td><td>1.41</td><td>8.66</td><td>722.2</td></tr>
+                      <tr><th scope="row">10</th><td>0.8000</td><td>4.35</td><td>5.72</td><td>518.5</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>The shared depth surface is not extrapolated to the report’s several-MW/m² engine estimate. At the reference point, multiplying reference flux × 10 s × the original 0.043585 m² bore area gives approximately 255 kJ. That is a reference-area integral—not absorbed sleeve energy, an energy requirement for ablation, or an energy-balance check.</p>
+              </div>
+              <h4>What Overture’s metal case is made of</h4>
+              <p>The <a href="https://docs.google.com/spreadsheets/d/1Zg9WjmT8dic_PtStrfykBivGqj8CVY54Y9kj8dExC5A/edit">Mk1 parts list</a> identifies the closure tube as <strong>304L stainless steel</strong>, McMaster part 89495K95; the master report calls it 304 stainless. The <a href="https://docs.google.com/spreadsheets/d/1HcJMnTM0SDfNXDDfdOUr65X4GkdxouMvA-WkfBdLpM0/edit">dimension sheet</a> specifies a 4-inch inside diameter, ¼-inch wall, and 12-inch length. That gives a 6.35 mm steel wall and, with the 3.95-inch sleeve target, a nominal 0.635 mm radial gap. These are design/BOM records, not an as-fired material certificate or dimensional inspection.</p>
+              <p>For a first conduction calculation, we use typical 304-family values of 7,900 kg/m³ density, 500 J/(kg·K) heat capacity, and 16.3 W/(m·K) conductivity from <a href="https://www.atimaterials.com/Products/Documents/datasheets/stainless-specialty-steel/austenitic/ati_302_304_304l_305_tds_en4_v1.pdf#page=3">ATI’s datasheet</a>. These are held constant: the heat capacity is tabulated over 0–100 °C and conductivity at 100 °C. Applying them at much higher temperatures is an extrapolation, not a validated high-temperature material model.</p>
+              <h4>Earlier comparison: gas heating and ambient cooling</h4>
+              <p>We solve radial heat conduction through the sleeve, its interface with the case, and the steel. The model starts uniformly at 20 °C and heats a local cylindrical band aligned with the sleeve for an assumed 10 seconds, then follows cooling and heat soak. It does not average a hot region over the full 12-inch case or include heat spreading along its length. The approximately 3.2 mm recession and 2 mm char layer are imposed <strong>before heating begins</strong>, leaving 6.89 mm of virgin material. This fixed, already-recessed wall is a what-if geometry—not a simulation of how the sleeve wore away.</p>
+              <p>The central hot-gas boundary uses the torch report’s separate engine estimate, \(T_g=2{,}876\,\mathrm K\) and \(h_g=2{,}240\,\mathrm{W/(m^2K)}\), with \(q''=h_g(T_g-T_s)\). Neither input was measured during this hotfire or fitted to the brick thermocouple traces. The initial cold-wall flux is about 5.79 MW/m² and decreases as the modeled surface warms; it is not a constant torch-equivalent flux. A different Mk1 design calculation gives 2,175 K, so that and the proposed 3,000 K target are checked separately. Gas temperature is not steel temperature.</p>
+              <p>Virgin material keeps the assumed \(k=0.16\,\mathrm{W/(m\cdot K)}\), \(c_p=1{,}000\,\mathrm{J/(kg\cdot K)}\), and conditional density of 1,444 kg/m³. Char is assigned the same conductivity and heat capacity but half the density. We select an effective interface conductance of 100 W/(m²·K), rather than silently treating the nominal gap as solid material. After shutdown, the bore and case exterior exchange heat with 20 °C surroundings using a selected coefficient of 10 W/(m²·K). Gap, material, heating, and cooling alternatives are sensitivities—not measured uncertainty bounds.</p>
+              <p><strong>Why follow the cooldown?</strong> Heat stored near the bore can reach the case after the flame is gone. With the chosen virgin properties, the diffusion scale across the remaining 6.89 mm is about 428 seconds—not a first-arrival time. The calculation follows at least 30 minutes and checks that the metal-temperature peak has passed.</p>
+              <figure class="article-figure is-wide">
+                <img src="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-case-temperature.svg" alt="Computed steel inner-face temperatures during thirty minutes after a selected ten-second heating pulse: central intact-path peak about 59 degrees Celsius, with separate assumed geometry, conductivity, and cooling comparisons; not hotfire measurements" width="1120" height="664" loading="lazy">
+                <figcaption>Temperature in the steel band alongside the sleeve—not the gas temperature or the whole engine’s average. Every curve assumes an intact radial heat path and fixed material layers. The thin red line marks the end of the selected 10-second heating pulse.</figcaption>
+              </figure>
+              <div class="thermal-table-scroll" role="region" aria-label="Conditional steel temperatures, not measured hotfire results" tabindex="0">
+                <table class="thermal-table">
+                  <caption>Selected one-at-a-time comparisons · computed steel inner-face peaks</caption>
+                  <thead><tr><th scope="col">Scenario</th><th scope="col">Peak temperature</th><th scope="col">Time from heating start</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Already-recessed wall · central inputs</th><td>59.3 °C</td><td>555 s ≈ 9.3 min</td></tr>
+                    <tr><th scope="row">Original virgin sleeve geometry</th><td>57.7 °C</td><td>880 s ≈ 14.7 min</td></tr>
+                    <tr><th scope="row">No bore cooling after shutdown</th><td>74.3 °C</td><td>721 s ≈ 12.0 min</td></tr>
+                    <tr><th scope="row">Char conductivity halved to 0.08 W/(m·K)</th><td>46.6 °C</td><td>568 s ≈ 9.5 min</td></tr>
+                    <tr><th scope="row">Char conductivity increased to 0.64 W/(m·K)</th><td>92.4 °C</td><td>544 s ≈ 9.1 min</td></tr>
+                    <tr><th scope="row">3,000 K gas-source sensitivity</th><td>61.2 °C</td><td>555 s ≈ 9.3 min</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>In the central case, both steel faces remain approximately 20 °C at shutdown; the later outer-face peak is 59.1 °C at 560 seconds. Across all 16 selected intact-path cases, inner-face peaks span about 47–92 °C. <strong>That span is not a confidence interval or an upper/lower bound on the real engine.</strong> Each alternative changes only one input; it does not capture combinations of errors or missing physics. Halving both cell size and time steps changes the central peak by less than 0.05 °C—a numerical check, not experimental validation.</p>
+              <p><strong>The important limitation is the hot side.</strong> The central calculation reaches roughly 2,500 °C at the sleeve’s exposed surface while holding its properties and shape fixed. The actual ablator would undergo processes this model does not solve: decomposition, recession, oxidation, changing char, and potentially cracking. Radiation, film-cooling distribution, and axial heat spreading are also omitted. A cool calculated steel temperature does not prove that the assumed insulating wall can remain intact.</p>
+              <p>Removing the sleeve entirely in a separate bare-wall radial-column benchmark drives the constant-property steel calculation beyond its supported temperature interval and even into the datasheet’s melting range. That output is <strong>not a reliable physical peak</strong>; temperature-dependent properties and phase change are missing. It is excluded from the intact-wall chart and retained only as a flagged model-breakdown case. It cannot reconstruct heating through a real crack of unknown width. Likewise, the alloy’s melting range is not an acceptable operating limit for a pressurized assembly: strength, thermal stress, joints, and seals require their own verified limits.</p>
+              <h4 id="ablative-conduction-only-title">Simplified analysis: conduction only</h4>
+              <p><strong>Within a conduction-only model, the intact sleeve keeps the modeled steel case far below melting for the assumed 10-second exposure.</strong> To make that question definite without calculating convection or radiation, we impose the heating directly at the solid surface and retain all deposited heat afterward.</p>
+              <ul>
+                <li>The sleeve’s exposed <strong>solid surface is held at 3,000 K for 10 seconds</strong>. This is a prescribed surface temperature—not a measured flame temperature or a calculated flame-to-surface interaction. All material initially starts at 20 °C.</li>
+                <li>The already-recessed sleeve stays intact and fixed: <strong>2 mm of retained char plus 6.89 mm of uncharred material</strong>, followed by the 6.35 mm steel wall. We model radial conduction in the band alongside the sleeve, not the entire engine.</li>
+                <li>Material properties remain constant: char and virgin material both use \(k=0.16\,\mathrm{W/(m\cdot K)}\) and \(c_p=1{,}000\,\mathrm{J/(kg\cdot K)}\), with densities of about 722 and 1,444 kg/m³, respectively. The steel uses the previously stated 304-family properties.</li>
+                <li>Perfect thermal coupling is assumed between the sleeve and steel: the nominal gap adds no contact resistance or invented heat capacity. There are no cracks, gas leaks, additional recession, evolving char, or temperature-dependent properties.</li>
+                <li><strong>No convection or radiation is included.</strong> The exterior is insulated throughout. At 10 seconds, the prescribed hot-surface boundary is removed and the bore is also insulated; stored heat can redistribute by conduction but cannot escape.</li>
+              </ul>
+              <div class="thermal-table-scroll" role="region" aria-label="Conduction-only steel temperatures with insulated heat soak" tabindex="0">
+                <table class="thermal-table">
+                  <caption>Conduction-only scenario · computed temperatures, not hotfire measurements</caption>
+                  <thead><tr><th scope="col">Time from heating start</th><th scope="col">Steel temperature</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">10 seconds · end of imposed heating</th><td>≈20 °C</td></tr>
+                    <tr><th scope="row">10 minutes · stored heat reaching the case</th><td>≈91 °C</td></tr>
+                    <tr><th scope="row">Eventual insulated equilibrium</th><td><strong>≈94 °C</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>Both steel faces round to the displayed values. The imposed pulse deposits approximately 159 kJ in the modeled sleeve–case band, whose combined heat capacity is about 2.15 kJ/K. With no heat leaving, the equilibrium check is \(T_\infty=T_0+E/\sum_i m_i c_{p,i}\approx94\,^{\circ}\mathrm C\). The computed steel temperatures approach that value without overshoot; it is an eventual equilibrium, not a peak occurring at a specified time.</p>
+              <p>This differs from the earlier 59 °C result: we now impose a 3,000 K <em>solid-surface</em> temperature, use perfect interface coupling, and eliminate all cooling to the surroundings. These are different boundary assumptions, not contradictory estimates of the same test. Approximately 94 °C is far below the roughly 1,400 °C melting range in <a href="https://www.atimaterials.com/Products/Documents/datasheets/stainless-specialty-steel/austenitic/ati_302_304_304l_305_tds_en4_v1.pdf#page=3">ATI’s steel-family datasheet</a>, but the model assumes that the insulating wall survives unchanged. It does not establish pressure strength, seal performance, or protection through actual cracks.</p>
+              <h4>How to test these assumptions</h4>
+              <p>Measure registered pre/post bore profiles to establish local depth and affected area; section representative regions to measure retained-char thickness; determine char volume and density separately; and weigh the whole sleeve under matched conditioning while tracking fragments, deposits, and cutting losses. Those measurements would test the mass partition above. A synchronized heating history and internal temperatures are additionally needed before predicting thermal protection.</p>
+              <p>The likely matching early-May hotfire is the May 3 event in the <a href="https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.h33f62dd7f2c39b51_1_45">team’s subsequent review</a>. It reports a controller failure about 0.25 s into the burn and venting; that timestamp is not the total heating duration, and the intended 10 s is not a reconstructed heat-input history. <a href="https://docs.google.com/presentation/d/1oOHAGOG1Z7mmtfshaSWwUD1cEP_X0XBLRNJsbGGLRxo/edit#slide=id.h33f62dd7f2c39b51_1_80">Inspection also found axial cracks, char within fractures, and outer-surface deposits</a>—features omitted by this intact-cylinder comparison.</p>
+              <p>For the steel-temperature comparison, confirm the installed case alloy/condition and sleeve fit, independently measure temperature-dependent virgin and char properties, and record calibrated case temperatures near seams and end interfaces through the post-fire peak. Reconstruct the actual pressure, valve, ignition, and heat-input histories together; the <a href="https://docs.google.com/document/d/1FI2h3YqpO12gbUEWAxf61ywpwOMc37wW0xKYwL8t3wY/edit">May 3 preliminary analysis</a> describes early fuel-valve closure and subsequent non-nominal burning. Compare the measurements against the assembly’s approved pressure–temperature limits, not just the metal’s melting point.</p>
+              <p>The rig now supplies one measured depth-and-mass result associated with a graphite-reference heating estimate. That is useful evidence for developing a material-response model, but it does not yet establish engine-sleeve survival or validate the shared depth surface.</p>
+              <p><a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-scenarios.csv" download>Download all 19 selected scenarios (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-comparison-results.json" download>Full conditional calculation (JSON)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-comparison-README.md">Equations, sources, and limitations</a>.</p>
+              <p><a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-thermal-history.csv" download>Computed temperature histories (CSV)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-thermal-results.json" download>All 17 thermal scenarios and inputs (JSON)</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-thermal-README.md">Thermal method and limitations</a> · <a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-case-sources.md">Case-material source audit</a>.</p>
+              <p><a href="../assets/builds/ablative-material-testing-fixture/analysis/sleeve-conduction-only.json" download>Conduction-only assumptions, results, and numerical checks (JSON)</a>. This separate calculation uses no convective or radiative heating/cooling model.</p>
+              <aside class="central-question ablative-sleeve-verdict" id="ablative-sleeve-verdict" aria-labelledby="ablative-sleeve-verdict-title">
+                <h4 id="ablative-sleeve-verdict-title">Would this sleeve protect our engine?</h4>
+                <p>Yes—within the simplified conduction-only model, the intact sleeve provides sufficient insulation to prevent melting of the modeled steel case for the assumed 10-second heating event, including subsequent heat soak.</p>
+                <p>With a 3,000 K solid-surface temperature imposed for 10 seconds and no convective or radiative cooling, the steel stays near 20 °C during heating, reaches about 91 °C after ten minutes, and approaches an eventual <strong>94 °C equilibrium</strong> as stored heat redistributes.</p>
+                <p>This is a positive <strong>model conclusion</strong>, not proof that the real sleeve remained intact. Actual engine protection is not established: observed cracks, unverified hot-material properties, and missing case-temperature measurements remain outside this idealization. The calculation does not qualify pressure-vessel safety or an allowable burn duration.</p>
+              </aside>
+            </div>
+            <details class="ablative-outcome-details article-body" id="ablative-next-tests">
+              <summary>What the next tests need to record</summary>
+              <p>This is a proposed measurement plan, not a claim that the existing campaign met these requirements. Instrument resolution must be backed by calibration and an uncertainty budget.</p>
+            <div class="thermal-table-scroll" role="region" aria-label="Explicit future test requirements" tabindex="0">
+              <table class="thermal-table">
+                <thead><tr><th scope="col">Missing evidence</th><th scope="col">Next-test requirement</th><th scope="col">What it resolves</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Actual material and geometry</th><td>Assign sample IDs; record batch recipe, cure, conditioning, orientation, and moisture state. Measure width, height, and thickness at multiple points, plus initial dry mass. Proposed instrument readouts: ≤0.1 mm and ≤0.01 g; report actual uncertainties.</td><td>Replaces nominal dimensions and baseline mass assumptions; verifies hot-brick density and any transfer to the sleeve.</td></tr>
+                  <tr><th scope="row">Recession versus char growth</th><td>Record a calibrated pre/post surface profile against intact reference surfaces; measure maximum depth, depression area/volume, and char thickness separately. Target ≤0.1 mm depth uncertainty for millimeter-scale features. Photograph with sample ID and scale. Weigh after the same conditioning; distinguish as-tested and cleaned states.</td><td>Adds a measured baseline depth and uncertainty to the hot depth; replaces assumed shape and distinguishes surface loss from swollen char.</td></tr>
+                  <tr><th scope="row">Timing and temperature</th><td>Save raw, unsmoothed timestamped channels with units, probe IDs, calibration, sensor depths/attachment, and a synchronized flame-on/off marker. Document actual sensor conversion rate, not just repeated logger reads. Record the entire heating/cooling response. In a non-ablating property test, design for a temperature rise ≥10× the measured differential-temperature uncertainty.</td><td>Separates sensor coupling, timing, and resolution effects from material response.</td></tr>
+                  <tr><th scope="row">Torch reset and pyrometer reference</th><td>Record valve settings and available gas pressure/flow readings, reference starting temperature, preheating history, and disk-transfer timing. Calibrate the pyrometer for its operating range; document wavelength, emissivity treatment, spot size, viewing geometry, and flame interference. Validate a reference-temperature band and stabilization interval against independent heat-flux calibration. If preheating replaces the original 3-second graphite check, update the thermal model and initial conditions rather than reusing that fit unchanged.</td><td>Turns the proposed graphite-to-ablator sequence into a reproducible heating condition; a 3,000 K surface reading alone is not a heat-flux measurement or engine-equivalence test.</td></tr>
+                  <tr><th scope="row">Heating boundary and fixture losses</th><td>Characterize heat flux and spatial footprint at the specimen plane before and after each series; record standoff/alignment and reference conditions. Measure or model heat transfer into clamps/backing and heat lost from exposed faces. Keep reference-gauge flux distinct from heat actually conducted into the brick.</td><td>Constrains the energy balance rather than assuming graphite and brick absorb identically.</td></tr>
+                  <tr><th scope="row">Independent thermal properties</th><td>Use same-batch unburned coupons for density and \(c_p(T)\) measurements, then a suitable diffusivity or conductivity method. DSC applies within thermally stable ranges; check decomposition with thermal analysis. Have the lab assess method suitability for a porous composite. Characterize char separately if modeling ablating temperatures.</td><td>Allows \(k=\alpha\rho c_p\) to use measured inputs instead of selected constants.</td></tr>
+                  <tr><th scope="row">Repeatability and a depth–dose relationship</th><td>For an initial study, use at least three independently prepared specimens per condition, multiple durations at fixed flux, and matched-equivalent-dose pairs at different fluxes. Randomize test order and repeat reference checks. Choose sample count and uncertainty targets again after this pilot.</td><td>Distinguishes duration, intensity, sample variation, and dose; the two existing tests cannot isolate them.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            </details>
+            <details class="ablative-outcome-details article-body">
+              <summary>Model limitations and method references</summary>
+              <p>The 1D graphite fit omits lateral heat spreading, so its inferred flux may serve as an effective heating-severity index rather than a direct incident-flux measurement. The inferred 0.26–0.58 MW/m² range is below the report’s several-MW/m² engine estimate; matching equivalent dose alone does not establish engine-representative conditions.</p>
+              <p>Recover <code>Ablative 20s.csv</code> and <code>Ablative Hot 10s.csv</code>, along with the paired graphite logs, probe/channel mapping, and flame-on/off timing. Record specimen thickness, batch and composition, density, thermocouple depth and attachment, and measured surface profiles. Useful heating and cooling transients, preferably at multiple depths, are needed to constrain a property fit and its uncertainty.</p>
+              <p>In even a simple conduction model, density and heat capacity enter as the product \(\rho c_p\). Unknown heat flux, conductivity, and volumetric heat capacity can trade off without changing the predicted temperature. Ablation and uncertain recession add further ambiguity. See <a href="https://authors.library.caltech.edu/records/w7s9t-q5s59">Mahzari et al. on inverse material-property estimation</a> and <a href="https://ntrs.nasa.gov/citations/20170004352">NASA’s analysis of uncertain recession</a>.</p>
+              <p>Method references: <a href="https://store.astm.org/e1269-24.html">ASTM E1269: specific heat by DSC</a>; <a href="https://store.astm.org/standards/e1461">ASTM E1461: flash diffusivity, subject to specimen suitability</a>; <a href="https://ntrs.nasa.gov/citations/20170001312">NASA on thermocouple position and measurement-error sensitivity</a>. These support the measurement approach, not the assumed numerical properties above. Temperature-dependent properties, anisotropy, evolving char, decomposition energy, gas transport, lateral heat spreading, and sensor contact errors are outside the forward scenario calculation. Its envelopes omit these errors; this is not engine qualification or a validated ablation-performance prediction.</p>
+            </details>
           </section>
           <section class="build-section build-video-section" aria-labelledby="test-footage-title">
             <h2 id="test-footage-title">Test footage</h2>
@@ -382,26 +831,25 @@ N_{\max}
               <video controls muted loop playsinline preload="none" data-autoplay-loop
                 width="1280" height="720"
                 poster="../assets/builds/ablative-material-testing-fixture/test-footage-01-poster.jpg"
-                aria-label="Wide view of the flame-exposure test"
-                aria-describedby="test-footage-01-caption">
+                aria-label="Wide view of the flame-exposure test">
                 <source src="../assets/builds/ablative-material-testing-fixture/test-footage-01.mp4" type="video/mp4">
                 <a href="../assets/builds/ablative-material-testing-fixture/test-footage-01.mp4">Download the first test clip.</a>
               </video>
-              <figcaption id="test-footage-01-caption">Wide view of a flame-exposure test, with a clamped sample rotated into and away from the torch.</figcaption>
             </figure>
             <figure class="build-video">
               <video controls muted loop playsinline preload="none" data-autoplay-loop
                 width="1280" height="720"
                 poster="../assets/builds/ablative-material-testing-fixture/test-footage-02-poster.jpg"
-                aria-label="Close-up of the flame-exposure test"
-                aria-describedby="test-footage-02-caption">
+                aria-label="Close-up of the flame-exposure test">
                 <source src="../assets/builds/ablative-material-testing-fixture/test-footage-02.mp4" type="video/mp4">
                 <a href="../assets/builds/ablative-material-testing-fixture/test-footage-02.mp4">Download the second test clip.</a>
               </video>
-              <figcaption id="test-footage-02-caption">Close-up of a clamped sample during flame exposure.</figcaption>
             </figure>
           </section>
         </article>
+        <nav class="page-return" aria-label="Page navigation">
+          <a href="#page-top">Back to top ↑</a>
+        </nav>
       </main>
     </div>
   </body>
