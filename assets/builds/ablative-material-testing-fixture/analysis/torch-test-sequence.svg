@@ -12,7 +12,7 @@
     <text x="1066" y="37" text-anchor="end" font-size="18" fill="#68635a">Illustrative timing</text>
     <rect id="graphite-stage" x="54" y="67" width="272" height="68" fill="#dce5ed"/>
     <rect id="transition-stage" x="392" y="67" width="272" height="68" fill="#f0dfbd"/>
-    <rect x="730" y="67" width="336" height="68" fill="#ece7dd"/>
+    <rect id="ablative-stage" x="730" y="67" width="336" height="68" fill="none"/>
     <g font-size="25" text-anchor="middle">
       <text x="190" y="109">Graphite</text>
       <text x="528" y="109">Transition</text>

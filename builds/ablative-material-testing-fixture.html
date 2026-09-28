@@ -131,13 +131,13 @@
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
-        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" target="_blank" rel="noopener">
           <span>Jerich Lee</span>
         </a>
 
         <nav class="nav">
-          <a href="../builds/index.html">builds</a>
-          <a href="../contact/index.html">contact</a>
+          <a href="../builds/index.html" target="_blank" rel="noopener">builds</a>
+          <a href="../contact/index.html" target="_blank" rel="noopener">contact</a>
         </nav>
       </aside>
 
@@ -146,12 +146,12 @@
         <p class="article-meta">Builds · 2026</p>
         <h1>Ablative Material Testing Fixture</h1>
         <figure class="article-figure">
-        <a href="../assets/builds/ablative-material-testing-fixture/test-rig.jpg">
+        <a href="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" target="_blank" rel="noopener">
         <img alt="Ablative testing rig with a fixed torch, remotely indexed specimen holder, insulation, and thermocouple wiring" fetchpriority="high" height="1800" src="../assets/builds/ablative-material-testing-fixture/test-rig.jpg" width="1200"/>
         </a>
         </figure>
         <dl class="build-details">
-        <div><dt>Group</dt><dd><a href="https://www.liquidrocket.org/">Liquid Rocketry at Illinois (LRI)</a></dd>
+        <div><dt>Group</dt><dd><a href="https://www.liquidrocket.org/" target="_blank" rel="noopener">Liquid Rocketry at Illinois (LRI)</a></dd>
         </div>
         <div><dt>Role</dt><dd>Mechanical Design &amp; Experimental Systems Engineer</dd>
         </div>
@@ -163,7 +163,7 @@
         <section aria-labelledby="ablative-introduction-title" class="build-section">
         <h2 id="ablative-introduction-title" tabindex="-1">Introduction</h2>
         <div class="article-body">
-        <p>For <a href="https://www.liquidrocket.org/">Liquid Rocketry at Illinois (LRI)</a>, this project combined a remotely operated specimen holder with torch-based testing of graphite references and ChamberSafe ablative samples. The goal was to position samples consistently, increase operator standoff, and compare their response to different heating conditions.</p>
+        <p>For <a href="https://www.liquidrocket.org/" target="_blank" rel="noopener">Liquid Rocketry at Illinois (LRI)</a>, this project combined a remotely operated specimen holder with torch-based testing of graphite references and ChamberSafe ablative samples. The goal was to position samples consistently, increase operator standoff, and compare their response to different heating conditions.</p>
         <p><strong>My contribution:</strong> I designed the cable-operated fixture, waterjet-cut the disk and sample extenders, and developed the bolt-impact analysis. The thermal campaign and measurement records were team work; the data reanalysis presented here was retrospective.</p>
         <div class="project-summary">
         <div class="summary-box central-question" id="ablative-central-question">
@@ -179,7 +179,7 @@
         <figure class="build-video" id="ablative-initial-prototype">
         <video aria-label="Original ablative test fixture prototype in motion" controls="" data-autoplay-loop="" height="720" loop="" muted="" playsinline="" poster="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped-poster.jpg" preload="none" width="540">
         <source src="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4" type="video/mp4"/>
-        <a href="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4">Download the silent prototype video.</a>
+        <a href="../assets/builds/ablative-material-testing-fixture/initial-prototype-cropped.mp4" target="_blank" rel="noopener">Download the silent prototype video.</a>
         </video>
         </figure>
         <figure class="build-inline-figure">
@@ -214,7 +214,7 @@
         <figure class="build-video">
         <video aria-label="Ablative testing fixture demonstration" controls="" data-autoplay-loop="" height="720" loop="" muted="" playsinline="" poster="../assets/builds/ablative-material-testing-fixture/demonstration-poster.jpg" preload="none" width="1280">
         <source src="../assets/builds/ablative-material-testing-fixture/demonstration.mp4" type="video/mp4"/>
-        <a href="../assets/builds/ablative-material-testing-fixture/demonstration.mp4">Download the demonstration.</a>
+        <a href="../assets/builds/ablative-material-testing-fixture/demonstration.mp4" target="_blank" rel="noopener">Download the demonstration.</a>
         </video>
         </figure>
         </section>
@@ -223,7 +223,7 @@
         <div class="build-inline-gallery is-single">
         <figure class="build-inline-figure ablative-symbolic-fbd">
         <div class="ablative-fbd-frame" role="region" aria-label="Side-by-side rotor and bolt diagrams; scroll horizontally on narrow screens" tabindex="0">
-        <img alt="Elastic rotor-stop model: incoming speed omega_0 and rotor inertia J load one equivalent cantilever at radius r_c. The assumed free span L_b, root diameter d, and modulus determine stiffness, peak force F_max, and stopping rotation theta_max." height="510" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/fixture-symbolic-load-path.svg?v=3" width="1120"/>
+        <img alt="Elastic rotor-stop model: incoming speed omega_0 and rotor inertia J load one equivalent cantilever at radius r_c. The assumed free span L_b, root diameter d, and modulus determine stiffness, peak force F_max, and stopping rotation theta_max." height="510" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/fixture-symbolic-load-path.svg?v=4" width="1120"/>
         </div>
         <figcaption>Elastic load path: rigid rotor and one equivalent cantilever. Stopping rotation follows from stiffness.</figcaption>
         </figure>
@@ -232,8 +232,7 @@
         <p>Stopping rotation is calculated from elastic stiffness, not selected in advance. I model a rigid rotor stopped by one initially unloaded, equivalent circular cantilever. The baseline assumes small-deflection linear elasticity, negligible bolt inertia, and no dissipation or additional driving work during compression.</p>
         </div>
         <div aria-label="Historical stop-bolt calculation inputs and assumptions" class="thermal-table-scroll" role="region" tabindex="0">
-        <table class="thermal-table">
-        <caption>Historical calculation inputs and assumptions</caption>
+        <table class="thermal-table" aria-label="Historical calculation inputs and assumptions">
         <thead>
         <tr><th scope="col">Input</th><th scope="col">Symbol</th><th scope="col">Value</th></tr>
         </thead>
@@ -296,16 +295,6 @@
         </table>
         </div>
         <div class="article-body">
-        <p>The highlighted row is the nominal factor-of-two boundary for the assumed yield stress \(S_y=57~\mathrm{ksi}\):</p>
-        <div class="article-equation">\[
-            \begin{gathered}
-              \sigma_{b,\mathrm{nom}}\le\frac{S_y}{2}=28.5~\mathrm{ksi}
-                \quad\Longrightarrow\quad n_{\mathrm{nom}}\ge2,\\
-              \text{At the highlighted row:}\qquad
-              n_{\mathrm{nom}}=\frac{S_y}{\sigma_{b,\mathrm{nom}}}
-                =\frac{57}{28.5}=\boxed{2}.
-            \end{gathered}
-          \]</div>
         <p>This nominal boundary corresponds to about 7.03 seconds for the rig’s 180° transfer at constant speed (approximately 4.27 rpm).</p>
         <p>The analysis highlighted why the final approach matters: impact loading depends on speed at contact, not average transfer speed. The 7.03-second result is a constant-speed equivalent—not a measured transfer or compression duration—and remains separate from the thermal-test timestamps.</p>
         <p>The nominal \(n=2\) result provided a bending benchmark for the design. At that boundary, additional cable/bungee work during compression would raise calculated stress above the criterion. The installed bolt’s free span, support/shank geometry, grade, thread stresses and preload remain unverified; the nominal factor of two does not validate those details.</p>
@@ -368,13 +357,13 @@
         <figure class="build-video">
         <video aria-label="Wide view of the flame-exposure test" controls="" data-autoplay-loop="" height="720" loop="" muted="" playsinline="" poster="../assets/builds/ablative-material-testing-fixture/test-footage-01-poster.jpg" preload="none" width="1280">
         <source src="../assets/builds/ablative-material-testing-fixture/test-footage-01.mp4" type="video/mp4"/>
-        <a href="../assets/builds/ablative-material-testing-fixture/test-footage-01.mp4">Download the first test clip.</a>
+        <a href="../assets/builds/ablative-material-testing-fixture/test-footage-01.mp4" target="_blank" rel="noopener">Download the first test clip.</a>
         </video>
         </figure>
         <figure class="build-video">
         <video aria-label="Close-up of the flame-exposure test" controls="" data-autoplay-loop="" height="720" loop="" muted="" playsinline="" poster="../assets/builds/ablative-material-testing-fixture/test-footage-02-poster.jpg" preload="none" width="1280">
         <source src="../assets/builds/ablative-material-testing-fixture/test-footage-02.mp4" type="video/mp4"/>
-        <a href="../assets/builds/ablative-material-testing-fixture/test-footage-02.mp4">Download the second test clip.</a>
+        <a href="../assets/builds/ablative-material-testing-fixture/test-footage-02.mp4" target="_blank" rel="noopener">Download the second test clip.</a>
         </video>
         </figure>
         </section>
@@ -398,7 +387,7 @@
         </table>
         </div>
         <figure class="article-figure is-wide ablative-thermal-overlay">
-        <a href="../assets/builds/ablative-material-testing-fixture/analysis/raw-graphite-fit-overlay.svg?v=3">
+        <a href="../assets/builds/ablative-material-testing-fixture/analysis/raw-graphite-fit-overlay.svg?v=3" target="_blank" rel="noopener">
         <img alt="Measured graphite logger traces and re-fitted one-dimensional model responses on shared axes. Baseline and hot traces are aligned to a detected back-face response, not measured flame-on. Solid curves are raw-derived readings and dashed curves are model fits, not experimental validation." height="740" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/raw-graphite-fit-overlay.svg?v=3" width="1000"/>
         </a>
         <figcaption>Graphite rear-temperature readings and fitted one-dimensional responses. Zero marks detected rear-temperature onset, not measured flame-on.</figcaption>
@@ -433,23 +422,23 @@
         <p>Both specimens lost about 10% of their starting mass and developed darkened surfaces with localized depressions. Without weighing uncertainty and replicate tests, the small difference in net loss does not establish a performance difference. No quantitative recession-depth measurements are available; whole-specimen mass loss does not locate the damage.</p>
         </div>
         <figure class="article-figure is-wide ablative-outcome-pair">
-        <a href="../assets/builds/ablative-material-testing-fixture/outcome-sample-pair.jpg">
+        <a href="../assets/builds/ablative-material-testing-fixture/outcome-sample-pair.jpg" target="_blank" rel="noopener">
         <img alt="Two exposed ablative bricks side by side: 10-second hot test on the left and 20-second baseline test on the right, with darkened surfaces and localized depressions" height="1200" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-sample-pair.jpg" width="1600"/>
         </a>
         <figcaption>Left: 10 s, hot condition. Right: 20 s, baseline condition. Run identification supplied by the experimenter; no calibrated depth scale is present.</figcaption>
         </figure>
         <div class="ablative-outcome-gallery">
         <figure class="article-figure">
-        <a href="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg"><img alt="Close view of a darkened ablative brick with a central depression, held after testing" height="1600" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg" width="1067"/></a>
+        <a href="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg" target="_blank" rel="noopener"><img alt="Close view of a darkened ablative brick with a central depression, held after testing" height="1600" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-dimple-detail.jpg" width="1067"/></a>
         <figcaption>Close-up of the exposed surface.</figcaption>
         </figure>
         <div class="ablative-observation-stack">
         <figure class="article-figure">
-        <a href="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg"><img alt="Exposed ablative sample still clamped to its steel extender, with cracking around the central impingement region" height="1067" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg" width="1600"/></a>
+        <a href="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg" target="_blank" rel="noopener"><img alt="Exposed ablative sample still clamped to its steel extender, with cracking around the central impingement region" height="1067" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-clamped-sample.jpg" width="1600"/></a>
         <figcaption>Surface condition with the sample still clamped.</figcaption>
         </figure>
         <figure class="article-figure">
-        <a href="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg"><img alt="Torch nozzle positioned near the central darkened region of a mounted ablative sample" height="1200" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg" width="1600"/></a>
+        <a href="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg" target="_blank" rel="noopener"><img alt="Torch nozzle positioned near the central darkened region of a mounted ablative sample" height="1200" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/outcome-torch-position.jpg" width="1600"/></a>
         <figcaption>Torch position relative to the exposed region.</figcaption>
         </figure>
         </div>
@@ -459,11 +448,11 @@
         <p>The recorded maximum rises were <strong>0.317 °C at baseline and 0.241 °C in the hot run</strong>, using each log’s initial 5 s mean and the report’s 1.0129 gain. These are full-log excursions, not verified exposure-only peaks. Actual heating markers and channel-to-probe assignments were not recorded in the CSVs.</p>
         </div>
         <figure class="article-figure is-wide">
-        <a href="../assets/builds/ablative-material-testing-fixture/analysis/raw-chambersafe-traces.svg?v=6"><img alt="Measured ChamberSafe back-face readings, with the initial five-second reference window partitioned into illustrative graphite placement at 0–3 s and transition at 3–5 s. Colors match the sequence diagram; these are assumed placements, not recorded switching times. The initial mean subtraction, report gain, and measured traces are unchanged." height="675" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/raw-chambersafe-traces.svg?v=6" width="1120"/></a>
+        <a href="../assets/builds/ablative-material-testing-fixture/analysis/raw-chambersafe-traces.svg?v=6" target="_blank" rel="noopener"><img alt="Measured ChamberSafe back-face readings, with the initial five-second reference window partitioned into illustrative graphite placement at 0–3 s and transition at 3–5 s. Colors match the sequence diagram; these are assumed placements, not recorded switching times. The initial mean subtraction, report gain, and measured traces are unchanged." height="675" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/raw-chambersafe-traces.svg?v=6" width="1120"/></a>
         </figure>
         <figure class="article-figure is-wide ablative-test-sequence">
         <div class="ablative-sequence-frame" role="region" aria-label="Torch-test sequence" tabindex="0">
-        <img alt="Illustrative test sequence, color-matched to the plot: graphite for 3 s, an assumed 2 s transition through 180°, then ChamberSafe ablative exposure for 20 s baseline or 10 s hot. Placement is not measured switching timing; block widths are not a time scale." height="250" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/torch-test-sequence.svg?v=2" width="1120"/>
+        <img alt="Illustrative test sequence, color-matched to the plot: graphite for 3 s, an assumed 2 s transition through 180°, then ChamberSafe ablative exposure for 20 s baseline or 10 s hot. Placement is not measured switching timing; block widths are not a time scale." height="250" loading="lazy" src="../assets/builds/ablative-material-testing-fixture/analysis/torch-test-sequence.svg?v=3" width="1120"/>
         </div>
         </figure>
         <div class="article-body">

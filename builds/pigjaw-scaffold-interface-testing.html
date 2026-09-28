@@ -93,6 +93,9 @@
         line-height: 1.4;
         text-align: left;
       }
+      .pigjaw-project .comparison-table.model-inputs {
+        min-width: 0;
+      }
       .pigjaw-project .comparison-table caption {
         text-align: left;
         padding-bottom: 0.6rem;
@@ -119,13 +122,13 @@
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
-        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" target="_blank" rel="noopener">
           <span>Jerich Lee</span>
         </a>
 
         <nav class="nav">
-          <a href="../builds/index.html">builds</a>
-          <a href="../contact/index.html">contact</a>
+          <a href="../builds/index.html" target="_blank" rel="noopener">builds</a>
+          <a href="../contact/index.html" target="_blank" rel="noopener">contact</a>
         </nav>
       </aside>
 
@@ -135,7 +138,7 @@
           <h1>Pigjaw Scaffold–Bone Interface Mechanical Testing</h1>
 
           <figure class="article-figure">
-            <a href="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png">
+            <a href="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" target="_blank" rel="noopener">
               <img src="../assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" alt="Built metal push-out plate with a slotted central opening and elongated mounting slots" width="462" height="402" fetchpriority="high">
             </a>
           </figure>
@@ -168,13 +171,13 @@
             </div>
             <div class="article-image-pair initial-design-images">
               <figure class="article-figure" id="pigjaw-initial-design-cad">
-                <a href="../assets/builds/pigjaw-scaffold-interface-testing/initial-design-cad.png">
+                <a href="../assets/builds/pigjaw-scaffold-interface-testing/initial-design-cad.png" target="_blank" rel="noopener">
                   <img src="../assets/builds/pigjaw-scaffold-interface-testing/initial-design-cad.png" alt="Isometric CAD view of the reference fixture with a raised central deck, circular opening, two curved annular slots, mounting flanges, and an underside relief" width="1298" height="958" loading="lazy">
                 </a>
                 <figcaption>Reference fixture geometry used for the PLA assessment, showing the central annulus, curved slots, and mounting flanges.</figcaption>
               </figure>
               <figure class="article-figure" id="pigjaw-scaffold-loading">
-                <a href="../assets/builds/pigjaw-scaffold-interface-testing/scaffold-pushout-loading.png">
+                <a href="../assets/builds/pigjaw-scaffold-interface-testing/scaffold-pushout-loading.png" target="_blank" rel="noopener">
                   <img src="../assets/builds/pigjaw-scaffold-interface-testing/scaffold-pushout-loading.png" alt="Intended push-out setup with a porcine jaw specimen secured to the fixture and a red downward force F applied directly to the cylindrical scaffold inside the bone defect" width="866" height="898" loading="lazy">
                 </a>
                 <figcaption>Intended scaffold–bone push-out setup. The red force vector acts directly on the cylindrical scaffold, while the fixture supports the surrounding jawbone.</figcaption>
@@ -185,168 +188,89 @@
           <section class="build-section" aria-labelledby="pigjaw-handcalcs-title">
             <h2 id="pigjaw-handcalcs-title" tabindex="-1">Simplified Model</h2>
             <div class="article-body">
-              <p>I used an equivalent simply supported bridge to estimate global bending and shear deflection. This made the effects of material stiffness, web thickness, and support span easier to examine without resolving every geometric feature.</p>
-              <p>The following steps expand the retrospective bridge calculation recorded in the September 2026 note. It treats the deck as a short, linear-elastic beam under a central load, not as an as-built model of the metal assembly.</p>
+              <p>I modeled the deck as an equivalent simply supported bridge to estimate global bending and shear compliance. This retrospective September 2026 calculation uses a short, linear-elastic beam under a central load, not an as-built model of the metal assembly.</p>
             </div>
             <figure class="article-figure is-wide">
-              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-simplified-bridge.png">
+              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-simplified-bridge.png" target="_blank" rel="noopener">
                 <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-simplified-bridge.png" alt="Equivalent simply supported bridge with a central downward force and equal upward reactions at the two supports" width="1180" height="390" loading="lazy">
               </a>
               <figcaption>Equivalent bridge model used to estimate global bending and shear deflection.</figcaption>
             </figure>
             <div class="article-body essential-model">
-              <h3 id="pigjaw-bridge-inputs-title">Equivalent geometry and material inputs</h3>
-              <p>Assume a rigid base supports the lower lands, with effective simple supports at \(z=\pm30~\mathrm{mm}\). The span is therefore \(L=60~\mathrm{mm}\), and the central load is the assumed \(F=250~\mathrm{N}\). Use the remaining web thickness, not the overall plate height:</p>
-              <div class="article-equation">
-                \[
-                h=30-15=15~\mathrm{mm}
-                \]
+              <h3 id="pigjaw-bridge-inputs-title">Geometry and assumptions</h3>
+              <p>The model assumes a rigid base supporting the lower lands, idealized as simple supports at \(z=\pm30~\mathrm{mm}\). The equivalent section uses the remaining web thickness and subtracts the full slot envelope across the entire span.</p>
+              <div class="comparison-table-scroll" role="region" aria-labelledby="pigjaw-bridge-inputs-title" tabindex="0">
+                <table class="comparison-table model-inputs" aria-label="Equivalent bridge geometry and PLA screening assumptions">
+                  <thead>
+                    <tr><th scope="col">Input</th><th scope="col">Symbol</th><th scope="col">Value</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Assumed central load</th><td>\(F\)</td><td>\(250~\mathrm{N}\)</td></tr>
+                    <tr><th scope="row">Effective support span</th><td>\(L\)</td><td>\(60~\mathrm{mm}\)</td></tr>
+                    <tr><th scope="row">Remaining web thickness</th><td>\(h\)</td><td>\(30-15=15~\mathrm{mm}\)</td></tr>
+                    <tr><th scope="row">Equivalent width</th><td>\(b_g\)</td><td>\(120-2(22.15)=75.7~\mathrm{mm}\)</td></tr>
+                    <tr><th scope="row">PLA surrogate modulus</th><td>\(E\)</td><td>\(2000~\mathrm{MPa}\)</td></tr>
+                    <tr><th scope="row">Poisson ratio</th><td>\(\nu\)</td><td>0.35</td></tr>
+                    <tr><th scope="row">Rectangular shear factor</th><td>\(\kappa\)</td><td>\(5/6\)</td></tr>
+                    <tr><th scope="row">Selected annular-motion target</th><td>\(\delta_{\mathrm{target}}\)</td><td>\(50~\mu\mathrm{m}\)</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <p>Subtract the full slot envelope from the plate width over the entire span to obtain the equivalent bridge width \(b_g\), cross-sectional area \(A_g\), and second moment of area \(I_g\):</p>
+              <p>The section properties and isotropic-surrogate shear modulus are:</p>
               <div class="article-equation">
                 \[
                 \begin{aligned}
-                b_g&amp;=120-2(22.15)\\
-                &amp;=75.7~\mathrm{mm}\\[0.5em]
-                A_g&amp;=b_gh=(75.7)(15)\\
-                &amp;=1135.5~\mathrm{mm^2}\\[0.5em]
-                I_g&amp;=\frac{b_gh^3}{12}=\frac{75.7(15)^3}{12}\\
-                &amp;\approx21290.6~\mathrm{mm^4}
-                \end{aligned}
-                \]
-              </div>
-              <p>The PLA surrogate uses \(E=2000~\mathrm{MPa}\) and \(\nu=0.35\). With \(1~\mathrm{MPa}=1~\mathrm{N/mm^2}\), the assumed isotropic shear modulus is:</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                G&amp;=\frac{E}{2(1+\nu)}\\
-                &amp;=\frac{2000}{2(1+0.35)}\\
-                &amp;\approx740.7~\mathrm{MPa}
+                A_g&amp;=b_gh=1135.5~\mathrm{mm^2},\\
+                I_g&amp;=\frac{b_gh^3}{12}\approx21290.6~\mathrm{mm^4},\\
+                G&amp;=\frac{E}{2(1+\nu)}\approx740.7~\mathrm{MPa}.
                 \end{aligned}
                 \]
               </div>
 
-              <h3 id="pigjaw-bridge-equilibrium-title">Support reactions and nominal bending stress</h3>
-              <p>For a central point load, symmetry and vertical equilibrium give equal support reactions. The maximum bending moment occurs at midspan:</p>
-              <div class="article-equation">
-                \[
-                \begin{gathered}
-                R_A+R_B=F\\
-                R_A=R_B=\frac{250}{2}=125~\mathrm{N}\\[0.5em]
-                M_{\max}=\frac{FL}{4}\\
-                =\frac{250(60)}{4}=3750~\mathrm{N\,mm}
-                \end{gathered}
-                \]
-              </div>
-              <p>Using the outer-fiber distance \(h/2\), the global nominal bending stress is:</p>
+              <h3 id="pigjaw-bridge-equilibrium-title">Reactions and nominal bending stress</h3>
               <div class="article-equation">
                 \[
                 \begin{aligned}
-                \sigma_{g,\max}&amp;=\frac{M_{\max}(h/2)}{I_g}\\
-                &amp;=\frac{3750(15/2)}{21290.6}~\mathrm{MPa}
+                R_A=R_B&amp;=\frac{F}{2}=125~\mathrm{N},\\
+                M_{\max}&amp;=\frac{FL}{4}=3750~\mathrm{N\,mm},\\
+                \sigma_{g,\max}&amp;=\frac{M_{\max}(h/2)}{I_g}\approx1.321~\mathrm{MPa}.
                 \end{aligned}
                 \]
               </div>
-              <div class="article-equation article-equation-result">
-                \[
-                \boxed{\sigma_{g,\max}\approx1.321~\mathrm{MPa}}
-                \]
-              </div>
-              <p>This is the stress in the equivalent bridge, not the peak stress at the annulus or slot-ligament roots. It does not establish a fixture strength rating.</p>
+              <p>This is nominal bridge stress, excluding annulus and ligament-root concentrations—not a fixture strength rating.</p>
 
-              <h3 id="pigjaw-bridge-bending-title">Bending deflection</h3>
-              <p>With zero vertical deflection at the two simple supports, the central-load beam solution gives the midspan bending contribution:</p>
-              <div class="article-equation">
+              <h3 id="pigjaw-bridge-bending-title">Bending and shear deflection</h3>
+              <p id="pigjaw-bridge-shear-title">The span-to-thickness ratio is only 4, so both bending and transverse shear contribute to midspan motion.</p>
+              <div class="article-equation" id="pigjaw-bridge-result-title">
                 \[
                 \begin{aligned}
-                \delta_b&amp;=\frac{FL^3}{48EI_g}\\
-                &amp;=\frac{250(60)^3}{48(2000)(21290.6)}~\mathrm{mm}\\
-                &amp;\approx0.02642~\mathrm{mm}
-                \end{aligned}
-                \]
-              </div>
-              <div class="article-equation article-equation-result">
-                \[
-                \boxed{\delta_b\approx26.42~\mu\mathrm{m}}
-                \]
-              </div>
-
-              <h3 id="pigjaw-bridge-shear-title">Transverse-shear deflection</h3>
-              <p>The bridge is short, with \(L/h=4\), so retain the shear contribution as well. Using a rectangular-section shear correction \(\kappa=5/6\):</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                \delta_s&amp;=\frac{FL}{4\kappa GA_g}\\
-                &amp;=\frac{250(60)}{4(5/6)(740.7)(1135.5)}~\mathrm{mm}\\
-                &amp;\approx0.00535~\mathrm{mm}
-                \end{aligned}
-                \]
-              </div>
-              <div class="article-equation article-equation-result">
-                \[
-                \boxed{\delta_s\approx5.35~\mu\mathrm{m}}
-                \]
-              </div>
-
-              <h3 id="pigjaw-bridge-result-title">Combined bridge motion</h3>
-              <p>Add bending and shear to obtain the downward midspan-displacement magnitude under the assumed load:</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                \delta_g&amp;=\delta_b+\delta_s\\
-                &amp;\approx0.02642+0.00535\\
-                &amp;=0.03177~\mathrm{mm}
+                \delta_b&amp;=\frac{FL^3}{48EI_g}\approx26.42~\mu\mathrm{m},\\
+                \delta_s&amp;=\frac{FL}{4\kappa GA_g}\approx5.35~\mu\mathrm{m}.
                 \end{aligned}
                 \]
               </div>
               <div class="article-equation article-equation-result" id="pigjaw-bridge-result">
                 \[
-                \boxed{\delta_g\approx31.77~\mu\mathrm{m}}
+                \boxed{\delta_g=\delta_b+\delta_s\approx31.77~\mu\mathrm{m}}
                 \]
               </div>
-              <p>This is approximately 32 µm, below the chosen 50 µm motion screen. The bridge does not resolve local annulus or ligament deformation, however. Its midspan deflection and the FEA’s approximately 131 µm maximum annular motion are different response measures, not matched experimental measurements. Passing this calculation alone does not establish that the full fixture meets the target.</p>
+              <p>The bridge estimate is below the selected 50 µm screen, but does not resolve local annulus or ligament deformation. Its midspan motion differs from the FEA’s approximately 131 µm annular maximum; the lower bridge result alone does not establish full-fixture compliance.</p>
 
-              <h3 id="pigjaw-bridge-materials-title">Same geometry, stiffer trial materials</h3>
-              <p>Hold the geometry, supports, and load fixed, and substitute each material’s \(E\) and \(G=E/[2(1+\nu)]\) into the same displacement expression:</p>
-              <div class="article-equation">
-                \[
-                \delta_g=\frac{FL^3}{48EI_g}+\frac{FL}{4\kappa GA_g}
-                \]
+              <h3 id="pigjaw-bridge-materials-title">Material comparison</h3>
+              <p>With geometry, supports, and load held fixed, the same bending-plus-shear model gives:</p>
+              <div class="comparison-table-scroll" role="region" aria-labelledby="pigjaw-bridge-materials-title" tabindex="0">
+                <table class="comparison-table" aria-label="Trial material properties and calculated bridge-midspan motion at 250 N">
+                  <thead>
+                    <tr><th scope="col">Trial material</th><th scope="col">\(E\) (MPa)</th><th scope="col">\(\nu\)</th><th scope="col">\(G\) (MPa)</th><th scope="col">Midspan motion (µm)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">PLA surrogate</th><td>2,000</td><td>0.35</td><td>740.7</td><td>31.77</td></tr>
+                    <tr><th scope="row">6061 aluminum</th><td>68,300</td><td>0.33</td><td>25,676.7</td><td>0.928</td></tr>
+                    <tr><th scope="row">304 stainless steel</th><td>200,000</td><td>0.30</td><td>76,923.1</td><td>0.316</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <p>For the trial 6061 aluminum properties, \(E=68300~\mathrm{MPa}\) and \(\nu=0.33\):</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                G_{\mathrm{Al}}&amp;=\frac{68300}{2(1.33)}\\
-                &amp;\approx25676.7~\mathrm{MPa}\\[0.5em]
-                \delta_{g,\mathrm{Al}}&amp;\approx0.00077365~\mathrm{mm}\\
-                &amp;\quad+0.00015434~\mathrm{mm}\\
-                &amp;\approx0.00092799~\mathrm{mm}
-                \end{aligned}
-                \]
-              </div>
-              <div class="article-equation article-equation-result">
-                \[
-                \boxed{\delta_{g,\mathrm{Al}}\approx0.928~\mu\mathrm{m}}
-                \]
-              </div>
-              <p>For the trial 304 stainless-steel properties, \(E=200000~\mathrm{MPa}\) and \(\nu=0.30\):</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                G_{\mathrm{steel}}&amp;=\frac{200000}{2(1.30)}\\
-                &amp;\approx76923.1~\mathrm{MPa}\\[0.5em]
-                \delta_{g,\mathrm{steel}}&amp;\approx0.00026420~\mathrm{mm}\\
-                &amp;\quad+0.00005152~\mathrm{mm}\\
-                &amp;\approx0.00031572~\mathrm{mm}
-                \end{aligned}
-                \]
-              </div>
-              <div class="article-equation article-equation-result">
-                \[
-                \boxed{\delta_{g,\mathrm{steel}}\approx0.316~\mu\mathrm{m}}
-                \]
-              </div>
+              <p>These are analytical material comparisons using trial isotropic properties, not metal FEA or measurements of the built assembly.</p>
             </div>
           </section>
 
@@ -357,7 +281,7 @@
               <p id="pigjaw-comparison-title">At the assumed load, the model predicted approximately 131 µm of maximum downward annular motion, above the selected target. Hand-calculation results are not directly interchangeable; local stresses need further assessment.</p>
             </div>
             <figure class="article-figure is-wide" id="pigjaw-results-title">
-              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png">
+              <a href="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" target="_blank" rel="noopener">
                 <img src="../assets/builds/pigjaw-scaffold-interface-testing/rev-b-annular-displacement.png" alt="ANSYS vertical displacement contour of the loaded annulus in the supplied PLA reference fixture, with the millimeter legend and result readouts" width="1881" height="1053" loading="lazy">
               </a>
               <figcaption>Modeled vertical displacement of the loaded PLA annulus; contour values are shown in millimeters.</figcaption>
@@ -417,20 +341,20 @@
               <p>Hand calculations also compared aluminum and stainless steel as stiffer material options for the same simplified geometry. These comparisons supported considering metal, but no metal FEA or physical qualification of the completed assembly is included in this analysis.</p>
             </div>
             <figure class="article-figure is-wide">
-              <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-03.png">
+              <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-03.png" target="_blank" rel="noopener">
                 <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-03.png" alt="Photograph of the built metal push-out plate beside a reference CAD view of the plate mounted on an extrusion frame" width="1254" height="526" loading="lazy">
               </a>
               <figcaption>Metal push-out fixture I built, shown alongside its CAD assembly.</figcaption>
             </figure>
             <div class="article-image-pair">
               <figure class="article-figure">
-                <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-02.png">
+                <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-02.png" target="_blank" rel="noopener">
                   <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-02.png" alt="Section view showing the threaded pusher rod, nut, and adapter connection" width="353" height="586" loading="lazy">
                 </a>
                 <figcaption>Section view of the threaded pusher connection.</figcaption>
               </figure>
               <figure class="article-figure">
-                <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-04.png">
+                <a href="../assets/builds/pigjaw-scaffold-interface-testing/image-04.png" target="_blank" rel="noopener">
                   <img src="../assets/builds/pigjaw-scaffold-interface-testing/image-04.png" alt="Metal cylindrical adapter with a cross-hole beside a separate threaded pusher rod" width="794" height="818" loading="lazy">
                 </a>
                 <figcaption>Adapter and threaded rod for the push-out fixture.</figcaption>
