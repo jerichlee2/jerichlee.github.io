@@ -5,12 +5,13 @@
 #cube-nonlinear-lab h4 { margin:0 0 .25rem; font-size:.92rem; }
 #cube-nonlinear-lab p { margin:.55rem 0; text-align:left; }
 #cube-nonlinear-lab .cube-small { font-size:.88rem; line-height:1.5; }
-#cube-nonlinear-lab .cube-lab-controls { position:sticky; top:.5rem; z-index:5; border:1px solid var(--cube-rule); padding:.65rem .75rem; background:#fffdf9; box-shadow:0 2px 5px #1f1e1b0d; }
+#cube-nonlinear-lab .cube-lab-controls { min-width:0; border:1px solid var(--cube-rule); padding:.65rem .75rem; background:#fffdf9; box-shadow:0 2px 5px #1f1e1b0d; }
 #cube-nonlinear-lab label { display:block; font-size:.78rem; font-weight:700; }
 #cube-nonlinear-lab select, #cube-nonlinear-lab button { font:inherit; font-size:.84rem; color:inherit; border:1px solid #908679; border-radius:0; background:#fffdf9; min-height:44px; padding:.3rem .5rem; }
-#cube-nonlinear-lab select { max-width:100%; width:100%; margin:.15rem 0 0; }
+#cube-nonlinear-lab select { min-width:0; max-width:100%; width:100%; margin:.15rem 0 0; }
 #cube-nonlinear-lab .cube-setup { display:grid; grid-template-columns:minmax(0,1fr) 5rem; align-items:end; gap:.6rem; }
 #cube-nonlinear-lab .cube-case { min-width:0; }
+#cube-nonlinear-lab .cube-case-label { display:none; }
 #cube-nonlinear-lab button { cursor:pointer; }
 #cube-nonlinear-lab button:hover { background:#f1ebe2; }
 #cube-nonlinear-lab .cube-play { background:#952a24; color:#fff; border-color:#952a24; min-width:60px; }
@@ -56,15 +57,40 @@
 #cube-nonlinear-lab .cube-axis-line { stroke:#b6aea0; stroke-width:1; }
 #cube-nonlinear-lab .cube-cursor { stroke:#777066; stroke-width:1; stroke-dasharray:3 4; }
 #cube-nonlinear-lab .cube-visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+/* Match the ablative explorer's rail without crossing the navigation divider.
+ * The settings and plots stay in normal flow, with no sticky/fixed panel. */
+@media (min-width:1000px) {
+  #cube-nonlinear-lab[data-ready="true"] { display:grid; grid-template-columns:11.25rem minmax(0,1fr); column-gap:4rem; row-gap:.5rem; align-items:start; width:calc(100% + 15.25rem); margin-left:-15.25rem; }
+  #cube-nonlinear-lab .cube-lab-controls { grid-column:1; grid-row:1 / span 3; padding:.5rem; }
+  #cube-nonlinear-lab .cube-lab-controls h3 { font-size:.9rem; margin-bottom:.3rem; }
+  #cube-nonlinear-lab .cube-lab-controls label { font-size:.72rem; }
+  #cube-nonlinear-lab .cube-setup { grid-template-columns:minmax(0,1fr); gap:.4rem; }
+  #cube-nonlinear-lab .cube-case-label { display:block; margin:.25rem 0 0; font-size:.72rem; line-height:1.4; overflow-wrap:anywhere; }
+  #cube-nonlinear-lab .cube-speed { display:grid; grid-template-columns:3.2rem minmax(0,1fr); align-items:center; gap:.2rem; }
+  #cube-nonlinear-lab .cube-speed select { margin:0; }
+  #cube-nonlinear-lab .cube-lab-controls :is(select,button) { font-size:.75rem; padding:.2rem .3rem; }
+  #cube-nonlinear-lab .cube-playback { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.4rem; }
+  #cube-nonlinear-lab .cube-timeline { grid-column:1 / -1; margin:0; }
+  #cube-nonlinear-lab .cube-timeline-top { gap:.2rem; align-items:baseline; }
+  #cube-nonlinear-lab .cube-clock { font-size:.7rem; }
+  #cube-nonlinear-lab .cube-plot-tabs { display:grid; grid-template-columns:minmax(0,1fr); }
+  #cube-nonlinear-lab .cube-plot-tabs button { text-align:left; padding-inline:.5rem; }
+  #cube-nonlinear-lab .cube-geometry-grid { grid-column:2; grid-row:1; margin-top:0; }
+  #cube-nonlinear-lab .cube-plot-grid { grid-column:2; grid-row:2; margin:0; }
+  #cube-nonlinear-lab .cube-lab-notes { grid-column:2; grid-row:3; min-width:0; }
+}
+@media (min-width:1000px) and (pointer:fine) {
+  #cube-nonlinear-lab .cube-lab-controls :is(select,button) { min-height:32px; }
+  #cube-nonlinear-lab .cube-lab-controls input[type="range"] { height:24px; }
+}
+@media (pointer:coarse) {
+  #cube-nonlinear-lab input[type="range"] { height:44px; }
+}
 @media (max-width:700px) {
-  #cube-nonlinear-lab .cube-lab-controls { position:static; }
   #cube-nonlinear-lab .cube-plot-grid { grid-template-columns:1fr; }
   #cube-nonlinear-lab .cube-geometry-grid { grid-template-columns:1fr; gap:.75rem; }
   #cube-nonlinear-lab .cube-well-grid { grid-template-columns:1fr; gap:.75rem; }
   #cube-nonlinear-lab .cube-geometry canvas { height:180px; }
   #cube-nonlinear-lab .cube-playback { flex-wrap:wrap; }
   #cube-nonlinear-lab .cube-timeline { flex-basis:100%; margin:0; }
-}
-@media (max-height:560px) {
-  #cube-nonlinear-lab .cube-lab-controls { position:static; }
 }
