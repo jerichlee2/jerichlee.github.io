@@ -291,12 +291,22 @@
         <tr><th scope="row">2</th><td>13.3</td><td>0.310</td><td>0.187</td><td>15.0</td></tr>
         <tr><th scope="row">3</th><td>20.0</td><td>0.465</td><td>0.280</td><td>10.0</td></tr>
         <tr><th scope="row">4</th><td>26.7</td><td>0.620</td><td>0.373</td><td>7.50</td></tr>
-        <tr class="bolt-result-highlight"><th scope="row">4.27 — nominal screen</th><td>28.5</td><td>0.662</td><td>0.398</td><td>7.03</td></tr>
+        <tr class="bolt-result-highlight"><th scope="row">4.27 — nominal \(n=2\) screen</th><td>28.5</td><td>0.662</td><td>0.398</td><td>7.03</td></tr>
         </tbody>
         </table>
         </div>
         <div class="article-body">
-        <p><strong>About 7.03 seconds for a 180° transfer at constant speed</strong> corresponds to the nominal \(n=2\) bending screen (4.27 rpm; 28.5 ksi).</p>
+        <p>The highlighted row is the nominal factor-of-two boundary for the assumed yield stress \(S_y=57~\mathrm{ksi}\):</p>
+        <div class="article-equation">\[
+            \begin{gathered}
+              \sigma_{b,\mathrm{nom}}\le\frac{S_y}{2}=28.5~\mathrm{ksi}
+                \quad\Longrightarrow\quad n_{\mathrm{nom}}\ge2,\\
+              \text{At the highlighted row:}\qquad
+              n_{\mathrm{nom}}=\frac{S_y}{\sigma_{b,\mathrm{nom}}}
+                =\frac{57}{28.5}=\boxed{2}.
+            \end{gathered}
+          \]</div>
+        <p>This nominal boundary corresponds to about 7.03 seconds for the rig’s 180° transfer at constant speed (approximately 4.27 rpm).</p>
         <p>The analysis highlighted why the final approach matters: impact loading depends on speed at contact, not average transfer speed. The 7.03-second result is a constant-speed equivalent—not a measured transfer or compression duration—and remains separate from the thermal-test timestamps.</p>
         <p>The nominal \(n=2\) result provided a bending benchmark for the design. At that boundary, additional cable/bungee work during compression would raise calculated stress above the criterion. The installed bolt’s free span, support/shank geometry, grade, thread stresses and preload remain unverified; the nominal factor of two does not validate those details.</p>
         </div>
