@@ -23,19 +23,11 @@
     capture_15deg: "15° release: different destinations",
     large_offset_30deg: "30° release: both approach 45°"
   };
-  const explanations = {
-    offset_release: "Both start 10° from alignment and return toward 0°, following different paths.",
-    post_turn_ringdown: "Both start aligned at 5 rad/s; the side-mounted layer has the smaller first overshoot.",
-    approaching_alignment: "Both start at −10° and move toward alignment at +5 rad/s.",
-    equal_angular_impulse: "The same angular impulse gives different starting speeds because the layouts have different inertias.",
-    capture_15deg: "The root-mounted model returns to 0°; the side-mounted model settles near an unwanted 45° position.",
-    large_offset_30deg: "Both models settle near the unwanted 45° position instead of returning to 0°."
-  };
   mount.innerHTML = `
     <div class="cube-lab-controls">
       <h3 id="cube-lab-title" tabindex="-1">Follow a turn</h3>
       <div class="cube-setup">
-        <label class="cube-case" for="cube-case">Starting condition<select id="cube-case" aria-describedby="cube-initial cube-case-description"></select></label>
+        <div class="cube-case"><label for="cube-case">Starting condition<select id="cube-case"></select></label><p id="cube-case-label" class="cube-case-label" aria-hidden="true"></p></div>
         <label class="cube-speed" for="cube-speed">Speed<select id="cube-speed" aria-label="Playback speed"><option value="0.05">0.05×</option><option value="0.1" selected>0.1×</option><option value="0.25">0.25×</option><option value="1">1×</option></select></label>
       </div>
       <div class="cube-playback">
@@ -43,7 +35,7 @@
         <button type="button" id="cube-restart">Restart</button>
         <div class="cube-timeline">
           <div class="cube-timeline-top"><label for="cube-time">Time</label><output id="cube-clock" class="cube-clock" for="cube-time"></output></div>
-          <input id="cube-time" type="range" min="0" max="1.5" step="0.0005" value="0" aria-label="Physical time" aria-describedby="cube-playback-note">
+          <input id="cube-time" type="range" min="0" max="1.5" step="0.0005" value="0" aria-label="Physical time">
         </div>
       </div>
       <div class="cube-plot-tabs" role="tablist" aria-label="Linked plot view">
@@ -67,16 +59,16 @@
     </div>
     <div class="cube-lab-notes">
       <div class="cube-legend" aria-label="Plot legend"><span><i class="cube-swatch" aria-hidden="true"></i>Root: solid line, circle</span><span><i class="cube-swatch cube-swatch-side" aria-hidden="true"></i>Side: dashed line, square</span></div>
-      <p id="cube-initial" class="cube-small cube-initial"></p>
-      <p id="cube-case-description" class="cube-small"></p>
-      <p id="cube-playback-note" class="cube-small">Playback is slowed to reveal the motion; angles are not exaggerated. These six releases replay computed samples, not measured hardware or a new browser simulation.</p>
-      <p class="cube-small">Filled dots move with the layer; open dots stay fixed, and arrows show magnet axes. Both views use the same scale inside a 56 mm reference box, not collision-checked housing.</p>
-      <p class="cube-small" id="cube-plot-explanation">The bowls use curves recovered from the report figure; moving markers follow the saved layer motion on the same scale, not a new ball-on-track simulation.</p>
     </div>
     <p class="cube-visually-hidden" id="cube-status" aria-live="polite" aria-atomic="true"></p>`;
 
   const query = id => document.getElementById(id);
   const controls = { select: query("cube-case"), time: query("cube-time"), play: query("cube-play"), speed: query("cube-speed") };
+  const railQuery = window.matchMedia("(min-width:1000px)");
+  const syncTabOrientation = () => mount.querySelector(".cube-plot-tabs").setAttribute("aria-orientation", railQuery.matches ? "vertical" : "horizontal");
+  syncTabOrientation();
+  if (railQuery.addEventListener) railQuery.addEventListener("change", syncTabOrientation);
+  else railQuery.addListener(syncTabOrientation);
   Object.keys(data.cases).forEach(key => {
     const option = document.createElement("option");
     option.value = key;
@@ -343,13 +335,12 @@
   function setCase(key, speak = true) {
     if (!Object.prototype.hasOwnProperty.call(data.cases, key)) return false;
     pause(); current = key; time = 0; controls.select.value = key;
+    query("cube-case-label").textContent = labels[key] || data.cases[key].label;
     controls.time.max = data.cases[current].duration;
     const initial = layouts.map(layout => {
       const state = data.cases[current].trace[layout.key][0];
       return `${layout.label}: ${fixed(state[1] * degrees, 0)}°, ${fixed(state[2])} rad/s`;
     }).join(". ");
-    query("cube-initial").textContent = initial + ".";
-    query("cube-case-description").textContent = explanations[key];
     buildPlots();
     if (speak) announce(`${labels[key]}. ${initial}. Playback paused at the start.`);
     return true;
@@ -385,7 +376,6 @@
       query(`cube-panel-${tab.dataset.cubeView}`).hidden = !selected;
     });
     mount.dataset.view = view;
-    query("cube-plot-explanation").textContent = view === "potential" ? "The bowls are display curves recovered from the report figure, with interpolated heights; the markers follow the saved layer motion, not a new ball-on-track simulation." : "Faint paths show the full release; stronger paths and moving markers follow the selected time, using interpolation between the supplied samples.";
     buildPlots();
   }
   mount.querySelectorAll("[data-cube-view]").forEach(tab => {
@@ -393,8 +383,8 @@
     tab.addEventListener("keydown", event => {
       const order = plotViews.map(([key]) => key);
       let next = order.indexOf(tab.dataset.cubeView);
-      if (event.key === "ArrowRight") next = (next + 1) % order.length;
-      else if (event.key === "ArrowLeft") next = (next + order.length - 1) % order.length;
+      if (event.key === (railQuery.matches ? "ArrowDown" : "ArrowRight")) next = (next + 1) % order.length;
+      else if (event.key === (railQuery.matches ? "ArrowUp" : "ArrowLeft")) next = (next + order.length - 1) % order.length;
       else if (event.key === "Home") next = 0;
       else if (event.key === "End") next = order.length - 1;
       else return;
@@ -413,8 +403,9 @@
   if ("ResizeObserver" in window) new ResizeObserver(entries => {
     const width = entries[0].contentRect.width;
     if (Math.abs(width - lastWidth) > 1) { lastWidth = width; buildPlots(); }
-  }).observe(mount);
+  }).observe(mount.querySelector(".cube-geometry-grid"));
   else window.addEventListener("resize", buildPlots);
+  mount.dataset.ready = "true";
   setCase(current, false);
   window.CubeNonlinearLab = Object.freeze({
     setCase, setTime,

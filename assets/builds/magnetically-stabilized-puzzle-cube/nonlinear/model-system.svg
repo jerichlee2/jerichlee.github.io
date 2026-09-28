@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="540" viewBox="0 0 1120 540" role="img" aria-labelledby="system-title system-desc">
+  <title id="system-title">One rotating layer: three torques, two state variables</title>
+  <desc id="system-desc">A single rigid turning layer with inertia J carries 20 rotating magnets; 28 magnets remain fixed in the rest of the cube. Three torques act on the layer: prescribed external torque tau of time, linear viscous damping minus c omega, and nonlinear magnetic torque minus the derivative of the potential U with respect to angle theta. Their sum is J times angular acceleration. The outputs are angle theta and angular speed omega, the time derivative of theta. External torque is zero for free release. This is a single-axis model schematic, not a diagram of physical magnet locations.</desc>
+  <defs>
+    <marker id="arrow-ink" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 9 4.5 0 9Z" fill="#28251f"/>
+    </marker>
+    <marker id="arrow-rust" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 9 4.5 0 9Z" fill="#b8520c"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 9 4.5 0 9Z" fill="#176da5"/>
+    </marker>
+    <style>
+      text { font-family: Georgia, 'Times New Roman', serif; fill: #28251f; }
+      .label { font-size: 22px; }
+      .note { font-size: 20px; }
+      .math { font-size: 30px; font-style: italic; }
+      .blue { fill: #176da5; }
+      .rust { fill: #b8520c; }
+      .wire { fill: none; stroke: #28251f; stroke-width: 2; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="1120" height="540" fill="#fffefa"/>
+  <text x="28" y="43" font-size="27">One turning layer, three acting torques</text>
+  <path d="M28 63H1092" stroke="#d7d2c9"/>
+
+  <!-- Separate torque inputs avoid suggesting that the external drive creates magnetism. -->
+  <rect x="28" y="90" width="330" height="104" rx="4" fill="#fff" stroke="#a29b8e" stroke-width="1.5"/>
+  <text x="48" y="119" class="label">External torque</text>
+  <text x="48" y="150" class="math">τ(t)</text>
+  <text x="48" y="178" class="note">Prescribed; 0 for free release</text>
+
+  <rect x="28" y="216" width="330" height="74" rx="4" fill="#fff" stroke="#a29b8e" stroke-width="1.5"/>
+  <text x="48" y="246" class="label">Viscous damping · linear</text>
+  <text x="48" y="278" class="math">−cω</text>
+
+  <rect x="28" y="312" width="330" height="90" rx="4" fill="#fff7ef" stroke="#b8520c" stroke-width="1.5"/>
+  <text x="48" y="341" class="label rust">Magnetic torque · nonlinear</text>
+  <text x="48" y="373" class="math rust">−U′(θ)</text>
+
+  <path d="M358 142H402V168H446" class="wire" marker-end="url(#arrow-ink)"/>
+  <path d="M358 253H446" class="wire" marker-end="url(#arrow-ink)"/>
+  <path d="M358 357H402V334H446" fill="none" stroke="#b8520c" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow-rust)"/>
+
+  <!-- The central block is a lumped rigid-body model, not magnet-placement geometry. -->
+  <rect x="446" y="112" width="330" height="278" rx="4" fill="#f1f6f8" stroke="#176da5" stroke-width="1.7"/>
+  <text x="611" y="149" text-anchor="middle" font-size="25">Rigid turning layer</text>
+  <text x="611" y="181" text-anchor="middle" class="note">20 magnets rotate together</text>
+  <path d="M471 201H751" stroke="#c2d3de"/>
+  <text x="611" y="237" text-anchor="middle" class="label blue">Inertia J · linear</text>
+  <text x="611" y="276" text-anchor="middle" class="math blue">Jω̇ = net torque</text>
+  <path d="M471 294H751" stroke="#c2d3de"/>
+  <text x="611" y="326" text-anchor="middle" class="note rust">Magnetic coupling to</text>
+  <text x="611" y="354" text-anchor="middle" class="note rust">28 fixed magnets in remainder</text>
+
+  <path d="M776 253H866" fill="none" stroke="#176da5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="866" y="165" width="226" height="176" rx="4" fill="#fff" stroke="#176da5" stroke-width="1.5"/>
+  <text x="886" y="199" class="label">Motion / state</text>
+  <text x="886" y="246" class="label">Angle</text>
+  <text x="1035" y="246" class="math blue">θ</text>
+  <text x="886" y="280" class="label">Angular speed</text>
+  <text x="886" y="316" class="math blue">ω = θ̇</text>
+
+  <rect x="28" y="426" width="1064" height="67" rx="4" fill="#f3f0e9"/>
+  <text x="48" y="467" class="label">Torque balance</text>
+  <text x="272" y="468" class="math">
+    <tspan class="blue">Jω̇</tspan><tspan> = τ(t) − cω </tspan><tspan class="rust">− U′(θ)</tspan>
+  </text>
+  <text x="1080" y="467" text-anchor="end" class="note">θ̇ = ω</text>
+  <text x="28" y="523" class="note">Single-axis schematic; blocks do not show physical magnet locations.</text>
+</svg>
