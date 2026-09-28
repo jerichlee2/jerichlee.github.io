@@ -352,46 +352,36 @@
           <section class="build-section frequency-comparison" aria-labelledby="spindle-frequency-comparison-title">
             <h2 id="spindle-frequency-comparison-title">Frequency Comparison</h2>
             <div class="article-body">
-              <p>The original tests and full-spindle simulations date to 2025; the local beam models are retrospective calculations from September 2026. The plots and table compare their frequency scales while keeping the measured band, predicted modes, support configurations, and spin conditions distinct.</p>
+              <p>The baseline FEA lies near the observed ≈310 Hz band; the proposed bearing change raises the predicted first mode to 383.27 Hz. Local overhang estimates cluster near 334–337 Hz.</p>
             </div>
 
             <h3 id="spindle-frequency-detail-title">Local-model detail</h3>
             <figure class="frequency-figure" aria-labelledby="spindle-frequency-detail-title">
               <div id="spindle-frequency-detail-plot"></div>
-              <figcaption>Expanded frequency scale for the Rayleigh estimate and its rotary-inertia and rotating extensions. Reported decimal places do not establish physical accuracy.</figcaption>
+              <figcaption>Rayleigh and its rotary-inertia and rotating extensions on an expanded frequency scale.</figcaption>
             </figure>
 
-            <div class="article-body">
-              <p>The full-spindle second modes near 524 Hz and the second local Ritz mode at 1242.9 Hz are listed separately below. They are different mode shapes, not matched counterparts, and lie outside the <a href="#spindle-wavelet-title">wavelet’s displayed frequency range</a>.</p>
-            </div>
             <noscript><p>The interactive plots require JavaScript. All frequency values and conditions are available in the table below.</p></noscript>
 
             <p class="frequency-scroll-hint">On smaller screens, scroll the table horizontally to read all columns.</p>
             <div class="frequency-table-scroll" role="region" aria-labelledby="spindle-frequency-comparison-title" tabindex="0">
-              <table class="frequency-table">
-                <caption>Reported frequencies</caption>
+              <table class="frequency-table" aria-label="Unloaded response and first-mode predictions">
                 <thead>
-                  <tr><th scope="col">Test or model</th><th scope="col">Frequency (Hz)</th><th scope="col">Condition and interpretation</th></tr>
+                  <tr><th scope="col">Test or model</th><th scope="col">Frequency (Hz)</th><th scope="col">Condition</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Operational evidence and full-spindle FEA · 2025</th></tr>
-                  <tr><th scope="row">Unloaded test</th><td class="frequency">≈310</td><td>Observed y-direction band across 250–3000 rpm; no independently measured mode shape.</td></tr>
-                  <tr><th scope="row">Baseline FEA</th><td class="frequency">307.17</td><td>First bending mode; original bearing arrangement, 3000-rpm model.</td></tr>
-                  <tr><th scope="row">Modified “2x” FEA</th><td class="frequency">383.27</td><td>First bending mode; proposed floating-bearing modification and 22-mm shift. Prediction only.</td></tr>
+                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Test and full-spindle FEA · 2025</th></tr>
+                  <tr><th scope="row">Unloaded test</th><td class="frequency">≈310</td><td>Y-direction band, 250–3000 rpm; mode shape unverified.</td></tr>
+                  <tr><th scope="row">Baseline FEA</th><td class="frequency">307.17</td><td>First bending mode; original bearings, 3000 rpm.</td></tr>
+                  <tr><th scope="row">Modified “2x” FEA</th><td class="frequency">383.27</td><td>Predicted first mode; proposed bearing change and 22-mm shift.</td></tr>
                 </tbody>
                 <tbody>
-                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Local motor-end overhang models · September 2026</th></tr>
-                  <tr><th scope="row">Rayleigh</th><td class="frequency">336.8</td><td>One static bending shape; nonrotating, without rotary inertia.</td></tr>
-                  <tr><th scope="row">Rayleigh–Ritz</th><td class="frequency">333.7</td><td>First local mode; two station coordinates, nonrotating.</td></tr>
-                  <tr><th scope="row">Rotating extension: zero spin</th><td class="frequency">334.43</td><td>One shape in two planes, with rotary inertia; forward/backward branches coincide.</td></tr>
-                  <tr><th scope="row">Rotating extension: backward whirl</th><td class="frequency">333.73</td><td>3000 rpm; stationary-frame frequency.</td></tr>
-                  <tr><th scope="row">Rotating extension: forward whirl</th><td class="frequency">335.13</td><td>3000 rpm; stationary-frame frequency.</td></tr>
-                </tbody>
-                <tbody>
-                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Higher modes · different mode shapes, not matched counterparts</th></tr>
-                  <tr><th scope="row">Baseline FEA: second mode</th><td class="frequency">523.67</td><td>Full-spindle mode; the presentation shows bending concentrated toward the tool end.</td></tr>
-                  <tr><th scope="row">Modified “2x” FEA: second mode</th><td class="frequency">≈524</td><td>Full-spindle second mode, rounded as reported in the presentation.</td></tr>
-                  <tr><th scope="row">Rayleigh–Ritz: second local mode</th><td class="frequency">1242.9</td><td>Local motor-end overhang mode; not the full-spindle second mode.</td></tr>
+                  <tr class="group-heading"><th colspan="3" scope="rowgroup">Local overhang models · September 2026</th></tr>
+                  <tr><th scope="row">Rayleigh</th><td class="frequency">336.8</td><td>Nonrotating; one bending shape, no rotary inertia.</td></tr>
+                  <tr><th scope="row">Rayleigh–Ritz</th><td class="frequency">333.7</td><td>Nonrotating first mode; two station coordinates.</td></tr>
+                  <tr><th scope="row">Rotary inertia · zero spin</th><td class="frequency">334.43</td><td>One shape in two planes; whirl branches coincide.</td></tr>
+                  <tr><th scope="row">Backward whirl</th><td class="frequency">333.73</td><td>Rotating extension; 3000 rpm, stationary frame.</td></tr>
+                  <tr><th scope="row">Forward whirl</th><td class="frequency">335.13</td><td>Rotating extension; 3000 rpm, stationary frame.</td></tr>
                 </tbody>
               </table>
             </div>
