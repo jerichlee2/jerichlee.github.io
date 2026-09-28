@@ -38,13 +38,10 @@
     <text x="405" y="260" font-size="17">T-slot wall</text>
     <path d="M315 281V365" stroke="#b93626" stroke-width="2.6" marker-end="url(#force-arrow)"/>
     <text x="334" y="336" font-size="26" fill="#b93626" font-style="italic">F<tspan baseline-shift="sub" font-size="17">max</tspan></text>
-    <text x="28" y="439" font-size="19">Stopping rotation is predicted from stiffness.</text>
-    <text x="28" y="467" font-size="19">It is not the indexing travel.</text>
     </g>
 
     <g id="bolt-panel" transform="translate(560 -355)">
     <text x="28" y="478" font-size="23">(b) Equivalent bolt bending</text>
-    <text x="28" y="508" font-size="19" fill="#666">One initially unloaded circular cantilever.</text>
     <rect x="100" y="561" width="24" height="127" fill="url(#hatch)"/>
     <path d="M124 561V688" stroke="#252525" stroke-width="2.2"/>
     <rect x="124" y="605" width="204" height="25" fill="#f5f5f5" stroke="#252525" stroke-width="1.8"/>
@@ -65,7 +62,6 @@
 
     <text x="36" y="767" font-size="24" font-style="italic">k<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline" font-style="normal"> = 3</tspan>E I<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline" font-style="normal"> / </tspan>L<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="super" font-size="16">3</tspan></text>
     <text x="294" y="767" font-size="24" font-style="italic">F<tspan baseline-shift="sub" font-size="16">max</tspan><tspan baseline-shift="baseline" font-style="normal"> = </tspan>k<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline"> δ</tspan><tspan baseline-shift="sub" font-size="16">max</tspan></text>
-    <text x="28" y="822" font-size="18" fill="#666">Assumed free span; local thread stresses omitted.</text>
     </g>
   </g>
 </svg>
