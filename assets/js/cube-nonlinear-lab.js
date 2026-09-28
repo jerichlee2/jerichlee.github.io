@@ -50,7 +50,6 @@
         <div class="cube-well-grid">
           ${layouts.map(layout => `<section class="cube-well" aria-labelledby="cube-well-${layout.key}-title"><h4 id="cube-well-${layout.key}-title" class="cube-${layout.key}-text">${layout.key === "root" ? "Root: wider, gentler bowl" : "Side: narrower, firmer bowl"}</h4><div id="cube-well-${layout.key}-chart" class="cube-chart-host"></div><p class="cube-well-readout" id="cube-well-${layout.key}-readout"></p></section>`).join("")}
         </div>
-        <figcaption>Alignment is the bottom of each bowl at 0°; 45° is an unwanted resting place. Ridges: root ±${data.models.root.summary.barrier_angle_deg.toFixed(2)}°, side ±${data.models.side.summary.barrier_angle_deg.toFixed(2)}°. Enough starting speed can carry a layer over a ridge.</figcaption>
       </figure>
       <figure class="cube-chart cube-chart-wide" id="cube-panel-angle" role="tabpanel" aria-labelledby="cube-tab-angle" tabindex="0" hidden><h4>Layer angle</h4><div id="cube-angle-chart" class="cube-chart-host"></div><figcaption>Angle from the intended 0° alignment.</figcaption></figure>
       <figure class="cube-chart cube-chart-wide" id="cube-panel-speed" role="tabpanel" aria-labelledby="cube-tab-speed" tabindex="0" hidden><h4>Turning speed</h4><div id="cube-speed-chart" class="cube-chart-host"></div><figcaption>Positive and negative values show opposite turning directions.</figcaption></figure>

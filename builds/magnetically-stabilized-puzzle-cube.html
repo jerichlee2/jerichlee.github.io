@@ -16,7 +16,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/cube-nonlinear-data.js?v=1"></script>
     <script defer src="../assets/js/cube-potential-data.js?v=1"></script>
-    <script defer src="../assets/js/cube-nonlinear-lab.js?v=9"></script>
+    <script defer src="../assets/js/cube-nonlinear-lab.js?v=10"></script>
     <script defer src="../assets/js/cube-results-viewer.js?v=2"></script>
   </head>
   <body id="page-top" tabindex="-1">
@@ -106,8 +106,7 @@
               <h3 id="cube-model-title">Reduced-order system model</h3>
               <p>I modeled the positive-z layer—four complete edges, four corners, and one center—as a rigid body about a fixed vertical axis, with angle measured from alignment and the remainder fixed. Inertia includes pieces, magnets, and adhesive mass; magnets follow piece ownership. This uncalibrated 1-DOF model omits dry friction, contact/impact, axial motion, compliance, and independent cubie motion.</p>
               <div class="cube-table-wrap">
-                <table class="cube-comparison">
-                  <caption>Common model inputs</caption>
+                <table class="cube-comparison" aria-label="Common model inputs">
                   <thead><tr><th scope="col">Input</th><th scope="col">Value</th></tr></thead>
                   <tbody>
                     <tr><th scope="row">Cube envelope</th><td>\(56\ \mathrm{mm}\)</td></tr>
@@ -148,8 +147,7 @@
                 \end{aligned}
               \]</div>
               <div class="cube-table-wrap cube-model-parameters" role="region" aria-label="Root and side model parameters; scroll horizontally on narrow screens" tabindex="0">
-                <table class="cube-comparison">
-                  <caption>Layout parameters and local fit coefficients</caption>
+                <table class="cube-comparison" aria-label="Layout parameters and local fit coefficients">
                   <thead><tr><th scope="col">Parameter</th><th scope="col">Root-mounted</th><th scope="col">Side-mounted</th></tr></thead>
                   <tbody>
                     <tr><th scope="row">\(J\) (kg·m²)</th><td>\(1.0916\times10^{-5}\)</td><td>\(1.1732\times10^{-5}\)</td></tr>
@@ -175,7 +173,6 @@
           <section class="build-section cube-study" aria-labelledby="cube-explore-title">
             <h2 id="cube-explore-title" tabindex="-1">Explore the Motion</h2>
             <p>Choose a starting condition, press Play, or drag the time slider: the two magnet views and every live plot follow the same physical moment.</p>
-            <p class="cube-model-playback">The phase plots replay saved nonlinear trajectories; the well profiles are report-derived views of the full potential. Linear interpolation is display-only—the browser does not solve a new equation of motion or linearize the physical model.</p>
             <div id="cube-nonlinear-lab">
               <p>Interactive playback requires JavaScript; the reference plots are available below.</p>
             </div>
