@@ -3,18 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jerich Lee</title>
-    <meta
-      name="description"
-      content="The personal website of Jerich Lee: work, projects, course notes, writing, and contact information."
-    >
-    <meta property="og:title" content="Jerich Lee">
-    <meta
-      property="og:description"
-      content="Work, projects, course notes, writing, and contact information for Jerich Lee."
-    >
+    <title>Jerich Lee | Builds</title>
+    <meta name="description" content="Engineering projects by Jerich Lee, organized into Testing, Mechanical Design, and Simulation &amp; Analysis.">
+    <meta property="og:title" content="Jerich Lee | Builds">
+    <meta property="og:description" content="Engineering projects and prototypes by Jerich Lee.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jerichlee.com/">
+    <link rel="canonical" href="https://jerichlee.com/">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -22,7 +17,7 @@
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=15">
   </head>
-  <body>
+  <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
         <a class="site-title" href="#home" aria-label="Jerich Lee home">
@@ -30,83 +25,120 @@
         </a>
 
         <nav class="nav">
-          <a href="builds/index.html">builds</a>
+          <a href="#builds-title" aria-current="page">builds</a>
           <a href="contact/index.html">contact</a>
         </nav>
       </aside>
 
       <main class="content" id="home">
-        <section class="intro" aria-label="Introduction">
-          <p class="lede">
-            I am a builder that finds beauty in nonlinear interaction,
-            model-reality loss, and deciding what systems are worth capturing.
+        <section aria-labelledby="builds-title">
+          <h1 id="builds-title">Builds</h1>
+          <p class="empty-note">
+            Engineering projects and prototypes.
           </p>
-        </section>
 
-        <section aria-labelledby="about-title">
-          <h2 id="about-title">About</h2>
-          <p>
-            Welcome to my homepage. My academic training is in engineering
-            mechanics and pure mathematics, and I studied solid mechanics at the
-            graduate level. This site gathers my current work, selected
-            projects, course notes, writing, and ways to get in touch.
-          </p>
-        </section>
+          <section class="build-section" aria-labelledby="testing-title">
+            <h2 id="testing-title">Testing</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="builds/ablative-material-testing-fixture.html">
+                  <img src="assets/builds/ablative-material-testing-fixture/test-rig.jpg" alt="Ablative testing rig with an indexed specimen holder and fixed torch" width="128" height="96">
+                  <span>
+                    <strong>Ablative Material Testing Fixture</strong>
+                    <em>Torch-based ablative testing and graphite-calibrated inverse heat-flux estimation.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/spindle-vibration-deflection-reduction.html">
+                  <img src="assets/builds/spindle-vibration-deflection-reduction/cutting-thumbnail.png" alt="Spindle and cutting tool machining a workpiece during vibration testing" width="128" height="96">
+                  <span>
+                    <strong>Spindle Vibration Reduction</strong>
+                    <em>Mitigating spindle vibration via experimental modal analysis and bearing-stack redesign.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/pigjaw-scaffold-interface-testing.html">
+                  <span class="fixture-thumbnail">
+                    <img src="assets/builds/pigjaw-scaffold-interface-testing/fixture-thumbnail.png" alt="Metal Pigjaw push-out fixture with a circular center opening and mounting slots" width="462" height="402">
+                  </span>
+                  <span>
+                    <strong>Pigjaw Fixture Testing</strong>
+                    <em>PLA fixture analysis and the metal push-out fixture I built for scaffold–bone testing.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
 
-        <footer>
-          <p>Last modified: <time id="last-modified" datetime="2026-05-07">May 7, 2026</time>. &copy; <span id="copyright-year">2026</span> Jerich Lee.</p>
-        </footer>
+          <section class="build-section" aria-labelledby="mechanical-design-title">
+            <h2 id="mechanical-design-title">Mechanical Design</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="builds/magnetically-stabilized-puzzle-cube.html">
+                  <img src="assets/builds/magnetically-stabilized-puzzle-cube/cover.jpg" alt="Magnetically Stabilized Puzzle Cube thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Magnetically Stabilized Puzzle Cube</strong>
+                    <em>A mechanically redesigned Rubik’s-style cube optimized for stability, precision, and speed solving.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/rube-goldberg-me270.html">
+                  <img src="assets/builds/rube-goldberg-me270/cover.png" alt="Desktop Rube Goldberg Machine thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Desktop Rube Goldberg Machine</strong>
+                    <em>A 10+ step marble-powered machine designed under strict DFM constraints.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/pedal-guitar-string-tensioner.html">
+                  <img src="assets/builds/pedal-guitar-string-tensioner/cover.png" alt="Pedal-Actuated Guitar String Tensioner thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Pedal-Actuated Guitar String Tensioner</strong>
+                    <em>Low-cost pedal mechanism enabling controlled pitch modulation via precise string tension adjustment.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="build-section" aria-labelledby="simulation-title">
+            <h2 id="simulation-title">Simulation &amp; Analysis</h2>
+            <ul class="build-list">
+              <li>
+                <a class="build-entry" href="builds/discretizing-2d-heat-equation.html">
+                  <img src="assets/builds/discretizing-2d-heat-equation/cover.png" alt="Discretizing the 2D Heat Equation with Radiative Boundary Conditions thumbnail" width="128" height="96">
+                  <span>
+                    <strong>2D Heat Transfer Simulation</strong>
+                    <em>Explicit finite-difference simulation of transient heat conduction with nonlinear radiation boundary conditions.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/microchannel-transport-processes.html">
+                  <img src="assets/builds/microchannel-transport-processes/cover.png" alt="Microchannel Transport Processes thumbnail" width="128" height="96">
+                  <span>
+                    <strong>Microchannel Transport Processes</strong>
+                    <em>Numerical and CFD analysis of coupled heat, mass, and reaction transport in a pressure-driven microchannel reactor.</em>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="build-entry" href="builds/pressure-vessel-analysis-platform.html">
+                  <img src="assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" alt="ANSYS pressure-vessel analysis showing the meshed model, normal-stress contours, and results legend" width="128" height="96">
+                  <span>
+                    <strong>Rapid Pressure Vessel Design Screening</strong>
+                    <em>Web-based pressure-vessel calculations with elastic and elastoplastic models compared against ANSYS.</em>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </section>
       </main>
     </div>
-    <script>
-      (function () {
-        var modifiedTime = document.getElementById("last-modified");
-        var copyrightYear = document.getElementById("copyright-year");
-        var liveHosts = ["jerichlee.com", "www.jerichlee.com"];
-
-        function setModifiedDate(date) {
-          if (!modifiedTime || Number.isNaN(date.getTime())) {
-            return;
-          }
-
-          modifiedTime.dateTime = date.toISOString().slice(0, 10);
-          modifiedTime.textContent = new Intl.DateTimeFormat("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-          }).format(date);
-        }
-
-        if (copyrightYear) {
-          copyrightYear.textContent = new Date().getFullYear();
-        }
-
-        setModifiedDate(new Date(document.lastModified));
-
-        if (liveHosts.indexOf(window.location.hostname) !== -1) {
-          fetch("https://api.github.com/repos/jerichlee2/jerichlee.github.io/commits/main")
-            .then(function (response) {
-              if (!response.ok) {
-                throw new Error("Could not fetch latest commit.");
-              }
-
-              return response.json();
-            })
-            .then(function (data) {
-              if (
-                data &&
-                data.commit &&
-                data.commit.committer &&
-                data.commit.committer.date
-              ) {
-                setModifiedDate(new Date(data.commit.committer.date));
-              }
-            })
-            .catch(function () {
-              setModifiedDate(new Date(document.lastModified));
-            });
-        }
-      })();
-    </script>
   </body>
 </html>
