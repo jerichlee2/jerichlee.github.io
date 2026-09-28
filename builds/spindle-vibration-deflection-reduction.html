@@ -61,6 +61,9 @@
         line-height: 1.4;
         text-align: left;
       }
+      .spindle-project .frequency-table.model-coefficients {
+        min-width: 0;
+      }
       .spindle-project .frequency-table caption {
         text-align: left;
         padding-bottom: 0.6rem;
@@ -251,56 +254,57 @@
               <figcaption>Retrospective stepped-beam approximation of the motor-end overhang. Dimensions were estimated from report figures. Rev A, page 3.</figcaption>
             </figure>
             <div class="article-body essential-model">
-              <p>The baseline is an undamped, nonrotating Euler–Bernoulli beam, ideally clamped at the root: \(w(0)=w'(0)=0\). Let \(s\) run from the root to the free tail at \(L\). The stepped sections have bending rigidity \(E(s)I(s)\) and mass per length \(\mu(s)=\rho(s)A(s)\); the C-ring is a point mass \(m_r\) at \(s_r\).</p>
+              <p>The baseline is a linear, undamped Euler–Bernoulli beam with an ideal root clamp and free tail. The axial coordinate \(s\) runs from the root to \(L\); the stepped sections have rigidity \(E(s)I(s)\) and line density \(\mu(s)=\rho(s)A(s)\). The C-ring contributes a point mass \(m_r\) at \(s_r\).</p>
 
-              <h3 id="spindle-rayleigh-title">Rayleigh estimate: one bending shape</h3>
-              <p>Use the static tip-load deflection \(v(s)\) as a trial shape, normalized by \(\phi(s)=v(s)/v(L)\). Then \(w(s,t)=\phi(s)q(t)\), where \(q\) is tail displacement. The tip stiffness and shape-weighted mass are:</p>
+              <div class="frequency-table-scroll" role="region" aria-label="Evaluated reduced-model coefficients and spin condition" tabindex="0">
+                <table class="frequency-table model-coefficients" aria-label="Evaluated reduced-model coefficients and spin condition">
+                  <thead>
+                    <tr><th scope="col">Quantity</th><th scope="col">Symbol</th><th scope="col">Model value</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Tip stiffness</th><td>\(k_L\)</td><td>\(3.08262016\times10^6~\mathrm{N/m}\)</td></tr>
+                    <tr><th scope="row">Translational modal mass</th><td>\(m_{\mathrm{eff}}\)</td><td>\(0.688433~\mathrm{kg}\)</td></tr>
+                    <tr><th scope="row">Rotary-inertia contribution</th><td>\(m_\theta\)</td><td>\(0.00971902~\mathrm{kg}\)</td></tr>
+                    <tr><th scope="row">Total modal mass</th><td>\(m\)</td><td>\(0.69815157~\mathrm{kg}\)</td></tr>
+                    <tr><th scope="row">Gyroscopic coefficient</th><td>\(g\)</td><td>\(0.01943803~\mathrm{kg}\)</td></tr>
+                    <tr><th scope="row">Spin speed</th><td>\(N\)</td><td>\(3000~\mathrm{rpm}\)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 id="spindle-rayleigh-title">Nonrotating Rayleigh model</h3>
+              <p>The static tip-load deflection \(v(s)\) defines the normalized trial shape; \(q(t)\) is tail displacement. Primes denote derivatives with respect to \(s\).</p>
               <div class="article-equation">
                 \[
-                k_L^{-1}=\int_0^L\frac{(L-s)^2}{E(s)I(s)}\,ds
+                \phi(s)=\frac{v(s)}{v(L)},\qquad
+                w(s,t)=\phi(s)q(t),\qquad
+                \phi(0)=\phi'(0)=0
                 \]
               </div>
               <div class="article-equation">
                 \[
                 \begin{aligned}
-                m_{\mathrm{eff}}&amp;=\int_0^L\mu(s)\phi(s)^2\,ds\\
-                &amp;\quad+m_r\phi(s_r)^2
+                k_L^{-1}&amp;=\int_0^L\frac{(L-s)^2}{E(s)I(s)}\,ds\\
+                m_{\mathrm{eff}}&amp;=\int_0^L\mu(s)\phi(s)^2\,ds+m_r\phi(s_r)^2
                 \end{aligned}
                 \]
               </div>
-              <div class="article-equation">
+              <div class="article-equation model-frequency-result" id="spindle-rayleigh-result">
                 \[
                 \begin{gathered}
                 m_{\mathrm{eff}}\ddot q+k_Lq=0\\
-                f_R=\frac{1}{2\pi}\sqrt{\frac{k_L}{m_{\mathrm{eff}}}}
+                \boxed{f_R=\frac{1}{2\pi}\sqrt{\frac{k_L}{m_{\mathrm{eff}}}}\approx336.8~\mathrm{Hz}}
                 \end{gathered}
                 \]
               </div>
-              <p id="spindle-rayleigh-result"><strong>Numerical evaluation.</strong> For the assumed nonrotating overhang, the stiffness and shape-weighted mass evaluate to:</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
-                k_L&amp;\approx 3.08262\times10^6~\mathrm{N/m}\\
-                m_{\mathrm{eff}}&amp;\approx 0.688433~\mathrm{kg}
-                \end{aligned}
-                \]
-              </div>
-              <p>Substitute into the frequency expression:</p>
-              <div class="article-equation">
-                \[
-                f_R\approx\frac{1}{2\pi}
-                \sqrt{\frac{3.08262\times10^6}{0.688433}}~\mathrm{Hz}
-                \]
-              </div>
-              <div class="article-equation model-frequency-result">
-                \[
-                \boxed{f_R\approx336.8~\mathrm{Hz}}
-                \]
-              </div>
-              <p>The \(\phi^2\) weighting counts how much each part moves, rather than treating the whole assembly as a mass at the tip.</p>
 
-              <h3 id="spindle-rotordynamics-title">Rotating effects: one shape in two planes</h3>
-              <p>Rev B keeps the Rayleigh shape \(\phi\) and stiffness \(k_L\), but allows transverse motion \(w_x=\phi q_x\) and \(w_y=\phi q_y\). This uses one spatial shape in two perpendicular planes. Cross-sectional tilting adds rotary inertia \(m_\theta\) and a gyroscopic coefficient \(g\). Primes denote derivatives with respect to \(s\):</p>
+              <h3 id="spindle-rotordynamics-title">Rotating extension</h3>
+              <p>The extension retains the same shape and stiffness in two transverse planes, adding rotary inertia and gyroscopic coupling. The cross-sectional area moments \(I\) and \(J_p\) satisfy \(J_p=2I\) for the circular equivalents.</p>
+              <div class="article-equation">
+                \[
+                w_x=\phi q_x,\qquad w_y=\phi q_y
+                \]
+              </div>
               <div class="article-equation">
                 \[
                 \begin{aligned}
@@ -310,7 +314,7 @@
                 \end{aligned}
                 \]
               </div>
-              <p>Here \(I\) and \(J_p\) are cross-sectional area moments; \(J_p=2I\) for the circular equivalents. For constant positive spin \(\Omega\) about \(+s\), using right-handed fixed axes \((x,y,s)\):</p>
+              <p>For constant positive spin about \(+s\), the linear equations in right-handed, stationary axes \((x,y,s)\) are:</p>
               <div class="article-equation">
                 \[
                 \begin{aligned}
@@ -321,74 +325,27 @@
               </div>
               <div class="article-equation">
                 \[
-                \begin{gathered}
-                \omega_0=\sqrt{k_L/m}\\
-                a=\frac{g\Omega}{2m}\\
-                \omega_\pm=\sqrt{\omega_0^2+a^2}\pm a\\
-                f_\pm=\frac{\omega_\pm}{2\pi}
-                \end{gathered}
-                \]
-              </div>
-              <p id="spindle-rotation-results-title"><strong>Numerical evaluation.</strong> The rotary-inertia integrals give the following values, with the original stiffness unchanged:</p>
-              <div class="article-equation">
-                \[
                 \begin{aligned}
-                m_\theta&amp;\approx0.00971902~\mathrm{kg}\\
-                m&amp;\approx0.69815157~\mathrm{kg}\\
-                g&amp;\approx0.01943803~\mathrm{kg}
-                \end{aligned}
-                \]
-              </div>
-              <p>First, include rotary inertia at zero spin:</p>
-              <div class="article-equation">
-                \[
-                \begin{aligned}
+                \Omega&amp;=\frac{2\pi N}{60}\approx314.15927~\mathrm{rad/s}\\
                 f_0&amp;=\frac{1}{2\pi}\sqrt{\frac{k_L}{m}}\\
-                &amp;\approx\frac{1}{2\pi}
-                \sqrt{\frac{3.08262016\times10^6}{0.69815157}}~\mathrm{Hz}
+                b&amp;=\frac{g\Omega}{4\pi m}\approx0.69605~\mathrm{Hz}\\
+                f_\pm&amp;=\sqrt{f_0^2+b^2}\pm b
                 \end{aligned}
                 \]
               </div>
-              <div class="article-equation model-frequency-result">
+              <p>Here \(f_0\) includes rotary inertia at zero spin; \(f_-\) and \(f_+\) are the backward- and forward-whirl branches at 3000 rpm.</p>
+              <div class="article-equation model-frequency-result" id="spindle-rotation-results-title">
                 \[
-                \boxed{f_0\approx334.43~\mathrm{Hz}}
-                \]
-              </div>
-              <p>Next, set the spin speed to <strong>3000 rpm</strong>. Express the gyroscopic term in Hz as \(b=a/(2\pi)\):</p>
-              <div class="article-equation">
-                \[
+                \boxed{
                 \begin{aligned}
-                \Omega&amp;=3000\frac{2\pi}{60}~\mathrm{rad/s}\\
-                &amp;\approx314.15927~\mathrm{rad/s}\\
-                b&amp;=\frac{g\Omega}{4\pi m}\\
-                 &amp;\approx0.69605~\mathrm{Hz}
+                f_0&amp;\approx334.43~\mathrm{Hz}\\
+                f_-&amp;\approx333.73~\mathrm{Hz}\\
+                f_+&amp;\approx335.13~\mathrm{Hz}
                 \end{aligned}
+                }
                 \]
               </div>
-              <p>The lower, backward-whirl branch is:</p>
-              <div class="article-equation">
-                \[
-                f_-=\sqrt{f_0^2+b^2}-b
-                \]
-              </div>
-              <div class="article-equation model-frequency-result">
-                \[
-                \boxed{f_-\approx333.73~\mathrm{Hz}}
-                \]
-              </div>
-              <p>The upper, forward-whirl branch is:</p>
-              <div class="article-equation">
-                \[
-                f_+=\sqrt{f_0^2+b^2}+b
-                \]
-              </div>
-              <div class="article-equation model-frequency-result">
-                \[
-                \boxed{f_+\approx335.13~\mathrm{Hz}}
-                \]
-              </div>
-              <p>These are stationary-frame predictions, not measurements; boxed results use full-precision calculations.</p>
-              <p>Here, \(+\)/\(−\) denote forward/backward whirl. Rotary inertia lowers their shared zero-spin frequency relative to Rayleigh. Gyroscopic coupling splits them without damping; the backward branch’s proximity to Rayleigh–Ritz is coincidental.</p>
+              <p>Rotary inertia lowers the zero-spin frequency; gyroscopic coupling splits the stationary-frame branches without damping. These are model predictions, not measurements. Results use full-precision coefficients; the backward branch’s proximity to the independent Rayleigh–Ritz estimate is coincidental.</p>
             </div>
           </section>
 
