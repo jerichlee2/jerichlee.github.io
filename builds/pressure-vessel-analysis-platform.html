@@ -60,12 +60,12 @@
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
-        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" target="_blank" rel="noopener">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" rel="noopener">
           <span>Jerich Lee</span>
         </a>
         <nav class="nav">
-          <a href="../builds/index.html" target="_blank" rel="noopener">builds</a>
-          <a href="../contact/index.html" target="_blank" rel="noopener">contact</a>
+          <a href="../builds/index.html" rel="noopener">builds</a>
+          <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
@@ -74,7 +74,7 @@
           <p class="article-meta">Builds · 2026</p>
           <h1>Rapid Pressure Vessel Design Screening</h1>
           <figure class="article-figure">
-            <a href="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" target="_blank" rel="noopener">
+            <a href="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" rel="noopener">
               <img src="../assets/builds/pressure-vessel-analysis-platform/normal-stress-mesh-source.jpg" alt="ANSYS pressure-vessel analysis showing the meshed model, normal-stress contours, and results legend" width="1189" height="1032" fetchpriority="high">
             </a>
           </figure>
@@ -104,7 +104,7 @@
               <p>A FastAPI backend validates requests and runs the mechanics in SI units. The browser handles display-unit conversion, plots, and PDF, CSV, and JSON exports. Authentication and saved calculations make it possible to return to previous studies without rebuilding their inputs.</p>
             </div>
             <figure class="article-figure is-wide">
-              <a href="../assets/builds/pressure-vessel-analysis-platform/app-plastic-strain-profile.png" target="_blank" rel="noopener">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/app-plastic-strain-profile.png" rel="noopener">
                 <img src="../assets/builds/pressure-vessel-analysis-platform/app-plastic-strain-profile.png" alt="Calculator interface with selectable radial quantities and a plot of equivalent plastic strain decreasing from the inner to outer vessel wall" width="833" height="517" loading="lazy">
               </a>
               <figcaption>A representative application view: selectable through-wall profiles and a marked critical location. This interface example is separate from the corrected P06 benchmark in the FEA comparison section.</figcaption>
@@ -131,7 +131,7 @@
 
               <h3>Computing engine and hardware</h3>
               <p>The saved implementation uses a custom Python/NumPy solver on the CPU, accessed through a FastAPI backend. It assembles the one-dimensional radial equilibrium problem, advances the load adaptively, and solves the Newton correction systems with NumPy’s dense linear algebra. The calculation is performed by the backend, not by the browser or an ANSYS solver.</p>
-              <p>The 4.523-second run used the same Linux workstation as the <a href="microchannel-transport-processes.html#microchannel-transport-processes-process-title" target="_blank" rel="noopener">Microchannel Transport Processes</a> project: an <strong>AMD Ryzen 7 7800X3D processor (8 cores, 16 threads)</strong> with <strong>32 GB DDR5 RAM</strong>. The run’s active thread count and numerical-library versions were not recorded.</p>
+              <p>The 4.523-second run used the same Linux workstation as the <a href="microchannel-transport-processes.html#microchannel-transport-processes-process-title" rel="noopener">Microchannel Transport Processes</a> project: an <strong>AMD Ryzen 7 7800X3D processor (8 cores, 16 threads)</strong> with <strong>32 GB DDR5 RAM</strong>. The run’s active thread count and numerical-library versions were not recorded.</p>
               <p>The recorded value is backend compute time, not total browser-to-result latency. A matched ANSYS runtime and repeated timing measurements were not reported, so it does not establish a numerical speedup factor. The demonstrated result is a seconds-scale nonlinear example within a calculator designed for rapid screening.</p>
             </div>
           </section>
@@ -176,7 +176,7 @@
               <p>Adding multilinear hardening support let the backend use the same plastic-strain/stress table as ANSYS. Repeating the comparison with matched constitutive inputs substantially improved agreement. This became the central lesson of the project: a solver comparison is only meaningful when the geometry, loads, and material definitions are aligned.</p>
             </div>
             <figure class="article-figure is-wide">
-              <a href="../assets/builds/pressure-vessel-analysis-platform/hardening-law-comparison.png" target="_blank" rel="noopener">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/hardening-law-comparison.png" rel="noopener">
                 <img src="../assets/builds/pressure-vessel-analysis-platform/hardening-law-comparison.png" alt="Flow stress versus equivalent plastic strain, comparing the softer original power-law curve with the multilinear hardening table shared by ANSYS and the corrected backend" width="2234" height="1567" loading="lazy">
               </a>
               <figcaption>The original and aligned hardening laws. The corrected backend uses the same piecewise-linear material table as the ANSYS comparison.</figcaption>
@@ -190,7 +190,7 @@
               <p>The final report records the following mean absolute percent errors for the selected benchmark outputs. These are numerical comparisons with ANSYS, not experimental measurements. The table scrolls horizontally on smaller screens.</p>
             </div>
             <figure class="article-figure is-wide">
-              <a href="../assets/builds/pressure-vessel-analysis-platform/von-mises-comparison.png" target="_blank" rel="noopener">
+              <a href="../assets/builds/pressure-vessel-analysis-platform/von-mises-comparison.png" rel="noopener">
                 <img src="../assets/builds/pressure-vessel-analysis-platform/von-mises-comparison.png" alt="ANSYS and the updated one-dimensional solver predict closely overlapping von Mises stress profiles across the wall in the P06 pressure-vessel case" width="2234" height="1569" loading="lazy">
               </a>
               <figcaption>One-dimensional elastoplastic solver compared with ANSYS at 100 MPa internal pressure, after aligning the material hardening law. Open the figure for the full-resolution comparison.</figcaption>
