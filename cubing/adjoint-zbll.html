@@ -86,17 +86,6 @@
               other pieces differently. Include setups and rotations, and stick to that
               choice when making later predictions.
             </p>
-            <details>
-              <summary>Why the notes say 8 → 6 → 4 → 2</summary>
-              <p>
-                Four pairs need eight sticker addresses: one corner and one edge per pair.
-                Once a pair is solved, you can stop tracking it. Three pairs need six
-                addresses, then four, then two. You still have to remember your chosen
-                algorithms and reference frame; this is not a claim that the entire solve
-                fits into eight items of memory. Speffz also uses separate corner and edge
-                alphabets, so a letter needs its piece type to be unambiguous.
-              </p>
-            </details>
 
             <h2>3. Send the question backward</h2>
             <p>
@@ -148,21 +137,14 @@
               and inspect the current UR sticker. For a longer sequence, undo the moves
               in reverse order <em>on the position you are tracing</em>.
             </p>
+            <h3>How that scales to cross + three pairs</h3>
             <p>
-              The real cube stays scrambled. These are mental location changes, not
-              physical inverse turns. In official inspection,
-              <a href="https://www.worldcubeassociation.org/regulations/#A3c1">you cannot make layer turns</a>.
+              Trace the future position backward through the third pair’s inverse,
+              then the second pair’s inverse, then the first pair’s inverse, then the
+              cross’s inverse. To predict a position after ZBLS, first trace through
+              the chosen ZBLS algorithm’s inverse, then through that same F2L prefix.
+              Changing any planned moves means recalculating the affected queries.
             </p>
-            <details>
-              <summary>How that scales to cross + three pairs</summary>
-              <p>
-                Trace the future position backward through the third pair’s inverse,
-                then the second pair’s inverse, then the first pair’s inverse, then the
-                cross’s inverse. To predict a position after ZBLS, first trace through
-                the chosen ZBLS algorithm’s inverse, then through that same F2L prefix.
-                Changing any planned moves means recalculating the affected queries.
-              </p>
-            </details>
 
             <h2>4. Ask only what the next step needs</h2>
             <h3>Before ZBLS: which edges are flipped?</h3>
@@ -207,20 +189,6 @@
               observation reads a whole corner’s identity and orientation. Nor does
               mathematical sufficiency mean it is easy to decode quickly.
             </p>
-            <details>
-              <summary>What does “parity” mean here?</summary>
-              <p>
-                An arrangement is even or odd according to whether it takes an even
-                or odd number of two-piece swaps to make it. A legal 3×3 has matching
-                corner and edge permutation parity. Once F2L is solved and the corners
-                are known, swapping just the two unknown edges would break that match.
-              </p>
-              <p>
-                This is also why the original notes discuss 12 relative edge patterns:
-                with the corner arrangement fixed, only half of the 24 possible edge
-                permutations are legal. It does not mean there are only 12 ZBLL cases.
-              </p>
-            </details>
 
             <h2>The idea to take away</h2>
             <p>
@@ -228,16 +196,6 @@
               question becomes relevant, trace that question backward to the scramble.
               The math explains which information is enough; the open question is how
               much of that process a human can learn to do accurately within inspection.
-            </p>
-            <p class="azbc-source">
-              Adapted from my September 2026
-              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf">A Mathematical Inspection Architecture for Full-ZB 3×3 Speedcubing</a>
-              (88-page PDF). For the technical version, see
-              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=18">sections 8–10 on backward queries</a>,
-              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=27">section 15 on training</a>, and
-              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=69">Appendix F’s worked solve</a>.
-              For the more personal side of learning the algset, see
-              <a href="the-joy-of-zbll.html">The Joy of ZBLL</a>.
             </p>
           </div>
           <nav class="page-return" aria-label="Page navigation">
