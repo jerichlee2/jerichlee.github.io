@@ -7,6 +7,17 @@ exclude:
   - node_modules
   - vendor
   - output
+  # Temporarily unpublished sections. Keep source files for later restoration.
+  - notes
+  - writing
+  - media
+  - guitar
+  - cubing
+  # Assets used only by the temporarily unpublished sections.
+  - assets/cubing
+  - assets/chipotlean
+  - assets/demons-penguin-classics-cover.jpg
+  - assets/flowers-for-algernon-cover.jpg
   # Archived section absent from the current navigation.
   - grappling
   # Unlisted projects and their assets.
