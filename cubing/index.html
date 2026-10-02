@@ -6,7 +6,7 @@
     <title>Cubing | Jerich Lee</title>
     <meta
       name="description"
-      content="Cubing notes and entries by Jerich Lee."
+      content="Jerich Lee’s official WCA results, 3×3 personal bests and rankings, cubing projects, and notes."
     >
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
@@ -26,6 +26,72 @@
         justify-self: center;
         border-radius: 20%;
         background: transparent;
+      }
+
+      .wca-summary {
+        margin-bottom: 2.5rem;
+      }
+
+      .wca-table-wrap {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .wca-table-wrap:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+      }
+
+      .wca-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .wca-table caption {
+        padding-bottom: 0.5rem;
+        text-align: left;
+      }
+
+      .wca-table th,
+      .wca-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 0.6rem 0.4rem;
+        text-align: right;
+      }
+
+      .wca-table th:first-child {
+        padding-left: 0;
+        text-align: left;
+      }
+
+      .wca-table th:last-child,
+      .wca-table td:last-child {
+        padding-right: 0;
+      }
+
+      .wca-table tbody th {
+        font-weight: 400;
+      }
+
+      .wca-table td {
+        white-space: nowrap;
+      }
+
+      .content .wca-summary p {
+        text-align: left;
+      }
+
+      @media (max-width: 400px) {
+        .wca-table {
+          font-size: 0.84rem;
+        }
+
+        .wca-table th,
+        .wca-table td {
+          padding: 0.55rem 0.2rem;
+        }
       }
     </style>
   </head>
@@ -51,6 +117,44 @@
       <main class="content">
         <section aria-labelledby="cubing-title">
           <h1 id="cubing-title">Cubing</h1>
+
+          <section class="wca-summary" aria-labelledby="wca-title">
+            <h2 id="wca-title">Official results</h2>
+            <p>
+              <a href="https://www.worldcubeassociation.org/persons/2015LEEJ02">My WCA profile</a>
+              &middot; WCA ID: 2015LEEJ02
+            </p>
+            <div class="wca-table-wrap" role="region" aria-labelledby="wca-records-caption" tabindex="0">
+              <table class="wca-table" data-rankings-checked="2026-10-02">
+                <caption id="wca-records-caption">3×3 personal bests and rankings</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Result</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">World</th>
+                    <th scope="col">North America</th>
+                    <th scope="col">United States</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Single</th>
+                    <td>6.66 s</td>
+                    <td>2,854</td>
+                    <td>783</td>
+                    <td>637</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Average</th>
+                    <td>7.90 s</td>
+                    <td>1,742</td>
+                    <td>499</td>
+                    <td>417</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
 
           <section class="month-group" aria-labelledby="september-2026-title">
             <h2 id="september-2026-title">September 2026</h2>
