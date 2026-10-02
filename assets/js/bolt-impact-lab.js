@@ -11,15 +11,16 @@
   const translationScales = [1, 10, 25, 50, 100], defaultTranslationScale = 50;
   const ranges = [
     ["omega", "Impact speed", 0, 5, .05, "rad/s"],
-    ["stopAngle", "Stop compliance", 5, 20, .5, "°"],
+    ["stopAngle", "Assumed stop angle", 5, 20, .5, "°"],
     ["diameter", "Bolt diameter", .16, .25, .005, "in"],
     ["length", "Bolt length", 1.5, 3, .05, "in"]
   ];
   const canvas = (id, label) => `<canvas id="bolt-${id}" class="bolt-visual" width="880" height="600" ${id === "space" ? 'role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="360" aria-valuenow="34.4" aria-describedby="bolt-space-instructions bolt-space-readout"' : id === "motion" ? 'role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" aria-describedby="bolt-motion-instructions"' : 'role="img"'} aria-label="${label}"></canvas>`;
   mount.innerHTML = `
     <div class="bolt-controls">
-      <h3>Bolt settings</h3>
+      <h3>Bolt what-if settings</h3>
       <p class="bolt-material-fixed">Assumed Grade 2 steel · fixed</p>
+      <p class="bolt-material-fixed">Unvalidated fixed-angle example.</p>
       <p class="bolt-material-fixed">One-sided strain input: 0 → peak → 0.</p>
       <div class="bolt-settings">
         ${ranges.map(([key, label, min, max, step, unit]) => `<label for="bolt-${key}"><span class="bolt-control-head"><span>${label}</span><output id="bolt-${key}-value" for="bolt-${key}"></output></span><input id="bolt-${key}" type="range" min="${min}" max="${max}" step="${step}" data-parameter="${key}" aria-label="${label} (${unit})"></label>`).join("")}
@@ -40,9 +41,9 @@
       </div>
     </div>
     <div class="bolt-metrics">
-      <div><span class="bolt-metric-label">Peak elastic estimate</span><strong id="bolt-demand-value" class="bolt-metric-value"></strong></div>
-      <div><span class="bolt-metric-label">First-yield speed · no safety factor</span><strong id="bolt-limit-value" class="bolt-metric-value"></strong></div>
-      <div><span class="bolt-metric-label">Current material response</span><strong id="bolt-state" class="bolt-metric-value bolt-state" data-state="elastic">Elastic</strong></div>
+      <div><span class="bolt-metric-label">Nominal bending demand</span><strong id="bolt-demand-value" class="bolt-metric-value"></strong></div>
+      <div><span class="bolt-metric-label">Nominal demand = assumed Sᵧ · not a limit</span><strong id="bolt-limit-value" class="bolt-metric-value"></strong></div>
+      <div><span class="bolt-metric-label">Illustrative material-point state</span><strong id="bolt-state" class="bolt-metric-value bolt-state" data-state="elastic">Elastic</strong></div>
     </div>
     <div class="bolt-results">
     <div class="bolt-stage">
@@ -65,6 +66,7 @@
     </div>
     <div class="bolt-notes">
       <div class="bolt-legend"><span><i class="bolt-dot"></i>Elastic point</span><span><i class="bolt-dot bolt-plastic-dot"></i>Plastic-flow point</span><span><i class="bolt-demand"></i>Elastic estimate</span><span><i class="bolt-origin"></i>Original yield boundary</span></div>
+      <p>Fixed stopping angle, not measured compliance. The strain cycle is a separate constitutive illustration; its elastic/plastic states do not predict fixture deformation, fatigue life, or a safe operating speed.</p>
     </div>
     </div>
     <p class="bolt-visually-hidden" id="bolt-announcement" aria-live="polite" aria-atomic="true"></p>`;
@@ -334,7 +336,7 @@
     line(ctx, [actual, elastic], C.gray, 1, [3, 3]); dot(ctx, elastic, C.gray, true); dot(ctx, actual, stateColor(p));
     text(ctx, get("criterion").value === "mises" ? "von Mises · circular cylinder" : "Tresca · hexagonal prism", 220, 287, C.ink, "center", 15);
     translationLabel(ctx);
-    get("space-readout").textContent = `Actual stress: (${fmt(p.stress)}, 0, 0) ksi · relative yield ratio ${fmt(Math.abs(p.stress - p.backstress) / Sy, 3)}`;
+    get("space-readout").textContent = `Illustrative point stress: (${fmt(p.stress)}, 0, 0) ksi · relative yield ratio ${fmt(Math.abs(p.stress - p.backstress) / Sy, 3)}`;
   }
   function drawPi(p) {
     const ctx = context("pi"), extent = piExtent;
@@ -359,7 +361,7 @@
     text(ctx, translationScale === 1 ? "Deviatoric coordinates / Sᵧ" : "Display deviatoric coordinates / Sᵧ", 220, 295, C.ink, "center", 14);
     text(ctx, "e₂", 228, 32, C.gray, "left", 14); text(ctx, "e₁", 220 + 105 + 18, 145, C.gray, "left", 14);
     translationLabel(ctx);
-    get("pi-readout").textContent = `Actual center shift: ${fmt(radius * p.backstress, 3)} ksi in e₁ · no hydrostatic dependence`;
+    get("pi-readout").textContent = `Unscaled model center shift: ${fmt(radius * p.backstress, 3)} ksi in e₁ · no hydrostatic dependence`;
   }
   function drawHistory(p) {
     const stress = context("stress-history"), ymax = Math.max(run.peakDemand * 1.1, Sy * 1.2);

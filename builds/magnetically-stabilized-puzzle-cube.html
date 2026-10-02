@@ -10,23 +10,31 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=16">
-    <link rel="stylesheet" href="../assets/css/cube-project.css?v=6">
-    <link rel="stylesheet" href="../assets/css/cube-nonlinear-lab.css?v=5">
+    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="../assets/css/cube-project.css?v=13">
+    <link rel="stylesheet" href="../assets/css/cube-nonlinear-lab.css?v=7">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script defer src="../assets/js/cube-nonlinear-data.js?v=1"></script>
     <script defer src="../assets/js/cube-potential-data.js?v=1"></script>
-    <script defer src="../assets/js/cube-nonlinear-lab.js?v=7"></script>
+    <script defer src="../assets/js/cube-nonlinear-lab.js?v=10"></script>
+    <script defer src="../assets/js/cube-results-viewer.js?v=2"></script>
   </head>
-  <body>
+  <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
-        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" rel="noopener">
           <span>Jerich Lee</span>
         </a>
 
         <nav class="nav">
-          <a href="../builds/index.html">builds</a>
-          <a href="../contact/index.html">contact</a>
+          <a href="../index.html#home" rel="noopener">home</a>
+          <a href="index.html" rel="noopener">builds</a>
+          <a href="../notes/index.html" rel="noopener">notes</a>
+          <a href="../writing/index.html" rel="noopener">writing</a>
+          <a href="../media/index.html" rel="noopener">media</a>
+          <a href="../guitar/index.html" rel="noopener">guitar</a>
+          <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
@@ -97,14 +105,75 @@
               </table>
             </div>
             <figure class="build-inline-figure cube-reference" id="cube-potential-reference">
-              <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential.png" alt="Root and side magnetic potentials have alignment minima at 0 and 90 degrees, with a shallow unwanted minimum at 45 degrees; the root alignment well is wider."></a>
+              <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential-clean.svg" rel="noopener noreferrer"><img loading="lazy" width="1580" height="1101" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/01_potential-clean.svg" alt="Root and side magnetic potentials have alignment minima at 0 and 90 degrees, with a shallow unwanted minimum at 45 degrees; circles mark stable minima and crosses mark saddles, with the key below the plot."></a>
               <figcaption>Reference potential, Figure 3: both layouts have an unwanted 45° resting position as well as the intended alignments; the ridges alone do not determine capture when the layer starts with speed.</figcaption>
             </figure>
             <section class="cube-method" aria-labelledby="cube-model-title">
-              <h3 id="cube-model-title">The model behind the motion</h3>
-              <p class="cube-equation" aria-label="Inertia times angular acceleration plus damping times angular velocity plus the potential gradient equals applied torque">Jθ̈ + cθ̇ + U′(θ) = τ(t)</p>
-              <p>The magnetic potential includes 48 finite cylindrical magnets: 20 move and 28 stay fixed, giving 560 changing interactions. Both layouts use the same assumed damping, c = 2 × 10<sup>−4</sup> N·m·s/rad; the release cases have no applied torque.</p>
-              <p>Root placement lowers layer inertia by 6.95%, but lowers local magnetic stiffness by about 71%. That softer restoring action explains its larger first overshoot. Near either aligned minimum, energy decreases as dV/dt = −cω², establishing local return in this reduced model, not return from every starting condition.</p>
+              <h3 id="cube-model-title">Reduced-order system model</h3>
+              <p>I modeled the positive-z layer—four complete edges, four corners, and one center—as a rigid body about a fixed vertical axis, with angle measured from alignment and the remainder fixed. Inertia includes pieces, magnets, and adhesive mass; magnets follow piece ownership. This uncalibrated 1-DOF model omits dry friction, contact/impact, axial motion, compliance, and independent cubie motion.</p>
+              <div class="cube-table-wrap">
+                <table class="cube-comparison" aria-label="Common model inputs">
+                  <thead><tr><th scope="col">Input</th><th scope="col">Value</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Cube envelope</th><td>\(56\ \mathrm{mm}\)</td></tr>
+                    <tr><th scope="row">Axial cylindrical magnets</th><td>48 total: 20 moving and 28 fixed; Ø3 × 2 mm</td></tr>
+                    <tr><th scope="row">Aligned face gap</th><td>\(0.80\ \mathrm{mm}\)</td></tr>
+                    <tr><th scope="row">Remanence \(B_r\)</th><td>\(1.20\ \mathrm{T}\)</td></tr>
+                    <tr><th scope="row">Viscous damping \(c\)</th><td>\(2\times10^{-4}\ \mathrm{N\,m\,s/rad}\)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>The state and torque balance are:</p>
+              <div class="article-equation">\[
+                \begin{aligned}
+                  \mathbf{x}&amp;=(\theta,\omega),\\
+                  \dot{\theta}&amp;=\omega,\\
+                  J\dot{\omega}&amp;=\tau(t)-c\omega-U'(\theta).
+                \end{aligned}
+              \]</div>
+              <p>Free releases are unforced. Prescribed harmonic excitation uses 30 Hz for periodic-orbit analysis and 10–80 Hz for the frequency sweep:</p>
+              <div class="article-equation">\[
+                \begin{aligned}
+                  \tau_{\mathrm{free}}&amp;=0,\\
+                  \tau_{\mathrm{forced}}(t)&amp;=0.002\cos(2\pi ft)\ \mathrm{N\,m}.
+                \end{aligned}
+              \]</div>
+              <p>The finite-cylinder surface-charge model uses prescribed uniform magnetization and sums 560 moving–fixed pair energies; same-assembly interactions are constant. Position and orientation changes produce the nonlinear torque:</p>
+              <div class="article-equation">\[
+                \begin{aligned}
+                  M&amp;=\frac{B_r}{\mu_0},\\
+                  \tau_{\mathrm{mag}}(\theta)&amp;=-U'(\theta).
+                \end{aligned}
+              \]</div>
+              <p>Reflection and quarter-turn symmetry extend the 0–45° grid, sampled at 0.1°, into a periodic C² cubic spline. All simulations use this <strong>full magnetic potential</strong>. Alignment curvature defines the local linearization; a separate even-potential fit over 0–1° gives diagnostic coefficients, with angles in radians:</p>
+              <div class="article-equation">\[
+                \begin{aligned}
+                  k_0&amp;=U''(0),\\
+                  U'(\theta)&amp;\approx k_{\mathrm{fit}}\theta+\alpha\theta^3+\beta\theta^5.
+                \end{aligned}
+              \]</div>
+              <div class="cube-table-wrap cube-model-parameters" role="region" aria-label="Root and side model parameters; scroll horizontally on narrow screens" tabindex="0">
+                <table class="cube-comparison" aria-label="Layout parameters and local fit coefficients">
+                  <thead><tr><th scope="col">Parameter</th><th scope="col">Root-mounted</th><th scope="col">Side-mounted</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">\(J\) (kg·m²)</th><td>\(1.0916\times10^{-5}\)</td><td>\(1.1732\times10^{-5}\)</td></tr>
+                    <tr><th scope="row">\(k_0\) (N·m/rad)</th><td>\(0.441072\)</td><td>\(1.509802\)</td></tr>
+                    <tr><th scope="row">\(k_{\mathrm{fit}}\) (N·m/rad)</th><td>\(0.441029\)</td><td>\(1.509283\)</td></tr>
+                    <tr><th scope="row">\(\alpha\) (N·m/rad³)</th><td>\(-28.04\)</td><td>\(-340.61\)</td></tr>
+                    <tr><th scope="row">\(\beta\) (N·m/rad⁵)</th><td>\(2167.29\)</td><td>\(99597.97\)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>Both layouts have positive alignment curvature. For unforced motion:</p>
+              <div class="article-equation">\[
+                \begin{aligned}
+                  U'(\theta_*)&amp;=0,\\
+                  J\lambda^2+c\lambda+U''(\theta_*)&amp;=0,\\
+                  V&amp;=\tfrac12J\omega^2+U(\theta)-U(\theta_*),\\
+                  \dot V&amp;=-c\omega^2.
+                \end{aligned}
+              \]</div>
+              <p><strong>The model establishes local asymptotic stability, not global alignment capture.</strong> LaSalle’s argument applies within a compact invariant sublevel set containing no other equilibrium; both layouts also admit an attracting 45° equilibrium. The fitted coefficients characterize local behavior but do not replace the full potential in simulation.</p>
             </section>
           </section>
           <section class="build-section cube-study" aria-labelledby="cube-explore-title">
@@ -116,45 +185,41 @@
           </section>
           <section class="build-section cube-study" aria-labelledby="cube-release-findings-title">
             <h2 id="cube-release-findings-title" tabindex="-1">Capture, Overshoot, and Decay</h2>
-            <p>Where a layer ends up, how far it first swings, and how quickly its motion fades are three different questions.</p>
-            <section class="cube-method" id="cube-capture-reference" aria-labelledby="cube-capture-title">
+            <p>Local stiffness and inertia explain small-amplitude frequency differences; damped spirals and small-amplitude overshoot also occur in a linear model. Finite barriers and competing capture destinations require the full nonlinear potential.</p>
+            <div class="cube-results-window" id="cube-results-viewer" role="region" aria-labelledby="cube-results-window-title">
+              <div class="cube-results-topbar">
+                <p id="cube-results-window-title">Simulation results</p>
+                <output id="cube-results-count" aria-live="polite" aria-atomic="true" hidden>01 / 03</output>
+              </div>
+              <div class="cube-results-tabs" role="tablist" aria-label="Simulation result" hidden>
+                <button type="button" id="cube-results-tab-capture" role="tab" aria-controls="cube-capture-reference" aria-selected="true" data-result-panel="cube-capture-reference">Capture</button>
+                <button type="button" id="cube-results-tab-overshoot" role="tab" aria-controls="cube-ringdown-reference" aria-selected="false" tabindex="-1" data-result-panel="cube-ringdown-reference">Overshoot</button>
+                <button type="button" id="cube-results-tab-decay" role="tab" aria-controls="cube-return-reference" aria-selected="false" tabindex="-1" data-result-panel="cube-return-reference">Decay</button>
+              </div>
+            <section class="cube-method cube-results-panel" id="cube-capture-reference" aria-labelledby="cube-capture-title">
               <h3 id="cube-capture-title">Capture: the same 15° release finds two different resting positions</h3>
               <figure class="build-inline-figure cube-reference">
-                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" alt="Release from 15 degrees at rest: root motion decays toward zero, while side motion approaches 45 degrees."></a>
-                <figcaption>Report Figure 14: the root layout returns to alignment from this initial angle, but the side layout settles halfway through a turn.</figcaption>
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/17_capture_example.png" alt="Release from 15 degrees at rest: root motion decays toward zero, while side motion approaches 45 degrees."></a>
+                <figcaption><a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/cube_nonlinear_analysis.pdf#page=12" rel="noopener noreferrer">Report Figure 14</a>: capture from a 15° release at rest.</figcaption>
               </figure>
+              <p>Released from rest at 15°, the root layout starts inside its 20.47° saddle and returns to 0°; the side layout starts beyond its 11.84° saddle and settles at 45°. Extrapolating the local quadratic potential about 0° would predict alignment capture for both, missing the competing 45° attractor.</p>
             </section>
-            <section class="cube-method" id="cube-ringdown-reference" aria-labelledby="cube-ringdown-title">
+            <section class="cube-method cube-results-panel" id="cube-ringdown-reference" aria-labelledby="cube-ringdown-title">
               <h3 id="cube-ringdown-title">Overshoot: a softer pull lets the first swing travel farther</h3>
               <figure class="build-inline-figure cube-reference">
-                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" alt="Starting aligned at 5 radians per second, the root model swings farther and more slowly than the side model; both oscillations decay."></a>
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/06_release_post_turn_ringdown.png" alt="Starting aligned at 5 radians per second, the root model swings farther and more slowly than the side model; both oscillations decay."></a>
                 <figcaption>Report Figure 6: first overshoot is 1.340° for root and 0.778° for side; this reference shows only the early part of the 1-second release.</figcaption>
               </figure>
             </section>
-            <section class="cube-method" id="cube-return-reference" aria-labelledby="cube-return-title">
+            <section class="cube-method cube-results-panel" id="cube-return-reference" aria-labelledby="cube-return-title">
               <h3 id="cube-return-title">Decay: each pass through alignment loses speed</h3>
               <figure class="build-inline-figure cube-reference">
-                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" alt="The next positive crossing speed is lower than the current crossing speed for both models; both return curves lie below the no-decay diagonal."></a>
+                <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/10_free_return_map.png" alt="The next positive crossing speed is lower than the current crossing speed for both models; both return curves lie below the no-decay diagonal."></a>
                 <figcaption>Report Figure 17: the free Poincaré map compares consecutive passes through 0° in the positive direction, not consecutive animation frames.</figcaption>
               </figure>
               <p>Near alignment, the next crossing retains about 75.1% of the speed for root and 86.1% for side. Root loses more speed per cycle, but its cycles take longer; this is not the same advantage per second.</p>
             </section>
-          </section>
-          <section class="build-section cube-study" aria-labelledby="cube-driven-title">
-            <h2 id="cube-driven-title" tabindex="-1">Response to Repeated Forcing</h2>
-            <p>A separate test applies a repeating 2 mN·m torque. At 30 Hz, the root response is much larger; at 55 Hz, the side response is larger. Neither layout has the smaller response at every frequency.</p>
-            <figure class="build-inline-figure cube-reference" id="cube-frequency-reference">
-              <a href="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/13_frequency_sweep.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" width="1580" height="991" src="../assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/13_frequency_sweep.png" alt="Forced frequency sweep: the largest sampled response is near 30 hertz for root and 54 hertz for side, with a crossover between the two peaks."></a>
-              <figcaption>Report Figure 21: a fixed frequency-sweep result, separate from the unforced release explorer above.</figcaption>
-            </figure>
-            <div class="cube-table-wrap">
-              <table class="cube-comparison">
-                <caption>Steady periodic response · report pp. 17–18</caption>
-                <thead><tr><th scope="col">Drive frequency</th><th scope="col">Root amplitude</th><th scope="col">Side amplitude</th></tr></thead>
-                <tbody><tr><th scope="row">30 Hz</th><td>3.016°</td><td>0.105°</td></tr><tr><th scope="row">55 Hz</th><td>0.132°</td><td>1.458°</td></tr></tbody>
-              </table>
             </div>
-            <p>At 30 Hz, both modeled responses settle into a repeating cycle; Floquet multiplier magnitudes below 1 indicate local attraction of those cycles. This does not establish behavior at every forcing level or under real hand turns.</p>
           </section>
           <section class="build-section" aria-labelledby="magnetically-stabilized-puzzle-cube-outcome-title">
             <h2 id="magnetically-stabilized-puzzle-cube-outcome-title" tabindex="-1">Outcome</h2>
@@ -176,11 +241,14 @@
               </figure>
             </div>
             <div class="article-body">
-              <p>The design received <a href="https://patents.google.com/patent/US10583351B2/en" target="_blank" rel="noopener noreferrer">U.S. Patent</a> No. 10,583,351 B2 in 2020. The later nonlinear model gives a testable tradeoff: root placement recovers from a 15° stationary release that the side layout does not, while allowing greater first overshoot in the matched release tests.</p>
-              <p>Measuring torque against angle and recording real release motion would test whether those predictions hold for the prototype; this rigid-layer study does not establish individual-piece stability.</p><p><em>This cube design was used to help break the world record for the fastest single 3×3×3 Rubik’s Cube solve:</em> <a href="https://www.youtube.com/watch?v=bTDZXzI_Ab8" target="_blank"><strong><em>2.76 seconds</em></strong></a><em> (Teodor Zajder, GLS Big Cubes Gdańsk 2026).</em></p>
+              <p>The design received <a href="https://patents.google.com/patent/US10583351B2/en" rel="noopener noreferrer">U.S. Patent</a> No. 10,583,351 B2 in 2020. The later nonlinear model gives a testable tradeoff: root placement recovers from a 15° stationary release that the side layout does not, while allowing greater first overshoot in the matched release tests.</p>
+              <p>Measuring torque against angle and recording real release motion would test whether those predictions hold for the prototype; this rigid-layer study does not establish individual-piece stability.</p>
             </div>
           </section>
         </article>
+        <nav class="page-return" aria-label="Page navigation">
+          <a href="#page-top">Back to top ↑</a>
+        </nav>
       </main>
     </div>
   </body>

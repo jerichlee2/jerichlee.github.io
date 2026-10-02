@@ -1,0 +1,90 @@
+.guitar-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9.5rem;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.content .guitar-intro .lede {
+  margin: 0;
+  text-align: left;
+}
+
+.guitar-portrait {
+  position: relative;
+  width: 9.5rem;
+  height: 9.5rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.25rem;
+}
+
+/* Frame the photo inside the letterboxed screenshot without changing the source. */
+.guitar-portrait img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 152%;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 760px) {
+  .guitar-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .guitar-portrait {
+    grid-row: 1;
+  }
+}
+
+.guitar-recordings {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.guitar-recording {
+  min-width: 0;
+  margin: 0;
+  padding: 1.25rem 0 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.guitar-recording h2 {
+  margin: 0 0 0.8rem;
+  padding: 0;
+  border: 0;
+  overflow-wrap: anywhere;
+}
+
+.guitar-recording audio {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 34rem;
+}
+
+.guitar-alternate {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.guitar-alternate summary {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.guitar-alternate[open] summary {
+  margin-bottom: 0.75rem;
+}
+
+.guitar-alternate summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MATH 447: Real Variables - Homework #6</title>
-    <link rel="stylesheet" href="/styles.css?v=7">
+    <link rel="stylesheet" href="../../../../styles.css?v=19-local">
     <script>
         MathJax = {
             tex: {
@@ -22,8 +22,8 @@
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 </head>
-<body class="course-document">
-    <a href="../../index.html" class="home-button">Back</a>
+<body class="course-document" id="page-top" tabindex="-1">
+    <a href="../../index.html" class="home-button" rel="noopener">Back</a>
     <div id="main">
         <h1>MATH 447: Real Variables - Homework #6</h1>
 <h3>Jerich Lee</h3>
@@ -230,6 +230,9 @@ $g(x)$ is bounded, as $0&lt;g(x)&lt;1$ for all $x$. $g(x)$ has no maximal elemen
 <div class='solution'><strong>Solution.</strong>
   No. Choose $f=\frac{1}{x-x_0}$ with $x\in{} (0,x_0)$. Uniform continuity states that $\forall{} \varepsilon{}, \exists{} \delta{} \ s.t. \ d(p,q)&lt;\delta{} \implies{} d(f(p),f(q))$ for all $p, q$. Choose an arbitrary $\varepsilon{}$. Then, there exists a corresponding $\delta{}$ such that $d(x,x_0)&lt;\delta{}\implies{} d(f(x),f(x_0))&lt;\varepsilon{}$. But as we take the same $\delta{}$ about $x$ closer and closer to $x_0$, $d(f(x),f(x_n))$ will grow larger and larger, eventually exceeding our chosen $\varepsilon{}$. Therefore, there exists no constant $\delta{}$ that satisfies our chosen $\varepsilon{}$. Therefore, our bounded, continuous function $f$ is not uniformly continuous.
 </div>
+        <nav class="page-return" aria-label="Page navigation">
+            <a href="#page-top">Back to top ↑</a>
+        </nav>
     </div>
 </body>
 </html>

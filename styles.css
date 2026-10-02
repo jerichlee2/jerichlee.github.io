@@ -103,10 +103,6 @@ a:focus-visible {
   padding: 0.08rem 0;
 }
 
-.nav a:not([href$="builds/index.html"]):not([href$="contact/index.html"]) {
-  display: none;
-}
-
 .content {
   max-width: var(--measure);
 }
@@ -349,6 +345,12 @@ li + li {
   margin-bottom: 1rem;
 }
 
+/* Keep emphasis in prose at body weight; preserve headings and UI/figure labels. */
+.content p:not(.modal-label) :is(strong, b),
+.content article li > :is(strong, b) {
+  font-weight: inherit;
+}
+
 .article-body mjx-container {
   overflow-x: auto;
   overflow-y: hidden;
@@ -502,7 +504,7 @@ li + li {
 .build-section .central-question p {
   margin: 0;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.5;
   text-align: left;
 }
@@ -827,13 +829,18 @@ address {
 }
 
 .page-return {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
   margin-top: 2.5rem;
   border-top: 1px solid var(--line);
   padding-top: 0.75rem;
   font-size: 0.9rem;
 }
 
-.page-return a {
+.page-return a,
+footer .back-to-top {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;

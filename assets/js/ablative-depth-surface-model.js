@@ -13,15 +13,18 @@
   if (root) root.AblativeDepthSurfaceModel = api;
 })(typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
-  const density = 0.0828 / (0.0508 * 0.0889 * 0.0127);
+  const thicknessMM = 0.495 * 25.4;
+  const density = 0.0828 / (0.0508 * 0.0889 * (thicknessMM / 1000));
   const diameterMM = 20, shapeFactor = 0.5;
   // kg/m³ × projected area in m² × depth in mm gives mass in grams.
   const massPerMM = density * shapeFactor * Math.PI * (diameterMM / 1000) ** 2 / 4;
   const constants = Object.freeze({ timeMax: 20, fluxMax: 0.8, depthMax: 12,
-    massMax: 2.4, density, diameterMM, shapeFactor, thicknessMM: 12.7, massPerMM });
+    massMax: 2.4, density, diameterMM, shapeFactor, thicknessMM, massPerMM });
   const evidence = Object.freeze({
     hotInitialMassG: 82.8, hotFinalMassG: 73.9, hotNetMassLossG: 8.9,
-    densityStatus: "Conditional on the weighed hot brick having nominal 2 × 3.5 × 0.5 in dimensions; transfer across the surface is assumed.",
+    baselineInitialMassG: 82.08, baselineFinalMassG: 73.55, baselineNetMassLossG: 8.53,
+    reportedThicknessIn: 0.495,
+    densityStatus: "Conditional on nominal 2 × 3.5 in plan dimensions and reported 0.495 in material thickness; measurement uncertainty and tare are unverified. Hot-brick density transfer across the surface is assumed.",
     dimpleGeometryStatus: "20 mm diameter and paraboloid shape remain assumptions.",
     hotDepthSource: "User-confirmed measured dimple depth, reported approximately as 1/8 in; conversion digits are not measurement precision."
   });

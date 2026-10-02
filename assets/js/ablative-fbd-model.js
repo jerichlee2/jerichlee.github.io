@@ -21,6 +21,10 @@
  * Thus kinetic energy + stored stop energy is conserved. Playback ends at the
  * first maximum compression, BEFORE rebound; 'held' is that frozen snapshot,
  * not a prediction that the rotor remains in equilibrium at the endpoint.
+ * The stiffness is recomputed for each chosen speed and stop angle. This
+ * retains the fixed-angle what-if law, NOT a sweep of one physical fixed
+ * stiffness. Its torque-displacement curve is linear; torque-time is not.
+ * No material certificate, measured compliance, or operating speed is supplied.
  *
  * Bolt stress is nominal elastic cantilever demand: 32 F L / (pi d^3).
  * Results above Sy are explicitly elastic extrapolation, not post-yield stress.
@@ -94,6 +98,9 @@
       throw new RangeError("The requested angles or speed exceed the finite range of this model.");
     }
     const result = Object.freeze({
+      interpretation: "Unvalidated fixed-stopping-angle what-if",
+      stiffnessInterpretation: "Recomputed per selection; not calibrated fixed hardware stiffness",
+      hardwareValidation: false,
       params: params,
       constants: constants,
       J: constants.J,

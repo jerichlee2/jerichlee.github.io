@@ -1,0 +1,109 @@
+.azbc-chain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.25rem 0;
+  list-style: none;
+}
+
+.azbc-chain li {
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  background: var(--paper);
+}
+
+.azbc-chain span {
+  color: var(--muted);
+  margin-right: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.azbc-article details {
+  border-block: 1px solid var(--line);
+  margin: 1.25rem 0 1.75rem;
+  padding: 0.75rem 0;
+}
+
+.azbc-article summary {
+  cursor: pointer;
+  color: var(--link);
+}
+
+.azbc-article summary:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 4px;
+}
+
+.azbc-article details[open] summary {
+  margin-bottom: 0.8rem;
+}
+
+.azbc-article details p:last-child {
+  margin-bottom: 0;
+}
+
+.azbc-example {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 1.15rem;
+  margin: 1.5rem 0;
+}
+
+.azbc-example-head {
+  font-size: 1.1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.azbc-views {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.azbc-views svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.azbc-views .azbc-view-label,
+.azbc-views .azbc-view-caption {
+  text-align: center;
+  margin: 0;
+}
+
+.azbc-view-caption {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.azbc-face { fill: #f0ece4; stroke: #a89f90; }
+.azbc-grid { fill: none; stroke: #a89f90; }
+.azbc-highlight { fill: #dce8f1; stroke: #216b96; stroke-width: 2; }
+.azbc-dot { fill: #216b96; }
+.azbc-face-labels { fill: var(--ink); font: 17px Georgia, serif; text-anchor: middle; }
+
+.azbc-example figcaption {
+  border-top: 1px solid var(--line);
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.azbc-source {
+  font-size: 0.94rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 480px) {
+  .azbc-chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .azbc-views { grid-template-columns: 1fr; gap: 1.5rem; }
+}

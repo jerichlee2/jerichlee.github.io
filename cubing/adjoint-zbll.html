@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adjoint ZBLL: Reading the Last Layer Early | Jerich Lee</title>
+    <meta name="description" content="An intermediate-cuber’s guide to the Adjoint ZB Compiler: forward F2L tracking, backward recognition, and a one-turn visual example.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="adjoint-zbll.css?v=1-local">
+  </head>
+  <body id="page-top" tabindex="-1">
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home"><span>Jerich Lee</span></a>
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="../builds/index.html">builds</a>
+          <a href="../notes/index.html">notes</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../guitar/index.html">guitar</a>
+          <a href="index.html" aria-current="page">cubing</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article class="article azbc-article">
+          <p class="article-meta"><time datetime="2026-09">September 2026</time> · An intermediate-cuber’s guide</p>
+          <h1>Adjoint ZBLL: Reading the Last Layer Early</h1>
+          <div class="article-body">
+            <p>
+              If you can plan a cross and sometimes track your first F2L pair, you already know
+              the starting idea: predict what your moves will do before you make them. My
+              Adjoint ZB Compiler (AZBC) notes ask how much further that prediction could go—
+              all the way to choosing the last-layer algorithm during inspection.
+            </p>
+            <p>
+              You only need familiar F2L and OLL/PLL ideas to follow this explanation, not full
+              ZBLL or advanced math. The full inspection method is a research proposal, not
+              a demonstrated way to plan every solve in 15 seconds.
+            </p>
+
+            <h2>1. What are we trying to plan?</h2>
+            <p>
+              The proposed solve has six chunks. A chunk is a complete move sequence,
+              not a single turn:
+            </p>
+            <ol class="azbc-chain" aria-label="The six planned solve chunks">
+              <li><span>1</span> Cross</li>
+              <li><span>2</span> First pair</li>
+              <li><span>3</span> Second pair</li>
+              <li><span>4</span> Third pair</li>
+              <li><span>5</span> ZBLS</li>
+              <li><span>6</span> ZBLL</li>
+            </ol>
+            <p>
+              ZBLS solves the last F2L pair while orienting the last-layer edges. That sets
+              up ZBLL, which finishes the last layer in one algorithm. Any needed AUF
+              (a U-layer adjustment before or after an algorithm) belongs in the plan too.
+            </p>
+            <p>
+              Normally, you reach a case, recognize it, then choose an algorithm. Here,
+              the goal is to recognize the case you <em>will</em> reach while the cube is
+              still scrambled. “Compiler” means turning those predictions into one exact
+              sequence of familiar algorithms. It is not a new algorithm set replacing ZBLL.
+            </p>
+
+            <h2>2. Follow F2L forward</h2>
+            <p>
+              Start with a fixed cross color and front face. Choose your cross, then work
+              out where each unsolved pair will land. Choose the first insertion, update
+              the remaining pairs, and repeat until only the last pair remains.
+            </p>
+            <p>
+              The notes use sticker addresses: one chosen sticker on a known corner and
+              one on its matching edge. Following a sticker tells you both where its piece
+              goes and how it is oriented. Speffz letters are just a shorthand for those
+              addresses; you can start with plain names such as “the U-facing sticker at UR.”
+            </p>
+            <p>
+              The exact moves matter. Two insertions can solve the same pair but move the
+              other pieces differently. Include setups and rotations, and stick to that
+              choice when making later predictions.
+            </p>
+            <details>
+              <summary>Why the notes say 8 → 6 → 4 → 2</summary>
+              <p>
+                Four pairs need eight sticker addresses: one corner and one edge per pair.
+                Once a pair is solved, you can stop tracking it. Three pairs need six
+                addresses, then four, then two. You still have to remember your chosen
+                algorithms and reference frame; this is not a claim that the entire solve
+                fits into eight items of memory. Speffz also uses separate corner and edge
+                alphabets, so a letter needs its piece type to be unambiguous.
+              </p>
+            </details>
+
+            <h2>3. Send the question backward</h2>
+            <p>
+              Tracking every last-layer piece through every F2L move would add a lot of
+              work. Instead, choose a future position you need to recognize and ask:
+              “Which sticker on the original scramble will end up there?”
+            </p>
+            <p>
+              That change in viewpoint is what “adjoint” means here. Forward tracking
+              follows a piece toward its destination. A backward query starts at the
+              destination and finds the piece that will arrive.
+            </p>
+
+            <figure class="azbc-example">
+              <div class="azbc-example-head">A one-turn example: U</div>
+              <div class="azbc-views">
+                <div>
+                  <p class="azbc-view-label">Before the turn</p>
+                  <svg viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="Top view before U: the U-facing sticker of the UR edge is highlighted on the right.">
+                    <path class="azbc-face" d="M42 42h96v96H42z"/>
+                    <path class="azbc-highlight" d="M106 74h32v32h-32z"/>
+                    <path class="azbc-grid" d="M74 42v96M106 42v96M42 74h96M42 106h96"/>
+                    <g class="azbc-face-labels"><text x="90" y="25">B</text><text x="156" y="96">R</text><text x="90" y="163">F</text><text x="23" y="96">L</text><text x="90" y="96">U</text></g>
+                    <circle cx="122" cy="90" r="5" class="azbc-dot"/>
+                  </svg>
+                  <p class="azbc-view-caption">Read the U-face sticker at UR.</p>
+                </div>
+                <div>
+                  <p class="azbc-view-label">After U, in your prediction</p>
+                  <svg viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="Top view after U: that same U-facing sticker is now at UF, at the bottom of the diagram.">
+                    <path class="azbc-face" d="M42 42h96v96H42z"/>
+                    <path class="azbc-highlight" d="M74 106h32v32H74z"/>
+                    <path class="azbc-grid" d="M74 42v96M106 42v96M42 74h96M42 106h96"/>
+                    <g class="azbc-face-labels"><text x="90" y="25">B</text><text x="156" y="96">R</text><text x="90" y="163">F</text><text x="23" y="96">L</text><text x="90" y="96">U</text></g>
+                    <circle cx="90" cy="122" r="5" class="azbc-dot"/>
+                  </svg>
+                  <p class="azbc-view-caption">It will occupy the U-face position at UF.</p>
+                </div>
+              </div>
+              <figcaption>
+                Looking down at U, with F at the bottom, U turns clockwise.
+                Forward: UR → UF. Backward question: future UF ← current UR.
+                Shading tracks one sticker; it does not represent the cube’s colors.
+              </figcaption>
+            </figure>
+
+            <p>
+              To answer “what will be at UF?”, mentally trace that position through U′
+              and inspect the current UR sticker. For a longer sequence, undo the moves
+              in reverse order <em>on the position you are tracing</em>.
+            </p>
+            <p>
+              The real cube stays scrambled. These are mental location changes, not
+              physical inverse turns. In official inspection,
+              <a href="https://www.worldcubeassociation.org/regulations/#A3c1">you cannot make layer turns</a>.
+            </p>
+            <details>
+              <summary>How that scales to cross + three pairs</summary>
+              <p>
+                Trace the future position backward through the third pair’s inverse,
+                then the second pair’s inverse, then the first pair’s inverse, then the
+                cross’s inverse. To predict a position after ZBLS, first trace through
+                the chosen ZBLS algorithm’s inverse, then through that same F2L prefix.
+                Changing any planned moves means recalculating the affected queries.
+              </p>
+            </details>
+
+            <h2>4. Ask only what the next step needs</h2>
+            <h3>Before ZBLS: which edges are flipped?</h3>
+            <p>
+              After cross + three pairs, five edges lie outside the solved cross and
+              pairs: the last F2L edge and the four last-layer edges. Your tracking already tells you the
+              last-pair edge’s position and orientation. What you still need is the
+              orientation pattern of the other four—not their identities yet.
+            </p>
+            <p>
+              The notes show that three orientation checks suffice: the cube’s
+              even-flip constraint determines the fourth. Trace those checks backward
+              to the scramble, read them there, and use the predicted pair state and
+              edge orientations to choose an exact ZBLS algorithm.
+            </p>
+            <p>
+              This depends on using a consistent edge-orientation convention, including
+              when an edge is in the open F2L slot. When learning, check all four and use
+              the extra observation to catch mistakes.
+            </p>
+            <h3>After ZBLS: which ZBLL case will appear?</h3>
+            <p>
+              Now F2L will be solved and the last-layer edges will be oriented. The next
+              query is three complete corner observations plus two edge identities.
+              Pull those observations backward through your exact ZBLS and F2L moves.
+            </p>
+            <p>
+              For each corner, trace one chosen sticker-position address backward.
+              Then inspect the whole corner at that address, noting which color is
+              on the traced facelet. That gives you both its identity and orientation.
+            </p>
+            <ul>
+              <li>Three corners reveal their identities and twists. The missing corner
+                is the remaining identity, and its twist is constrained by the other three.</li>
+              <li>Two edges leave only two possible arrangements of the remaining edges.
+                Only one matches the corner permutation’s parity, so the legal cube
+                state picks the last two for you.</li>
+            </ul>
+            <p>
+              That determines the last layer, including the information needed for
+              recognition and AUF. “Five probes” does not mean five colors: each corner
+              observation reads a whole corner’s identity and orientation. Nor does
+              mathematical sufficiency mean it is easy to decode quickly.
+            </p>
+            <details>
+              <summary>What does “parity” mean here?</summary>
+              <p>
+                An arrangement is even or odd according to whether it takes an even
+                or odd number of two-piece swaps to make it. A legal 3×3 has matching
+                corner and edge permutation parity. Once F2L is solved and the corners
+                are known, swapping just the two unknown edges would break that match.
+              </p>
+              <p>
+                This is also why the original notes discuss 12 relative edge patterns:
+                with the corner arrangement fixed, only half of the 24 possible edge
+                permutations are legal. It does not mean there are only 12 ZBLL cases.
+              </p>
+            </details>
+
+            <h2>The idea to take away</h2>
+            <p>
+              Follow the pieces you need for F2L forward. When a later recognition
+              question becomes relevant, trace that question backward to the scramble.
+              The math explains which information is enough; the open question is how
+              much of that process a human can learn to do accurately within inspection.
+            </p>
+            <p class="azbc-source">
+              Adapted from my September 2026
+              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf">A Mathematical Inspection Architecture for Full-ZB 3×3 Speedcubing</a>
+              (88-page PDF). For the technical version, see
+              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=18">sections 8–10 on backward queries</a>,
+              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=27">section 15 on training</a>, and
+              <a href="../assets/cubing/adjoint-zbll/full-zb-inspection-architecture.pdf#page=69">Appendix F’s worked solve</a>.
+              For the more personal side of learning the algset, see
+              <a href="the-joy-of-zbll.html">The Joy of ZBLL</a>.
+            </p>
+          </div>
+          <nav class="page-return" aria-label="Page navigation">
+            <a href="index.html">← Back to Cubing</a>
+            <a href="#page-top">Back to top ↑</a>
+          </nav>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

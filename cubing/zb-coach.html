@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZB Coach | Jerich Lee</title>
+    <meta name="description" content="ZB Coach is my iPhone app for GAN smart-cube practice: live ZBLL and ZBLS guidance, saved-case drills, and case-level progress tracking.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="zb-coach.css?v=1-local">
+  </head>
+  <body id="page-top" tabindex="-1">
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home"><span>Jerich Lee</span></a>
+        <nav class="nav">
+          <a href="../index.html#home">home</a>
+          <a href="../builds/index.html">builds</a>
+          <a href="../notes/index.html">notes</a>
+          <a href="../writing/index.html">writing</a>
+          <a href="../media/index.html">media</a>
+          <a href="../guitar/index.html">guitar</a>
+          <a href="index.html" aria-current="page">cubing</a>
+          <a href="../contact/index.html">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article class="article zb-coach-article">
+          <p class="article-meta"><time datetime="2026-09">September 2026</time> · In development</p>
+          <header class="zb-coach-heading">
+            <img src="../assets/cubing/zb-coach/icon.png" alt="ZB Coach app icon" width="1024" height="1024">
+            <div>
+              <h1>ZB Coach</h1>
+              <p>An iPhone coach for ZBLL and ZBLS practice.</p>
+            </div>
+          </header>
+
+          <div class="article-body">
+            <p>
+              Knowing an algorithm and using it fluently in a solve are different skills.
+              ZB Coach is my app for connecting the two: it follows a GAN smart cube,
+              recognizes last-slot and last-layer cases, and brings the algorithm,
+              move-by-move guidance, and practice history together on my phone.
+            </p>
+            <p>
+              ZBLS solves the final F2L pair while orienting the last-layer edges.
+              ZBLL then solves that edge-oriented last layer in one algorithm.
+              The app supports both focused case drills and normal solves.
+            </p>
+
+            <h2>A coach beside the cube</h2>
+            <p>
+              Bluetooth turns update the virtual cube as I solve. The coach uses the
+              calibrated hold to present the case and algorithm in the right orientation,
+              including opening adjustments and the final AUF—the U-layer turn needed
+              to finish alignment.
+            </p>
+            <p>
+              Completed moves disappear without shifting the remaining letters. If I
+              go off track, Undo instructions lead back to the expected state. The same
+              guidance helps with scrambling, so a practice attempt starts from the
+              intended case rather than an almost-correct setup.
+            </p>
+
+            <h2>Turn a solve into focused practice</h2>
+            <p>
+              I can select entire algorithm sets or individual cases and practice them
+              in order or in shuffled rounds. Each case gets randomized setups instead
+              of always starting with the same familiar scramble.
+            </p>
+            <p>
+              More importantly, a saved solve can become its own practice material.
+              Named sessions and folders retain the recorded ZBLS and ZBLL states;
+              selecting one restores that exact case, its slot, and its saved algorithm.
+              This makes it possible to revisit a case from an actual solve without
+              manually reconstructing it.
+            </p>
+
+            <div class="zb-coach-screens" aria-label="ZB Coach app screenshots">
+              <figure>
+                <a href="../assets/cubing/zb-coach/saved-cases.png" aria-label="View the saved-case practice screenshot at full size">
+                  <img src="../assets/cubing/zb-coach/saved-cases.png" alt="ZB Coach’s saved-case picker with three illustrated ZBLS and ZBLL cases, Random and In order options, and a Start practice button" width="402" height="778" loading="lazy">
+                </a>
+                <figcaption>Choose recorded cases for a focused practice set.</figcaption>
+              </figure>
+              <figure>
+                <a href="../assets/cubing/zb-coach/case-history.png" aria-label="View the case-history screenshot at full size">
+                  <img src="../assets/cubing/zb-coach/case-history.png" alt="ZB Coach’s dark-mode case history with separate complete and partial rhythm statistics, a trend chart, and a Practice this case button" width="402" height="778" loading="lazy">
+                </a>
+                <figcaption>Review a case’s history, then return to practice.</figcaption>
+              </figure>
+            </div>
+            <p class="zb-coach-capture-note">Development screenshots of the app with sample practice data, shown in light and dark mode.</p>
+
+            <h2>More than a finishing time</h2>
+            <p>
+              Standard timing and averages of 5, 12, and 100 sit alongside move counts
+              and rhythm variability (RV). Case-level RV describes how uneven the gaps
+              between turns are within an algorithm’s execution. Lower values mean a
+              more even rhythm, not necessarily a faster solve.
+            </p>
+            <p>
+              The case history separates complete and partial timing data, plots changes
+              over time, and suggests practice priorities from repeated complete attempts.
+              Missing timing is left unavailable rather than filled in as zero. The app
+              also has a custom Solve Score combining move count and rhythm, with a bonus
+              for verified ZBLS followed by ZBLL; it is a training metric, not an official
+              cubing score.
+            </p>
+
+            <h2>Built for the phone</h2>
+            <p>
+              ZB Coach combines a Swift iPhone app and native CoreBluetooth connection
+              with a customized csTimer-based interface in WKWebView. Algorithms are
+              bundled and cached for offline practice, while community-sheet updates
+              can refresh them online. Solve records and practice history stay on the
+              device unless I choose to export them.
+            </p>
+            <p>
+              The current development build targets iOS 16 or later. GAN 16 UI is the
+              hardware-tested cube; other GAN models are not yet verified. The app is
+              not currently a public App Store release.
+            </p>
+
+            <p class="zb-coach-credits">
+              Built on <a href="https://github.com/cs0x7f/cstimer">csTimer</a> (GPL-3.0),
+              with algorithm references from Juju’s ZBLL contributors, Brina/masadl’s
+              ZBLS contributors, and J Perm’s PLL reference. ZB Coach is an independent
+              project, not an official GAN or csTimer product.
+            </p>
+            <p>
+              Related: <a href="the-joy-of-zbll.html">The Joy of ZBLL</a> and
+              <a href="adjoint-zbll.html">Adjoint ZBLL: Reading the Last Layer Early</a>.
+            </p>
+          </div>
+          <nav class="page-return" aria-label="Page navigation">
+            <a href="index.html">← Back to Cubing</a>
+            <a href="#page-top">Back to top ↑</a>
+          </nav>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

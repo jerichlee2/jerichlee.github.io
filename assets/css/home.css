@@ -1,0 +1,32 @@
+.home-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9.5rem;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.content .home-intro .lede {
+  margin: 0;
+  text-align: left;
+}
+
+.home-portrait {
+  display: block;
+  width: 9.5rem;
+  height: 9.5rem;
+  object-fit: cover;
+  object-position: 50% 60%;
+  border: 1px solid var(--line);
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 760px) {
+  .home-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .home-portrait {
+    grid-row: 1;
+  }
+}

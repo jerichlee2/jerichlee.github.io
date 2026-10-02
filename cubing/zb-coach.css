@@ -1,0 +1,82 @@
+.zb-coach-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.zb-coach-heading > img {
+  width: 5rem;
+  height: 5rem;
+  flex: 0 0 auto;
+  border-radius: 1rem;
+}
+
+.zb-coach-heading h1 {
+  margin: 0 0 0.2rem;
+}
+
+.zb-coach-heading p {
+  margin: 0;
+  text-align: left;
+  color: var(--muted);
+}
+
+.zb-coach-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.6rem;
+}
+
+.zb-coach-screens figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.zb-coach-screens a {
+  display: block;
+}
+
+.zb-coach-screens img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+}
+
+.zb-coach-screens figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.zb-coach-article .zb-coach-capture-note {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: left;
+}
+
+.zb-coach-credits {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  margin-top: 1.8rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .zb-coach-screens {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 25rem;
+    margin-inline: auto;
+  }
+
+  .zb-coach-heading > img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.8rem;
+  }
+}

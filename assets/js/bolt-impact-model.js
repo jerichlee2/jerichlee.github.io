@@ -1,8 +1,12 @@
 /* Educational outer-fiber bolt bending model; no DOM or animation state.
  *
- * Part 1 is the existing energy/compliance estimate of ELASTIC peak demand:
+ * Part 1 is the unvalidated fixed-stopping-angle estimate of NOMINAL demand:
  *   E_k = I omega^2 / (2 gc), T_peak = 2 E_k / deltaTheta,
  *   sigma_demand = 32 (T_peak / radius) length / (pi diameter^3).
+ * Its triangular work diagram is torque versus angular displacement, not
+ * torque versus time. Stop work may be elastic storage and/or dissipation.
+ * The assumed stopping angle is not measured compliance. No operating-speed
+ * recommendation follows from comparing this demand with assumed strength.
  * This is not a contact-dynamics solver or a post-yield equilibrium solution.
  *
  * Part 2 independently prescribes a triangular total strain of demand / E.
@@ -12,7 +16,9 @@
  * does NOT predict bolt deflection, thermal weakening, fatigue life or damage.
  * Cycles are a playback coordinate, NOT seconds or resolved impact duration.
  *
- * Grade 2 Sy = 57 ksi follows the article's assumption. E and H are fixed
+ * Grade 2 Sy = 57 ksi follows the article's assumption, not a bolt certificate.
+ * Inertia and nominal geometry are retained from the original fixture
+ * calculation, without independent as-built/inertia verification. E and H are fixed
  * illustrative inputs, not a calibrated cyclic curve for the actual bolts.
  * In uniaxial stress both von Mises and Tresca give |sigma - backstress|.
  * Theory references (not material calibration data):
@@ -83,6 +89,9 @@
       throw new RangeError("The requested geometry or speed exceeds the finite range of this model.");
     }
     return {
+      interpretation: "Unvalidated fixed-stopping-angle what-if; no operating-speed limit",
+      nominalStrengthComparisonOnly: true,
+      hardwareValidation: false,
       params: params,
       material: material,
       geometry: Object.freeze({
@@ -97,6 +106,8 @@
       coefficient: coefficient,
       peakDemand: peakDemand,
       peakStrain: peakDemand / material.E,
+      // Legacy API names retained for linked views: these are only algebraic
+      // nominal-stress/assumed-strength intersections, never safe speed limits.
       yieldOmega: yieldOmega,
       yieldRpm: yieldOmega * 60 / (2 * Math.PI),
       energy: energy,

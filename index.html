@@ -20,9 +20,10 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=15">
+    <link rel="stylesheet" href="styles.css?v=19-local">
+    <link rel="stylesheet" href="assets/css/home.css?v=3-local">
   </head>
-  <body>
+  <body id="page-top" tabindex="-1">
     <div class="site-shell">
       <aside class="sidebar" aria-label="Site navigation">
         <a class="site-title" href="#home" aria-label="Jerich Lee home">
@@ -30,27 +31,24 @@
         </a>
 
         <nav class="nav">
-          <a href="builds/index.html">builds</a>
-          <a href="contact/index.html">contact</a>
+          <a href="#home" aria-current="page" rel="noopener">home</a>
+          <a href="builds/index.html" rel="noopener">builds</a>
+          <a href="notes/index.html" rel="noopener">notes</a>
+          <a href="writing/index.html" rel="noopener">writing</a>
+          <a href="media/index.html" rel="noopener">media</a>
+          <a href="guitar/index.html" rel="noopener">guitar</a>
+          <a href="cubing/index.html" rel="noopener">cubing</a>
+          <a href="contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
       <main class="content" id="home">
-        <section class="intro" aria-label="Introduction">
+        <section class="intro home-intro" aria-label="Introduction">
           <p class="lede">
             I am a builder that finds beauty in nonlinear interaction,
             model-reality loss, and deciding what systems are worth capturing.
           </p>
-        </section>
-
-        <section aria-labelledby="about-title">
-          <h2 id="about-title">About</h2>
-          <p>
-            Welcome to my homepage. My academic training is in engineering
-            mechanics and pure mathematics, and I studied solid mechanics at the
-            graduate level. This site gathers my current work, selected
-            projects, course notes, writing, and ways to get in touch.
-          </p>
+          <img class="home-portrait" src="assets/jerich-lee-profile.jpg" alt="Jerich Lee at the beach" width="960" height="1280" decoding="async">
         </section>
 
         <footer>

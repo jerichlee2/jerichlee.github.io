@@ -81,7 +81,7 @@
     const project = function (t, q, d) { const p = raw(t, q, d); return { x: ox + p.x * scale, y: oy + p.y * scale, distance: p.distance }; };
     const from = p => project(p.time, p.flux, p.depth);
     ctx.save(); ctx.clearRect(0, 0, width, height); ctx.fillStyle = paper; ctx.fillRect(0, 0, width, height); ctx.lineJoin = "round"; ctx.lineCap = "round";
-    text(ctx, "PARTLY CALIBRATED · NOT VALIDATED", 18, 19, { size: mobile ? 10 : 12, color: muted });
+    text(ctx, "ILLUSTRATIVE · NOT VALIDATED", 18, 19, { size: mobile ? 10 : 12, color: muted });
     text(ctx, "Measured hot · assumed baseline", width < 560 ? 18 : width - 18, width < 560 ? 36 : 19, { align: width < 560 ? "left" : "right", size: mobile ? 11 : 14 });
     const floor = [project(0, 0, 0), project(c.timeMax, 0, 0), project(c.timeMax, c.fluxMax, 0), project(0, c.fluxMax, 0)];
     polygon(ctx, floor, "#f4f1e9", "#c9c3b8");
@@ -214,14 +214,14 @@
       </section>
       <div class="depth-surface-results" id="depth-surface-results">
       <p class="depth-surface-help" id="depth-surface-help">Slow auto-rotation · drag to take over. Keyboard focus pauses rotation; arrow keys rotate, Home resets. Filled H: measured ≈3.2 mm. Hollow B: assumed 3 mm.</p>
-      <canvas id="depth-surface-canvas" class="depth-surface-canvas" tabindex="0" role="img" aria-label="Rotatable three-dimensional partly calibrated depth surface, not validated. One approximate measured hot depth and one assumed baseline constrain the surface; color shows conditional-density-equivalent dimple mass, not whole-brick net loss." aria-describedby="depth-surface-help depth-surface-readout"></canvas>
+      <canvas id="depth-surface-canvas" class="depth-surface-canvas" tabindex="0" role="img" aria-label="Rotatable three-dimensional illustrative depth surface, partly calibrated but not validated. One approximate measured hot depth and one assumed baseline constrain the surface; color shows conditional-density-equivalent dimple mass, not whole-brick net loss." aria-describedby="depth-surface-help depth-surface-readout"></canvas>
       <div class="depth-surface-probe">
         <div class="depth-surface-probe-heading"><h3>Selected point</h3><span>◆ Probe</span></div>
         <dl class="depth-surface-readout" id="depth-surface-readout">
           <div><dt>Modeled depth</dt><dd><output id="depth-surface-depth-value" for="depth-surface-time depth-surface-flux"></output></dd></div>
           <div><dt>Dimple-equivalent mass</dt><dd><output id="depth-surface-mass-value" for="depth-surface-time depth-surface-flux"></output></dd></div>
         </dl>
-        <p class="depth-surface-note">Partly calibrated, not validated. Hot depth was measured approximately; model digits do not imply measurement precision. Mass assumes a 20 mm paraboloid and transfers the hot brick’s conditional density (82.8 g / nominal volume) across this surface—not the observed 8.9 g whole-brick net loss. Curves mark equal mass every 0.2 g; the color scale stays fixed.</p>
+        <p class="depth-surface-note">Illustrative, not validated. Hot depth was measured approximately; model digits do not imply measurement precision. Mass assumes a 20 mm paraboloid and transfers the hot brick’s conditional density (82.8 g / volume from nominal plan dimensions and reported 0.495 in thickness) across this surface—not the observed 8.9 g whole-brick net loss. The baseline’s reported 8.53 g loss is also a separate whole-brick measurement, not a depth fit. Curves mark equal mass every 0.2 g; the color scale stays fixed.</p>
       </div>
       </div>
       <p class="depth-surface-sr-only" id="depth-surface-status" aria-live="polite" aria-atomic="true"></p>`;

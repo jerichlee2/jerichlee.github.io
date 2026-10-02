@@ -7,14 +7,14 @@
   if (!mount || !model || !fixture) return;
   const fields = [
     ["omega", "Impact speed", 0, 5, .05, "rad/s"],
-    ["travelAngle", "Travel angle", 45, 120, 5, "°"],
-    ["stopAngle", "Stop angle", 5, 20, .5, "°"],
+    ["travelAngle", "Illustrative travel", 45, 120, 5, "°"],
+    ["stopAngle", "Assumed stop angle", 5, 20, .5, "°"],
     ["pullRadius", "Pull radius", 4, 6, .1, "in"]
   ];
   const picture = (id, title, w, h) => `<canvas class="fbd-visual" id="fbd-${id}" width="${w * 2}" height="${h * 2}" role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-describedby="fbd-drag-help" aria-label="${title}; shared fixture rotation"></canvas>`;
   mount.innerHTML = `
     <div class="fbd-controls">
-      <h3>Motion settings</h3>
+      <h3>Motion what-if settings</h3>
       <label for="fbd-driveMode">Approach motion<select id="fbd-driveMode" aria-describedby="fbd-profile-help"><option value="accelerated" selected>Accelerate from rest</option><option value="steady">Steady speed</option></select></label>
       <p class="fbd-small fbd-profile-help" id="fbd-profile-help"></p>
       <div class="fbd-settings">${fields.map(([id, label, min, max, step, unit]) => `<label for="fbd-${id}"><span class="fbd-control-head"><span>${label}</span><output id="fbd-${id}-value" for="fbd-${id}"></output></span><input id="fbd-${id}" type="range" min="${min}" max="${max}" step="${step}" data-fbd-setting="${id}" aria-label="${label} (${unit})"></label>`).join("")}</div>
@@ -28,7 +28,7 @@
       </div>
       <div class="fbd-stage-buttons" aria-label="Jump to a stage"><button type="button" id="fbd-start">Start</button><button type="button" id="fbd-contact">Contact</button><button type="button" id="fbd-peak">Peak</button></div>
       <p class="fbd-phase" id="fbd-phase"></p>
-      <p class="fbd-small">One bolt takes the stop load. Dimensions and forces are schematic.</p>
+      <p class="fbd-small">Unvalidated fixed-angle example; one bolt takes the load. Spring stiffness is recomputed for each selected speed and stop angle—not calibrated hardware compliance. Travel is illustrative, not the rig’s measured transfer clock.</p>
     </div>
     <div class="fbd-results">
       <div class="fbd-stage">

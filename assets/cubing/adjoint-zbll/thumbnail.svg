@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Forward tracking and backward recognition</title>
+  <desc id="desc">A top-face cube diagram highlights its right and front edge positions, connected by a forward and backward arrow.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#216b96"/></marker></defs>
+  <rect width="240" height="240" fill="#fffdf8"/>
+  <path d="M42 42h156v156H42z" fill="#f0ece4" stroke="#a89f90" stroke-width="2"/>
+  <path d="M146 94h52v52h-52zM94 146h52v52H94z" fill="#dce8f1"/>
+  <path d="M94 42v156M146 42v156M42 94h156M42 146h156" fill="none" stroke="#a89f90" stroke-width="2"/>
+  <path d="M181 122Q181 181 124 181M120 163Q164 163 164 122" fill="none" stroke="#216b96" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="120" y="130" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="#68635a">U</text>
+</svg>

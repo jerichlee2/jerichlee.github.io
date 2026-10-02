@@ -7,17 +7,8 @@ exclude:
   - node_modules
   - vendor
   - output
-  # Sections absent from the current navigation.
-  - notes
-  - writing
-  - media
-  - guitar
+  # Archived section absent from the current navigation.
   - grappling
-  - cubing
-  - assets/chipotlean
-  - assets/cubing
-  - assets/demons-penguin-classics-cover.jpg
-  - assets/flowers-for-algernon-cover.jpg
   # Unlisted projects and their assets.
   - builds/8-bit-cpu-from-scratch.html
   - builds/gpt-2-from-scratch.html
@@ -37,7 +28,6 @@ exclude:
   - assets/builds/ablative-material-testing-fixture/initial-prototype.mp4
   - assets/builds/ablative-material-testing-fixture/initial-prototype-poster.jpg
   - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/README.md
-  - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/cube_nonlinear_analysis.pdf
   - assets/builds/magnetically-stabilized-puzzle-cube/nonlinear/cube_nonlinear_dashboard.html
   - assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_B.pdf
   - assets/builds/pigjaw-scaffold-interface-testing/Pigjaw_Fixture_Material_Hand_Calculations_Rev_C.pdf

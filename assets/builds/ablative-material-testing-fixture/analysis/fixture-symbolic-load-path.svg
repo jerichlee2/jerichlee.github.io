@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="510" viewBox="0 0 1120 510" role="img" aria-labelledby="load-path-title load-path-desc">
+  <title id="load-path-title">Elastic rotor-stop and cantilever-bolt load path</title>
+  <desc id="load-path-desc">Two side-by-side schematic views show a rigid rotor and one initially unloaded equivalent circular cantilever. The rotor has mass moment of inertia J and incoming angular speed omega zero. The stop exerts a tangential maximum force F max opposite the rotor motion at contact radius r c. The small maximum stopping rotation theta max is predicted from elastic stiffness, not selected in advance and not the indexing travel. The equivalent bolt has assumed unsupported span L b, uniform root diameter d, elastic modulus E, and area moment of inertia I b. Its stiffness k b equals 3 E I b divided by L b cubed; maximum force equals k b times maximum elastic deflection. The baseline assumes small-deflection linear elasticity, negligible bolt inertia, no dissipation, and no additional driving work during compression. The support and root geometry are idealizations; local thread stresses are omitted.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#252525"/></marker>
+    <marker id="force-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b93626"/></marker>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V7" stroke="#777" stroke-width="1.2"/></pattern>
+  </defs>
+  <rect width="1120" height="510" fill="#fff"/>
+  <g fill="#252525" font-family="Georgia, 'Times New Roman', serif">
+    <text x="28" y="38" font-size="27">Fixture stop load path</text>
+    <text x="28" y="67" font-size="19" fill="#666">Elastic baseline · symbolic model · not to scale</text>
+    <path d="M28 88H1092M560 108V482" stroke="#cfcfcf"/>
+
+    <g id="rotor-panel">
+    <text x="28" y="123" font-size="23">(a) Rotor at stop contact</text>
+    <circle cx="210" cy="271" r="105" fill="#f5f5f5" stroke="#252525" stroke-width="1.8"/>
+    <circle cx="210" cy="271" r="6" fill="#252525"/>
+    <path d="M192 271H228M210 253V289" stroke="#252525" stroke-width="1.2"/>
+    <path d="M123 194A117 117 0 0 0 97 299" fill="none" stroke="#252525" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="55" y="228" font-size="28" font-style="italic">ω<tspan baseline-shift="sub" font-size="18">0</tspan></text>
+    <text x="200" y="228" font-size="28" font-style="italic">J</text>
+    <path d="M206 278L161 324H51" fill="none" stroke="#252525" stroke-width="1.2"/>
+    <text x="42" y="353" font-size="22">Rotor axis</text>
+
+    <path d="M218 271H300" stroke="#252525" stroke-width="1.3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="251" y="299" font-size="25" font-style="italic">r<tspan baseline-shift="sub" font-size="17">c</tspan></text>
+    <path d="M210 271L305 233" stroke="#666" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <path d="M260 271A50 50 0 0 0 256.4 252.4" fill="none" stroke="#252525" stroke-width="1.3" marker-end="url(#arrow)"/>
+    <path d="M266 255L348 191" fill="none" stroke="#252525" stroke-width="1.1"/>
+    <text x="347" y="179" font-size="24" font-style="italic">θ<tspan baseline-shift="sub" font-size="16">max</tspan></text>
+
+    <rect x="299" y="237" width="90" height="26" fill="url(#hatch)"/>
+    <path d="M299 263H389" stroke="#252525" stroke-width="2.2"/>
+    <circle cx="315" cy="271" r="8" fill="#fff" stroke="#252525" stroke-width="1.8"/>
+    <path d="M391 263H414" stroke="#252525" stroke-width="1.1"/>
+    <text x="405" y="237" font-size="20">Fixed stop</text>
+    <text x="405" y="260" font-size="17">T-slot wall</text>
+    <path d="M315 281V365" stroke="#b93626" stroke-width="2.6" marker-end="url(#force-arrow)"/>
+    <text x="334" y="336" font-size="26" fill="#b93626" font-style="italic">F<tspan baseline-shift="sub" font-size="17">max</tspan></text>
+    </g>
+
+    <g id="bolt-panel" transform="translate(560 -355)">
+    <text x="28" y="478" font-size="23">(b) Equivalent bolt bending</text>
+    <rect x="100" y="561" width="24" height="127" fill="url(#hatch)"/>
+    <path d="M124 561V688" stroke="#252525" stroke-width="2.2"/>
+    <rect x="124" y="605" width="204" height="25" fill="#f5f5f5" stroke="#252525" stroke-width="1.8"/>
+    <path d="M124 617.5H328" stroke="#777" stroke-width="1" stroke-dasharray="6 4"/>
+    <path d="M124 595V550M328 595V550" stroke="#777" stroke-width="1.1"/>
+    <path d="M128 559H324" stroke="#252525" stroke-width="1.3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="206" y="548" font-size="25" font-style="italic">L<tspan baseline-shift="sub" font-size="17">b</tspan></text>
+    <path d="M339 605H379M339 630H379" stroke="#777" stroke-width="1.1"/>
+    <path d="M369 604V580M369 631V655" stroke="#252525" stroke-width="1.2"/>
+    <path d="M369 580V604" stroke="#252525" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <path d="M369 655V631" stroke="#252525" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <text x="392" y="627" font-size="26" font-style="italic">d</text>
+    <text x="421" y="627" font-size="18">(root)</text>
+    <circle cx="328" cy="617.5" r="3.6" fill="#b93626"/>
+    <path d="M328 621V704" stroke="#b93626" stroke-width="2.6" marker-end="url(#force-arrow)"/>
+    <text x="349" y="695" font-size="26" fill="#b93626" font-style="italic">F<tspan baseline-shift="sub" font-size="17">max</tspan></text>
+    <text x="51" y="719" font-size="18">Equivalent support</text>
+
+    <text x="36" y="767" font-size="24" font-style="italic">k<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline" font-style="normal"> = 3</tspan>E I<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline" font-style="normal"> / </tspan>L<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="super" font-size="16">3</tspan></text>
+    <text x="294" y="767" font-size="24" font-style="italic">F<tspan baseline-shift="sub" font-size="16">max</tspan><tspan baseline-shift="baseline" font-style="normal"> = </tspan>k<tspan baseline-shift="sub" font-size="16">b</tspan><tspan baseline-shift="baseline"> δ</tspan><tspan baseline-shift="sub" font-size="16">max</tspan></text>
+    </g>
+  </g>
+</svg>
