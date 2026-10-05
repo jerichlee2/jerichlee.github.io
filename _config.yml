@@ -26,12 +26,14 @@ exclude:
   - builds/numerical-methods-on-a-6502-processor.html
   - builds/project-hephaestus.html
   - builds/fatigue-equivalent-load-analysis.html
+  - builds/pressure-vessel-analysis-platform.html
   - builds/forgesense.html
   - assets/builds/8-bit-cpu-from-scratch
   - assets/builds/gpt-2-from-scratch
   - assets/builds/numerical-methods-on-a-6502-processor
   - assets/builds/project-hephaestus
   - assets/builds/fatigue-equivalent-load-analysis
+  - assets/builds/pressure-vessel-analysis-platform
   - assets/builds/forgesense
   # Unused source reports, alternate figures, and media.
   - assets/builds/ablative-material-testing-fixture/cover.jpg
@@ -46,10 +48,6 @@ exclude:
   - assets/builds/pigjaw-scaffold-interface-testing/rev-b-principal-stress.png
   - assets/builds/pigjaw-scaffold-interface-testing/pigjaw-fixture-drawing.pdf
   - assets/builds/pigjaw-scaffold-interface-testing/pushin-fixture-drawing.pdf
-  - assets/builds/pressure-vessel-analysis-platform/ansys-von-mises-thumbnail.png
-  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.png
-  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.svg
-  - assets/builds/pressure-vessel-analysis-platform/pressure-vessel-analytical.tex
   - assets/builds/spindle-vibration-deflection-reduction/baseline-mode-307hz.png
   - assets/builds/spindle-vibration-deflection-reduction/campbell-diagram-rev-b.png
   - assets/builds/spindle-vibration-deflection-reduction/cover.png
