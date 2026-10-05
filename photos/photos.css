@@ -1,0 +1,45 @@
+.content .photo-intro {
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.photo-gallery {
+  columns: 2;
+  column-gap: 1.25rem;
+}
+
+.photo-figure {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+  vertical-align: top;
+}
+
+.photo-figure a {
+  display: block;
+  border-radius: 0.2rem;
+}
+
+.photo-figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.2rem;
+}
+
+.photo-figure figcaption {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 560px) {
+  .photo-gallery {
+    columns: 1;
+  }
+}

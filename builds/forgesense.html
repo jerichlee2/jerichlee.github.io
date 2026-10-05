@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="../styles.css?v=23-text">
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <style>
       .forgesense-project .signal-path {
@@ -22,6 +22,9 @@
       }
       .forgesense-project .article-figure.is-wide img {
         max-height: none;
+      }
+      .forgesense-project .build-video video {
+        border-radius: 0.2rem;
       }
       .forgesense-project .calibration-equation {
         margin: 1.3rem 0;
@@ -70,6 +73,7 @@
           <a href="../media/index.html" rel="noopener">media</a>
           <a href="../guitar/index.html" rel="noopener">guitar</a>
           <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../photos/index.html" rel="noopener">photos</a>
           <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
@@ -88,6 +92,17 @@
             <div><dt>Tools</dt><dd>SystemVerilog, Vivado, SPI, UART, Python</dd></div>
             <div><dt>Focus</dt><dd>Hardware timing, data integrity, calibration, and signal analysis</dd></div>
           </dl>
+
+          <section class="build-section" aria-labelledby="forgesense-test-title">
+            <h2 id="forgesense-test-title">Digital Accelerometer Test</h2>
+            <figure class="build-video">
+              <video controls autoplay loop muted playsinline preload="auto" poster="../assets/builds/forgesense/digital-accelerometer-test-poster.jpg" width="1920" height="1080" aria-label="Digital accelerometer cantilever tap test" aria-describedby="forgesense-test-caption">
+                <source src="../assets/builds/forgesense/digital-accelerometer-test.mp4" type="video/mp4">
+                <a href="../assets/builds/forgesense/digital-accelerometer-test.mp4">Watch the digital accelerometer test.</a>
+              </video>
+              <figcaption id="forgesense-test-caption">Digital accelerometer tap test on a cantilever, with live acceleration, FFT, and wavelet views.</figcaption>
+            </figure>
+          </section>
 
           <section class="build-section" aria-labelledby="forgesense-acquisition-title">
             <h2 id="forgesense-acquisition-title">FPGA Acquisition</h2>

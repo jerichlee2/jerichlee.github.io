@@ -4,13 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>8-bit CPU from Scratch | Jerich Lee</title>
-    <meta name="description" content="8-bit CPU from Scratch by Jerich Lee.">
+    <meta name="description" content="An 8-bit breadboard computer built by Jerich Lee following Ben Eater’s design, with a handwritten Fibonacci program and a video of the CPU running.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="../styles.css?v=23-text">
+    <style>
+      .cpu-8bit-project .article-figure img {
+        border-radius: 0.2rem;
+      }
+      .cpu-8bit-project .build-video {
+        max-width: 32rem;
+        margin: 1rem auto;
+      }
+      .cpu-8bit-project .build-video video {
+        aspect-ratio: 1 / 1;
+        border-radius: 0.2rem;
+      }
+    </style>
   </head>
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
@@ -27,19 +40,39 @@
           <a href="../media/index.html" rel="noopener">media</a>
           <a href="../guitar/index.html" rel="noopener">guitar</a>
           <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../photos/index.html" rel="noopener">photos</a>
           <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
       <main class="content">
-        <article>
+        <article class="cpu-8bit-project">
           <p class="article-meta">Builds · 2026</p>
           <h1>8-bit CPU from Scratch</h1>
 
-          <figure class="build-hero">
-            <img src="../assets/builds/8-bit-cpu-from-scratch/cover.jpg" alt="Breadboard 8-bit CPU with LEDs and a seven-segment display">
+          <div class="article-body">
+            <p>I built this 8-bit computer on breadboards following <a href="https://eater.net/8bit" rel="noopener">Ben Eater’s 8-bit computer project</a>. The clock, registers, arithmetic circuitry, memory, and control logic are wired together as separate modules, with LEDs making the computer’s internal state visible.</p>
+          </div>
+          <figure class="article-figure is-wide">
+            <a href="../assets/builds/8-bit-cpu-from-scratch/breadboard-fibonacci.jpg" rel="noopener">
+              <img src="../assets/builds/8-bit-cpu-from-scratch/breadboard-fibonacci.jpg" alt="The wired breadboard CPU beside a handwritten Fibonacci program with assembly instructions and their binary encodings" width="2400" height="1800">
+            </a>
+            <figcaption>The breadboard CPU beside my handwritten Fibonacci program, with assembly instructions and their binary encodings.</figcaption>
           </figure>
-          <p class="empty-note">Details coming soon.</p>
+          <div class="article-body">
+            <p>The labeled modules show the path from instructions to output: a program counter, memory address and contents, an instruction register, A and B registers, a sum register, and flags. Microcode EEPROMs and the control-word LEDs expose the control side, while a decimal display shows the output.</p>
+          </div>
+
+          <section class="build-section" aria-labelledby="cpu-demo-title">
+            <h2 id="cpu-demo-title">Running the computer</h2>
+            <figure class="build-video">
+              <video controls autoplay loop muted playsinline preload="auto" poster="../assets/builds/8-bit-cpu-from-scratch/demo-poster.jpg" width="2158" height="2158" aria-label="8-bit breadboard CPU running" aria-describedby="cpu-demo-caption">
+                <source src="../assets/builds/8-bit-cpu-from-scratch/8-bit-demo.mp4" type="video/mp4">
+                <a href="../assets/builds/8-bit-cpu-from-scratch/8-bit-demo.mp4">Watch the 8-bit CPU demonstration.</a>
+              </video>
+              <figcaption id="cpu-demo-caption">The CPU running, with LEDs showing its changing internal state and the decimal display showing its output.</figcaption>
+            </figure>
+          </section>
         </article>
         <nav class="page-return" aria-label="Page navigation">
           <a href="#page-top">Back to top ↑</a>

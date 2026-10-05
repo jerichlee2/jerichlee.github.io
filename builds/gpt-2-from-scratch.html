@@ -4,13 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GPT-2 from Scratch | Jerich Lee</title>
-    <meta name="description" content="GPT-2 from Scratch by Jerich Lee.">
+    <meta name="description" content="My GPT-2 from-scratch project: four days of training, Andrej Karpathy’s Neural Networks: Zero to Hero series, and photos of my desktop setup.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="../styles.css?v=23-text">
+    <style>
+      .gpt2-project .article-image-pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+      .gpt2-project .article-image-pair .article-figure img {
+        aspect-ratio: auto;
+        max-height: none;
+        border-radius: 0.2rem;
+      }
+      @media (max-width: 560px) {
+        .gpt2-project .article-image-pair {
+          grid-template-columns: minmax(0, 1fr);
+          max-width: 24rem;
+          margin-inline: auto;
+        }
+      }
+    </style>
   </head>
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
@@ -27,19 +45,38 @@
           <a href="../media/index.html" rel="noopener">media</a>
           <a href="../guitar/index.html" rel="noopener">guitar</a>
           <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../photos/index.html" rel="noopener">photos</a>
           <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
       <main class="content">
-        <article>
+        <article class="gpt2-project">
           <p class="article-meta">Builds · 2026</p>
           <h1>GPT-2 from Scratch</h1>
 
-          <figure class="build-hero">
-            <img src="../assets/builds/gpt-2-from-scratch/cover.jpg" alt="Desktop computer with an NVIDIA GeForce RTX graphics card">
-          </figure>
-          <p class="empty-note">Details coming soon.</p>
+          <div class="article-body">
+            <p>This project builds and trains GPT-2, a transformer language model that learns to predict the next token, or piece of text, and generates text one token at a time. It follows the from-scratch approach in <a href="https://karpathy.ai/zero-to-hero.html" rel="noopener">Karpathy’s course</a> and <a href="https://github.com/karpathy/build-nanogpt" rel="noopener">GPT-2 walkthrough</a>, connecting neural-network fundamentals with the model architecture, training loop, and text generation in Python and PyTorch.</p>
+            <p>I completed Andrej Karpathy’s <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" rel="noopener">Neural Networks: Zero to Hero</a> series and trained GPT-2 from scratch. Training took four days, but it was worth it. Thanks to badmephisto!</p>
+          </div>
+
+          <section class="build-section" aria-labelledby="gpt2-setup-title">
+            <h2 id="gpt2-setup-title">Training and setup</h2>
+            <div class="article-image-pair">
+              <figure class="article-figure">
+                <a href="../assets/builds/gpt-2-from-scratch/training-desktop.png" rel="noopener">
+                  <img src="../assets/builds/gpt-2-from-scratch/training-desktop.png" alt="Desktop monitor showing a nanochat training script and live training logs in Visual Studio Code" width="1536" height="2048">
+                </a>
+                <figcaption>A nanochat training run on my desktop.</figcaption>
+              </figure>
+              <figure class="article-figure">
+                <a href="../assets/builds/gpt-2-from-scratch/cover.jpg" rel="noopener">
+                  <img src="../assets/builds/gpt-2-from-scratch/cover.jpg" alt="My desktop computer with its side panel open, showing an NVIDIA GeForce RTX graphics card" width="1536" height="2048">
+                </a>
+                <figcaption>My desktop setup.</figcaption>
+              </figure>
+            </div>
+          </section>
         </article>
         <nav class="page-return" aria-label="Page navigation">
           <a href="#page-top">Back to top ↑</a>

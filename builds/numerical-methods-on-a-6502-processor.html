@@ -4,13 +4,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Numerical Methods on a 6502 Processor | Jerich Lee</title>
-    <meta name="description" content="Numerical Methods on a 6502 Processor by Jerich Lee.">
+    <meta name="description" content="Running Runge–Kutta in BASIC on a breadboard 6502 computer: an RLC simulation, UART communication, and a comparison with Python.">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="shortcut icon" href="/favicon.ico?v=3">
     <link rel="icon" href="/favicon.ico?v=3" sizes="any">
     <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
     <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <link rel="stylesheet" href="../styles.css?v=23-text">
+    <style>
+      .numerical-6502 .benchmark-table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+        font-variant-numeric: tabular-nums;
+      }
+      .numerical-6502 .benchmark-table caption {
+        padding-bottom: 0.45rem;
+        color: var(--muted);
+        text-align: left;
+        font-size: 0.9rem;
+      }
+      .numerical-6502 .benchmark-table th,
+      .numerical-6502 .benchmark-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 0.55rem 0.35rem;
+        text-align: left;
+      }
+      .numerical-6502 .benchmark-table td {
+        text-align: right;
+        white-space: nowrap;
+      }
+      .numerical-6502 .benchmark-table th {
+        font-weight: 400;
+      }
+      .numerical-6502 .build-video video {
+        border-radius: 0.2rem;
+      }
+    </style>
   </head>
   <body id="page-top" tabindex="-1">
     <div class="site-shell">
@@ -27,19 +57,64 @@
           <a href="../media/index.html" rel="noopener">media</a>
           <a href="../guitar/index.html" rel="noopener">guitar</a>
           <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../photos/index.html" rel="noopener">photos</a>
           <a href="../contact/index.html" rel="noopener">contact</a>
         </nav>
       </aside>
 
       <main class="content">
-        <article>
+        <article class="numerical-6502">
           <p class="article-meta">Builds · 2026</p>
           <h1>Numerical Methods on a 6502 Processor</h1>
 
+          <div class="article-body">
+            <p>I built a breadboard computer using <a href="https://eater.net/6502" rel="noopener">Ben Eater’s 6502 project</a> as a starting point, then used it to run numerical methods in BASIC. Coming from mechanical engineering, simulating a physical system was one of the first things I wanted to try as I got into computer architecture.</p>
+          </div>
           <figure class="build-hero">
-            <img src="../assets/builds/numerical-methods-on-a-6502-processor/cover.jpg" alt="Breadboard-mounted 6502 computer with an LCD display">
+            <img src="../assets/builds/numerical-methods-on-a-6502-processor/cover.jpg" alt="Breadboard-mounted 6502 computer with an LCD displaying Stay curious and a serial connection">
           </figure>
-          <p class="empty-note">Details coming soon.</p>
+
+          <section class="build-section" aria-labelledby="runge-kutta-title">
+            <h2 id="runge-kutta-title">Runge–Kutta on a breadboard</h2>
+            <div class="article-body">
+              <p>I ran fourth-order Runge–Kutta (RK4) in BASIC to simulate the step response of a series RLC circuit. The program takes the circuit parameters and timestep through a serial terminal, plots the response with text characters, and reports the peak capacitor voltage, overshoot, and final state. The LCD shows when the calculation is running and when it is complete.</p>
+            </div>
+            <figure class="build-video">
+              <video controls autoplay loop muted playsinline preload="auto" poster="../assets/builds/numerical-methods-on-a-6502-processor/runge-kutta-poster.jpg" width="1920" height="1080" aria-label="Runge–Kutta RLC simulation on the 6502" aria-describedby="runge-kutta-caption">
+                <source src="../assets/builds/numerical-methods-on-a-6502-processor/runge-kutta-6502.mp4" type="video/mp4">
+                <a href="../assets/builds/numerical-methods-on-a-6502-processor/runge-kutta-6502.mp4">Watch the Runge–Kutta demonstration.</a>
+              </video>
+              <figcaption id="runge-kutta-caption">A short demonstration of the BASIC program, serial plot, and LCD status messages.</figcaption>
+            </figure>
+            <div class="article-body">
+              <p>The underdamped example in the video uses R = 20 Ω, L = 100 mH, C = 100 μF, and a 5 V step. It advances in 0.4 ms steps over 200 ms of simulated time. The program reports a peak capacitor voltage of about 6.754 V at 10.4 ms, or 35.08% overshoot, before settling near 5 V.</p>
+            </div>
+            <table class="benchmark-table">
+              <caption>Results from my July 19 post</caption>
+              <tbody>
+                <tr><th scope="row">6502 BASIC runtime</th><td>~120 seconds</td></tr>
+                <tr><th scope="row">Python runtime</th><td>~0.005 seconds</td></tr>
+                <tr><th scope="row">Reported 6502 RK4 error</th><td>0.000184%</td></tr>
+              </tbody>
+            </table>
+            <div class="article-body">
+              <p>Python was roughly 24,000× faster in this comparison. These figures describe the two implementations and setups, not the processors in isolation. The appeal for me was getting a numerical simulation to run on a computer I had wired together.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="uart-title">
+            <h2 id="uart-title">UART from first principles</h2>
+            <div class="article-body">
+              <p>I also studied UART communication to connect the breadboard computer to a terminal. This demonstration shows “Stay curious.” appearing in the terminal and on the LCD, with the terminal connection configured at 19,200 baud. That serial interface also lets the numerical program accept inputs and display more output than fits on the LCD.</p>
+            </div>
+            <figure class="build-video">
+              <video controls autoplay loop muted playsinline preload="auto" poster="../assets/builds/numerical-methods-on-a-6502-processor/uart-poster.jpg" width="3840" height="2160" aria-label="6502 UART and LCD demonstration" aria-describedby="uart-caption">
+                <source src="../assets/builds/numerical-methods-on-a-6502-processor/6502-uart.mp4" type="video/mp4">
+                <a href="../assets/builds/numerical-methods-on-a-6502-processor/6502-uart.mp4">Watch the UART demonstration.</a>
+              </video>
+              <figcaption id="uart-caption">“Stay curious.” on the breadboard computer’s LCD and the connected terminal.</figcaption>
+            </figure>
+          </section>
         </article>
         <nav class="page-return" aria-label="Page navigation">
           <a href="#page-top">Back to top ↑</a>
