@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FPGA Data Acquisition Platform | Jerich Lee</title>
+    <meta name="description" content="FPGA Data Acquisition Platform for mechanics experiments, combining timestamped accelerometer acquisition, packet integrity checks, six-position calibration, and stationary-noise analysis.">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+    <link rel="icon" href="/favicon-jl.png?v=3" type="image/png">
+    <link rel="icon" href="/favicon-jl.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css?v=19-local">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+      .forgesense-project .signal-path {
+        margin: 1.2rem 0;
+        padding-left: 1.4rem;
+      }
+      .forgesense-project .signal-path li {
+        padding: 0.35rem 0 0.35rem 0.25rem;
+      }
+      .forgesense-project .article-figure.is-wide img {
+        max-height: none;
+      }
+      .forgesense-project .calibration-equation {
+        margin: 1.3rem 0;
+        padding: 0.7rem 1rem;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        text-align: center;
+      }
+      .forgesense-project .calibration-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        font-variant-numeric: tabular-nums;
+      }
+      .forgesense-project .calibration-table caption {
+        text-align: left;
+        color: var(--muted);
+        padding: 0.6rem 0;
+      }
+      .forgesense-project .calibration-table th,
+      .forgesense-project .calibration-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 0.6rem 0.35rem;
+        text-align: right;
+      }
+      .forgesense-project .calibration-table th:first-child {
+        text-align: left;
+      }
+      .forgesense-project .calibration-table thead th {
+        border-top: 1px solid var(--line);
+      }
+    </style>
+  </head>
+  <body id="page-top" tabindex="-1">
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site navigation">
+        <a class="site-title" href="../index.html#home" aria-label="Jerich Lee home" rel="noopener">
+          <span>Jerich Lee</span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html#home" rel="noopener">home</a>
+          <a href="../builds/index.html" rel="noopener">builds</a>
+          <a href="../notes/index.html" rel="noopener">notes</a>
+          <a href="../writing/index.html" rel="noopener">writing</a>
+          <a href="../media/index.html" rel="noopener">media</a>
+          <a href="../guitar/index.html" rel="noopener">guitar</a>
+          <a href="../cubing/index.html" rel="noopener">cubing</a>
+          <a href="../contact/index.html" rel="noopener">contact</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <article class="forgesense-project">
+          <p class="article-meta">Builds · 2026 · In progress</p>
+          <h1>FPGA Data Acquisition Platform</h1>
+          <div class="article-body">
+            <p>I am building this FPGA-based data-acquisition and instrumentation platform for mechanics experiments. It connects physical measurements to analysis: acquiring sensor data, timestamping each recognized data-ready event, checking the stream for missing or corrupted records, and converting raw counts into calibrated acceleration.</p>
+            <p>The current implementation pairs an Arty A7 FPGA with a three-axis Pmod ACL2 accelerometer and Python host software. As the instrumentation part of Project Hephaestus, its goal is to provide a dependable measurement foundation for vibration experiments and, later, additional sensing channels.</p>
+          </div>
+          <dl class="build-details">
+            <div><dt>Status</dt><dd>Working accelerometer acquisition and accepted six-position calibration; development ongoing</dd></div>
+            <div><dt>Hardware</dt><dd>Digilent Arty A7 · Pmod ACL2 / ADXL362</dd></div>
+            <div><dt>Tools</dt><dd>SystemVerilog, Vivado, SPI, UART, Python</dd></div>
+            <div><dt>Focus</dt><dd>Hardware timing, data integrity, calibration, and signal analysis</dd></div>
+          </dl>
+
+          <section class="build-section" aria-labelledby="forgesense-acquisition-title">
+            <h2 id="forgesense-acquisition-title">FPGA Acquisition</h2>
+            <div class="article-body">
+              <p>The acquisition chain separates sensor timing from computer-side processing. Rather than repeatedly reading the sensor on an unrelated polling schedule, the FPGA responds to its DATA_READY signal and timestamps the recognized event using a 100 MHz clock.</p>
+              <ol class="signal-path" aria-label="Acquisition signal path">
+                <li><strong>Sensor → FPGA.</strong> A synchronized DATA_READY event triggers an SPI read of the X, Y, and Z channels.</li>
+                <li><strong>Acquisition → buffer.</strong> A FIFO queues sample records while the output link is busy.</li>
+                <li><strong>Buffer → computer.</strong> A packetizer sends framed binary records over the board’s USB–UART connection.</li>
+                <li><strong>Computer → analysis.</strong> Python validates the stream, saves raw binary and decoded CSV files, and produces time histories and spectra.</li>
+              </ol>
+              <p>Each 17-byte packet carries a synchronization word, version, channel mask, timestamp, sequence number, three signed acceleration readings, and a checksum. The sensor determines the sampling cadence; the FPGA timestamps make that cadence measurable.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="forgesense-integrity-title">
+            <h2 id="forgesense-integrity-title">Data Integrity and Timing</h2>
+            <div class="article-body">
+              <p>The calibration campaign produced <strong>86,389 complete packets across seven captures</strong>, with zero detected packet/header/checksum errors, zero sequence discontinuities, and zero binary-to-CSV mismatches. Timestamps remained monotonic after counter-wrap handling, and no samples reached the sensor’s digital limits.</p>
+              <p>The stationary capture measured <strong>360.07 samples/s</strong>, compared with the configured nominal rate of 400 Hz. Rate variation across the six calibration inputs was 0.0344%. Analysis uses the measured timing rather than assuming that the nominal setting is the actual sampling rate.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="forgesense-calibration-title">
+            <h2 id="forgesense-calibration-title">Six-Position Calibration</h2>
+            <div class="article-body">
+              <p>I used gravity as a reference by placing the assembly in six static orientations: +X, −X, +Y, −Y, +Z, and −Z upward. The paired positive and negative readings give an independent bias and sensitivity for each axis.</p>
+              <div class="article-equation calibration-equation">\[
+                \text{Acceleration in g}=\frac{\text{raw count}-\text{bias}}{\text{sensitivity}}
+              \]</div>
+              <p>The resulting coefficients convert counts into g, or into m/s² by multiplying by 9.80665. This corrects per-axis offset and scale; it does not fit cross-axis coupling or mounting tilt.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/forgesense/six-position-calibration.png" rel="noopener">
+                <img src="../assets/builds/forgesense/six-position-calibration.png" alt="Calibrated X, Y, and Z acceleration across six static orientations: each dominant axis reaches positive or negative one g while the perpendicular axes remain near zero" width="1980" height="1080" loading="lazy">
+              </a>
+              <figcaption>Six-position calibration check. Each point is an orientation mean; connecting lines guide the eye between separate captures. Open the plot for full resolution.</figcaption>
+            </figure>
+            <table class="calibration-table">
+              <caption>Fitted coefficients for the calibrated sensor and mounting</caption>
+              <thead>
+                <tr><th scope="col">Axis</th><th scope="col">Bias<br>(counts)</th><th scope="col">Sensitivity<br>(counts/g)</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">X</th><td>12.28</td><td>1011.20</td></tr>
+                <tr><th scope="row">Y</th><td>43.26</td><td>1056.16</td></tr>
+                <tr><th scope="row">Z</th><td>103.90</td><td>1048.44</td></tr>
+              </tbody>
+            </table>
+            <div class="article-body">
+              <p>Across the six fitted orientations, the maximum acceleration-vector error was 0.0549 g, and the maximum deviation of its magnitude from 1 g was 0.00150 g. A separate +Z repeat differed from the original calibrated mean vector by 0.00146 g.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="forgesense-noise-title">
+            <h2 id="forgesense-noise-title">Stationary Baseline</h2>
+            <div class="article-body">
+              <p>A stationary recording establishes what the assembled measurement system sees before an experiment begins. The retained baseline contained 20,521 samples over about 57 seconds, with calibrated sample standard deviations of <strong>3.075 mg in X, 3.002 mg in Y, and 4.857 mg in Z</strong>, where mg means one thousandth of g.</p>
+            </div>
+            <figure class="article-figure is-wide">
+              <a href="../assets/builds/forgesense/stationary-psd.png" rel="noopener">
+                <img src="../assets/builds/forgesense/stationary-psd.png" alt="Stationary X, Y, and Z acceleration power spectral densities in raw count squared per hertz, with a prominent Z-axis component near 71 hertz" width="1980" height="1080" loading="lazy">
+              </a>
+              <figcaption>Stationary power spectral density, shown in the original raw-count units. This is the as-mounted baseline, not a measured structural mode.</figcaption>
+            </figure>
+            <div class="article-body">
+              <p>Follow-up stationary captures reproduced narrowband components around 58–60.5 Hz and 70–71.5 Hz without identifying a unique physical source. Future tap tests will use a session-specific stationary control and repeatable, tap-synchronous response to distinguish structural motion from the baseline.</p>
+            </div>
+          </section>
+
+          <section class="build-section" aria-labelledby="forgesense-outcome-title">
+            <h2 id="forgesense-outcome-title">Outcome and Next Steps</h2>
+            <div class="article-body">
+              <p>The platform now has a working path from sensor acquisition to timestamped, checked, and calibrated acceleration data. The current milestone combines a recorded packet campaign with no detected packet errors, accepted bias/scale calibration, and a repeatable stationary baseline.</p>
+              <p>The next stage is a repeatable cantilever mounting and tap-test workflow, followed by strain-gauge and analog acquisition development. Those extensions build on the measurement pipeline established here.</p>
+            </div>
+          </section>
+        </article>
+        <nav class="page-return" aria-label="Page navigation">
+          <a href="#page-top">Back to top ↑</a>
+        </nav>
+      </main>
+    </div>
+  </body>
+</html>

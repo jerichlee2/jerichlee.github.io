@@ -1,5 +1,5 @@
-# Publish only the current portfolio. Archived files stay in the repository
-# and local workspace, but are not served by GitHub Pages.
+# Publish the portfolio and personal sections. Dropped sections and projects
+# stay in the repository or local workspace, but are not served by GitHub Pages.
 exclude:
   # Local tooling and working files.
   - Gemfile
@@ -7,34 +7,15 @@ exclude:
   - node_modules
   - vendor
   - output
-  # Temporarily unpublished sections. Keep source files for later restoration.
-  - notes
-  - writing
-  - media
-  - guitar
-  - cubing
-  # Assets used only by the temporarily unpublished sections.
-  - assets/cubing
-  - assets/chipotlean
-  - assets/demons-penguin-classics-cover.jpg
-  - assets/flowers-for-algernon-cover.jpg
-  # Archived section absent from the current navigation.
+  # Grappling is dropped from this branch; retain its source for recovery.
   - grappling
-  # Unlisted projects and their assets.
-  - builds/8-bit-cpu-from-scratch.html
-  - builds/gpt-2-from-scratch.html
-  - builds/numerical-methods-on-a-6502-processor.html
+  # Dropped projects and their assets.
   - builds/project-hephaestus.html
   - builds/fatigue-equivalent-load-analysis.html
   - builds/pressure-vessel-analysis-platform.html
-  - builds/forgesense.html
-  - assets/builds/8-bit-cpu-from-scratch
-  - assets/builds/gpt-2-from-scratch
-  - assets/builds/numerical-methods-on-a-6502-processor
   - assets/builds/project-hephaestus
   - assets/builds/fatigue-equivalent-load-analysis
   - assets/builds/pressure-vessel-analysis-platform
-  - assets/builds/forgesense
   # Unused source reports, alternate figures, and media.
   - assets/builds/ablative-material-testing-fixture/cover.jpg
   - assets/builds/ablative-material-testing-fixture/image-02.png
