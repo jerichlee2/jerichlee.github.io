@@ -7,7 +7,12 @@
 
 .content .home-intro .lede {
   margin: 0;
+  color: #5f757d;
   text-align: left;
+}
+
+.content .home-intro .lede + .lede {
+  margin-top: 1.5rem;
 }
 
 .home-portrait {
