@@ -1,14 +1,39 @@
 :root {
   color-scheme: light;
-  --bg: #fbfaf7;
-  --paper: #fffdf8;
-  --ink: #1f1e1b;
-  --muted: #68635a;
-  --line: #d7d0c3;
-  --link: #064f9e;
-  --link-visited: #6b3a85;
-  --accent: #8f251f;
-  --focus: #b7791f;
+  /* Background, foreground, and accent match the supplied Codex Solarized themes. */
+  --bg: #fdf6e3;
+  --paper: #fdf8e9;
+  --ink: #657b83;
+  --muted: #657b83;
+  --line: #d9d6c5;
+  /* A darker gold keeps small links readable on the cream background. */
+  --link: #886600;
+  --link-visited: #765d8a;
+  --accent: #b58900;
+  --focus: #b58900;
+  --intro-ink: #657b83;
+  --surface-raised: #eee8d5;
+  --selection-bg: #e6dbad;
+  --diagram-face: #eee8d5;
+  --diagram-line: #93a1a1;
+  --diagram-highlight: #f3e1a5;
+  --diagram-accent: #886600;
+  --dark-bg: #002b36;
+  --dark-paper: #032e39;
+  --dark-ink: #839496;
+  --dark-muted: #93a1a1;
+  --dark-line: #36535a;
+  --dark-link: #f0c34c;
+  --dark-link-visited: #f0c34c;
+  --dark-accent: #f0c34c;
+  --dark-focus: #f0c34c;
+  --dark-intro-ink: #839496;
+  --dark-surface-raised: #073642;
+  --dark-selection-bg: #375052;
+  --dark-diagram-face: #073642;
+  --dark-diagram-line: #657b83;
+  --dark-diagram-highlight: #375052;
+  --dark-diagram-accent: #f0c34c;
   --measure: 44rem;
   --entry-thumbnail-width: 5rem;
   --entry-thumbnail-height: 3.75rem;
@@ -17,6 +42,65 @@
   --entry-row-gap: 0.5rem;
   --script: Script, Zapfino, Papyrus, Georgia, "Lucida Grande", LucidaGrande,
     Lucida, PakTypeNaqsh, Arial, Helvetica, sans-serif;
+}
+
+/* Follow each visitor's system appearance, including changes while the page is open. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: var(--dark-bg);
+    --paper: var(--dark-paper);
+    --ink: var(--dark-ink);
+    --muted: var(--dark-muted);
+    --line: var(--dark-line);
+    --link: var(--dark-link);
+    --link-visited: var(--dark-link-visited);
+    --accent: var(--dark-accent);
+    --focus: var(--dark-focus);
+    --intro-ink: var(--dark-intro-ink);
+    --surface-raised: var(--dark-surface-raised);
+    --selection-bg: var(--dark-selection-bg);
+    --diagram-face: var(--dark-diagram-face);
+    --diagram-line: var(--dark-diagram-line);
+    --diagram-highlight: var(--dark-diagram-highlight);
+    --diagram-accent: var(--dark-diagram-accent);
+  }
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--ink);
+}
+
+/* Source drawings and simulations retain their original scientific colors. */
+:is(#bolt-impact-lab, #ablative-fbd-lab, #ablative-depth-surface, #cube-nonlinear-lab) {
+  color-scheme: light;
+  --ink: #1f1e1b;
+  --muted: #68635a;
+  --line: #d7d0c3;
+  --paper: #fffdf8;
+  --bg: #fbfaf7;
+  --link: #064f9e;
+  --link-visited: #6b3a85;
+  --accent: #8f251f;
+  --focus: #b7791f;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+@media print {
+  :root {
+    color-scheme: light !important;
+    --bg: #fff !important;
+    --paper: #fff !important;
+    --ink: #111 !important;
+    --muted: #444 !important;
+    --line: #ccc !important;
+    --link: #064f9e !important;
+    --link-visited: #064f9e !important;
+    --accent: #8f251f !important;
+    --intro-ink: #444 !important;
+  }
 }
 
 * {

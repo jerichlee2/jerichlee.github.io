@@ -7,7 +7,7 @@
 
 .content .home-intro .lede {
   margin: 0;
-  color: #5f757d;
+  color: var(--intro-ink);
   text-align: left;
 }
 

@@ -82,10 +82,10 @@
   font-size: 0.94rem;
 }
 
-.azbc-face { fill: #f0ece4; stroke: #a89f90; }
-.azbc-grid { fill: none; stroke: #a89f90; }
-.azbc-highlight { fill: #dce8f1; stroke: #216b96; stroke-width: 2; }
-.azbc-dot { fill: #216b96; }
+.azbc-face { fill: var(--diagram-face); stroke: var(--diagram-line); }
+.azbc-grid { fill: none; stroke: var(--diagram-line); }
+.azbc-highlight { fill: var(--diagram-highlight); stroke: var(--diagram-accent); stroke-width: 2; }
+.azbc-dot { fill: var(--diagram-accent); }
 .azbc-face-labels { fill: var(--ink); font: 17px Georgia, serif; text-anchor: middle; }
 
 .azbc-example figcaption {
