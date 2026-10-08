@@ -1,5 +1,5 @@
-# Publish the portfolio and personal sections. Dropped sections and projects
-# stay in the repository or local workspace, but are not served by GitHub Pages.
+# Publish only the portfolio on codex/portfolio-only. Main keeps the full site.
+# Unpublished sections remain in the repository but are not served by GitHub Pages.
 exclude:
   # Local tooling and working files.
   - Gemfile
@@ -7,6 +7,18 @@ exclude:
   - node_modules
   - vendor
   - output
+  # Unpublished personal sections, including their nested pages and downloads.
+  - notes
+  - writing
+  - media
+  - guitar
+  - cubing
+  - photos
+  # Assets used only by those sections.
+  - assets/cubing
+  - assets/chipotlean
+  - assets/demons-penguin-classics-cover.jpg
+  - assets/flowers-for-algernon-cover.jpg
   # Grappling is dropped from this branch; retain its source for recovery.
   - grappling
   # Dropped projects and their assets.
